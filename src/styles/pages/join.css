@@ -1,0 +1,420 @@
+/* ============================================
+   JOIN PAGE STYLES
+   Complex page with modals, FAQs, acknowledgements
+   ============================================ */
+
+/* ============================================
+   JOIN HERO
+   ============================================ */
+.join-hero {
+  text-align: center;
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 1.75rem);
+  justify-items: center;
+  padding: clamp(1.5rem, 4vw, 2.5rem) 0;
+}
+
+.join-lede {
+  max-width: 65ch;
+  margin: 0 auto;
+}
+
+/* ============================================
+   ACKNOWLEDGEMENTS SECTION
+   ============================================ */
+.acknowledgements-section {
+  padding: clamp(2rem, 5vw, 3rem);
+  max-width: 90ch;
+  margin: 0 auto;
+}
+
+.acknowledgements-intro-text {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.acknowledgements-intro-text p {
+  font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+  line-height: 1.7;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.acknowledgements-section h2 {
+  text-align: center;
+  margin: 0 0 1rem 0;
+  font-size: clamp(1.6rem, 4vw, 2rem);
+}
+
+.acknowledgements-intro {
+  text-align: center;
+  max-width: 70ch;
+  margin: 0 auto 2rem;
+}
+
+.acknowledgements-intro p {
+  margin: 0 0 0.5rem 0;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.acknowledgements-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  margin: 2rem 0;
+}
+
+.acknowledgement-card {
+  padding: 1.25rem;
+  background: rgba(6, 12, 22, 0.4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-base);
+}
+
+.acknowledgement-card:hover {
+  border-color: rgba(93, 225, 228, 0.3);
+  background: rgba(10, 147, 150, 0.05);
+}
+
+.acknowledgement-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.05rem;
+}
+
+.acknowledgement-card h3 a {
+  color: var(--color-primary-bright);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.acknowledgement-card h3 a:hover {
+  color: var(--color-text);
+}
+
+.acknowledgement-card p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.acknowledgements-note {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+/* ============================================
+   GETTING STARTED GRID
+   ============================================ */
+.getting-started-section {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.getting-started-section h2 {
+  text-align: center;
+  margin: 0 0 1rem 0;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+}
+
+.getting-started-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  margin: 2rem 0;
+}
+
+.start-card {
+  padding: clamp(1.75rem, 4vw, 2.25rem);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.start-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(93, 225, 228, 0.4);
+}
+
+.process-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--color-primary-soft);
+  color: var(--color-primary-bright);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.start-card h3 {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.8vw, 1.35rem);
+}
+
+.start-card p {
+  margin: 0;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  font-size: 0.98rem;
+}
+
+/* ============================================
+   CONTRIBUTE SECTION
+   ============================================ */
+.contribute-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  margin: 2rem 0;
+}
+
+.contribute-card {
+  padding: clamp(1.75rem, 4vw, 2rem);
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.contribute-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(93, 225, 228, 0.4);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.contribute-card h3 {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.8vw, 1.35rem);
+}
+
+.card-focus {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-primary-bright);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.contribute-tasks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.contribute-tasks li {
+  padding-left: 1.5rem;
+  position: relative;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.contribute-tasks li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--color-primary-bright);
+  font-weight: 700;
+}
+
+.ideal-for {
+  margin: 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.button-modal {
+  margin-top: 0.5rem;
+}
+
+/* ============================================
+   EXPECTATIONS SECTION
+   ============================================ */
+.expectations-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  margin: 2rem 0;
+}
+
+.expectation-card {
+  padding: clamp(1.5rem, 4vw, 2rem);
+  display: grid;
+  gap: 0.75rem;
+  transition: all var(--transition-base);
+}
+
+.expectation-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(93, 225, 228, 0.4);
+}
+
+.expectation-card h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: var(--color-primary-bright);
+}
+
+.expectation-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+/* ============================================
+   FAQ SECTION
+   ============================================ */
+.faq-section {
+  padding: clamp(2rem, 5vw, 3rem);
+  max-width: 85ch;
+  margin: 0 auto;
+}
+
+.faq-section h2 {
+  text-align: center;
+  margin: 0 0 2rem 0;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+}
+
+.faq-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.faq-item {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: border-color var(--transition-base);
+}
+
+.faq-item:hover {
+  border-color: rgba(93, 225, 228, 0.3);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(6, 12, 22, 0.4);
+  border: none;
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--transition-base);
+}
+
+.faq-question:hover {
+  background: rgba(10, 147, 150, 0.08);
+}
+
+.faq-question h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.faq-toggle {
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  color: var(--color-primary-bright);
+  transition: transform var(--transition-base);
+  font-weight: 300;
+}
+
+.faq-question[aria-expanded="true"] .faq-toggle {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-question[aria-expanded="true"] + .faq-answer {
+  max-height: 500px;
+}
+
+.faq-answer p {
+  margin: 0;
+  padding: 0 1.5rem 1.5rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+/* ============================================
+   FINAL CTA
+   ============================================ */
+.final-cta {
+  padding: clamp(2.5rem, 6vw, 3.5rem);
+  text-align: center;
+  display: grid;
+  gap: 1.5rem;
+  justify-items: center;
+}
+
+.final-cta h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+}
+
+.final-cta p {
+  margin: 0;
+  max-width: 60ch;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+}
+
+.button-large {
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .getting-started-grid,
+  .contribute-grid,
+  .expectations-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .acknowledgements-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .card-icon {
+    font-size: 2rem;
+  }
+}

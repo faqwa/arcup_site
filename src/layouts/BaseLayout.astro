@@ -1,0 +1,123 @@
+---
+import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  bodyClass?: string;
+  seo?: {
+    canonical?: string;
+    robots?: string;
+    openGraph?: {
+      title?: string;
+      description?: string;
+      url?: string;
+      image?: string;
+      type?: string;
+    };
+    twitter?: {
+      card?: string;
+      title?: string;
+      description?: string;
+      image?: string;
+    };
+  };
+}
+
+const {
+  title = "arc^ - Open Plasma Research for Ecological Repair",
+  description = "arc^ is an open research framework building plasma technology for ecological repair. We work openly, share everything, and build technology that serves life over profit.",
+  bodyClass = "",
+  seo = {},
+} = Astro.props;
+
+// SEO data
+const siteUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined;
+const canonical = seo.canonical ?? siteUrl;
+
+const og = {
+  title: seo.openGraph?.title ?? title,
+  description: seo.openGraph?.description ?? description,
+  url: seo.openGraph?.url ?? canonical,
+  image: seo.openGraph?.image ?? `${import.meta.env.BASE_URL}favicon.svg`,
+  type: seo.openGraph?.type ?? "website",
+};
+
+const twitter = {
+  card: seo.twitter?.card ?? "summary_large_image",
+  title: seo.twitter?.title ?? og.title,
+  description: seo.twitter?.description ?? og.description,
+  image: seo.twitter?.image ?? og.image,
+};
+
+const bodyClasses = ["site-body", bodyClass].filter(Boolean).join(" ");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <link rel="manifest" href={`${import.meta.env.BASE_URL}manifest.json`} />
+    <meta name="theme-color" content="#0a9396" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="ali" />
+    <meta name="keywords" content="plasma research, open science, regenerative technology, plasma activated water, ecological restoration, RE:TECH, community research" />
+    <meta name="robots" content={seo.robots || "index, follow"} />
+    
+    <!-- Canonical -->
+    {canonical && <link rel="canonical" href={canonical} />}
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={og.title} />
+    <meta property="og:description" content={og.description} />
+    <meta property="og:type" content={og.type} />
+    <meta property="og:locale" content="en_US" />
+    {og.url && <meta property="og:url" content={og.url} />}
+    {og.image && <meta property="og:image" content={og.image} />}
+    <meta property="og:site_name" content="arc^ by ali" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content={twitter.card} />
+    <meta name="twitter:title" content={twitter.title} />
+    <meta name="twitter:description" content={twitter.description} />
+    {twitter.image && <meta name="twitter:image" content={twitter.image} />}
+    
+    <!-- PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="arc^" />
+    
+    <!-- Allow pages to inject additional head content -->
+    <slot name="head" />
+  </head>
+  
+  <body class={bodyClasses}>
+    <!-- Skip to main content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Page content -->
+    <slot />
+    
+    <!-- Universal footer -->
+    <Footer />
+    
+    <!-- Allow pages to inject scripts -->
+    <slot name="scripts" />
+  </body>
+</html>

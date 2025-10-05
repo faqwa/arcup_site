@@ -1,0 +1,144 @@
+---
+const currentYear = new Date().getFullYear();
+
+const normalizedBase = (import.meta.env.BASE_URL ?? "").replace(/\/$/, "");
+const withBase = (path: string) =>
+  path === "/"
+    ? normalizedBase
+      ? `${normalizedBase}/`
+      : "/"
+    : `${normalizedBase}${path}`;
+---
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-content">
+    <div class="footer-main">
+      <p class="footer-text">
+        <strong>arc^</strong> by <a href="https://www.xbyali.page" target="_blank" rel="noopener">ali</a>
+      </p>
+      <p class="footer-license">
+        Open research licensed under 
+        <a 
+          href="https://creativecommons.org/licenses/by-nc-sa/4.0/" 
+          target="_blank" 
+          rel="license noopener"
+          aria-label="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License"
+        >
+          CC BY-NC-SA 4.0
+        </a>
+      </p>
+    </div>
+    
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href={withBase("/docs/privacy-policy")}>Privacy</a>
+      <a href={withBase("/docs/terms")}>Terms</a>
+      <a href="https://github.com/arcup" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://discord.gg/DA8BPA3VsN" target="_blank" rel="noopener">Discord</a>
+    </nav>
+    
+    <p class="footer-copyright">
+      © {currentYear} arc^. Built with open science principles.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    width: var(--shell-width);
+    margin: var(--space-3xl) auto var(--space-2xl);
+    padding: var(--space-xl) var(--shell-padding);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(18px);
+    background: rgba(6, 12, 22, 0.58);
+    border: 1px solid rgba(93, 225, 228, 0.14);
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    align-items: center;
+    text-align: center;
+  }
+  
+  .footer-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  
+  .footer-text {
+    font-size: var(--text-base);
+    color: var(--color-text);
+    margin: 0;
+  }
+  
+  .footer-text strong {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary-bright);
+  }
+  
+  .footer-license {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+  
+  .footer-license a {
+    color: var(--color-text-muted);
+    text-decoration: underline;
+    text-decoration-color: rgba(93, 225, 228, 0.3);
+    transition: color var(--transition-base);
+  }
+  
+  .footer-license a:hover,
+  .footer-license a:focus-visible {
+    color: var(--color-primary-bright);
+  }
+  
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    justify-content: center;
+  }
+  
+  .footer-links a {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: color var(--transition-base);
+  }
+  
+  .footer-links a:hover,
+  .footer-links a:focus-visible {
+    color: var(--color-primary-bright);
+  }
+  
+  .footer-copyright {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+  
+  /* Mobile */
+  @media (max-width: 640px) {
+    .site-footer {
+      margin-top: var(--space-2xl);
+      padding: var(--space-lg) var(--space-md);
+    }
+    
+    .footer-links {
+      gap: var(--space-md);
+    }
+  }
+  
+  /* Print */
+  @media print {
+    .site-footer {
+      display: none;
+    }
+  }
+</style>

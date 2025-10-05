@@ -1,0 +1,119 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ArcCanvas from "../components/ArcCanvas.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import PageNavigation from "../components/PageNavigation.astro";
+import '../styles/pages/about.css';
+
+const normalizedBase = (import.meta.env.BASE_URL ?? "").replace(/\/$/, "");
+const withBase = (path: string) => (path === "/" ? (normalizedBase ? `${normalizedBase}/` : "/") : `${normalizedBase}${path}`);
+
+const title = "About Ali - arc^";
+const description = "Meet Ali, the founder of arc^ — building open research frameworks for regenerative futures.";
+const siteUrl = Astro.site ? new URL("/about", Astro.site).toString() : undefined;
+
+const seo = {
+  canonical: siteUrl,
+  openGraph: {
+    title: "About Ali - arc^",
+    description,
+    url: siteUrl,
+  },
+  twitter: {
+    title,
+    description,
+  },
+};
+---
+
+<BaseLayout title={title} description={description} bodyClass="page-about" seo={seo}>
+  <ArcCanvas />
+  <SiteHeader active="about" />
+
+  <main id="main-content" class="page-shell" aria-labelledby="about-title">
+    
+    <!-- HERO SECTION -->
+    <header class="about-hero" aria-labelledby="about-title">
+      <h1 id="about-title">About Ali</h1>
+      <p class="about-lede">arc^ is my work — a framework I'm building to do science differently. If it grows, it becomes something bigger: a foundation, circle, or collective. Whatever we choose. But right now, it's under my CCs, and I'm inviting you into the process.</p>
+    </header>
+
+    <!-- WHO I AM -->
+    <section class="about-section">
+      <h2>Who I Am</h2>
+      <div class="about-content">
+        <p>I'm an undergraduate biological science student at a university in Melbourne, Australia, majoring in environmental and ecological systems. My applied work has focused on triboelectric nanogenerators and pollutant breakdown, as well as saltmarsh restoration research.</p>
+        <p>I'm currently working toward an honours project that aligns with arc^'s framework — research that's open, collaborative, and grounded in regenerative principles rather than extractive ones.</p>
+      </div>
+    </section>
+
+    <!-- WHY ARC^ -->
+    <section class="about-section">
+      <h2>Why arc^?</h2>
+      <div class="about-content">
+        <p>arc^ began with a question: <em>if I make the same choices as the people before me, what world does that create?</em></p>
+        <p>I couldn't justify entering a system that prioritizes profit over ecosystems, patents over open knowledge, or individual recognition over collective benefit. So I decided to build something different.</p>
+        <p>arc^ is my attempt to create a research framework that refuses those old paradigms — one that starts with transparency, safety, and planetary wellbeing. It's messy, evolving, and far from perfect. But it's honest.</p>
+      </div>
+    </section>
+
+    <!-- WHAT'S NEXT -->
+    <section class="about-section">
+      <h2>What Comes Next?</h2>
+      <div class="about-content">
+        <p>Right now, arc^ is just me and the framework I'm building. I'm hoping it grows beyond my idea into something bigger — a collective group of independent individuals working together toward regenerative futures.</p>
+        <p>If this takes off, I see it transforming into a foundation, circle, or whatever structure serves the community best. That's not a decision I'll make alone. The form should emerge from the people who contribute.</p>
+        <p>For now, it's early. Everything is still being developed. The most valuable contribution is conversation, co-design, and helping build the methods together.</p>
+      </div>
+    </section>
+
+    <!-- MY ROLE -->
+    <section class="about-role surface-panel">
+      <h2>My Role</h2>
+      <p>I'm the initiator, not the owner. I built the framework and set the principles, but arc^ is designed to grow beyond me. My job is to steward the vision, maintain the standards, and invite others into the process.</p>
+      <p>If you're here, you're early. That means you have a chance to shape what this becomes.</p>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section">
+      <h2>Contact</h2>
+      <p class="contact-intro">Want to collaborate, ask questions, or explore how your work might align with arc^? Reach out.</p>
+      
+      <div class="contact-grid">
+        <article class="contact-card surface-panel">
+          <h3>Personal Email</h3>
+          <p>For general inquiries, collaboration proposals, or just to say hello.</p>
+          <a href="mailto:writingsbyali@gmail.com" class="contact-link">writingsbyali@gmail.com</a>
+        </article>
+
+        <article class="contact-card surface-panel">
+          <h3>arc^ Email</h3>
+          <p>For project-specific questions, research collaboration, or formal correspondence.</p>
+          <a href="mailto:alixarcup@gmail.com" class="contact-link">alixarcup@gmail.com</a>
+        </article>
+      </div>
+
+      <p class="contact-note">No formal applications. No templates. Just authentic conversation about what you want to build and how we might work together.</p>
+    </section>
+
+    <!-- FULL STORY LINK -->
+    <section class="full-story-section surface-panel">
+      <h2>Want the Full Story?</h2>
+      <p>This page covers arc^. For more about my broader work, philosophy, and projects outside this framework, visit my main site.</p>
+      <a href="https://www.xbyali.page" target="_blank" rel="noopener" class="button button--outline">Visit xbyali.page →</a>
+    </section>
+
+    <!-- VALUES REMINDER -->
+    <section class="values-reminder">
+      <h2>What Guides This Work</h2>
+      <p>arc^ is built on principles that refuse extraction and prioritize regeneration. If you're curious about the philosophical foundation, explore how we work and the methods we follow.</p>
+      <div class="values-links">
+        <a href={withBase("/how")} class="button button--outline">See How We Work</a>
+        <a href={withBase("/projects")} class="button button--outline">View Projects</a>
+      </div>
+    </section>
+
+  </main>
+
+  <PageNavigation currentPage="about" />
+</BaseLayout>

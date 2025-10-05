@@ -1,16 +1,129 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ArcCanvas from "../components/ArcCanvas.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import PageNavigation from "../components/PageNavigation.astro";
+import '../styles/pages/home.css';
 
+const title = "arc^ - Open Plasma Research for Ecological Repair";
+const description = "arc^ is an open research framework building plasma technology for ecological repair. We work openly, share everything, and build technology that serves life over profit.";
+const siteUrl = Astro.site ? new URL("/", Astro.site).toString() : undefined;
+
+const withBase = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  if (path === '/') return base;
+  return `${base}${path.replace(/^\//, '')}`;
+};
+
+const seo = {
+  canonical: siteUrl,
+  openGraph: {
+    title: "arc^ - Open Research for Ecological Repair",
+    description,
+    url: siteUrl,
+    type: "website",
+  },
+  twitter: {
+    title,
+    description,
+    card: "summary_large_image",
+  },
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout 
+  title={title}
+  description={description} 
+  bodyClass="page-home" 
+  seo={seo}
+>
+  <ArcCanvas />
+  <SiteHeader active="home" />
+  
+  <main id="main-content" class="page-shell" aria-labelledby="main-title">
+    
+    <!-- HERO INTRO -->
+    <header class="home-hero" aria-labelledby="main-title">
+      <p class="eyebrow">Building Technology for a Better Future</p>
+      <h1 id="main-title">arc^</h1>
+      <p class="lead home-lede">
+        Arc^ is an <strong>open research framework</strong> building plasma technology for ecological repair. 
+        We bring together <strong>researchers, builders, and communities</strong> to develop technology openly 
+        and ethically — <em>technology that serves life, not profit</em>. Whether you're a student, engineer, 
+        scientist, or community partner, if you're ready to work transparently and collaboratively, there's a 
+        place for you here.
+      </p>      
+    </header>
+
+    <!-- ARC UP ETYMOLOGY CALLOUT -->
+    <section class="etymology-callout" aria-labelledby="etymology-heading">
+      <div class="etymology-content">
+        <h2 id="etymology-heading" class="visually-hidden">Origin of arc^</h2>
+        <div class="pronunciation-block">
+          <div class="pronunciation-title">
+            <span class="arc-text">arc<sup>^</sup></span>
+            <span class="pronunciation-text">/ark-up/</span>
+          </div>
+          <button class="audio-button" aria-label="Play pronunciation of arc up" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span class="button-text">Listen</span>
+          </button>
+        </div>
+        <p class="etymology-definition">
+          <strong>"to arc up"</strong> <em>(Australian slang)</em><br>
+          to rise in defense of people and planet
+        </p>
+      </div>
+    </section>
+
+    <!-- NAVIGATION CARDS -->
+    <nav class="home-nav-cards" aria-label="Main site sections">
+      <a href={withBase("/projects")} class="nav-card">
+        <h3>Projects</h3>
+        <p>See our open research in plasma technology and ecological applications</p>
+        <span class="nav-card-arrow" aria-hidden="true">→</span>
+      </a>
+      
+      <a href={withBase("/how")} class="nav-card">
+        <h3>Method</h3>
+        <p>Understand how we work: transparently, ethically, regeneratively</p>
+        <span class="nav-card-arrow" aria-hidden="true">→</span>
+      </a>
+      
+      <a href={withBase("/join")} class="nav-card">
+        <h3>Join</h3>
+        <p>Contribute to open research and help build technology for life</p>
+        <span class="nav-card-arrow" aria-hidden="true">→</span>
+      </a>
+    </nav>
+
+  </main>
+
+  <PageNavigation currentPage="home" />
+
+  <script>
+    // Audio pronunciation using uploaded file
+    const btn = document.querySelector('.audio-button');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const base = import.meta.env.BASE_URL || '/';
+        const audioPath = `${base}audio/EN-AU_ck1_arc_up.mp3`.replace('//', '/');
+        const audio = new Audio(audioPath);
+        
+        audio.play().catch(err => {
+          console.error('Audio playback failed:', err);
+          // Fallback to speech synthesis
+          if ('speechSynthesis' in window) {
+            const utterance = new SpeechSynthesisUtterance('arc up');
+            utterance.rate = 0.8;
+            utterance.pitch = 1;
+            window.speechSynthesis.speak(utterance);
+          }
+        });
+      });
+    }
+  </script>
+
+</BaseLayout>

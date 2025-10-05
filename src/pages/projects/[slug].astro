@@ -1,0 +1,243 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArcCanvas from "../../components/ArcCanvas.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import PageNavigation from "../../components/PageNavigation.astro";
+import '../../styles/pages/project-detail.css';
+import '../../styles/pages/projects.css'; // For status badges
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+
+const formURL = "https://docs.google.com/forms/d/e/1FAIpQLScyVWKDifYxaVWOhdW-SPEXXDVEjBmVezv7W668lizvRCQuaQ/viewform?usp=header";
+
+const normalizedBase = (import.meta.env.BASE_URL ?? "").replace(/\/$/, "");
+const withBase = (path: string) => (path === "/" ? (normalizedBase ? `${normalizedBase}/` : "/") : `${normalizedBase}${path}`);
+
+const title = `${project.data.title} - arc^`;
+const description = project.data.description;
+const siteUrl = Astro.site ? new URL(`/projects/${project.slug}`, Astro.site).toString() : undefined;
+
+const seo = {
+  canonical: siteUrl,
+  openGraph: {
+    title,
+    description,
+    url: siteUrl,
+  },
+  twitter: {
+    title,
+    description,
+  },
+};
+---
+
+<BaseLayout title={title} description={description} bodyClass="page-project-detail" seo={seo}>
+  <ArcCanvas />
+  <SiteHeader active="projects" />
+
+  <main id="main-content" class="page-shell project-detail-shell">
+    
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href={withBase("/projects")}>Projects</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{project.data.title}</span>
+    </nav>
+
+    <!-- PROJECT HERO -->
+    <header class="project-hero">
+      <div class="project-meta">
+        <span class={`status-badge status-${project.data.status}`}>
+          {project.data.status.replace('-', ' ')}
+        </span>
+        <span class="project-date">Last updated: {project.data.lastUpdated}</span>
+      </div>
+      <h1>{project.data.title}</h1>
+      <p class="project-lede">{project.data.description}</p>
+    </header>
+
+    <!-- QUICK SUMMARY PANEL -->
+    <section class="summary-panel surface-panel">
+      <h2>At a Glance</h2>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <h3>The Challenge</h3>
+          <p>{project.data.challenge}</p>
+        </div>
+        <div class="summary-item">
+          <h3>Our Approach</h3>
+          <p>{project.data.approach}</p>
+        </div>
+        <div class="summary-item">
+          <h3>Current Status</h3>
+          <p>{project.data.currentStatus}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN CONTENT (from markdown) -->
+    <article class="project-content">
+      
+      <section class="content-section">
+        <Content />
+      </section>
+
+      <section class="content-section">
+        <h2>Research Questions</h2>
+        <ul class="styled-list">
+          {project.data.researchQuestions.map((question) => (
+            <li>{question}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="content-section">
+        <h2>What We're Looking For</h2>
+        <div class="needs-grid">
+          <div class="need-item">
+            <h3>Expertise</h3>
+            <ul>
+              {project.data.expertise.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div class="need-item">
+            <h3>Resources</h3>
+            <ul>
+              {project.data.resources.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div class="need-item">
+            <h3>Support</h3>
+            <ul>
+              {project.data.support.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>Project Timeline</h2>
+        <div class="timeline">
+          {project.data.timeline.map((phase) => (
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <span class="timeline-date">{phase.date}</span>
+              </div>
+              <div class="timeline-content">
+                <h3>{phase.phase}</h3>
+                <p>{phase.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>How to Contribute</h2>
+        <p>There are multiple ways to get involved, regardless of your background:</p>
+        <div class="contribution-cards">
+          {project.data.contributions.map((contrib) => (
+            <div class="contrib-card">
+              <h3>{contrib.title}</h3>
+              <p>{contrib.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+    </article>
+
+    <!-- LINKS & RESOURCES -->
+    <section class="resources-section surface-panel">
+      <h2>Links & Resources</h2>
+      <p class="resources-intro">As this project develops, we'll share documentation, data, and code here. For now, these links are placeholders — real resources will be added as they're created.</p>
+      
+      <div class="links-grid">
+        <a href="#" class="resource-link disabled">
+          <div class="link-icon">📚</div>
+          <div class="link-content">
+            <h3>Project Wiki</h3>
+            <p>Research notes, protocols, and methodology documentation</p>
+          </div>
+          <span class="link-status">Coming Soon</span>
+        </a>
+
+        <a href="#" class="resource-link disabled">
+          <div class="link-icon">💻</div>
+          <div class="link-content">
+            <h3>GitHub Repository</h3>
+            <p>Code for data analysis, sensor systems, and visualization tools</p>
+          </div>
+          <span class="link-status">Coming Soon</span>
+        </a>
+
+        <a href="#" class="resource-link disabled">
+          <div class="link-icon">📊</div>
+          <div class="link-content">
+            <h3>Open Data Repository</h3>
+            <p>Raw datasets, trial results, and measurement logs</p>
+          </div>
+          <span class="link-status">Coming Soon</span>
+        </a>
+
+        <a href="#" class="resource-link disabled">
+          <div class="link-icon">📄</div>
+          <div class="link-content">
+            <h3>Publications & Preprints</h3>
+            <p>Research papers, technical reports, and findings</p>
+          </div>
+          <span class="link-status">Coming Soon</span>
+        </a>
+
+        <a href="#" class="resource-link disabled">
+          <div class="link-icon">🛠️</div>
+          <div class="link-content">
+            <h3>Hardware Designs (OSHW)</h3>
+            <p>Schematics, CAD files, and build instructions for equipment</p>
+          </div>
+          <span class="link-status">Coming Soon</span>
+        </a>
+
+        <a href="#" class="resource-link disabled">
+          <div class="link-icon">💬</div>
+          <div class="link-content">
+            <h3>Discussion Forum</h3>
+            <p>Community discussions, Q&A, and collaboration space</p>
+          </div>
+          <span class="link-status">Coming Soon</span>
+        </a>
+      </div>
+
+      <p class="resources-note"><strong>Note:</strong> All project outputs will be released under open licenses (CERN-OHL-S v2 for hardware, CC BY-NC-SA 4.0 for documentation, AGPL-3.0 for software).</p>
+    </section>
+
+    <!-- JOIN CTA -->
+    <section class="join-cta-section surface-panel">
+      <h2>Join This Project</h2>
+      <p>Whether you're a student, researcher, farmer, or just curious — there's a way to contribute. The project is in early stages, which means you can help shape the direction.</p>
+      <div class="cta-buttons">
+        <a href={formURL} target="_blank" rel="noopener" class="button button--primary">Get Involved</a>
+        <a href={withBase("/projects")} class="button button--outline">← Back to All Projects</a>
+      </div>
+    </section>
+
+  </main>
+
+  <PageNavigation currentPage="projects" />
+</BaseLayout>
