@@ -1,0 +1,71 @@
+---
+/**
+ * SectionDivider - Visual separator between page sections
+ * 
+ * @param variant - Visual style of the divider
+ * @param spacing - Amount of vertical space around divider
+ */
+interface Props {
+  variant?: 'default' | 'subtle' | 'strong';
+  spacing?: 'normal' | 'compact' | 'spacious';
+}
+
+const { 
+  variant = 'default', 
+  spacing = 'normal' 
+} = Astro.props;
+---
+
+<div 
+  class={`section-divider section-divider--${variant} section-divider--${spacing}`}
+  role="separator"
+  aria-hidden="true"
+></div>
+
+<style>
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      90deg, 
+      transparent, 
+      var(--color-border), 
+      transparent
+    );
+  }
+
+  /* Variants */
+  .section-divider--subtle {
+    opacity: 0.3;
+  }
+
+  .section-divider--strong {
+    height: 2px;
+    opacity: 0.8;
+    background: linear-gradient(
+      90deg, 
+      transparent, 
+      var(--color-primary), 
+      transparent
+    );
+  }
+
+  /* Spacing */
+  .section-divider--compact {
+    margin: var(--space-lg) 0;
+  }
+
+  .section-divider--normal {
+    margin: var(--space-2xl) 0;
+  }
+
+  .section-divider--spacious {
+    margin: var(--space-3xl) 0;
+  }
+
+  @media (max-width: 640px) {
+    .section-divider--spacious {
+      margin: var(--space-2xl) 0;
+    }
+  }
+</style>

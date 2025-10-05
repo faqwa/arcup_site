@@ -1,0 +1,194 @@
+---
+/**
+ * LinkButton - Styled link component with button appearance
+ * 
+ * @param href - Link destination
+ * @param variant - Button style variant
+ * @param size - Button size
+ * @param external - Opens in new tab if true
+ * @param icon - Optional icon position
+ */
+interface Props {
+  href: string;
+  variant?: 'primary' | 'outline' | 'ghost';
+  size?: 'normal' | 'small' | 'large';
+  external?: boolean;
+  icon?: 'none' | 'arrow-right' | 'external';
+  class?: string;
+}
+
+const { 
+  href,
+  variant = 'outline',
+  size = 'normal',
+  external = false,
+  icon = 'none',
+  class: className = ''
+} = Astro.props;
+
+// Auto-detect external links
+const isExternal = external || href.startsWith('http');
+
+const classes = [
+  'link-button',
+  `link-button--${variant}`,
+  `link-button--${size}`,
+  className
+].filter(Boolean).join(' ');
+
+// Determine which icon to show
+const showIcon = icon !== 'none' ? icon : (isExternal ? 'external' : 'none');
+---
+
+<a 
+  href={href}
+  class={classes}
+  target={isExternal ? '_blank' : undefined}
+  rel={isExternal ? 'noopener noreferrer' : undefined}
+>
+  <span class="link-button__text">
+    <slot />
+  </span>
+  
+  {showIcon === 'arrow-right' && (
+    <svg 
+      class="link-button__icon" 
+      width="16" 
+      height="16" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      stroke-width="2" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M5 12h14M12 5l7 7-7 7"/>
+    </svg>
+  )}
+  
+  {showIcon === 'external' && (
+    <svg 
+      class="link-button__icon" 
+      width="14" 
+      height="14" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      stroke-width="2" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+      <polyline points="15 3 21 3 21 9"/>
+      <line x1="10" y1="14" x2="21" y2="3"/>
+    </svg>
+  )}
+</a>
+
+<style>
+  .link-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-sm);
+    font-weight: var(--font-weight-semibold);
+    border: 1px solid transparent;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    white-space: nowrap;
+  }
+
+  /* Sizes */
+  .link-button--small {
+    padding: 0.5rem 1rem;
+    font-size: var(--text-sm);
+  }
+
+  .link-button--normal {
+    padding: 0.75rem 1.5rem;
+    font-size: var(--text-base);
+  }
+
+  .link-button--large {
+    padding: 1rem 2rem;
+    font-size: var(--text-lg);
+  }
+
+  /* Variants */
+  .link-button--primary {
+    background: linear-gradient(
+      135deg, 
+      var(--color-primary) 0%, 
+      var(--color-primary-bright) 100%
+    );
+    color: #031115;
+    box-shadow: 0 18px 35px -25px rgba(93, 225, 228, 0.55);
+  }
+
+  .link-button--primary:hover,
+  .link-button--primary:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 22px 42px -30px rgba(93, 225, 228, 0.7);
+  }
+
+  .link-button--outline {
+    background: rgba(6, 12, 20, 0.7);
+    color: var(--color-primary-bright);
+    border-color: var(--color-primary);
+  }
+
+  .link-button--outline:hover,
+  .link-button--outline:focus-visible {
+    background: rgba(10, 147, 150, 0.15);
+    border-color: var(--color-primary-bright);
+  }
+
+  .link-button--ghost {
+    background: transparent;
+    color: var(--color-text-muted);
+    border-color: var(--color-border);
+  }
+
+  .link-button--ghost:hover,
+  .link-button--ghost:focus-visible {
+    background: rgba(6, 12, 20, 0.5);
+    color: var(--color-text);
+    border-color: var(--color-primary);
+  }
+
+  /* Icon */
+  .link-button__icon {
+    flex-shrink: 0;
+    transition: transform var(--transition-base);
+  }
+
+  .link-button:hover .link-button__icon {
+    transform: translateX(2px);
+  }
+
+  .link-button__text {
+    display: inline-block;
+  }
+
+  /* Touch targets for mobile */
+  @media (max-width: 640px) {
+    .link-button {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .link-button:hover {
+      transform: none;
+    }
+    
+    .link-button:hover .link-button__icon {
+      transform: none;
+    }
+  }
+</style>

@@ -1,0 +1,86 @@
+---
+/**
+ * SectionHeader - Consistent section heading component
+ * 
+ * @param title - Main heading text
+ * @param subtitle - Optional supporting text (lead paragraph)
+ * @param eyebrow - Optional small text above title
+ * @param align - Text alignment
+ * @param headingLevel - Semantic heading level (h2-h4)
+ */
+interface Props {
+  title: string;
+  subtitle?: string;
+  eyebrow?: string;
+  align?: 'left' | 'center';
+  headingLevel?: 'h2' | 'h3' | 'h4';
+}
+
+const { 
+  title, 
+  subtitle, 
+  eyebrow,
+  align = 'center',
+  headingLevel = 'h2'
+} = Astro.props;
+
+const HeadingTag = headingLevel;
+---
+
+<header class={`section-header section-header--${align}`}>
+  {eyebrow && (
+    <p class="section-header__eyebrow eyebrow">{eyebrow}</p>
+  )}
+  
+  <HeadingTag class="section-header__title">
+    {title}
+  </HeadingTag>
+  
+  {subtitle && (
+    <p class="section-header__subtitle lead">
+      {subtitle}
+    </p>
+  )}
+</header>
+
+<style>
+  .section-header {
+    display: grid;
+    gap: clamp(0.75rem, 2vw, 1rem);
+    margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .section-header--center {
+    text-align: center;
+    justify-items: center;
+  }
+
+  .section-header--left {
+    text-align: left;
+    justify-items: start;
+  }
+
+  .section-header__eyebrow {
+    margin: 0;
+  }
+
+  .section-header__title {
+    margin: 0;
+  }
+
+  .section-header__subtitle {
+    margin: 0;
+    max-width: 72ch;
+  }
+
+  /* Center alignment constraint */
+  .section-header--center .section-header__subtitle {
+    margin-inline: auto;
+  }
+
+  @media (max-width: 640px) {
+    .section-header {
+      gap: 0.65rem;
+    }
+  }
+</style>
