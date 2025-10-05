@@ -1,6 +1,12 @@
 /* ============================================
-   ABOUT PAGE STYLES
+   ABOUT PAGE STYLES (CLEANED UP)
    Personal page about Ali and arc^
+   
+   MIGRATION NOTES:
+   - Removed .button and .button--outline styles (now using LinkButton component)
+   - Removed duplicate section header styles (now using SectionHeader component)
+   - Removed .surface-panel styles (now using Card component)
+   - Kept page-specific layout and content styles
    ============================================ */
 
 /* ============================================
@@ -42,11 +48,13 @@
   gap: 1.5rem;
 }
 
+/* REMOVED: Section header styles - now handled by SectionHeader component
 .about-section h2 {
   margin: 0;
   font-size: clamp(1.6rem, 4vw, 2rem);
   color: var(--color-text);
 }
+*/
 
 .about-content {
   display: grid;
@@ -66,158 +74,48 @@
 }
 
 /* ============================================
-   ROLE SECTION
-   ============================================ */
-.about-role {
-  padding: clamp(1.5rem, 4vw, 2rem);
-  text-align: center;
-}
-
-.about-role h2 {
-  margin: 0 0 1rem 0;
-  font-size: clamp(1.4rem, 3.5vw, 1.7rem);
-  color: var(--color-primary-bright);
-}
-
-.about-role p {
-  margin: 0 0 1rem 0;
-  line-height: 1.7;
-  color: var(--color-text-muted);
-  font-size: clamp(1rem, 2.5vw, 1.1rem);
-}
-
-.about-role p:last-child {
-  margin-bottom: 0;
-  color: var(--color-text);
-  font-weight: 500;
-}
-
-/* ============================================
-   CONTACT SECTION
-   ============================================ */
-.contact-section {
-  display: grid;
-  gap: 2rem;
-}
-
-.contact-section h2 {
-  margin: 0;
-  font-size: clamp(1.8rem, 4vw, 2.2rem);
-  text-align: center;
-}
-
-.contact-intro {
-  margin: 0;
-  text-align: center;
-  font-size: clamp(1.05rem, 2.5vw, 1.15rem);
-  line-height: 1.7;
-  color: var(--color-text-muted);
-  max-width: 60ch;
-  margin: 0 auto;
-}
-
-.contact-grid {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-  margin: 1rem 0;
-}
-
-.contact-card {
-  padding: clamp(1.5rem, 4vw, 2rem);
-  display: grid;
-  gap: 0.8rem;
-  text-align: center;
-  transition: all var(--transition-base);
-}
-
-.contact-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(93, 225, 228, 0.4);
-}
-
-.contact-card h3 {
-  margin: 0;
-  font-size: 1.15rem;
-  color: var(--color-text);
-}
-
-.contact-card p {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--color-text-muted);
-}
-
-.contact-link {
-  display: inline-block;
-  margin-top: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  background: var(--color-primary-soft);
-  color: var(--color-primary-bright);
-  text-decoration: none;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: all var(--transition-base);
-  word-break: break-all;
-}
-
-.contact-link:hover {
-  background: rgba(10, 147, 150, 0.25);
-  transform: translateY(-2px);
-}
-
-.contact-note {
-  margin: 1rem 0 0 0;
-  text-align: center;
-  font-size: 0.95rem;
-  font-style: italic;
-  color: var(--color-text-muted);
-  line-height: 1.6;
-}
-
-/* ============================================
    FULL STORY SECTION
+   Page-specific layout only - Card component handles panel styling
    ============================================ */
 .full-story-section {
-  padding: clamp(2rem, 5vw, 3rem);
-  text-align: center;
-  display: grid;
-  gap: 1rem;
-  justify-items: center;
-}
-
-.full-story-section h2 {
-  margin: 0;
-  font-size: clamp(1.4rem, 3.5vw, 1.7rem);
+  /* Keep page-specific overrides here if needed */
+  /* The Card component handles: background, padding, border-radius, shadow */
 }
 
 .full-story-section p {
-  margin: 0;
-  max-width: 60ch;
+  margin: 0 0 1.5rem 0;
   line-height: 1.7;
   color: var(--color-text-muted);
 }
 
+/* REMOVED: surface-panel styles - now handled by Card component
+.surface-panel {
+  background: rgba(6, 12, 22, 0.42);
+  border: 1px solid rgba(93, 225, 228, 0.12);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 4vw, 2rem);
+  box-shadow: var(--shadow-soft);
+}
+*/
+
 /* ============================================
-   VALUES REMINDER
+   VALUES REMINDER SECTION
    ============================================ */
 .values-reminder {
   display: grid;
   gap: 1.5rem;
-  text-align: center;
 }
 
+/* REMOVED: Section header styles - now handled by SectionHeader component
 .values-reminder h2 {
   margin: 0;
   font-size: clamp(1.6rem, 4vw, 2rem);
+  color: var(--color-text);
 }
+*/
 
 .values-reminder p {
   margin: 0;
-  max-width: 65ch;
-  margin: 0 auto;
   line-height: 1.7;
   color: var(--color-text-muted);
   font-size: clamp(1rem, 2.5vw, 1.1rem);
@@ -226,48 +124,72 @@
 .values-links {
   display: flex;
   gap: 1rem;
-  justify-content: center;
   flex-wrap: wrap;
-  margin-top: 0.5rem;
 }
 
-/* ============================================
-   SECTION DIVIDER (Shared component style)
-   ============================================ */
-.section-divider {
-  display: flex;
+/* REMOVED: Button styles - now handled by LinkButton component
+.button {
+  display: inline-flex;
   align-items: center;
-  gap: 1rem;
-  margin: 2rem 0 1rem 0;
-  opacity: 0.6;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  transition: all var(--transition-base);
+  border: 1px solid transparent;
 }
 
-.section-divider::before,
-.section-divider::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--color-border), transparent);
-}
-
-.divider-label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
+.button--outline {
+  background: transparent;
+  border-color: rgba(93, 225, 228, 0.3);
   color: var(--color-primary-bright);
-  font-weight: 600;
-  white-space: nowrap;
 }
+
+.button--outline:hover {
+  background: rgba(93, 225, 228, 0.08);
+  border-color: rgba(93, 225, 228, 0.5);
+  color: var(--color-text);
+}
+*/
 
 /* ============================================
-   RESPONSIVE
+   RESPONSIVE ADJUSTMENTS
    ============================================ */
 @media (max-width: 640px) {
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-  
   .values-links {
     flex-direction: column;
   }
 }
+
+/* ============================================
+   CLEANUP SUMMARY
+   ============================================
+   
+   REMOVED STYLES (now handled by components):
+   ✅ .about-section h2 → SectionHeader component
+   ✅ .values-reminder h2 → SectionHeader component
+   ✅ .surface-panel → Card component
+   ✅ .button → LinkButton component
+   ✅ .button--outline → LinkButton component (variant="outline")
+   
+   KEPT STYLES (page-specific):
+   ✓ .page-about - page layout
+   ✓ .about-hero - hero section layout
+   ✓ .about-lede - hero description styling
+   ✓ .about-section - section layout
+   ✓ .about-content - content area layout
+   ✓ .about-content p - paragraph styling
+   ✓ .about-content em - emphasis styling
+   ✓ .full-story-section - section-specific overrides
+   ✓ .values-reminder - section layout
+   ✓ .values-links - button container layout
+   ✓ Media queries for responsive design
+   
+   BENEFITS:
+   - Reduced CSS bundle size
+   - No duplicate styles across pages
+   - Easier maintenance (change component once, updates everywhere)
+   - Consistent styling automatically
+   ============================================ */
