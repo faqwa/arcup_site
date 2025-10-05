@@ -1,5 +1,7 @@
 ---
 import '../styles/components/header.css';
+import { withBase } from '../utils/paths';
+import { NAV_ITEMS, EXTERNAL_LINKS } from '../config/constants';
 
 interface Props {
   active?: string;
@@ -7,32 +9,17 @@ interface Props {
 
 const { active = "home" } = Astro.props;
 
-const normalizedBase = (import.meta.env.BASE_URL ?? "").replace(/\/$/, "");
-const withBase = (path: string) =>
-  path === "/"
-    ? normalizedBase
-      ? `${normalizedBase}/`
-      : "/"
-    : `${normalizedBase}${path}`;
-
-const navItems = [
-  { key: "home", label: "home", href: withBase("/") },
-  { key: "projects", label: "projects", href: withBase("/projects") },
-  { key: "how", label: "how", href: withBase("/how") },
-  { key: "about", label: "about", href: withBase("/about") },
-  { key: "join", label: "join", href: withBase("/join") },
-];
-
+// Social links configuration
 const socialLinks = [
   {
     name: "YouTube",
-    url: "https://www.youtube.com/@arc-arcup",
+    url: EXTERNAL_LINKS.youtube,
     icon: "youtube",
     label: "Visit Arc^ on YouTube"
   },
   {
     name: "Discord",
-    url: "https://discord.gg/DA8BPA3VsN",
+    url: EXTERNAL_LINKS.discord,
     icon: "discord",
     label: "Join Arc^ Discord community"
   }
@@ -48,10 +35,10 @@ const socialLinks = [
   
   <nav class="site-nav" aria-label="Primary navigation">
     <ul class="nav-list">
-      {navItems.map((item) => (
+      {NAV_ITEMS.map((item) => (
         <li>
           <a
-            href={item.href}
+            href={withBase(item.href)}
             class={item.key === active ? "nav-link is-active" : "nav-link"}
             aria-current={item.key === active ? "page" : undefined}
           >

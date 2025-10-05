@@ -63,11 +63,11 @@ export const SOCIAL_HANDLES = {
  * Navigation structure
  */
 export const NAV_ITEMS = [
-  { key: "home", label: "home", path: "/" },
-  { key: "projects", label: "projects", path: "/projects" },
-  { key: "how", label: "how", path: "/how" },
-  { key: "about", label: "about", path: "/about" },
-  { key: "join", label: "join", path: "/join" },
+  { key: "home", label: "home", href: "/" },        // Changed path → href
+  { key: "projects", label: "projects", href: "/projects" },
+  { key: "how", label: "how", href: "/how" },
+  { key: "about", label: "about", href: "/about" },
+  { key: "join", label: "join", href: "/join" },
 ] as const;
 
 /**

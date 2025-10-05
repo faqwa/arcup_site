@@ -15,7 +15,7 @@
 }
 
 .join-lede {
-  max-width: 65ch;
+  max-width: var(--shell-width);
   margin: 0 auto;
 }
 
@@ -24,7 +24,7 @@
    ============================================ */
 .acknowledgements-section {
   padding: clamp(2rem, 5vw, 3rem);
-  max-width: 90ch;
+  max-width: var(--shell-width);
   margin: 0 auto;
 }
 
@@ -48,7 +48,7 @@
 
 .acknowledgements-intro {
   text-align: center;
-  max-width: 70ch;
+  max-width: var(--shell-width);
   margin: 0 auto 2rem;
 }
 
@@ -291,7 +291,7 @@
    ============================================ */
 .faq-section {
   padding: clamp(2rem, 5vw, 3rem);
-  max-width: 85ch;
+  max-width: var(--shell-width);
   margin: 0 auto;
 }
 
@@ -389,7 +389,7 @@
 
 .final-cta p {
   margin: 0;
-  max-width: 60ch;
+  max-width: var(--shell-width);
   line-height: 1.7;
   color: var(--color-text-muted);
   font-size: clamp(1rem, 2.5vw, 1.1rem);
