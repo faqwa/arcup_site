@@ -1,12 +1,29 @@
 ---
+// ============================================================================
+// IMPORTS - Updated to use shared components and utilities
+// ============================================================================
 import { getCollection } from 'astro:content';
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ArcCanvas from "../../components/ArcCanvas.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import PageNavigation from "../../components/PageNavigation.astro";
+
+// NEW: Import shared components
+import Card from "../../components/Card.astro";
+import LinkButton from "../../components/LinkButton.astro";
+import StatusBadge from "../../components/StatusBadge.astro";
+
 import '../../styles/pages/project-detail.css';
 import '../../styles/pages/projects.css'; // For status badges
 
+// NEW: Import utilities and constants
+import { withBase } from '../../utils/paths';
+import { buildSEO } from '../../utils/seo';
+import { EXTERNAL_LINKS } from '../../config/constants';
+
+// ============================================================================
+// DYNAMIC ROUTE GENERATION
+// ============================================================================
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
   return projects.map((project) => ({
@@ -18,56 +35,44 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await project.render();
 
-const formURL = "https://docs.google.com/forms/d/e/1FAIpQLScyVWKDifYxaVWOhdW-SPEXXDVEjBmVezv7W668lizvRCQuaQ/viewform?usp=header";
-
-const normalizedBase = (import.meta.env.BASE_URL ?? "").replace(/\/$/, "");
-const withBase = (path: string) => (path === "/" ? (normalizedBase ? `${normalizedBase}/` : "/") : `${normalizedBase}${path}`);
-
-const title = `${project.data.title} - arc^`;
-const description = project.data.description;
-const siteUrl = Astro.site ? new URL(`/projects/${project.slug}`, Astro.site).toString() : undefined;
-
-const seo = {
-  canonical: siteUrl,
-  openGraph: {
-    title,
-    description,
-    url: siteUrl,
-  },
-  twitter: {
-    title,
-    description,
-  },
-};
+// ============================================================================
+// SEO - Simplified using buildSEO utility
+// ============================================================================
+const seo = buildSEO({
+  title: project.data.title,
+  description: project.data.description,
+  path: `/projects/${project.slug}`,
+  siteUrl: Astro.site,
+});
 ---
 
-<BaseLayout title={title} description={description} bodyClass="page-project-detail" seo={seo}>
+<BaseLayout title={seo.title} description={seo.description} bodyClass="page-project-detail" seo={seo}>
   <ArcCanvas />
   <SiteHeader active="projects" />
 
   <main id="main-content" class="page-shell project-detail-shell">
     
-    <!-- BREADCRUMB -->
+    <!-- BREADCRUMB - Keep as is, just using withBase utility -->
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href={withBase("/projects")}>Projects</a>
       <span aria-hidden="true">/</span>
       <span aria-current="page">{project.data.title}</span>
     </nav>
 
-    <!-- PROJECT HERO -->
+    <!-- PROJECT HERO 
+         Replace status badge with StatusBadge component -->
     <header class="project-hero">
       <div class="project-meta">
-        <span class={`status-badge status-${project.data.status}`}>
-          {project.data.status.replace('-', ' ')}
-        </span>
+        <StatusBadge status={project.data.status} />
         <span class="project-date">Last updated: {project.data.lastUpdated}</span>
       </div>
       <h1>{project.data.title}</h1>
       <p class="project-lede">{project.data.description}</p>
     </header>
 
-    <!-- QUICK SUMMARY PANEL -->
-    <section class="summary-panel surface-panel">
+    <!-- QUICK SUMMARY PANEL 
+         Replace surface-panel wrapper with Card -->
+    <Card as="section" class="summary-panel">
       <h2>At a Glance</h2>
       <div class="summary-grid">
         <div class="summary-item">
@@ -83,9 +88,10 @@ const seo = {
           <p>{project.data.currentStatus}</p>
         </div>
       </div>
-    </section>
+    </Card>
 
-    <!-- MAIN CONTENT (from markdown) -->
+    <!-- MAIN CONTENT (from markdown) 
+         Keep ALL structure as-is -->
     <article class="project-content">
       
       <section class="content-section">
@@ -163,8 +169,9 @@ const seo = {
 
     </article>
 
-    <!-- LINKS & RESOURCES -->
-    <section class="resources-section surface-panel">
+    <!-- LINKS & RESOURCES 
+         Replace surface-panel wrapper with Card -->
+    <Card as="section" class="resources-section">
       <h2>Links & Resources</h2>
       <p class="resources-intro">As this project develops, we'll share documentation, data, and code here. For now, these links are placeholders — real resources will be added as they're created.</p>
       
@@ -225,19 +232,60 @@ const seo = {
       </div>
 
       <p class="resources-note"><strong>Note:</strong> All project outputs will be released under open licenses (CERN-OHL-S v2 for hardware, CC BY-NC-SA 4.0 for documentation, AGPL-3.0 for software).</p>
-    </section>
+    </Card>
 
-    <!-- JOIN CTA -->
-    <section class="join-cta-section surface-panel">
+    <!-- JOIN CTA 
+         Replace surface-panel wrapper with Card, replace buttons with LinkButton -->
+    <Card as="section" class="join-cta-section">
       <h2>Join This Project</h2>
       <p>Whether you're a student, researcher, farmer, or just curious — there's a way to contribute. The project is in early stages, which means you can help shape the direction.</p>
       <div class="cta-buttons">
-        <a href={formURL} target="_blank" rel="noopener" class="button button--primary">Get Involved</a>
-        <a href={withBase("/projects")} class="button button--outline">← Back to All Projects</a>
+        <LinkButton href={EXTERNAL_LINKS.formURL} variant="primary" icon="external">
+          Get Involved
+        </LinkButton>
+        <LinkButton href={withBase("/projects")} variant="outline" icon="arrow-right">
+          ← Back to All Projects
+        </LinkButton>
       </div>
-    </section>
+    </Card>
 
   </main>
 
   <PageNavigation currentPage="projects" />
 </BaseLayout>
+
+<!-- 
+============================================================================
+MIGRATION SUMMARY - projects/[slug].astro
+============================================================================
+
+✅ WHAT CHANGED (Minimal, preserving design):
+1. Imports:
+   - Added: Card, LinkButton, StatusBadge components
+   - Added: withBase, buildSEO, EXTERNAL_LINKS utilities
+   - Removed: Duplicate withBase function, manual SEO construction, hard-coded formURL
+
+2. Replaced specific elements:
+   - Status badge span → <StatusBadge status={project.data.status} />
+   - <section class="surface-panel"> → <Card as="section"> (3 instances)
+   - <a class="button button--primary"> → <LinkButton variant="primary">
+   - <a class="button button--outline"> → <LinkButton variant="outline">
+   - formURL → EXTERNAL_LINKS.formURL
+
+✅ WHAT DIDN'T CHANGE (Preserved design):
+- ALL section headers kept as-is (h1, h2, h3 elements)
+- Breadcrumb structure maintained
+- Project hero layout unchanged
+- Summary grid structure preserved
+- ALL content sections unchanged (.content-section, .needs-grid, .timeline, etc.)
+- Resource links grid structure maintained
+- Visual appearance should be IDENTICAL
+
+✅ DYNAMIC ROUTE HANDLING:
+- getStaticPaths function unchanged
+- Project data structure unchanged
+- Content rendering unchanged
+- SEO uses dynamic project data correctly with buildSEO()
+
+============================================================================
+-->
