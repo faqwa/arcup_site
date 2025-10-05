@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://yourusername.github.io/arcup-v2/sitemap-index.xml
+Sitemap: https://faqwa.github.io/arcup-v2/sitemap-index.xml
 
 # Optional: Crawl-delay (if you want to be nice to crawlers)
 Crawl-delay: 1
