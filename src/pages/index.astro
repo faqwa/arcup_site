@@ -1,22 +1,24 @@
 ---
 // ============================================================================
-// IMPORTS - Updated to use shared utilities
+// IMPORTS
 // ============================================================================
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ArcCanvas from "../components/ArcCanvas.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import PageNavigation from "../components/PageNavigation.astro";
+import Card from "../components/Card.astro";
+import LinkButton from "../components/LinkButton.astro";
 import '../styles/pages/home.css';
 
-// NEW: Import utilities
 import { withBase } from '../utils/paths';
 import { buildSEO } from '../utils/seo';
+import { EXTERNAL_LINKS } from '../config/constants';
 
 // ============================================================================
-// SEO - Simplified using buildSEO utility
+// SEO
 // ============================================================================
 const seo = buildSEO({
-  title: "arc^",  // buildSEO will add "- Open Plasma Research for Ecological Repair"
+  title: "arc^",
   description: "arc^ is an open research framework building plasma technology for ecological repair. We work openly, share everything, and build technology that serves life over profit.",
   path: "/",
   siteUrl: Astro.site,
@@ -34,25 +36,75 @@ const seo = buildSEO({
   
   <main id="main-content" class="page-shell" aria-labelledby="main-title">
     
-    <!-- HERO INTRO - No changes, keep exact structure -->
+    <!-- ========================================================================
+         SECTION 1: THE WHAT (Functional/Scientific)
+         ======================================================================== -->
     <header class="home-hero" aria-labelledby="main-title">
       <p class="eyebrow">Building Technology for a Better Future</p>
       <h1 id="main-title">arc^</h1>
       <p class="lead home-lede">
-        Arc^ is an <strong>open research framework</strong> building plasma technology for ecological repair. 
-        We bring together <strong>researchers, builders, and communities</strong> to develop technology openly 
-        and ethically — <em>technology that serves life, not profit</em>. Whether you're a student, engineer, 
-        scientist, or community partner, if you're ready to work transparently and collaboratively, there's a 
-        place for you here.
-      </p>      
+        arc^ is an <em>open research framework</em> building plasma technology for ecological repair. 
+        We bring together <em>researchers, builders, and communities</em> to develop technology that 
+        serves <em>life over profit</em>. If you're ready to work openly and collaboratively, there's 
+        a place for you here.
+      </p>
+      
+      <!-- Action buttons for immediate engagement -->
+      <div class="hero-actions">
+        <LinkButton 
+          href={withBase("/projects")} 
+          variant="primary"
+          icon="arrow-right"
+        >
+          Explore Project Ideas
+        </LinkButton>
+        <LinkButton 
+          href={withBase("/how")} 
+          variant="outline"
+          icon="arrow-right"
+        >
+          See How We Work
+        </LinkButton>
+      </div>
     </header>
 
-    <!-- ARC UP ETYMOLOGY CALLOUT 
-         Keep this EXACTLY as is - it's unique to the homepage
-         This section has custom styling and interactions that shouldn't be componentized -->
+    <!-- ========================================================================
+         SECTION 2: THE WHY (Emotional/Purposeful)
+         ======================================================================== -->
+    <Card as="section" class="why-section" padding="spacious">
+      <div class="why-content">
+        <p class="eyebrow">For Our Land. For Our People. For Collective Futures.</p>
+        
+        <p class="why-lede">
+          This work is for those who refuse extraction and choose regeneration. Technology should serve 
+          <em>the many, not the few</em>—building <em>futures worth inheriting</em> for our 
+          communities, our land, our shared survival. If you believe another world is possible, you're already 
+          part of this.
+        </p>
+
+        <div class="why-action">
+          <LinkButton 
+            href={withBase("/about")} 
+            variant="outline"
+            icon="arrow-right"
+          >
+            Meet the Person Behind arc^
+          </LinkButton>
+        </div>
+      </div>
+    </Card>
+
+    <!-- ========================================================================
+         SECTION 3: ETYMOLOGY (Cultural Context + Mathematical Symbolism)
+         ======================================================================== -->
     <section class="etymology-callout" aria-labelledby="etymology-heading">
       <div class="etymology-content">
         <h2 id="etymology-heading" class="visually-hidden">Origin of arc^</h2>
+        
+        <!-- Context intro -->
+        <p class="etymology-context">The name <em>arc^</em> holds dual meaning:</p>
+        
+        <!-- Pronunciation block -->
         <div class="pronunciation-block">
           <div class="pronunciation-title">
             <span class="arc-text">arc<sup>^</sup></span>
@@ -65,43 +117,70 @@ const seo = buildSEO({
             <span class="button-text">Listen</span>
           </button>
         </div>
-        <p class="etymology-definition">
-          <strong>"to arc up"</strong> <em>(Australian slang)</em><br>
-          to rise in defense of people and planet
-        </p>
+        
+        <!-- Definitions -->
+        <div class="etymology-definitions">
+          <p class="etymology-definition">
+            <strong>"to arc up"</strong> <em>(Australian slang)</em><br>
+            to rise in defense of people and planet
+          </p>
+          
+          <p class="etymology-definition">
+            <strong>"^"</strong> <em>(mathematical notation)</em><br>
+            to the power of — amplifying change through the scientific method
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- NAVIGATION CARDS 
-         Keep this structure - these are unique homepage nav cards, not LinkButton components
-         They have specific styling and hover effects that shouldn't be changed -->
+    <!-- ========================================================================
+         SECTION 4: NAVIGATION CARDS (How to Engage)
+         ======================================================================== -->
     <nav class="home-nav-cards" aria-label="Main site sections">
+      
+      <!-- Projects Card -->
       <a href={withBase("/projects")} class="nav-card">
         <h3>Projects</h3>
-        <p>See our open research in plasma technology and ecological applications</p>
+        <p>Explore open plasma research and ecological applications</p>
         <span class="nav-card-arrow" aria-hidden="true">→</span>
       </a>
       
+      <!-- Method Card -->
       <a href={withBase("/how")} class="nav-card">
         <h3>Method</h3>
-        <p>Understand how we work: transparently, ethically, regeneratively</p>
+        <p>Learn how we work: openly, ethically, regeneratively</p>
         <span class="nav-card-arrow" aria-hidden="true">→</span>
       </a>
       
+      <!-- Join Card -->
       <a href={withBase("/join")} class="nav-card">
         <h3>Join</h3>
-        <p>Contribute to open research and help build technology for life</p>
+        <p>Contribute to research building technology for life</p>
         <span class="nav-card-arrow" aria-hidden="true">→</span>
       </a>
+
+      <!-- Beyond arc^ Card (External) -->
+      <a 
+        href={EXTERNAL_LINKS.personalSite} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="nav-card nav-card--external"
+      >
+        <h3>Beyond arc^</h3>
+        <p>Explore writing, philosophy, and projects outside this framework</p>
+        <span class="nav-card-arrow" aria-hidden="true">↗</span>
+      </a>
+      
     </nav>
 
   </main>
 
   <PageNavigation currentPage="home" />
 
-  <!-- Audio pronunciation script - Keep as is -->
+  <!-- ========================================================================
+       AUDIO PRONUNCIATION SCRIPT
+       ======================================================================== -->
   <script>
-    // Audio pronunciation using uploaded file
     const btn = document.querySelector('.audio-button');
     if (btn) {
       btn.addEventListener('click', () => {
@@ -124,49 +203,3 @@ const seo = buildSEO({
   </script>
 
 </BaseLayout>
-
-<!-- 
-============================================================================
-MIGRATION SUMMARY - index.astro (Homepage)
-============================================================================
-
-✅ WHAT CHANGED (Minimal - utilities only):
-1. Imports:
-   - Added: withBase, buildSEO utilities
-   - Removed: Duplicate withBase function definition
-   - Removed: Manual SEO object construction
-
-2. SEO simplified:
-   - Used buildSEO() utility instead of manual construction
-   - Same functionality, less code
-
-3. Used withBase from utilities:
-   - All navigation card href attributes now use imported withBase
-   - No functional changes
-
-✅ WHAT DIDN'T CHANGE (Preserved ALL unique homepage design):
-- Hero section structure - UNCHANGED
-- Etymology section - UNCHANGED (unique to homepage, custom styling)
-- Audio pronunciation button - UNCHANGED
-- Navigation cards - UNCHANGED (unique homepage pattern)
-- ALL CSS classes maintained
-- Client-side script for audio - UNCHANGED
-- Visual appearance is IDENTICAL
-
-✅ WHY SO FEW CHANGES:
-The homepage is simple and has UNIQUE elements that shouldn't be componentized:
-- Etymology callout with custom gradient background and pronunciation audio
-- Special navigation cards with unique hover effects
-- No surface-panel or button elements that need component replacement
-- The design is already clean and doesn't have code duplication
-
-✅ KEY DECISION:
-Did NOT use LinkButton for nav cards because:
-- They have unique styling (.nav-card class)
-- Custom hover effects and layout
-- Not standard buttons - they're large promotional cards
-- Would require extensive custom styling if converted to LinkButton
-- Better to keep them as custom elements for the homepage
-
-============================================================================
--->
