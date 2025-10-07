@@ -27,6 +27,23 @@ import { EXTERNAL_LINKS } from '../config/constants';
 // Get all projects dynamically
 const allProjects = await getCollection('projects');
 
+// Group projects by category (if they have one)
+const projectsByCategory = allProjects.reduce((acc, project) => {
+  const category = project.data.category || 'Other';
+  if (!acc[category]) {
+    acc[category] = [];
+  }
+  acc[category].push(project);
+  return acc;
+}, {} as Record<string, typeof allProjects>);
+
+// Get categories in a specific order (alphabetical, but 'Other' last)
+const categories = Object.keys(projectsByCategory).sort((a, b) => {
+  if (a === 'Other') return 1;
+  if (b === 'Other') return -1;
+  return a.localeCompare(b);
+});
+
 const seo = buildSEO({
   title: "Projects",
   description: "Active research projects in plasma technology for ecological repair. Open, collaborative, and building in public.",
@@ -89,32 +106,40 @@ const seo = buildSEO({
       </div>
     </section>
 
-    <!-- ALL PROJECTS SECTION -->
+    <!-- ALL PROJECTS SECTION (with categories) -->
     <section class="all-projects-section" aria-labelledby="all-projects-title">
       <SectionHeader 
         title="All Projects"
         subtitle="Each project follows RE:TECH principles — open, safe, iterative — and follows arc^'s licensing and governance."
       />
       
-      <div class="projects-grid">
-        {allProjects.map((project) => (
-          <Card as="article" class="project-card">
-            <div class="card-header">
-              <h3>
-                <a href={withBase(`/projects/${project.slug}`)}>{project.data.title}</a>
-              </h3>
-              <StatusBadge status={project.data.status} />
-            </div>
-            <p class="card-summary">{project.data.summary}</p>
-            <p class="card-updated">Last updated: {project.data.lastUpdated}</p>
-            <div class="card-actions">
-              <LinkButton href={withBase(`/projects/${project.slug}`)} variant="outline" icon="arrow-right">
-                Learn More
-              </LinkButton>
-            </div>
-          </Card>
-        ))}
-      </div>
+      {categories.map((category) => (
+        <div class="project-category">
+          {category !== 'Other' && (
+            <h3 class="category-heading">{category}</h3>
+          )}
+          
+          <div class="projects-grid">
+            {projectsByCategory[category].map((project) => (
+              <Card as="article" class="project-card">
+                <div class="card-header">
+                  <h4>
+                    <a href={withBase(`/projects/${project.slug}`)}>{project.data.title}</a>
+                  </h4>
+                  <StatusBadge status={project.data.status} />
+                </div>
+                <p class="card-summary">{project.data.summary}</p>
+                <p class="card-updated">Last updated: {project.data.lastUpdated}</p>
+                <div class="card-actions">
+                  <LinkButton href={withBase(`/projects/${project.slug}`)} variant="outline" icon="arrow-right">
+                    Learn More
+                  </LinkButton>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      ))}
     </section>
 
     <!-- BUILD YOUR OWN SECTION -->
@@ -134,7 +159,7 @@ const seo = buildSEO({
           <strong>You have the power.</strong> Document your work. Share openly. Build for 
           <em>life over profit</em>. That's all we ask.
         </p>
-        <div style="margin-top: 1.5rem;">
+        <div class="button-wrapper">
           <LinkButton href={withBase("/how")} variant="outline" icon="arrow-right">
             Learn the Philosophy
           </LinkButton>

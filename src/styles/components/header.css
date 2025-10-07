@@ -1,5 +1,5 @@
 /* ============================================
-   SITE HEADER COMPONENT
+   SITE HEADER COMPONENT WITH HOVER DROPDOWNS
    ============================================ */
 
 .site-header {
@@ -16,9 +16,6 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-lg);
-  
-  position: relative;
-  z-index: 100;
 }
 
 /* ============================================
@@ -63,14 +60,12 @@
   align-items: center;
 }
 
-/* Navigation items */
+/* Nav item wrapper - needed for dropdown positioning */
 .nav-item {
   position: relative;
-  display: flex;
-  align-items: center;
 }
 
-/* Regular nav links */
+/* Main nav link - always clickable */
 .nav-link {
   color: var(--color-text-muted);
   text-decoration: none;
@@ -80,6 +75,7 @@
   position: relative;
   padding-bottom: 0.25rem;
   transition: color var(--transition-base);
+  display: block;
 }
 
 .nav-link::after {
@@ -116,195 +112,103 @@
 }
 
 /* ============================================
-   DROPDOWN NAVIGATION
+   DROPDOWN NAVIGATION (HOVER-BASED, CLICKABLE)
    ============================================ */
 
-/* Dropdown trigger button - matches nav-link styles */
-.nav-dropdown-trigger {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  
-  /* Match regular nav-link styles */
-  color: var(--color-text-muted);
-  text-decoration: none;
-  font-size: var(--text-sm);
-  font-weight: var(--font-weight-medium);
-  letter-spacing: 0.05em;
-  position: relative;
-  padding: 0;
-  padding-bottom: 0.25rem;
-  transition: color var(--transition-base);
-  
-  /* Remove default button styles */
-  font-family: inherit;
-}
-
-/* Underline effect for dropdown trigger - same as nav-link */
-.nav-dropdown-trigger::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--color-primary),
-    transparent
-  );
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform var(--transition-base);
-}
-
-.nav-dropdown-trigger:hover,
-.nav-dropdown-trigger:focus-visible {
-  color: var(--color-text);
-}
-
-.nav-dropdown-trigger:hover::after,
-.nav-dropdown-trigger:focus-visible::after,
-.nav-dropdown-trigger.is-active::after {
-  transform: scaleX(1);
-}
-
-.nav-dropdown-trigger.is-active {
-  color: var(--color-text);
-}
-
-/* Arrow icon */
-.dropdown-arrow {
-  transition: transform var(--transition-base);
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-
-.nav-dropdown-trigger[aria-expanded="true"] .dropdown-arrow {
-  transform: rotate(180deg);
-}
-
-/* Dropdown menu */
+/* Dropdown container */
 .nav-dropdown {
   position: absolute;
-  top: calc(100% + 0.75rem);
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  
-  list-style: none;
-  margin: 0;
-  padding: 0.5rem 0;
-  
   min-width: 200px;
-  max-width: 280px;
   
-  /* Max height with scroll for long lists */
-  max-height: 400px;
-  overflow-y: auto;
-  
-  background: rgba(6, 12, 22, 0.95);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(93, 225, 228, 0.2);
-  border-radius: var(--radius-md);
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5),
-              0 0 0 1px rgba(93, 225, 228, 0.1);
+  /* Add padding-top to create hover bridge */
+  padding-top: 0.75rem;
+  margin-top: 0;
   
   /* Hidden by default */
   opacity: 0;
   visibility: hidden;
-  transform: translateX(-50%) translateY(-10px);
-  transition: opacity 0.2s ease, 
-              transform 0.2s ease, 
-              visibility 0.2s;
-  
+  pointer-events: none;
   z-index: 1000;
+  
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dropdown open state */
-.nav-dropdown.is-open {
+/* Inner dropdown content with styling */
+.nav-dropdown::before {
+  content: '';
+  position: absolute;
+  top: 0.75rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(6, 12, 22, 0.95);
+  border: 1px solid rgba(93, 225, 228, 0.25);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+              0 0 0 1px rgba(93, 225, 228, 0.1);
+  z-index: -1;
+}
+
+/* Position dropdown items */
+.nav-dropdown li {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.75rem;
+}
+
+.nav-dropdown li:first-child {
+  margin-top: 1.25rem;
+}
+
+.nav-dropdown li:last-child {
+  margin-bottom: 0.5rem;
+}
+
+/* Show dropdown on parent hover */
+.nav-item.has-dropdown:hover .nav-dropdown,
+.nav-item.has-dropdown:focus-within .nav-dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
+  /* CRITICAL: Re-enable pointer events when visible */
+  pointer-events: auto;
 }
 
-/* Custom scrollbar */
-.nav-dropdown::-webkit-scrollbar {
-  width: 6px;
+/* Keep dropdown visible when hovering over it */
+.nav-dropdown:hover {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
-.nav-dropdown::-webkit-scrollbar-track {
-  background: rgba(6, 12, 22, 0.3);
-  border-radius: 3px;
-}
-
-.nav-dropdown::-webkit-scrollbar-thumb {
-  background: rgba(93, 225, 228, 0.3);
-  border-radius: 3px;
-}
-
-.nav-dropdown::-webkit-scrollbar-thumb:hover {
-  background: rgba(93, 225, 228, 0.5);
-}
-
-/* Dropdown links */
+/* Dropdown link */
 .nav-dropdown-link {
   display: block;
-  padding: 0.65rem 1.25rem;
+  padding: 0.65rem 1rem;
   color: var(--color-text-muted);
   text-decoration: none;
-  font-size: var(--text-sm);
-  font-weight: var(--font-weight-medium);
+  font-size: 0.95rem;
+  border-radius: calc(var(--radius-md) - 2px);
   transition: all var(--transition-base);
-  position: relative;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.nav-dropdown-link::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 0;
-  background: var(--color-primary-bright);
-  transition: height 0.2s ease;
+  /* Ensure links are clickable */
+  cursor: pointer;
 }
 
 .nav-dropdown-link:hover,
-.nav-dropdown-link:focus {
+.nav-dropdown-link:focus-visible {
   color: var(--color-text);
-  background: rgba(93, 225, 228, 0.08);
-  padding-left: 1.5rem;
-}
-
-.nav-dropdown-link:hover::before,
-.nav-dropdown-link:focus::before {
-  height: 60%;
+  background: rgba(93, 225, 228, 0.1);
 }
 
 .nav-dropdown-link.is-active {
   color: var(--color-primary-bright);
-  background: rgba(93, 225, 228, 0.12);
-}
-
-.nav-dropdown-link.is-active::before {
-  height: 60%;
-}
-
-/* Hover effect on parent when dropdown is open */
-.nav-dropdown-trigger[aria-expanded="true"] {
-  color: var(--color-text);
-}
-
-.nav-dropdown-trigger[aria-expanded="true"]::after {
-  transform: scaleX(1);
+  background: rgba(93, 225, 228, 0.08);
 }
 
 /* ============================================
@@ -339,20 +243,6 @@
 }
 
 /* ============================================
-   ACCESSIBILITY
-   ============================================ */
-.nav-dropdown-trigger:focus-visible {
-  outline: 2px solid var(--color-primary-bright);
-  outline-offset: 4px;
-  border-radius: 2px;
-}
-
-.nav-dropdown-link:focus-visible {
-  outline: 2px solid var(--color-primary-bright);
-  outline-offset: -2px;
-}
-
-/* ============================================
    MOBILE RESPONSIVE
    ============================================ */
 @media (max-width: 768px) {
@@ -374,6 +264,7 @@
     width: 100%;
     justify-content: space-between;
     gap: var(--space-xs);
+    flex-wrap: wrap;
   }
   
   .nav-link {
@@ -389,17 +280,9 @@
     border-bottom: 1px solid rgba(93, 225, 228, 0.15);
   }
   
-  /* Dropdown adjustments for mobile */
+  /* Disable dropdowns on mobile - keep simple navigation */
   .nav-dropdown {
-    left: 0;
-    right: 0;
-    transform: none;
-    min-width: auto;
-    max-width: none;
-  }
-  
-  .nav-dropdown.is-open {
-    transform: none;
+    display: none;
   }
 }
 
@@ -411,18 +294,5 @@
   
   .nav-link {
     font-size: 0.85rem;
-  }
-}
-
-/* ============================================
-   REDUCED MOTION
-   ============================================ */
-@media (prefers-reduced-motion: reduce) {
-  .nav-dropdown {
-    transition: opacity 0.01ms, visibility 0.01ms;
-  }
-  
-  .dropdown-arrow {
-    transition: none;
   }
 }

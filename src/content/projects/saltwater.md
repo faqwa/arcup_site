@@ -1,6 +1,7 @@
 ---
 title: "Saltwater Irrigation"
 status: "early-idea"
+category: "water"  # <-- NEW! Add this to group projects together
 summary: "Exploring strategies for salinity-tolerant cultivation and soil recovery."
 lastUpdated: "October 2025"
 description: "Exploring strategies for salinity-tolerant cultivation and soil recovery using plasma-activated water."

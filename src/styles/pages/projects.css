@@ -28,12 +28,21 @@
   margin: 0 auto;
 }
 
+/* Emphasis styling for projects page */
+.projects-hero .lead strong {
+  color: var(--color-primary-bright);
+  font-weight: 600;
+}
+
+.projects-hero .lead em {
+  color: var(--color-primary-bright);
+  font-style: italic;
+}
+
 /* ============================================
    ACTIVE PROJECTS SECTION
    ============================================ */
-.active-projects-section {
-  margin-bottom: clamp(3rem, 6vw, 5rem);
-}
+/* REMOVED - No longer separating active projects */
 
 /* ============================================
    GETTING INVOLVED SECTION
@@ -129,6 +138,12 @@
   margin-bottom: 0;
 }
 
+.build-your-own-content .button-wrapper {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-end; /* Align button to the right */
+}
+
 .build-your-own-content a {
   color: var(--color-primary-bright);
   text-decoration: none;
@@ -157,12 +172,32 @@
   margin: 0 auto clamp(3rem, 6vw, 5rem) auto;
 }
 
+.project-category {
+  margin-bottom: clamp(3rem, 5vw, 4rem);
+  width: 100%; /* Force full width */
+  display: block; /* Ensure it's a block element */
+}
+
+.project-category:last-child {
+  margin-bottom: 0;
+}
+
+.category-heading {
+  margin: 0 0 2rem 0; /* Increased bottom margin */
+  font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+  color: var(--color-primary-bright);
+  font-weight: 600;
+  text-align: left; /* Changed to left align */
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(93, 225, 228, 0.2); /* Add visual separator */
+}
+
 /* ============================================
-   PROJECTS GRID - FIXED RESPONSIVE LAYOUT
+   PROJECTS GRID - SMART RESPONSIVE LAYOUT
+   Max 3 columns, adapts based on screen width
    Mobile: 1 column
    Tablet: 2 columns
-   Desktop: 3 columns
-   Large: 4 columns
+   Desktop: 3 columns (max)
    ============================================ */
 .projects-grid {
   display: grid;
@@ -177,17 +212,25 @@
   }
 }
 
-/* Desktop: 3 columns */
-@media (min-width: 900px) {
+/* Desktop: 3 columns MAX */
+@media (min-width: 1024px) {
   .projects-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* Large Desktop: 4 columns */
-@media (min-width: 1400px) {
-  .projects-grid {
-    grid-template-columns: repeat(4, 1fr);
+/* Smart sizing for different card counts */
+.projects-grid:has(.project-card:only-child) {
+  grid-template-columns: 1fr;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .projects-grid:has(.project-card:nth-child(2):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+    margin: 0 auto;
   }
 }
 
@@ -212,7 +255,7 @@
   flex-wrap: wrap;
 }
 
-.card-header h3 {
+.card-header h4 {
   margin: 0;
   font-size: clamp(1.15rem, 2.5vw, 1.3rem);
   line-height: 1.3;
@@ -220,13 +263,13 @@
   min-width: 200px;
 }
 
-.card-header h3 a {
+.card-header h4 a {
   color: var(--color-text);
   text-decoration: none;
   transition: color var(--transition-base);
 }
 
-.card-header h3 a:hover {
+.card-header h4 a:hover {
   color: var(--color-primary-bright);
 }
 
