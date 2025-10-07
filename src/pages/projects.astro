@@ -1,28 +1,35 @@
 ---
 // ============================================================================
-// IMPORTS - Updated to use shared components and utilities
+// FILE: src/pages/projects.astro
+// ACTION: FULL REPLACEMENT
+// CHANGES: 
+// 1. Reordered sections (Active Projects first, then Getting Involved)
+// 2. Replaced "Propose Your Own" with "Build Your Own" empowerment section
+// 3. Updated hero copy to be punchier
+// 4. Separated active vs all projects
+// 5. Using SectionHeader component for consistency
 // ============================================================================
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ArcCanvas from "../components/ArcCanvas.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import PageNavigation from "../components/PageNavigation.astro";
-
-// NEW: Import shared components
 import Card from "../components/Card.astro";
 import LinkButton from "../components/LinkButton.astro";
 import StatusBadge from "../components/StatusBadge.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 
+import { getCollection } from 'astro:content';
 import "../styles/pages/projects.css";
 
-// NEW: Import utilities and constants
 import { withBase } from '../utils/paths';
 import { buildSEO } from '../utils/seo';
 import { EXTERNAL_LINKS } from '../config/constants';
 
-// ============================================================================
-// SEO - Simplified using buildSEO utility
-// ============================================================================
+// Get all projects and separate by status
+const allProjects = await getCollection('projects');
+const activeProjects = allProjects.filter(p => p.data.status === 'active');
+const otherProjects = allProjects.filter(p => p.data.status !== 'active');
+
 const seo = buildSEO({
   title: "Projects",
   description: "Active research projects in plasma technology for ecological repair. Open, collaborative, and building in public.",
@@ -37,217 +44,147 @@ const seo = buildSEO({
 
   <main id="main-content" class="page-shell" aria-labelledby="projects-title">
     
-    <!-- HERO SECTION - No changes -->
+    <!-- HERO SECTION -->
     <header class="projects-hero" aria-labelledby="projects-title">
       <p class="eyebrow">Early-Stage Collaborative Research</p>
       <h1 id="projects-title">Projects</h1>
       <p class="lead">
-        Each project applies RE:TECH principles — open, safe, iterative — and follows arc^'s licensing and governance. 
-        <strong>These are real-world challenges that need collaborative solutions.</strong> Whether you're testing a hypothesis, 
-        building hardware, or bringing community knowledge — there's a way in.
+        <strong>Real problems. Open solutions.</strong> Each project tackles ecological repair 
+        through <em>collaborative research</em> — testing hypotheses, building hardware, and 
+        sharing everything we learn. <strong>You can join at any stage.</strong>
       </p>
     </header>
 
-    <!-- GETTING INVOLVED SECTION
-         Keep ALL structure, only replace surface-panel wrappers and buttons -->
-    <section class="getting-involved-section">
-      <SectionHeader
-        title="Getting Involved"
-        subtitle="arc^ is in early stages, which means <strong>you can help shape the direction</strong> from the ground up."
-        align="center"
-        headingLevel="h2"
+    <!-- ACTIVE PROJECTS SECTION (Priority placement!) -->
+    {activeProjects.length > 0 && (
+      <section class="active-projects-section" aria-labelledby="active-projects-title">
+        <SectionHeader 
+          title="Active Projects" 
+          subtitle="These projects are actively seeking collaborators and building in public."
+        />
+        
+        <div class="projects-grid">
+          {activeProjects.map((project) => (
+            <Card as="article" class="project-card">
+              <div class="card-header">
+                <h3>
+                  <a href={withBase(`/projects/${project.slug}`)}>{project.data.title}</a>
+                </h3>
+                <StatusBadge status={project.data.status} />
+              </div>
+              <p class="card-summary">{project.data.summary}</p>
+              <p class="card-updated">Last updated: {project.data.lastUpdated}</p>
+              <div class="card-actions">
+                <LinkButton href={withBase(`/projects/${project.slug}`)} variant="outline" icon="arrow-right">
+                  Learn More
+                </LinkButton>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- GETTING INVOLVED SECTION -->
+    <section class="getting-involved-section" aria-labelledby="getting-involved-title">
+      <SectionHeader 
+        title="Getting Involved" 
+        subtitle="arc^ is in early stages, which means you can help shape the direction from the ground up."
       />
       
       <div class="involvement-grid">
         <Card as="article" class="involvement-card">
           <div class="card-icon">🎓</div>
           <h3>For Students</h3>
-          <p>Working on a final year project, honours thesis, or PhD? You can explore arc^ projects as part of your coursework. You'll need to find supervisors at your institution who are willing to work within arc^'s open research framework.</p>
-          <p class="card-note"><strong>What you'll need:</strong> A project proposal, supervisor approval, and commitment to open licensing.</p>
+          <p>Working on a final year project, honours thesis, or PhD? You can explore arc^ projects as part of your coursework.</p>
+          <p class="card-note">We're here to support you — whether that's access to equipment, guidance on safety protocols, or help framing research questions.</p>
         </Card>
 
         <Card as="article" class="involvement-card">
           <div class="card-icon">🔬</div>
           <h3>For Researchers</h3>
-          <p>Independent researchers are welcome! Fair warning: there aren't public designs or protocols yet. But that's the opportunity — <strong>early contributors help define the methods and set the standards.</strong></p>
-          <p class="card-note"><strong>What's available now:</strong> Research questions, literature leads, experimental frameworks to build together.</p>
+          <p>Have expertise in plasma physics, materials science, or ecological systems? Your knowledge can help validate approaches or identify new directions.</p>
+          <p class="card-note">This isn't about gatekeeping — it's about learning together and building on each other's insights.</p>
         </Card>
 
         <Card as="article" class="involvement-card">
-          <div class="card-icon">🌱</div>
-          <h3>Current Reality</h3>
-          <p>arc^ is building in public, which means it's messy, evolving, and honest about uncertainty. The most valuable contribution right now is <strong>dialogue, co-design, and shaping direction together.</strong></p>
-          <p class="card-note"><strong>Best way to start:</strong> Pick a project below that interests you, then reach out to discuss how we can collaborate.</p>
+          <div class="card-icon">🛠️</div>
+          <h3>For Everyone</h3>
+          <p>You don't need a degree to contribute. Maybe you're a maker, a tinkerer, or someone with lived experience of the problems we're trying to solve.</p>
+          <p class="card-note">If you're curious, willing to learn, and committed to safety — there's a place for you.</p>
         </Card>
       </div>
 
       <div class="involvement-cta">
         <LinkButton href={EXTERNAL_LINKS.formURL} variant="primary" icon="external">
-          Let's Talk
+          Get Involved
         </LinkButton>
       </div>
     </section>
 
-    <!-- PROJECTS GRID
-         Keep ALL structure, replace surface-panel and status badges -->
-    <section class="all-projects-section" aria-labelledby="all-projects-heading">
-      <SectionHeader
-        title="Active Projects"
-        align="center"
-        headingLevel="h2"
+    <!-- BUILD YOUR OWN SECTION (Replaces "Propose Your Own") -->
+    <section class="build-your-own-section" aria-labelledby="build-your-own-title">
+      <SectionHeader 
+        title="Build Your Own" 
+        subtitle="Don't see what you're looking for? You don't need our permission."
       />
       
-      <div class="projects-grid">
-        
-        <!-- PROJECT 1: Saltwater Irrigation -->
-        <Card as="article" class="project-card">
-          <div class="card-header">
-            <h3>Saltwater Irrigation</h3>
-            <StatusBadge status="early-idea" />
-          </div>
-          <p class="card-summary">Exploring strategies for salinity-tolerant cultivation and soil recovery.</p>
-          <p class="card-updated">Last updated: October 2025</p>
-          <div class="card-actions">
-            <LinkButton href={withBase("/projects/saltwater")} variant="outline" icon="arrow-right">
-              View Project
-            </LinkButton>
-          </div>
-        </Card>
-
-        <!-- PROJECT 2: PAW for Pathogens & Nutrients -->
-        <Card as="article" class="project-card">
-          <div class="card-header">
-            <h3>PAW for Pathogens & Nutrients</h3>
-            <StatusBadge status="early-idea" />
-          </div>
-          <p class="card-summary">Testing plasma-activated water for pathogen control and nutrient transformation.</p>
-          <p class="card-updated">Last updated: October 2025</p>
-          <div class="card-actions">
-            <LinkButton href={withBase("/projects/paw-pathogens")} variant="outline" icon="arrow-right">
-              View Project
-            </LinkButton>
-          </div>
-        </Card>
-
-        <!-- PROJECT 3: Airborne Pathogens -->
-        <Card as="article" class="project-card">
-          <div class="card-header">
-            <h3>Low-Energy Plasma for Airborne Pathogens</h3>
-            <StatusBadge status="early-idea" />
-          </div>
-          <p class="card-summary">Scalable sanitation without harsh chemicals for indoor air quality.</p>
-          <p class="card-updated">Last updated: October 2025</p>
-          <div class="card-actions">
-            <LinkButton href={withBase("/projects/airborne")} variant="outline" icon="arrow-right">
-              View Project
-            </LinkButton>
-          </div>
-        </Card>
-
-        <!-- PROJECT 4: Surface Decontamination -->
-        <Card as="article" class="project-card">
-          <div class="card-header">
-            <h3>Surface Decontamination Without Harsh Chemicals</h3>
-            <StatusBadge status="early-idea" />
-          </div>
-          <p class="card-summary">Plasma-based surface treatment for food prep, healthcare, and public spaces.</p>
-          <p class="card-updated">Last updated: October 2025</p>
-          <div class="card-actions">
-            <LinkButton href={withBase("/projects/surface-decontamination")} variant="outline" icon="arrow-right">
-              View Project
-            </LinkButton>
-          </div>
-        </Card>
-
-        <!-- PROJECT 5: Wetland & Riparian Support -->
-        <Card as="article" class="project-card">
-          <div class="card-header">
-            <h3>Wetland & Riparian Support</h3>
-            <StatusBadge status="early-idea" />
-          </div>
-          <p class="card-summary">PAW variants for water quality and species resilience in wetland ecosystems.</p>
-          <p class="card-updated">Last updated: October 2025</p>
-          <div class="card-actions">
-            <LinkButton href={withBase("/projects/wetland")} variant="outline" icon="arrow-right">
-              View Project
-            </LinkButton>
-          </div>
-        </Card>
-
-        <!-- PROJECT 6: Native Grasslands & Fire Management -->
-        <Card as="article" class="project-card">
-          <div class="card-header">
-            <h3>Native Grasslands & Fire Management</h3>
-            <StatusBadge status="early-idea" />
-          </div>
-          <p class="card-summary">Exploring low-intervention methods for grassland resilience and biodiversity.</p>
-          <p class="card-updated">Last updated: October 2025</p>
-          <div class="card-actions">
-            <LinkButton href={withBase("/projects/grasslands")} variant="outline" icon="arrow-right">
-              View Project
-            </LinkButton>
-          </div>
-        </Card>
-
-      </div>
+      <Card class="build-your-own-content">
+        <p>
+          arc^ isn't about gatekeeping — it's about <em>enabling</em>. If you understand 
+          <a href={withBase("/how")}>our philosophy</a> and commit to our <a href={withBase("/how/safety")}>safety protocols</a> 
+          and <a href={withBase("/how/licensing")}>open licensing</a>, you can start your own arc^ project.
+        </p>
+        <p>
+          <strong>You have the power.</strong> Document your work. Share openly. Build for 
+          <em>life over profit</em>. That's all we ask.
+        </p>
+        <div style="margin-top: 1.5rem;">
+          <LinkButton href={withBase("/how")} variant="outline" icon="arrow-right">
+            Learn the Philosophy
+          </LinkButton>
+        </div>
+      </Card>
     </section>
 
-    <!-- PROPOSE YOUR OWN -->
-    <Card as="section" class="propose-section">
-      <SectionHeader
-        title="Propose Your Own Project"
-        align="center"
-        headingLevel="h2"
-      />
-      <p>Have an idea that fits arc^'s mission? We're open to new directions. The only requirement is alignment with RE:TECH principles: open, safe, and iterative.</p>
-      <LinkButton href={EXTERNAL_LINKS.formURL} variant="outline" icon="external">
-        Submit a Project Idea
-      </LinkButton>
-    </Card>
+    <!-- ALL PROJECTS SECTION (if there are non-active projects) -->
+    {otherProjects.length > 0 && (
+      <section class="all-projects-section" aria-labelledby="all-projects-title">
+        <SectionHeader 
+          title="All Projects" 
+          subtitle="Including early ideas, paused work, and completed research."
+        />
+        
+        <div class="projects-grid">
+          {otherProjects.map((project) => (
+            <Card as="article" class="project-card">
+              <div class="card-header">
+                <h3>
+                  <a href={withBase(`/projects/${project.slug}`)}>{project.data.title}</a>
+                </h3>
+                <StatusBadge status={project.data.status} />
+              </div>
+              <p class="card-summary">{project.data.summary}</p>
+              <p class="card-updated">Last updated: {project.data.lastUpdated}</p>
+              <div class="card-actions">
+                <LinkButton href={withBase(`/projects/${project.slug}`)} variant="outline" icon="arrow-right">
+                  Learn More
+                </LinkButton>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </section>
+    )}
 
-    <!-- LEGAL & LICENSING -->
-    <Card as="section" class="legal-section">
-      <h3>Licensing & Governance</h3>
-      <p>All arc^ research and outputs are licensed under <strong>CERN-OHL-S v2</strong> (hardware), <strong>CC BY-NC-SA 4.0</strong> (documentation), and <strong>AGPL-3.0</strong> (software).</p>
-      <p>This ensures research remains open, attributable, and non-commercial. For full details, see the <a href={withBase("/docs/terms-of-use")}>Terms of Use</a>.</p>
-    </Card>
+    <!-- LEGAL REMINDER -->
+    <section class="legal-section">
+      <h3>Open by Default</h3>
+      <p>All arc^ projects follow our <a href={withBase("/how/licensing")}>non-extractive licensing model</a>. Research outputs, data, and designs stay in the commons.</p>
+      <p>This ensures that <em>the many benefit</em>, not just a few.</p>
+    </section>
 
   </main>
 
   <PageNavigation currentPage="projects" />
 </BaseLayout>
-
-<!-- 
-============================================================================
-MIGRATION SUMMARY - projects.astro
-============================================================================
-
-✅ WHAT CHANGED (Minimal, preserving design):
-1. Imports:
-   - Added: Card, LinkButton, StatusBadge components
-   - Added: withBase, buildSEO, EXTERNAL_LINKS utilities
-   - Removed: Duplicate withBase function, manual SEO construction, hard-coded formURL
-
-2. Replaced wrappers and specific elements:
-   - <article class="surface-panel"> → <Card as="article">
-   - <span class="status-badge status-early-idea"> → <StatusBadge status="early-idea" />
-   - <a class="button button--outline"> → <LinkButton variant="outline">
-   - <a class="button button--primary"> → <LinkButton variant="primary">
-   - formURL → EXTERNAL_LINKS.formURL (2 instances)
-
-✅ WHAT DIDN'T CHANGE (Preserved design):
-- ALL section headers kept as-is (h2, h3 elements)
-- ALL grid layouts (.involvement-grid, .projects-grid)
-- ALL card internals (.involvement-card, .project-card classes)
-- ALL existing CSS classes maintained
-- Card structure (.card-header, .card-summary, .card-updated, .card-actions)
-- Visual appearance should be IDENTICAL
-
-✅ NEW COMPONENT USED:
-- StatusBadge component (replaces manual status badge spans)
-  - Benefits: Consistent status styling, centralized in one component
-  - Can easily add new status types in one place
-  - All status badges across site will be consistent
-
-============================================================================
--->
