@@ -1,28 +1,28 @@
 ---
-// ============================================================================
-// IMPORTS - Updated to use shared components and utilities
-// ============================================================================
+/**
+ * How arc^ Works - Main Method Page (SIMPLIFIED)
+ * File: src/pages/how.astro
+ * 
+ * Now focuses ONLY on the 7-step method
+ * Safety and Licensing moved to sub-pages
+ */
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ArcCanvas from "../components/ArcCanvas.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import PageNavigation from "../components/PageNavigation.astro";
-
-// NEW: Import shared components - minimal usage to preserve design
 import Card from "../components/Card.astro";
 import LinkButton from "../components/LinkButton.astro";
+import SectionHeader from "../components/SectionHeader.astro";
 
 import '../styles/pages/how.css';
 
-// NEW: Import utilities
 import { withBase } from '../utils/paths';
 import { buildSEO } from '../utils/seo';
+import { EXTERNAL_LINKS } from '../config/constants';
 
-// ============================================================================
-// SEO - Simplified using buildSEO utility
-// ============================================================================
 const seo = buildSEO({
   title: "How arc^ Works",
-  description: "arc^ follows a transparent, collaborative research process built on open methods, safety-first practices, and non-extractive licensing.",
+  description: "arc^ follows a transparent, collaborative research process built on open methods, safety-first practices, and commons-based licensing.",
   path: "/how",
   siteUrl: Astro.site,
 });
@@ -34,34 +34,38 @@ const seo = buildSEO({
 
   <main id="main-content" class="page-shell" aria-labelledby="how-title">
     
-    <!-- HERO SECTION - No changes -->
+    <!-- HERO SECTION -->
     <header class="how-hero" aria-labelledby="how-title">
       <p class="eyebrow">Our Research Framework</p>
       <h1 id="how-title">How arc^ Works</h1>
       <div class="hero-subtitle">
-        <p class="lead">arc^ follows a transparent, collaborative research process built on <strong>open methods</strong>, <strong>safety-first practices</strong>, and <strong>non-extractive licensing</strong>.</p>
+        <p class="lead">arc^ follows a transparent, collaborative research process built on <em>open methods</em>, <em>safety-first practices</em>, and <em>commons-based licensing</em>.</p>
         <p class="lead">Everything is documented from day zero. All outputs stay in the commons.</p>
       </div>
     </header>
 
-    <!-- RE:EARTH LINK SECTION 
-         MINIMAL CHANGE: Only replace surface-panel wrapper with Card -->
+    <!-- RE:EARTH LINK SECTION -->
     <Card as="section" class="reearth-callout">
       <div class="callout-content">
-        <h2>Philosophy & Principles</h2>
+        <SectionHeader
+          title="Philosophy & Principles"
+          align="left"
+          headingLevel="h2"
+        />
         <p>arc^ is guided by <strong>re:earth</strong> — a regenerative technology framework that asks "what world does this create?" before building anything.</p>
         <p>Re:earth includes the RE:TECH design approach and the ethical commitments that shape how we work. This philosophical foundation will soon live on its own site.</p>
         <p class="callout-note">For now, understand that arc^ research is grounded in: openness, ecological interdependence, future-consciousness, harm prevention, and planetary restoration.</p>
       </div>
     </Card>
 
-    <!-- RESEARCH METHOD SECTION 
-         Keep ALL original structure -->
+    <!-- RESEARCH METHOD SECTION -->
     <section class="method-section">
-      <header class="section-header">
-        <h2>Our Research Method</h2>
-        <p class="lead">Seven principles guide every arc^ project, ensuring transparency, collaboration, and replicability.</p>
-      </header>
+      <SectionHeader
+        title="Our Research Method"
+        subtitle="Seven principles guide every arc^ project, ensuring transparency, collaboration, and replicability."
+        align="center"
+        headingLevel="h2"
+      />
 
       <Card as="article" class="method-example">
         <h3>Example: Community Garden Testing PAW</h3>
@@ -129,149 +133,42 @@ const seo = buildSEO({
       </Card>
     </section>
 
-    <!-- SAFETY SECTION 
-         Keep ALL original structure, only replace wrappers -->
-    <section class="safety-section">
-      <header class="section-header">
-        <h2>Safety is Non-Negotiable</h2>
-        <p class="lead">Plasma research involves high voltage, reactive chemistry, and ecological impacts. We stop if harm is likely.</p>
-      </header>
-
-      <div class="safety-grid">
-        <Card as="article" class="safety-card">
-          <div class="safety-icon">⚡</div>
-          <h3>High-Voltage Protocols</h3>
-          <p>All electrical work follows safety standards. Devices include kill switches, grounding, and isolation. No improvisation with power systems.</p>
-        </Card>
-
-        <Card as="article" class="safety-card">
-          <div class="safety-icon">🧪</div>
-          <h3>Chemical Safety</h3>
-          <p>Plasma generates reactive oxygen and nitrogen species. We test water chemistry before and after treatment. No application without baseline data.</p>
-        </Card>
-
-        <Card as="article" class="safety-card">
-          <div class="safety-icon">🌿</div>
-          <h3>Ecological Safety</h3>
-          <p>Field trials start small and controlled. We monitor for unintended impacts on soil, water, and organisms. If harm appears, we pause.</p>
-        </Card>
-
-        <Card as="article" class="safety-card">
-          <div class="safety-icon">👥</div>
-          <h3>Community Safety</h3>
-          <p>No experimentation on land without informed consent from those who live there. Community veto power is real and respected.</p>
-        </Card>
-
-        <Card as="article" class="safety-card">
-          <div class="safety-icon">🛑</div>
-          <h3>Dual-Use Prevention</h3>
-          <p>If research trends toward weaponization, surveillance, or exploitation — we stop. No exceptions, even if technically interesting.</p>
-        </Card>
-
-        <Card as="article" class="safety-card">
-          <div class="safety-icon">📋</div>
-          <h3>Documentation</h3>
-          <p>Safety incidents are documented openly. Near-misses and failures are learning opportunities, not secrets to hide.</p>
-        </Card>
-      </div>
-
-      <Card class="safety-principle">
-        <h3>Core Principle</h3>
-        <p>When in doubt, we consult experts. When risk is unclear, we pause. When harm is likely, we stop. Research can wait — safety cannot.</p>
-      </Card>
-    </section>
-
-    <!-- LICENSING SECTION 
-         Keep ALL original structure, only replace wrappers -->
-    <section class="licensing-section">
-      <header class="section-header">
-        <h2>Licensing & IP</h2>
-        <p class="lead">All arc^ outputs are licensed openly. No patents, no paywalls, no proprietary lockdowns. Knowledge stays in the commons.</p>
-      </header>
-
-      <div class="licensing-grid">
-        
-        <!-- Hardware License -->
-        <Card as="article" class="license-card">
-          <div class="license-header">
-            <h3>CERN-OHL-S v2</h3>
-            <span class="license-tag">Hardware</span>
-          </div>
-          <p class="license-description">Open-source hardware license. Schematics, CAD files, and build instructions are freely available. You can build, modify, and distribute devices — but derivatives must also be open.</p>
-          <div class="license-details">
-            <h4>What This Means:</h4>
-            <ul>
-              <li>Anyone can build the devices</li>
-              <li>Anyone can modify the designs</li>
-              <li>Anyone can sell their own versions</li>
-              <li>But: derivatives must also be open-source</li>
-            </ul>
-          </div>
-          <a href="https://ohwr.org/cern_ohl_s_v2.txt" target="_blank" rel="noopener" class="license-link">Read Full License →</a>
-        </Card>
-
-        <!-- Documentation License -->
-        <Card as="article" class="license-card">
-          <div class="license-header">
-            <h3>CC BY-NC-SA 4.0</h3>
-            <span class="license-tag">Documentation</span>
-          </div>
-          <p class="license-description">Creative Commons license for protocols, guides, and research documentation. You can share and adapt the content for non-commercial purposes, with attribution.</p>
-          <div class="license-details">
-            <h4>What This Means:</h4>
-            <ul>
-              <li>Anyone can use the documentation</li>
-              <li>Anyone can adapt and remix it</li>
-              <li>Must credit arc^ and contributors</li>
-              <li>But: no commercial use without permission</li>
-            </ul>
-          </div>
-          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" class="license-link">Read Full License →</a>
-        </Card>
-
-        <!-- Software License -->
-        <Card as="article" class="license-card">
-          <div class="license-header">
-            <h3>AGPL-3.0</h3>
-            <span class="license-tag">Software</span>
-          </div>
-          <p class="license-description">Strong copyleft license for software. Code is open-source, and any modifications must also be open — even if used over a network.</p>
-          <div class="license-details">
-            <h4>What This Means:</h4>
-            <ul>
-              <li>Anyone can use and modify the code</li>
-              <li>Anyone can run it for any purpose</li>
-              <li>Network use counts as distribution</li>
-              <li>But: modifications must also be AGPL</li>
-            </ul>
-          </div>
-          <a href="https://www.gnu.org/licenses/agpl-3.0.en.html" target="_blank" rel="noopener" class="license-link">Read Full License →</a>
-        </Card>
-
-      </div>
-
-      <!-- Why These Licenses -->
-      <Card as="article" class="licensing-why">
-        <h3>Why These Licenses?</h3>
-        <p>We chose copyleft licenses (not permissive ones like MIT or Apache) because we want knowledge to stay open. If someone builds on arc^ work, their improvements should benefit everyone — not get locked behind patents or proprietary walls.</p>
-        <p>This is about collective advancement, not individual extraction. The commons grows when contributions flow back into it.</p>
-      </Card>
-
-      <!-- Commercial Use Note -->
-      <Card as="article" class="licensing-commercial">
-        <h3>What About Commercial Use?</h3>
-        <p>Hardware and software can be used commercially under their licenses. Documentation requires permission for commercial use — this prevents extractive companies from taking openly-developed knowledge and privatizing it.</p>
-        <p>If you want to use arc^ documentation commercially, reach out. We're open to collaboration, especially with mission-aligned organizations.</p>
-      </Card>
-    </section>
-
-    <!-- GETTING STARTED 
-         Keep structure, replace buttons with LinkButton -->
+    <!-- RELATED PAGES - Safety & Licensing -->
     <section class="getting-started-section">
-      <header class="section-header">
-        <h2>Ready to Participate?</h2>
-        <p class="lead">Whether you're here to learn, contribute, or collaborate — there's a path forward.</p>
-      </header>
+      <SectionHeader
+        title="How We Ensure Quality & <em>Ethics</em>"
+        subtitle="Our method is backed by rigorous safety protocols and open licensing."
+        align="center"
+        headingLevel="h2"
+      />
+
+      <div class="getting-started-cards">
+        <Card as="article" class="start-card">
+          <h3>Safety Protocols</h3>
+          <p>Learn how we ensure safety in plasma research through rigorous protocols and community accountability.</p>
+          <LinkButton href={withBase("/how/safety")} variant="outline" icon="arrow-right">
+            View Safety
+          </LinkButton>
+        </Card>
+
+        <Card as="article" class="start-card">
+          <h3>Open Licensing</h3>
+          <p>All outputs stay in the commons through copyleft licenses. No patents, no paywalls.</p>
+          <LinkButton href={withBase("/how/licensing")} variant="outline" icon="arrow-right">
+            View Licenses
+          </LinkButton>
+        </Card>
+      </div>
+    </section>
+
+    <!-- GETTING STARTED -->
+    <section class="getting-started-section">
+      <SectionHeader
+        title="Ready to Participate?"
+        subtitle="Whether you're here to learn, contribute, or collaborate — there's a path forward."
+        align="center"
+        headingLevel="h2"
+      />
 
       <div class="getting-started-cards">
         <Card as="article" class="start-card">
@@ -300,44 +197,7 @@ const seo = buildSEO({
       </div>
     </section>
 
-    <!-- LEGAL FOOTER -->
-    <Card as="section" class="legal-footer">
-      <p>For full legal details, see the <a href={withBase("/docs/terms-of-use")}>Terms of Use</a>, <a href={withBase("/docs/privacy-policy")}>Privacy Policy</a>, and <a href={withBase("/docs/code-of-conduct")}>Code of Conduct</a>.</p>
-    </Card>
-
   </main>
 
   <PageNavigation currentPage="how" />
 </BaseLayout>
-
-<!-- 
-============================================================================
-MIGRATION SUMMARY - how.astro
-============================================================================
-
-✅ WHAT CHANGED (Minimal, preserving design):
-1. Imports:
-   - Added: Card, LinkButton components
-   - Added: withBase, buildSEO utilities
-   - Removed: Duplicate withBase function, manual SEO construction
-
-2. Replaced ONLY wrappers, kept ALL internal structure:
-   - <section class="surface-panel"> → <Card as="section">
-   - <article class="surface-panel"> → <Card as="article">
-   - <a class="button button--outline"> → <LinkButton> (3 instances in getting-started section)
-
-✅ WHAT DIDN'T CHANGE (Preserved design):
-- ALL section headers kept as-is (h2, h3 elements)
-- ALL grid layouts untouched (.method-flow, .safety-grid, .licensing-grid, etc.)
-- ALL card internals preserved (.method-item, .safety-card, .license-card classes)
-- ALL existing CSS classes maintained
-- Visual appearance should be IDENTICAL
-
-✅ KEY INSIGHT:
-- Card component is just a wrapper replacing .surface-panel
-- Internal classes (.safety-card, .license-card, etc.) handle actual styling
-- We preserved the exact HTML structure to maintain the design
-- Only changed the outer container, not the content
-
-============================================================================
--->

@@ -11,6 +11,7 @@ import PageNavigation from "../components/PageNavigation.astro";
 import Card from "../components/Card.astro";
 import LinkButton from "../components/LinkButton.astro";
 import StatusBadge from "../components/StatusBadge.astro";
+import SectionHeader from "../components/SectionHeader.astro";
 
 import "../styles/pages/projects.css";
 
@@ -47,11 +48,15 @@ const seo = buildSEO({
       </p>
     </header>
 
-    <!-- GETTING INVOLVED SECTION 
+    <!-- GETTING INVOLVED SECTION
          Keep ALL structure, only replace surface-panel wrappers and buttons -->
     <section class="getting-involved-section">
-      <h2>Getting Involved</h2>
-      <p class="section-intro">arc^ is in early stages, which means <strong>you can help shape the direction</strong> from the ground up.</p>
+      <SectionHeader
+        title="Getting Involved"
+        subtitle="arc^ is in early stages, which means <strong>you can help shape the direction</strong> from the ground up."
+        align="center"
+        headingLevel="h2"
+      />
       
       <div class="involvement-grid">
         <Card as="article" class="involvement-card">
@@ -83,10 +88,14 @@ const seo = buildSEO({
       </div>
     </section>
 
-    <!-- PROJECTS GRID 
+    <!-- PROJECTS GRID
          Keep ALL structure, replace surface-panel and status badges -->
     <section class="all-projects-section" aria-labelledby="all-projects-heading">
-      <h2 id="all-projects-heading">Active Projects</h2>
+      <SectionHeader
+        title="Active Projects"
+        align="center"
+        headingLevel="h2"
+      />
       
       <div class="projects-grid">
         
@@ -185,7 +194,11 @@ const seo = buildSEO({
 
     <!-- PROPOSE YOUR OWN -->
     <Card as="section" class="propose-section">
-      <h2>Propose Your Own Project</h2>
+      <SectionHeader
+        title="Propose Your Own Project"
+        align="center"
+        headingLevel="h2"
+      />
       <p>Have an idea that fits arc^'s mission? We're open to new directions. The only requirement is alignment with RE:TECH principles: open, safe, and iterative.</p>
       <LinkButton href={EXTERNAL_LINKS.formURL} variant="outline" icon="external">
         Submit a Project Idea

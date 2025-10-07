@@ -1,4 +1,10 @@
 ---
+/**
+ * Updated SiteHeader.astro with DYNAMIC dropdown navigation
+ * Automatically populates "Projects" and "How" dropdowns from content/routes
+ * File: src/components/SiteHeader.astro
+ */
+import { getCollection } from 'astro:content';
 import '../styles/components/header.css';
 import { withBase } from '../utils/paths';
 import { NAV_ITEMS, EXTERNAL_LINKS } from '../config/constants';
@@ -8,6 +14,37 @@ interface Props {
 }
 
 const { active = "home" } = Astro.props;
+
+// Get current path to check for active dropdown items
+const currentPath = Astro.url.pathname.replace(import.meta.env.BASE_URL || '', '') || '/';
+
+// Fetch all projects for dropdown
+const allProjects = await getCollection('projects');
+
+// Build dynamic navigation structure
+const navigationItems = NAV_ITEMS.map(item => {
+  // Add dynamic dropdown for Projects
+  if (item.key === 'projects') {
+    return {
+      ...item,
+      dropdown: [
+        { key: 'projects-all', label: 'All Projects', href: '/projects' },
+        ...allProjects.map(project => ({
+          key: `project-${project.slug}`,
+          label: project.data.title,
+          href: `/projects/${project.slug}`
+        }))
+      ]
+    };
+  }
+  
+  // Add dropdown for How (from constants or hardcoded)
+  if (item.key === 'how' && item.dropdown) {
+    return item;
+  }
+  
+  return item;
+});
 
 // Social links configuration
 const socialLinks = [
@@ -24,6 +61,15 @@ const socialLinks = [
     label: "Join Arc^ Discord community"
   }
 ];
+
+// Helper to check if nav item or its dropdown is active
+function isItemActive(item: typeof navigationItems[number]) {
+  if (item.key === active) return true;
+  if (item.dropdown) {
+    return item.dropdown.some(subItem => currentPath === subItem.href);
+  }
+  return false;
+}
 ---
 
 <header class="site-header" role="banner">
@@ -35,15 +81,43 @@ const socialLinks = [
   
   <nav class="site-nav" aria-label="Primary navigation">
     <ul class="nav-list">
-      {NAV_ITEMS.map((item) => (
-        <li>
-          <a
-            href={withBase(item.href)}
-            class={item.key === active ? "nav-link is-active" : "nav-link"}
-            aria-current={item.key === active ? "page" : undefined}
-          >
-            {item.label}
-          </a>
+      {navigationItems.map((item) => (
+        <li class={item.dropdown ? "nav-item has-dropdown" : "nav-item"}>
+          {item.dropdown ? (
+            <!-- Dropdown menu item -->
+            <button 
+              class={isItemActive(item) ? "nav-link nav-dropdown-trigger is-active" : "nav-link nav-dropdown-trigger"}
+              aria-expanded="false"
+              aria-haspopup="true"
+            >
+              {item.label}
+              <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <ul class="nav-dropdown" role="menu">
+              {item.dropdown.map((subItem) => (
+                <li role="none">
+                  <a
+                    href={withBase(subItem.href)}
+                    class={currentPath === subItem.href ? "nav-dropdown-link is-active" : "nav-dropdown-link"}
+                    role="menuitem"
+                  >
+                    {subItem.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <!-- Regular nav item -->
+            <a
+              href={withBase(item.href)}
+              class={item.key === active ? "nav-link is-active" : "nav-link"}
+              aria-current={item.key === active ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          )}
         </li>
       ))}
     </ul>
@@ -73,3 +147,48 @@ const socialLinks = [
     ))}
   </div>
 </header>
+
+<!-- Dropdown interaction script -->
+<script>
+  // Handle dropdown menu interactions
+  document.querySelectorAll('.nav-dropdown-trigger').forEach(trigger => {
+    const button = trigger as HTMLButtonElement;
+    const dropdown = button.nextElementSibling as HTMLElement;
+    
+    if (!dropdown) return;
+    
+    // Toggle dropdown on click
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      
+      // Close all other dropdowns
+      document.querySelectorAll('.nav-dropdown-trigger').forEach(otherButton => {
+        if (otherButton !== button) {
+          otherButton.setAttribute('aria-expanded', 'false');
+          const otherDropdown = otherButton.nextElementSibling as HTMLElement;
+          if (otherDropdown) otherDropdown.classList.remove('is-open');
+        }
+      });
+      
+      // Toggle this dropdown
+      button.setAttribute('aria-expanded', (!isExpanded).toString());
+      dropdown.classList.toggle('is-open');
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', () => {
+      button.setAttribute('aria-expanded', 'false');
+      dropdown.classList.remove('is-open');
+    });
+    
+    // Keyboard navigation
+    button.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        button.setAttribute('aria-expanded', 'false');
+        dropdown.classList.remove('is-open');
+        button.focus();
+      }
+    });
+  });
+</script>

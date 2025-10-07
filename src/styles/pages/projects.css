@@ -1,40 +1,59 @@
 /* ============================================
-   PROJECTS PAGE STYLES
-   Grid layout for project cards + involvement
+   FILE: src/styles/pages/projects.css
+   ACTION: FULL REPLACEMENT
+   CHANGES:
+   1. Fixed responsive grid with explicit breakpoints (1/2/3/4 columns)
+   2. Added styles for new "Build Your Own" section
+   3. Added styles for separated active/all projects sections
+   4. Removed old "propose" section styles
    ============================================ */
 
 /* ============================================
-   SECTION INTRO TEXT
+   PROJECTS HERO
    ============================================ */
-.section-intro {
+.projects-hero {
+  display: grid;
+  gap: 1.5rem;
   text-align: center;
-  max-width: 65ch;
-  margin: 0 auto 2rem auto;
-  font-size: clamp(1rem, 2.5vw, 1.1rem);
-  color: var(--color-text-muted);
-  line-height: 1.6;
+  padding: clamp(2rem, 5vw, 3rem) 0;
 }
 
-/* ============================================
-   INVOLVEMENT SECTION
-   ============================================ */
-.getting-involved-section {
-  max-width: 100ch;
+.projects-hero h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+}
+
+.projects-hero .lead {
+  max-width: 72ch;
   margin: 0 auto;
 }
 
-.getting-involved-section h2 {
-  text-align: center;
-  margin: 0 0 1rem 0;
-  font-size: clamp(1.8rem, 4vw, 2.2rem);
-  color: var(--color-text);
+/* ============================================
+   ACTIVE PROJECTS SECTION
+   ============================================ */
+.active-projects-section {
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+/* ============================================
+   GETTING INVOLVED SECTION
+   ============================================ */
+.getting-involved-section {
+  max-width: 100ch;
+  margin: 0 auto clamp(3rem, 6vw, 5rem) auto;
 }
 
 .involvement-grid {
   display: grid;
   gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   margin: 2rem 0;
+}
+
+/* Responsive involvement grid */
+@media (min-width: 640px) {
+  .involvement-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (min-width: 900px) {
@@ -89,26 +108,87 @@
 }
 
 /* ============================================
+   BUILD YOUR OWN SECTION
+   ============================================ */
+.build-your-own-section {
+  max-width: 75ch;
+  margin: 0 auto clamp(3rem, 6vw, 5rem) auto;
+}
+
+.build-your-own-content {
+  padding: clamp(2rem, 5vw, 3rem);
+}
+
+.build-your-own-content p {
+  margin: 0 0 1.5rem 0;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.build-your-own-content p:last-of-type {
+  margin-bottom: 0;
+}
+
+.build-your-own-content a {
+  color: var(--color-primary-bright);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.build-your-own-content a:hover {
+  color: var(--color-text);
+}
+
+.build-your-own-content em {
+  color: var(--color-primary-bright);
+  font-style: italic;
+}
+
+.build-your-own-content strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* ============================================
    ALL PROJECTS SECTION
    ============================================ */
 .all-projects-section {
   max-width: 100%;
-  margin: 0 auto;
-}
-
-.all-projects-section h2 {
-  text-align: center;
-  margin: 0 0 clamp(2rem, 4vw, 3rem) 0;
-  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  margin: 0 auto clamp(3rem, 6vw, 5rem) auto;
 }
 
 /* ============================================
-   PROJECTS GRID
+   PROJECTS GRID - FIXED RESPONSIVE LAYOUT
+   Mobile: 1 column
+   Tablet: 2 columns
+   Desktop: 3 columns
+   Large: 4 columns
    ============================================ */
 .projects-grid {
   display: grid;
   gap: 1.5rem;
-  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+  grid-template-columns: 1fr;
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 640px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: 3 columns */
+@media (min-width: 900px) {
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large Desktop: 4 columns */
+@media (min-width: 1400px) {
+  .projects-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .project-card {
@@ -140,6 +220,16 @@
   min-width: 200px;
 }
 
+.card-header h3 a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.card-header h3 a:hover {
+  color: var(--color-primary-bright);
+}
+
 .card-summary {
   margin: 0;
   font-size: clamp(0.98rem, 2.2vw, 1.05rem);
@@ -160,23 +250,22 @@
 }
 
 /* ============================================
-   PROPOSE & LEGAL SECTIONS
+   LEGAL SECTION
    ============================================ */
-.propose-section,
 .legal-section {
   max-width: 75ch;
   margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 2rem);
   text-align: center;
 }
 
-.propose-section h2,
 .legal-section h3 {
   margin: 0 0 1rem 0;
+  font-size: clamp(1.4rem, 3.5vw, 1.6rem);
 }
 
-.propose-section p,
 .legal-section p {
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 1rem 0;
   color: var(--color-text-muted);
   line-height: 1.7;
 }
@@ -185,15 +274,26 @@
   margin-bottom: 0;
 }
 
+.legal-section a {
+  color: var(--color-primary-bright);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.legal-section a:hover {
+  color: var(--color-text);
+}
+
+.legal-section em {
+  color: var(--color-primary-bright);
+  font-style: italic;
+}
+
 /* ============================================
    RESPONSIVE
    ============================================ */
 @media (max-width: 640px) {
   .involvement-card .card-icon {
     font-size: 2.5rem;
-  }
-  
-  .projects-grid {
-    grid-template-columns: 1fr;
   }
 }

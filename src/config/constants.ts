@@ -63,9 +63,19 @@ export const SOCIAL_HANDLES = {
  * Navigation structure
  */
 export const NAV_ITEMS = [
-  { key: "home", label: "home", href: "/" },        // Changed path → href
+  { key: "home", label: "home", href: "/" },
   { key: "projects", label: "projects", href: "/projects" },
-  { key: "how", label: "how", href: "/how" },
+  { 
+    key: "how", 
+    label: "how", 
+    href: "/how",
+    // NEW: Dropdown items
+    dropdown: [
+      { key: "how-main", label: "How We Work", href: "/how" },
+      { key: "how-safety", label: "Safety", href: "/how/safety" },
+      { key: "how-licensing", label: "Licensing", href: "/how/licensing" },
+    ]
+  },
   { key: "about", label: "about", href: "/about" },
   { key: "join", label: "join", href: "/join" },
 ] as const;

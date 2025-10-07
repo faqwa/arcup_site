@@ -1,0 +1,169 @@
+---
+/**
+ * Open Licensing Page
+ * File: src/pages/how/licensing.astro
+ * 
+ * Extracted from main how.astro page
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArcCanvas from "../../components/ArcCanvas.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import PageNavigation from "../../components/PageNavigation.astro";
+import Card from "../../components/Card.astro";
+import LinkButton from "../../components/LinkButton.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+
+import '../../styles/pages/how.css';
+
+import { withBase } from '../../utils/paths';
+import { buildSEO } from '../../utils/seo';
+import { LICENSES } from '../../config/constants';
+
+const seo = buildSEO({
+  title: "Open Licensing",
+  description: "All arc^ outputs use copyleft licenses. No patents, no paywalls, no proprietary lockdowns. Knowledge stays in the commons.",
+  path: "/how/licensing",
+  siteUrl: Astro.site,
+});
+---
+
+<BaseLayout title={seo.title} description={seo.description} bodyClass="page-licensing" seo={seo}>
+  <ArcCanvas />
+  <SiteHeader active="how" />
+
+  <main id="main-content" class="page-shell" aria-labelledby="licensing-title">
+    
+    <!-- HERO SECTION -->
+    <header class="how-hero" aria-labelledby="licensing-title">
+      <p class="eyebrow">Knowledge in the Commons</p>
+      <h1 id="licensing-title">Open Licensing</h1>
+      <div class="hero-subtitle">
+        <p class="lead">All arc^ outputs are licensed openly. No patents, no paywalls, no proprietary lockdowns. Knowledge stays in the commons.</p>
+      </div>
+    </header>
+
+    <!-- LICENSING GRID -->
+    <section class="licensing-section">
+      <SectionHeader
+        title="Licensing & IP"
+        subtitle="We use copyleft licenses to ensure research remains open, attributable, and non-extractive. Derivatives must stay open too."
+        align="center"
+        headingLevel="h2"
+      />
+
+      <div class="licensing-grid">
+        
+        <!-- Hardware License -->
+        <Card as="article" class="license-card">
+          <div class="license-header">
+            <h3>CERN-OHL-S v2</h3>
+            <span class="license-tag">Hardware</span>
+          </div>
+          <p class="license-description">Open-source hardware license. Schematics, CAD files, and build instructions are freely available. You can build, modify, and distribute devices — but derivatives must also be open.</p>
+          <div class="license-details">
+            <h4>What This Means:</h4>
+            <ul>
+              <li>Anyone can build the devices</li>
+              <li>Anyone can modify the designs</li>
+              <li>Anyone can sell their own versions</li>
+              <li>But: derivatives must also be open-source</li>
+            </ul>
+          </div>
+          <a href={LICENSES.hardware} target="_blank" rel="noopener" class="license-link">Read Full License →</a>
+        </Card>
+
+        <!-- Documentation License -->
+        <Card as="article" class="license-card">
+          <div class="license-header">
+            <h3>CC BY-NC-SA 4.0</h3>
+            <span class="license-tag">Documentation</span>
+          </div>
+          <p class="license-description">Creative Commons license for protocols, guides, and research documentation. You can share and adapt the content for non-commercial purposes, with attribution.</p>
+          <div class="license-details">
+            <h4>What This Means:</h4>
+            <ul>
+              <li>Anyone can use the documentation</li>
+              <li>Anyone can adapt and remix it</li>
+              <li>Must credit arc^ and contributors</li>
+              <li>But: no commercial use without permission</li>
+            </ul>
+          </div>
+          <a href={LICENSES.documentation} target="_blank" rel="noopener" class="license-link">Read Full License →</a>
+        </Card>
+
+        <!-- Software License -->
+        <Card as="article" class="license-card">
+          <div class="license-header">
+            <h3>AGPL-3.0</h3>
+            <span class="license-tag">Software</span>
+          </div>
+          <p class="license-description">Strong copyleft license for software. Code is open-source, and any modifications must also be open — even if used over a network.</p>
+          <div class="license-details">
+            <h4>What This Means:</h4>
+            <ul>
+              <li>Anyone can use and modify the code</li>
+              <li>Anyone can run it for any purpose</li>
+              <li>Network use counts as distribution</li>
+              <li>But: modifications must also be AGPL</li>
+            </ul>
+          </div>
+          <a href={LICENSES.software} target="_blank" rel="noopener" class="license-link">Read Full License →</a>
+        </Card>
+
+      </div>
+
+      <!-- Why These Licenses -->
+      <Card as="article" class="licensing-why">
+        <h3>Why These Licenses?</h3>
+        <p>We chose copyleft licenses (not permissive ones like MIT or Apache) because we want knowledge to stay open. If someone builds on arc^ work, their improvements should benefit everyone — not get locked behind patents or proprietary walls.</p>
+        <p>This is about collective advancement, not individual extraction. The commons grows when contributions flow back into it.</p>
+      </Card>
+
+      <!-- Commercial Use Note -->
+      <Card as="article" class="licensing-commercial">
+        <h3>What About Commercial Use?</h3>
+        <p>Hardware and software can be used commercially under their licenses. Documentation requires permission for commercial use — this prevents extractive companies from taking openly-developed knowledge and privatizing it.</p>
+        <p>If you want to use arc^ documentation commercially, reach out. We're open to collaboration, especially with mission-aligned organizations.</p>
+      </Card>
+    </section>
+
+    <!-- RELATED PAGES -->
+    <section class="getting-started-section">
+      <SectionHeader
+        title="Related"
+        subtitle="Learn more about how arc^ operates."
+        align="center"
+        headingLevel="h2"
+      />
+
+      <div class="getting-started-cards">
+        <Card as="article" class="start-card">
+          <h3>How We Work</h3>
+          <p>Understand our 7-step research method and RE:TECH principles.</p>
+          <LinkButton href={withBase("/how")} variant="outline" icon="arrow-right">
+            See Our Method
+          </LinkButton>
+        </Card>
+
+        <Card as="article" class="start-card">
+          <h3>Safety Protocols</h3>
+          <p>Learn how we ensure safety in plasma research.</p>
+          <LinkButton href={withBase("/how/safety")} variant="outline" icon="arrow-right">
+            View Safety
+          </LinkButton>
+        </Card>
+
+        <Card as="article" class="start-card">
+          <h3>Join the Work</h3>
+          <p>Ready to contribute? Learn how to get involved.</p>
+          <LinkButton href={withBase("/join")} variant="outline" icon="arrow-right">
+            Get in Touch
+          </LinkButton>
+        </Card>
+      </div>
+    </section>
+
+  </main>
+
+  <PageNavigation currentPage="how" />
+</BaseLayout>

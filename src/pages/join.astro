@@ -10,6 +10,7 @@ import PageNavigation from "../components/PageNavigation.astro";
 // NEW: Import shared components - but use sparingly to preserve design
 import Card from "../components/Card.astro";
 import LinkButton from "../components/LinkButton.astro";
+import SectionHeader from "../components/SectionHeader.astro";
 
 import '../styles/pages/join.css';
 
@@ -55,11 +56,15 @@ const seo = buildSEO({
       <div class="acknowledgements-intro-text">
         <p>Before you think this is just hypothetical — <strong>we are not alone.</strong> Others have already spearheaded this movement.</p>
       </div>
-      
-      <h2 id="acknowledgements-heading">Standing on Shoulders</h2>
-      
+
+      <SectionHeader
+        title="Standing on Shoulders"
+        subtitle="arc^ exists because others paved the way. <strong>Open science movements, community-led research initiatives, and hardware hackers</strong> showed us what's possible."
+        align="left"
+        headingLevel="h2"
+      />
+
       <div class="acknowledgements-intro">
-        <p>arc^ exists because others paved the way. <strong>Open science movements, community-led research initiatives, and hardware hackers</strong> showed us what's possible.</p>
         <p><strong>We draw inspiration and learn from:</strong></p>
       </div>
 
@@ -110,13 +115,15 @@ const seo = buildSEO({
       </p>
     </Card>
 
-    <!-- GETTING STARTED SECTION 
+    <!-- GETTING STARTED SECTION
          Keep ALL original structure - only change surface-panel wrapper -->
     <section class="getting-started-section">
-      <header class="section-header">
-        <h2>How to Get Started</h2>
-        <p class="lead">There are three clear paths into arc^ — choose whichever fits your situation.</p>
-      </header>
+      <SectionHeader
+        title="How to Get Started"
+        subtitle="There are three clear paths into arc^ — choose whichever fits your situation."
+        align="center"
+        headingLevel="h2"
+      />
 
       <div class="getting-started-grid">
         <Card as="article" class="start-card">
@@ -139,13 +146,15 @@ const seo = buildSEO({
       </div>
     </section>
 
-    <!-- WAYS TO CONTRIBUTE SECTION 
+    <!-- WAYS TO CONTRIBUTE SECTION
          Keep ALL original structure -->
     <section class="contribute-section">
-      <header class="section-header">
-        <h2>Ways to Contribute</h2>
-        <p class="lead">Regardless of your background or experience level, there are meaningful ways to participate.</p>
-      </header>
+      <SectionHeader
+        title="Ways to Contribute"
+        subtitle="Regardless of your background or experience level, there are meaningful ways to participate."
+        align="center"
+        headingLevel="h2"
+      />
 
       <div class="contribute-grid">
         <!-- Card 1: Hardware Development -->
@@ -240,13 +249,15 @@ const seo = buildSEO({
       </div>
     </section>
 
-    <!-- EXPECTATIONS SECTION 
+    <!-- EXPECTATIONS SECTION
          Keep ALL original structure -->
     <section class="expectations-section">
-      <header class="section-header">
-        <h2>What to Expect</h2>
-        <p class="lead">Contributing to arc^ means working within a set of shared commitments.</p>
-      </header>
+      <SectionHeader
+        title="What to Expect"
+        subtitle="Contributing to arc^ means working within a set of shared commitments."
+        align="center"
+        headingLevel="h2"
+      />
 
       <div class="expectations-grid">
         <Card as="article" class="expectation-card">
@@ -281,10 +292,14 @@ const seo = buildSEO({
       </div>
     </section>
 
-    <!-- FINAL CTA 
+    <!-- FINAL CTA
          Only replace button with LinkButton -->
     <Card as="section" class="final-cta">
-      <h2>Ready to Join?</h2>
+      <SectionHeader
+        title="Ready to Join?"
+        align="center"
+        headingLevel="h2"
+      />
       <p>Fill out the interest form, and we'll be in touch to discuss how you can contribute. No formal applications — just honest conversation about what we're building together.</p>
       
       <LinkButton 
