@@ -1,0 +1,522 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import Card from "../../components/Card.astro";
+import LinkButton from "../../components/LinkButton.astro";
+import { withBase } from '../../utils/paths';
+import { buildSEO } from '../../utils/seo';
+
+const seo = buildSEO({
+  title: "Mission - Why ArcUp Exists",
+  description: "ArcUp exists to build regenerative plasma systems openly, safely, and ethically. For the many, not the few — building futures worth inheriting.",
+  path: "/about/mission",
+  siteUrl: Astro.site,
+});
+---
+
+<BaseLayout {...seo}>
+  <SiteHeader active="about" />
+  
+  <main id="main-content" class="page-shell page-mission">
+    
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href={withBase("/about")}>About</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Mission</span>
+    </nav>
+
+    <!-- Hero -->
+    <header class="mission-hero">
+      <h1>Why ArcUp Exists</h1>
+    </header>
+
+    <!-- Purpose -->
+    <section class="mission-section">
+      <h2 aria-label="ArcUp mission statement and purpose">The Purpose</h2>
+      <p>
+        ArcUp exists because <em>the way we make technology matters as much as what we make</em>.
+      </p>
+      <p>
+        Our goal is to build regenerative plasma systems — openly, safely, and ethically — guided by the values 
+        of the <a href={withBase("/how")}>Repractice Framework</a>.
+      </p>
+      <p class="purpose-emphasis">
+        We're not creating products. We're cultivating processes — transparent, interdisciplinary, and rooted in reciprocity.
+      </p>
+    </section>
+
+    <!-- For the Many -->
+    <Card as="section" class="many-section">
+      <h2 aria-label="ArcUp's ethical alignment and inclusivity">For the Many, Not the Few</h2>
+      <p>
+        ArcUp is for those who refuse extraction and choose regeneration.
+      </p>
+      <p>
+        Technology should serve <em>the many, not the few</em> — building <em>futures worth inheriting</em> for our 
+        communities, our ecosystems, and our shared humanity.
+      </p>
+      <p>
+        Our mission is to make plasma research accessible across disciplines — bridging engineers, biologists, artists, 
+        and institutions — so that ecological restoration becomes a shared, global experiment.
+      </p>
+    </Card>
+
+    <!-- Name Meaning -->
+    <section class="name-section">
+      <h2 aria-label="Meaning and symbolism of the name arc^">Meaning of the Name — arc<span class="caret">^</span></h2>
+      <p class="name-intro">
+        The name carries three intertwined meanings:
+      </p>
+
+      <div class="name-meanings">
+        <Card as="article" class="meaning-card">
+          <div class="meaning-symbol">↑</div>
+          <h3>"to arc up"</h3>
+          <p>to rise in defense of people and planet</p>
+        </Card>
+
+        <Card as="article" class="meaning-card">
+          <div class="meaning-symbol">^</div>
+          <h3>"^ to the power of"</h3>
+          <p>representing amplification through shared knowledge</p>
+        </Card>
+
+        <Card as="article" class="meaning-card">
+          <div class="meaning-symbol">⚡</div>
+          <h3>"plasma arc"</h3>
+          <p>the physical bridge of energy between matter and air — symbolizing connection, transformation, and renewal</p>
+        </Card>
+      </div>
+
+      <div class="name-equation">
+        <p class="equation-text">
+          arc<span class="caret">^</span> = resistance × regeneration × plasma energy
+        </p>
+        <p class="equation-description">
+          ArcUp is both metaphor and method: a spark that rises, connects, and transforms.
+        </p>
+      </div>
+    </section>
+
+    <!-- Phases -->
+    <section class="phases-section">
+      <h2 aria-label="ArcUp phased development model">The ArcUp Phases — From Spark to Commons</h2>
+
+      <div class="phases-grid">
+        
+        <Card as="article" class="phase-card">
+          <div class="phase-icon">🌱</div>
+          <h3>Phase 1 — Bench-Scale, Open Experiments</h3>
+          <div class="phase-content">
+            <p>
+              Hands-on exploration using dielectric barrier discharge (DBD) setups — simple, accessible, off-the-shelf components.
+            </p>
+            <p>
+              We test plasma-water interactions for purification, agriculture, and ecological applications, sharing results 
+              openly so others can replicate and improve them.
+            </p>
+            <p class="phase-outcome">
+              The outcome isn't a product, but open documentation — building a foundation of reproducible, transparent research.
+            </p>
+          </div>
+        </Card>
+
+        <Card as="article" class="phase-card">
+          <div class="phase-icon">🌍</div>
+          <h3>Phase 2 — Community Prototyping Framework</h3>
+          <div class="phase-content">
+            <p>
+              As results mature, we develop shared templates — community-ready DBD frameworks and build guides.
+            </p>
+            <p>
+              The goal is to form a commons of plasma tools where data, blueprints, and safety notes circulate openly yet 
+              responsibly, ensuring variants remain traceable and free from enclosure.
+            </p>
+          </div>
+        </Card>
+
+        <Card as="article" class="phase-card">
+          <div class="phase-icon">🔭</div>
+          <h3>Phase 3 — Collaborative Application</h3>
+          <div class="phase-content">
+            <p>
+              When the work reaches maturity, interdisciplinary teams and institutions can collaborate to apply plasma 
+              systems in real-world ecological contexts.
+            </p>
+            <p>
+              At this stage, governance matters: defensive openness replaces property. ArcUp invites collective custodianship, 
+              ensuring that no discovery becomes privately locked down and that all benefit flows back to the commons.
+            </p>
+          </div>
+        </Card>
+
+      </div>
+    </section>
+
+    <!-- Vision -->
+    <Card as="section" class="vision-section">
+      <h2 aria-label="ArcUp broader mission and closing reflection">The Broader Vision</h2>
+      <p>
+        ArcUp's mission is to create a living backbone for open plasma research — one that connects independent experimenters, 
+        academic labs, and communities across borders.
+      </p>
+      <p>
+        We're building a space where knowledge moves freely between art, science, and culture — where technology can once 
+        again serve <em>life</em>.
+      </p>
+      <div class="vision-principles">
+        <p>No property locked down.</p>
+        <p>No gatekeeping of discovery.</p>
+        <p>Just a shared field of practice — for people and planet alike.</p>
+      </div>
+    </Card>
+
+    <!-- CTA to Repractice -->
+    <div class="repractice-cta">
+      <p>Want to understand the ethical foundation?</p>
+      <LinkButton 
+        href={withBase("/how")} 
+        variant="primary"
+        icon="arrow-right"
+      >
+        Explore Repractice Methods
+      </LinkButton>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="mission-nav" aria-label="Continue exploring">
+      <LinkButton 
+        href={withBase("/about/founder")} 
+        variant="outline"
+        icon="arrow-right"
+      >
+        Meet the Founder
+      </LinkButton>
+      <LinkButton 
+        href={withBase("/join")} 
+        variant="outline"
+        icon="arrow-right"
+      >
+        Join the Work
+      </LinkButton>
+    </nav>
+
+  </main>
+</BaseLayout>
+
+<style>
+  .page-mission {
+    display: grid;
+    gap: var(--section-gap);
+    max-width: 85ch;
+    margin: 0 auto;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .breadcrumb a {
+    color: var(--color-primary-bright);
+    text-decoration: none;
+    transition: color var(--transition-base);
+  }
+
+  .breadcrumb a:hover,
+  .breadcrumb a:focus-visible {
+    color: var(--color-text);
+  }
+
+  /* Hero */
+  .mission-hero {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .mission-hero h1 {
+    margin: 0;
+    font-size: var(--text-4xl);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.1;
+    color: var(--color-text);
+  }
+
+  /* Mission Section */
+  .mission-section {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .mission-section h2 {
+    margin: 0;
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+  }
+
+  .mission-section p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .mission-section a {
+    color: var(--color-primary-bright);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(93, 225, 228, 0.3);
+    transition: all var(--transition-base);
+  }
+
+  .mission-section a:hover,
+  .mission-section a:focus-visible {
+    color: var(--color-text);
+    border-bottom-color: var(--color-primary-bright);
+  }
+
+  .purpose-emphasis {
+    font-size: var(--text-lg) !important;
+    font-weight: var(--font-weight-medium) !important;
+    color: var(--color-text) !important;
+    margin-top: 1rem !important;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* Many Section */
+  .many-section {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .many-section h2 {
+    margin: 0;
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+  }
+
+  .many-section p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  /* Name Section */
+  .name-section {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .name-section h2 {
+    margin: 0;
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+    text-align: center;
+  }
+
+  .caret {
+    color: var(--color-primary-bright);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .name-intro {
+    margin: 0;
+    text-align: center;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .name-meanings {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  }
+
+  .meaning-card {
+    display: grid;
+    gap: 1rem;
+    text-align: center;
+    transition: all var(--transition-base);
+  }
+
+  .meaning-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .meaning-symbol {
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--color-primary-bright);
+  }
+
+  .meaning-card h3 {
+    margin: 0;
+    font-size: var(--text-lg);
+    color: var(--color-text);
+  }
+
+  .meaning-card p {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .name-equation {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: rgba(10, 147, 150, 0.08);
+    border: 1px solid rgba(93, 225, 228, 0.2);
+    border-radius: var(--radius-md);
+    display: grid;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .equation-text {
+    margin: 0;
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    font-family: 'Courier New', monospace;
+  }
+
+  .equation-description {
+    margin: 0;
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  /* Phases Section */
+  .phases-section {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .phases-section h2 {
+    margin: 0;
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+    text-align: center;
+  }
+
+  .phases-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .phase-card {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .phase-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+
+  .phase-card h3 {
+    margin: 0;
+    font-size: var(--text-xl);
+    color: var(--color-text);
+  }
+
+  .phase-content {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .phase-content p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .phase-outcome {
+    font-weight: var(--font-weight-medium) !important;
+    color: var(--color-text) !important;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* Vision Section */
+  .vision-section {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .vision-section h2 {
+    margin: 0;
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+  }
+
+  .vision-section > p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .vision-principles {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    display: grid;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .vision-principles p {
+    margin: 0;
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+  }
+
+  /* Repractice CTA */
+  .repractice-cta {
+    display: grid;
+    gap: 1rem;
+    justify-items: center;
+    text-align: center;
+    padding: 2rem;
+    background: rgba(6, 12, 22, 0.4);
+    border-radius: var(--radius-md);
+  }
+
+  .repractice-cta p {
+    margin: 0;
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+  }
+
+  /* Navigation */
+  .mission-nav {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .mission-hero h1 {
+      font-size: var(--text-3xl);
+    }
+
+    .name-meanings {
+      grid-template-columns: 1fr;
+    }
+
+    .mission-nav {
+      flex-direction: column;
+    }
+  }
+</style>

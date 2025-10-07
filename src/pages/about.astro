@@ -1,302 +1,145 @@
 ---
-// ============================================================================
-// STEP 1: UPDATE IMPORTS
-// ============================================================================
-// We keep the existing layout and structure imports
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ArcCanvas from "../components/ArcCanvas.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import PageNavigation from "../components/PageNavigation.astro";
-
-// NEW: Import the shared components we'll use to replace repetitive HTML patterns
 import Card from "../components/Card.astro";
-import SectionHeader from "../components/SectionHeader.astro";
 import LinkButton from "../components/LinkButton.astro";
-
-// Keep the page-specific styles
-import '../styles/pages/about.css';
-
-// NEW: Import utilities instead of defining them locally
-// This eliminates duplicate withBase functions across pages
 import { withBase } from '../utils/paths';
-
-// NEW: Import SEO utility to simplify meta tag generation
 import { buildSEO } from '../utils/seo';
 
-// NEW: Import constants for external URLs
-// This centralizes all external links in one place
-import { EXTERNAL_LINKS } from '../config/constants';
-
-// ============================================================================
-// STEP 2: SIMPLIFY SEO OBJECT CONSTRUCTION
-// ============================================================================
-// OLD WAY (manual, repetitive, error-prone):
-// const title = "About Ali - arc^";
-// const description = "Meet Ali...";
-// const siteUrl = Astro.site ? new URL("/about", Astro.site).toString() : undefined;
-// const seo = {
-//   canonical: siteUrl,
-//   openGraph: { title: "About Ali - arc^", description, url: siteUrl },
-//   twitter: { title, description },
-// };
-
-// NEW WAY: Use buildSEO utility - cleaner, consistent, less typing
 const seo = buildSEO({
-  title: "About Ali",  // Note: "- arc^" is added automatically by buildSEO
-  description: "Meet Ali, the founder of arc^ — building open research frameworks for regenerative futures.",
+  title: "About ArcUp",
+  description: "An open experimental research framework exploring how plasma technologies can support ecological repair. Part of the broader Repractice ecosystem.",
   path: "/about",
   siteUrl: Astro.site,
 });
-// This automatically generates canonical URLs, OpenGraph tags, and Twitter cards
 ---
 
-<BaseLayout title={seo.title} description={seo.description} bodyClass="page-about" seo={seo}>
-  <ArcCanvas />
+<BaseLayout {...seo}>
   <SiteHeader active="about" />
-
-  <main id="main-content" class="page-shell" aria-labelledby="about-title">
+  
+  <main id="main-content" class="page-shell page-about-overview">
     
-    <!-- ========================================================================
-         HERO SECTION
-         No changes here - this is page-specific layout
-         ======================================================================== -->
-    <header class="about-hero" aria-labelledby="about-title">
-      <h1 id="about-title">About Ali</h1>
+    <!-- Hero Section -->
+    <header class="about-hero">
+      <h1>About ArcUp</h1>
+      <p class="about-lede" aria-label="ArcUp overview introduction">
+        ArcUp is an open experimental research framework exploring how plasma technologies can support ecological repair. 
+        It is part of the broader <a href="https://www.xbyali.page" target="_blank" rel="noopener">xbyali.page</a> ecosystem — 
+        connecting philosophy, ethics, and experimentation through the <em>Repractice Framework</em>.
+      </p>
       <p class="about-lede">
-        arc^ is my work — a framework I'm building to do science differently. 
-        If it grows, it becomes something bigger: a foundation, circle, or collective. 
-        Whatever we choose. But right now, it's under my CCs, and I'm inviting you into the process.
+        ArcUp serves as the backbone of open plasma research, building transparent pathways between individuals, 
+        institutions, and communities who want to develop technology for <em>the planet, not the market</em>.
+      </p>
+      <p class="about-lede-emphasis">
+        ArcUp exists to make research a collective act of care.
       </p>
     </header>
 
-    <!-- ========================================================================
-         WHO I AM SECTION
-         CHANGE: Replace <h2> with <SectionHeader> component
-         WHY: Consistent styling, accessibility, heading hierarchy management
-         ======================================================================== -->
+    <!-- Navigation Cards Section -->
     <section class="about-section">
-      <!-- OLD WAY: <h2>Who I Am</h2> -->
-      <!-- NEW WAY: Use SectionHeader component -->
-      <SectionHeader 
-        title="Who I Am"
-        align="left"
-        headingLevel="h2"
-      />
-      <!-- 
-      EXPLANATION:
-      - title: The heading text
-      - align: "left" or "center" - controls text alignment
-      - headingLevel: "h1", "h2", "h3" etc - maintains proper heading hierarchy
-      This component handles all the styling and accessibility automatically
-      -->
-      <div class="about-content">
-        <p>
-          I'm an undergraduate biological science student at a university in Melbourne, Australia, 
-          majoring in environmental and ecological systems. I have hands-on experience in agriculture, 
-          having worked on various farms, and I've been involved in developing a permaculture property 
-          on Gadigal land for about a year now.
-        </p>
-        <p>
-          My approach to science is shaped by these experiences — I want research to be grounded, 
-          accessible, and actually useful to the people who need it most.
-        </p>
-      </div>
-    </section>
-
-    <!-- ========================================================================
-         WHY ARC^ SECTION
-         CHANGE: Replace <h2> with <SectionHeader> component
-         ======================================================================== -->
-    <section class="about-section">
-      <SectionHeader 
-        title="Why arc^"
-        align="left"
-        headingLevel="h2"
-      />
-      <div class="about-content">
-        <p>
-          I created arc^ because traditional research models weren't working for me. The pressure to publish, 
-          the gatekeeping around funding, the lack of transparency — none of it served the goal of actually 
-          solving ecological problems.
-        </p>
-        <p>
-          arc^ is a bet on open collaboration, building in public, and refusing the extractive patterns 
-          that dominate both industry and academia. I want to create a space where research can happen 
-          without the usual compromise between integrity and survival.
-        </p>
-      </div>
-    </section>
-
-    <!-- ========================================================================
-         WHAT I'M BUILDING SECTION
-         CHANGE: Replace <h2> with <SectionHeader> component
-         ======================================================================== -->
-    <section class="about-section">
-      <SectionHeader 
-        title="What I'm Building"
-        align="left"
-        headingLevel="h2"
-      />
-      <div class="about-content">
-        <p>
-          Right now, arc^ is early-stage plasma research for ecological repair. The main project involves 
-          plasma-activated water (PAW) applied to agriculture and soil health. There are other ideas in 
-          development — but plasma is the thread connecting them.
-        </p>
-        <p>
-          Everything is structured around RE:TECH principles — open licensing, safety-first approach, 
-          and iterative development that values learning from failure.
-        </p>
-        <p>
-          I'm documenting everything openly so others can learn from my mistakes as much as my successes.
-        </p>
-      </div>
-    </section>
-
-    <!-- ========================================================================
-         HOW TO WORK WITH ME SECTION
-         CHANGE: Replace <h2> with <SectionHeader> component
-         ======================================================================== -->
-    <section class="about-section">
-      <SectionHeader 
-        title="How to Work With Me"
-        align="left"
-        headingLevel="h2"
-      />
-      <div class="about-content">
-        <p>
-          If you're interested in collaborating, the best approach is to reach out directly. 
-          There's no formal application process — just honest conversation about what you want to build 
-          and how we might work together.
-        </p>
-        <p>
-          I'm looking for people who are comfortable with uncertainty, who value transparency over prestige, 
-          and who want to contribute to research that genuinely serves ecological and community wellbeing.
-        </p>
-        <p>
-          No templates. Just authentic conversation about what you want to build and how we might work together.
-        </p>
-      </div>
-    </section>
-
-    <!-- ========================================================================
-         FULL STORY LINK SECTION
-         CHANGES: 
-         1. Replace <section class="surface-panel"> with <Card> component
-         2. Replace <h2> with <SectionHeader> component
-         3. Replace <a class="button"> with <LinkButton> component
-         4. Replace hard-coded URL with EXTERNAL_LINKS constant
-         ======================================================================== -->
-    <!-- OLD WAY:
-    <section class="full-story-section surface-panel">
-      <h2>Want the Full Story?</h2>
-      <p>...</p>
-      <a href="https://www.xbyali.page" target="_blank" rel="noopener" class="button button--outline">
-        Visit xbyali.page →
-      </a>
-    </section>
-    -->
-    
-    <!-- NEW WAY: -->
-    <Card as="section" class="full-story-section">
-      <!--
-      CARD COMPONENT EXPLANATION:
-      - as="section": Renders as <section> instead of <div> for semantic HTML
-      - class: We keep the page-specific class for any custom layout styles
-      The Card component automatically handles:
-      - Background color (.surface-panel styling)
-      - Padding
-      - Border radius
-      - Shadow effects
-      -->
-      
-      <SectionHeader 
-        title="Want the Full Story?"
-        align="left"
-        headingLevel="h2"
-      />
-      <p>
-        This page covers arc^. For more about my broader work, philosophy, and projects 
-        outside this framework, visit my main site.
+      <h2 class="section-title">What You'll Find Here</h2>
+      <p class="section-intro" aria-label="Navigation summary of ArcUp About section">
+        This section introduces the story, people, and purpose behind ArcUp. 
+        Each page expands the framework's story from reflection to practice.
       </p>
-      
-      <!-- OLD WAY:
-      <a href="https://www.xbyali.page" target="_blank" rel="noopener" class="button button--outline">
-        Visit xbyali.page →
-      </a>
-      -->
-      
-      <!-- NEW WAY: -->
-      <LinkButton 
-        href={EXTERNAL_LINKS.personalSite}
-        variant="outline"
-        icon="external"
-      >
-        Visit xbyali.page
-      </LinkButton>
-      <!--
-      LINKBUTTON COMPONENT EXPLANATION:
-      - href={EXTERNAL_LINKS.personalSite}: Uses constant instead of hard-coded URL
-        If you need to change the URL later, you change it once in constants.ts
-      - variant="outline": Specifies button style (options: "primary", "outline", "ghost")
-      - icon="external": Automatically adds external link icon (↗)
-        The component detects external URLs and adds target="_blank" rel="noopener" automatically
-      
-      The component handles:
-      - All button styling (no need for .button .button--outline classes)
-      - Hover states
-      - Focus states for keyboard navigation
-      - Accessibility attributes
-      - External link icons
-      -->
+
+      <div class="about-nav-grid">
+        
+        <Card as="article" class="about-nav-card">
+          <div class="nav-card-content">
+            <h3>Origin</h3>
+            <p>How a small experiment with plasma and seeds became an open framework for regenerative research.</p>
+          </div>
+          <LinkButton 
+            href={withBase("/about/origin")} 
+            variant="outline"
+            icon="arrow-right"
+          >
+            Read the Story
+          </LinkButton>
+        </Card>
+
+        <Card as="article" class="about-nav-card">
+          <div class="nav-card-content">
+            <h3>Founder</h3>
+            <p>Meet Ali Saleh, and the systems thinking that guides ArcUp's interdisciplinary approach.</p>
+          </div>
+          <LinkButton 
+            href={withBase("/about/founder")} 
+            variant="outline"
+            icon="arrow-right"
+          >
+            Meet Ali
+          </LinkButton>
+        </Card>
+
+        <Card as="article" class="about-nav-card">
+          <div class="nav-card-content">
+            <h3>Mission</h3>
+            <p>What drives the work, how the phases unfold, and the vision for a commons of plasma research.</p>
+          </div>
+          <LinkButton 
+            href={withBase("/about/mission")} 
+            variant="outline"
+            icon="arrow-right"
+          >
+            Explore the Mission
+          </LinkButton>
+        </Card>
+
+      </div>
+    </section>
+
+    <!-- Living Framework Section -->
+    <Card as="section" class="framework-section">
+      <h2>A Living Framework</h2>
+      <p aria-label="ArcUp framework description">
+        ArcUp grows through open, iterative phases — from individual experiments to global collaboration. 
+        It isn't a company or lab; it's a <em>commons of practice</em>, shaped by every person who contributes to it.
+      </p>
+      <p>
+        Each experiment adds to a shared understanding of how plasma interacts with life — and how open science 
+        can model a more regenerative relationship with Earth.
+      </p>
+      <p class="framework-closing">
+        ArcUp is science re-practised: transparent, ethical, and alive.
+      </p>
     </Card>
 
-    <!-- ========================================================================
-         VALUES REMINDER SECTION
-         CHANGES:
-         1. Replace <h2> with <SectionHeader> component
-         2. Replace <a class="button"> with <LinkButton> components
-         ======================================================================== -->
-    <section class="values-reminder">
-      <SectionHeader 
-        title="What Guides This Work"
-        align="left"
-        headingLevel="h2"
-      />
-      <p>
-        arc^ is built on principles that refuse extraction and prioritize regeneration. 
-        If you're curious about the philosophical foundation, explore how we work and the methods we follow.
-      </p>
-      
-      <div class="values-links">
-        <!-- OLD WAY:
-        <a href={withBase("/how")} class="button button--outline">See How We Work</a>
-        <a href={withBase("/projects")} class="button button--outline">View Projects</a>
-        -->
-        
-        <!-- NEW WAY: -->
+    <!-- Repractice Connection -->
+    <section class="repractice-connection">
+      <div class="repractice-divider" aria-hidden="true"></div>
+      <div class="repractice-content">
+        <h2>Connection to Repractice</h2>
+        <p aria-label="Relationship between ArcUp and Repractice">
+          ArcUp operates under the ethical foundation of <em>Repractice</em>: research as care, transparency as principle, 
+          and collaboration as responsibility.
+        </p>
+        <p>
+          Repractice defines the values behind ArcUp's structure — ensuring that technology development remains 
+          non-extractive, interdisciplinary, and accessible to all.
+        </p>
         <LinkButton 
           href={withBase("/how")} 
-          variant="outline" 
+          variant="outline"
           icon="arrow-right"
         >
-          See How We Work
-        </LinkButton>
-        <!--
-        EXPLANATION:
-        - withBase("/how"): Still using withBase for internal links
-        - variant="outline": Same outline style as before
-        - icon="arrow-right": Adds → arrow automatically
-        -->
-        
-        <LinkButton 
-          href={withBase("/projects")} 
-          variant="outline" 
-          icon="arrow-right"
-        >
-          View Projects
+          Explore Repractice Methods
         </LinkButton>
       </div>
+    </section>
+
+    <!-- Closing Invitation -->
+    <section class="closing-invitation">
+      <p aria-label="Closing invitation for visitors to engage">
+        ArcUp is still forming — a workbench, a library, a community in motion. 
+        You're invited to explore, question, and shape it with us.
+      </p>
+      <p class="invitation-emphasis">
+        Begin wherever you feel drawn — to the science, the story, or the ethics that hold it all together.
+      </p>
     </section>
 
   </main>
@@ -304,52 +147,216 @@ const seo = buildSEO({
   <PageNavigation currentPage="about" />
 </BaseLayout>
 
-<!-- 
-============================================================================
-SUMMARY OF CHANGES
-============================================================================
+<style>
+  .page-about-overview {
+    display: grid;
+    gap: var(--section-gap);
+  }
 
-✅ REMOVED (Code Duplication Eliminated):
-- Duplicate withBase function definition (now imported from utils/paths)
-- Manual SEO object construction (now using buildSEO utility)
-- Hard-coded external URL (now using EXTERNAL_LINKS constant)
+  /* Hero Section */
+  .about-hero {
+    max-width: 85ch;
+    margin: 0 auto;
+    text-align: center;
+  }
 
-✅ REPLACED (Consistent Components):
-- <h2> tags → <SectionHeader> components (5 instances)
-- <section class="surface-panel"> → <Card as="section"> (1 instance)
-- <a class="button button--outline"> → <LinkButton> components (3 instances)
+  .about-hero h1 {
+    margin: 0 0 1.5rem 0;
+    font-size: var(--text-4xl);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.1;
+    color: var(--color-text);
+  }
 
-✅ BENEFITS:
-1. DRY Principle: withBase defined once, used everywhere
-2. Consistency: All section headers styled identically
-3. Maintainability: Change button style once, applies to all pages
-4. Accessibility: Components have built-in ARIA labels and focus management
-5. Type Safety: Components have proper TypeScript interfaces
-6. Reduced Bundle Size: Shared CSS instead of duplicated styles
+  .about-lede {
+    margin: 0 0 1.5rem 0;
+    font-size: var(--text-lg);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
 
-============================================================================
-WHAT TO TEST
-============================================================================
+  .about-lede a {
+    color: var(--color-primary-bright);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(93, 225, 228, 0.3);
+    transition: all var(--transition-base);
+  }
 
-After copying this file, test:
-1. Page renders correctly (npm run dev)
-2. All links work (especially external link to xbyali.page)
-3. Buttons have proper hover states
-4. External link opens in new tab
-5. Internal links navigate correctly
-6. No console errors
-7. Build succeeds (npm run build)
-8. SEO meta tags are correct (view page source)
+  .about-lede a:hover,
+  .about-lede a:focus-visible {
+    color: var(--color-text);
+    border-bottom-color: var(--color-primary-bright);
+  }
 
-============================================================================
-NEXT STEPS
-============================================================================
+  .about-lede-emphasis {
+    margin: 2rem 0 0 0;
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+  }
 
-1. Copy this code to /src/pages/about.astro
-2. Test the page thoroughly
-3. Review /styles/pages/about.css - you can now remove:
-   - .button, .button--outline styles (handled by LinkButton)
-   - Any section header styles duplicated in the component
-4. Commit: git commit -m "refactor: migrate about page to shared components"
-5. Move to next page: join.astro (similar complexity)
--->
+  /* About Section */
+  .about-section {
+    max-width: 95ch;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    margin: 0 0 1rem 0;
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+    text-align: center;
+  }
+
+  .section-intro {
+    margin: 0 0 3rem 0;
+    font-size: var(--text-base);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    text-align: center;
+    max-width: 75ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Navigation Cards Grid */
+  .about-nav-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  }
+
+  .about-nav-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: all var(--transition-base);
+  }
+
+  .about-nav-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .nav-card-content {
+    flex: 1;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .nav-card-content h3 {
+    margin: 0;
+    font-size: var(--text-xl);
+    color: var(--color-text);
+  }
+
+  .nav-card-content p {
+    margin: 0;
+    font-size: var(--text-base);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  /* Framework Section */
+  .framework-section {
+    max-width: 85ch;
+    margin: 0 auto;
+  }
+
+  .framework-section h2 {
+    margin: 0 0 1.5rem 0;
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+  }
+
+  .framework-section p {
+    margin: 0 0 1.5rem 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .framework-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .framework-closing {
+    margin-top: 2rem !important;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+  }
+
+  /* Repractice Connection */
+  .repractice-connection {
+    max-width: 85ch;
+    margin: 0 auto;
+  }
+
+  .repractice-divider {
+    width: 60%;
+    height: 1px;
+    margin: 0 auto 3rem auto;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--color-primary-bright),
+      transparent
+    );
+    opacity: 0.3;
+  }
+
+  .repractice-content {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .repractice-content h2 {
+    margin: 0;
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+    text-align: center;
+  }
+
+  .repractice-content p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  /* Closing Invitation */
+  .closing-invitation {
+    max-width: 75ch;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .closing-invitation p {
+    margin: 0 0 1.5rem 0;
+    font-size: var(--text-lg);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .closing-invitation p:last-child {
+    margin-bottom: 0;
+  }
+
+  .invitation-emphasis {
+    font-size: var(--text-xl) !important;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text) !important;
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .about-hero h1 {
+      font-size: var(--text-3xl);
+    }
+
+    .about-nav-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

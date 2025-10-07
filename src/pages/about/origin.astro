@@ -1,0 +1,441 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import Card from "../../components/Card.astro";
+import LinkButton from "../../components/LinkButton.astro";
+import { withBase } from '../../utils/paths';
+import { buildSEO } from '../../utils/seo';
+
+const seo = buildSEO({
+  title: "Origin - How ArcUp Began",
+  description: "The story of how a question about open science and a small experiment with plasma became ArcUp — a framework for regenerative research.",
+  path: "/about/origin",
+  siteUrl: Astro.site,
+});
+---
+
+<BaseLayout {...seo}>
+  <SiteHeader active="about" />
+  
+  <main id="main-content" class="page-shell page-origin">
+    
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href={withBase("/about")}>About</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Origin</span>
+    </nav>
+
+    <!-- Hero -->
+    <header class="origin-hero">
+      <h1>How ArcUp Began</h1>
+    </header>
+
+    <!-- The Question -->
+    <section class="origin-section">
+      <h2 aria-label="Introduction: The question that inspired ArcUp">A Question That Started It All</h2>
+      <p class="origin-question">
+        What if the next big breakthrough was built in the open?
+      </p>
+      <p>
+        That question stayed with me. It wasn't about a specific device or formula — it was about what kind of future 
+        we might create if <em>discovery itself became a shared act</em>.
+      </p>
+      <p>
+        Arc^ began not as a product, but as a moment of reflection on how science could return to care, transparency, 
+        and collaboration.
+      </p>
+    </section>
+
+    <!-- Early Experiments -->
+    <Card as="section" class="experiments-section">
+      <h2 aria-label="ArcUp early experiments with plasma and seed germination">Early Experiments — The First Spark</h2>
+      <div class="experiments-content">
+        <p>
+          ArcUp began in a small room with a flyback transformer, a driver circuit, and a few glass electrodes. 
+          I had been reading plasma research papers from around the world — seeing how different teams were exploring 
+          plasma-water interactions — and decided to test it for myself.
+        </p>
+        <p>
+          My goal was simple: to see whether plasma could influence seed germination.
+        </p>
+        <p class="experiments-highlight">
+          And it did.
+        </p>
+        <p>
+          That small moment — watching seeds respond — revealed a larger truth: plasma can alter biological processes, 
+          and the tools to study it don't have to belong to large institutions.
+        </p>
+        <p>
+          It also raised new questions: If I can do this alone, what would it look like if <em>we did it together</em> — in the open?
+        </p>
+      </div>
+    </Card>
+
+    <!-- The Pattern -->
+    <section class="pattern-section">
+      <h2 aria-label="The systemic issues ArcUp responds to">The Pattern We Refuse</h2>
+      <p>
+        Looking back across centuries, I saw a cycle repeating:
+      </p>
+      
+      <div class="pattern-cycle">
+        <div class="cycle-item">Conflict</div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-item">Production</div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-item">Patents</div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-item">Profit</div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-item">Power</div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-item">Harm</div>
+      </div>
+
+      <p class="pattern-description">
+        A pattern of extraction dressed up as progress.
+      </p>
+
+      <Card class="pattern-today">
+        <h3>Today it looks like this:</h3>
+        <ul class="pattern-list">
+          <li>Curiosity gated by funding</li>
+          <li>Discovery delayed for the market</li>
+          <li>Scale replacing meaning</li>
+          <li>Science run as strategy, not as a humble search for knowledge</li>
+        </ul>
+      </Card>
+
+      <div class="pattern-response">
+        <p>
+          ArcUp was born from a refusal of that pattern. It's not rebellion for its own sake — it's a reorientation.
+        </p>
+        <p class="pattern-emphasis">
+          A way of saying that knowledge should circulate, not accumulate. That progress should heal, not harm.
+        </p>
+      </div>
+    </section>
+
+    <!-- Framework -->
+    <Card as="section" class="framework-origin-section">
+      <h2 aria-label="Transition from individual experiment to open framework">A Framework, Not a Lab</h2>
+      <p>
+        ArcUp grew from this reflection into a framework — a set of methods, values, and open tools for regenerative 
+        plasma research. It integrates my background in ecology, computer science, and systems thinking, but sits 
+        outside the usual institutions that govern innovation.
+      </p>
+      <p>
+        It's science re-practised — built to serve <em>life</em>, not ownership.
+      </p>
+      <div class="framework-closing">
+        <p>
+          Arc^ began as one person's experiment.
+        </p>
+        <p class="closing-emphasis">
+          It continues as a collective invitation: to research, to repair, to remember what science can be.
+        </p>
+      </div>
+    </Card>
+
+    <!-- Navigation -->
+    <nav class="origin-nav" aria-label="Continue exploring">
+      <LinkButton 
+        href={withBase("/about/founder")} 
+        variant="primary"
+        icon="arrow-right"
+      >
+        Meet the Founder
+      </LinkButton>
+      <LinkButton 
+        href={withBase("/about/mission")} 
+        variant="outline"
+        icon="arrow-right"
+      >
+        Explore the Mission
+      </LinkButton>
+    </nav>
+
+  </main>
+</BaseLayout>
+
+<style>
+  .page-origin {
+    display: grid;
+    gap: var(--section-gap);
+    max-width: 85ch;
+    margin: 0 auto;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .breadcrumb a {
+    color: var(--color-primary-bright);
+    text-decoration: none;
+    transition: color var(--transition-base);
+  }
+
+  .breadcrumb a:hover,
+  .breadcrumb a:focus-visible {
+    color: var(--color-text);
+  }
+
+  /* Hero */
+  .origin-hero {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .origin-hero h1 {
+    margin: 0;
+    font-size: var(--text-4xl);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.1;
+    color: var(--color-text);
+  }
+
+  /* Origin Section */
+  .origin-section {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .origin-section h2 {
+    margin: 0;
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+  }
+
+  .origin-question {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-primary-bright);
+    font-style: italic;
+    padding: 1.5rem;
+    background: rgba(10, 147, 150, 0.08);
+    border-left: 3px solid var(--color-primary-bright);
+    border-radius: var(--radius-sm);
+    margin: 1rem 0 2rem 0;
+  }
+
+  .origin-section p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  /* Experiments Section */
+  .experiments-section {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .experiments-section h2 {
+    margin: 0;
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+  }
+
+  .experiments-content {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .experiments-content p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .experiments-highlight {
+    font-size: var(--text-xl) !important;
+    font-weight: var(--font-weight-semibold) !important;
+    color: var(--color-text) !important;
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  /* Pattern Section */
+  .pattern-section {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .pattern-section h2 {
+    margin: 0;
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+  }
+
+  .pattern-section > p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .pattern-cycle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 2rem 0;
+    padding: 2rem 1rem;
+    background: rgba(6, 12, 22, 0.4);
+    border-radius: var(--radius-md);
+  }
+
+  .cycle-item {
+    padding: 0.75rem 1.25rem;
+    background: rgba(10, 147, 150, 0.12);
+    border: 1px solid rgba(93, 225, 228, 0.3);
+    border-radius: var(--radius-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+  }
+
+  .cycle-arrow {
+    color: var(--color-primary-bright);
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .pattern-description {
+    text-align: center;
+    font-size: var(--text-lg) !important;
+    font-style: italic;
+    color: var(--color-text) !important;
+  }
+
+  .pattern-today {
+    margin: 2rem 0;
+  }
+
+  .pattern-today h3 {
+    margin: 0 0 1rem 0;
+    font-size: var(--text-lg);
+    color: var(--color-text);
+  }
+
+  .pattern-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .pattern-list li {
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .pattern-list li::before {
+    content: "×";
+    position: absolute;
+    left: 0;
+    color: var(--color-primary-bright);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-lg);
+  }
+
+  .pattern-response {
+    display: grid;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .pattern-response p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .pattern-emphasis {
+    font-size: var(--text-lg) !important;
+    font-weight: var(--font-weight-medium) !important;
+    color: var(--color-text) !important;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* Framework Origin Section */
+  .framework-origin-section {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .framework-origin-section h2 {
+    margin: 0;
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+  }
+
+  .framework-origin-section > p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .framework-closing {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    display: grid;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .framework-closing p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .closing-emphasis {
+    font-size: var(--text-xl) !important;
+    font-weight: var(--font-weight-medium) !important;
+    color: var(--color-text) !important;
+  }
+
+  /* Navigation */
+  .origin-nav {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .origin-hero h1 {
+      font-size: var(--text-3xl);
+    }
+
+    .pattern-cycle {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+    }
+
+    .cycle-arrow {
+      transform: rotate(90deg);
+    }
+
+    .origin-nav {
+      flex-direction: column;
+    }
+  }
+</style>

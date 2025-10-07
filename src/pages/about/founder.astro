@@ -1,0 +1,379 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import Card from "../../components/Card.astro";
+import LinkButton from "../../components/LinkButton.astro";
+import { withBase } from '../../utils/paths';
+import { buildSEO } from '../../utils/seo';
+import { EXTERNAL_LINKS } from '../../config/constants';
+
+const seo = buildSEO({
+  title: "Founder - Meet Ali Saleh",
+  description: "Meet Ali Saleh, the biological sciences researcher and systems thinker behind ArcUp's interdisciplinary approach to regenerative plasma research.",
+  path: "/about/founder",
+  siteUrl: Astro.site,
+});
+---
+
+<BaseLayout {...seo}>
+  <SiteHeader active="about" />
+  
+  <main id="main-content" class="page-shell page-founder">
+    
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href={withBase("/about")}>About</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Founder</span>
+    </nav>
+
+    <!-- Hero -->
+    <header class="founder-hero">
+      <h1>About the Founder</h1>
+    </header>
+
+    <!-- Introduction -->
+    <section class="founder-intro">
+      <h2 aria-label="Founder introduction">Introduction</h2>
+      <p>
+        I'm Ali Saleh, a biological sciences researcher based in Melbourne, Australia, focusing on environmental and 
+        ecological systems. My background crosses disciplines — from pollution degradation using triboelectric nanogenerators 
+        to saltmarsh restoration ecology, and earlier studies in computer science.
+      </p>
+      <p>
+        ArcUp grew from a desire to bring these threads together — to integrate ethics, technology, and ecological 
+        understanding into a single, open practice.
+      </p>
+    </section>
+
+    <!-- Building ArcUp -->
+    <Card as="section" class="building-section">
+      <h2 aria-label="Ali's early experiments and ArcUp origin">Building ArcUp</h2>
+      <p>
+        My first experiments were small: plasma discharges across glass electrodes, powered by flyback transformers 
+        and a Z-driver circuit. I was testing how plasma-treated water might affect seed germination — and it did.
+      </p>
+      <p class="building-moment">
+        Watching seeds respond to plasma sparked a question that changed my trajectory:
+      </p>
+      <blockquote class="building-question">
+        What would it look like if this was built in the open?
+      </blockquote>
+      <p>
+        That question became ArcUp — a framework for open ecological experimentation, where <em>the process of learning 
+        is shared, not owned</em>.
+      </p>
+    </Card>
+
+    <!-- Systems View -->
+    <section class="systems-section">
+      <h2 aria-label="Ali's systems thinking and interdisciplinary approach">A Systems View</h2>
+      <p>
+        I've always been drawn to how systems interconnect — ecological, technological, social. Through ArcUp, I'm 
+        exploring how plasma, data, and design can <em>support living systems</em> rather than extract from them.
+      </p>
+      <p>
+        This is why ArcUp stays interdisciplinary: it sits between biology, physics, ethics, and culture, and invites 
+        each field to inform the others.
+      </p>
+      <p class="systems-emphasis">
+        Science is strongest when it listens — to ecosystems, to people, to context.
+      </p>
+    </section>
+
+    <!-- Personal Ethos -->
+    <Card as="section" class="ethos-section">
+      <h2 aria-label="Ali's research philosophy and personal ethos">Personal Ethos</h2>
+      <blockquote class="ethos-quote">
+        <p>
+          For me, ArcUp isn't a project; it's a way of doing research differently.
+        </p>
+        <p>
+          One that values openness over ownership, curiosity over control, and regeneration over recognition.
+        </p>
+      </blockquote>
+      <p>
+        I believe the best science is that which serves — restoring balance between innovation and the living world 
+        that sustains it.
+      </p>
+    </Card>
+
+    <!-- Looking Forward -->
+    <section class="forward-section">
+      <h2 aria-label="Founder closing reflection and invitation">Looking Forward</h2>
+      <p>
+        ArcUp is still young — an evolving commons that anyone aligned with its purpose can join.
+      </p>
+      <p>
+        My role is to hold the space: to guide its early shape, document openly, and build the ethical scaffolding 
+        that will let others expand it further.
+      </p>
+      <p class="forward-emphasis">
+        ArcUp isn't mine alone — it's ours to grow, together.
+      </p>
+    </section>
+
+    <!-- Connect -->
+    <Card class="connect-section">
+      <h2>Connect</h2>
+      <p>
+        Want to learn more about my broader work in ecology, technology, and systems thinking?
+      </p>
+      <div class="connect-links">
+        <LinkButton 
+          href={EXTERNAL_LINKS.personalSite}
+          variant="outline"
+          icon="external"
+        >
+          Visit xbyali.page
+        </LinkButton>
+        <LinkButton 
+          href={withBase("/join")} 
+          variant="primary"
+          icon="arrow-right"
+        >
+          Join ArcUp
+        </LinkButton>
+      </div>
+    </Card>
+
+    <!-- Navigation -->
+    <nav class="founder-nav" aria-label="Continue exploring">
+      <LinkButton 
+        href={withBase("/about/origin")} 
+        variant="outline"
+        icon="arrow-right"
+      >
+        Read the Origin Story
+      </LinkButton>
+      <LinkButton 
+        href={withBase("/about/mission")} 
+        variant="outline"
+        icon="arrow-right"
+      >
+        Explore the Mission
+      </LinkButton>
+    </nav>
+
+  </main>
+</BaseLayout>
+
+<style>
+  .page-founder {
+    display: grid;
+    gap: var(--section-gap);
+    max-width: 85ch;
+    margin: 0 auto;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .breadcrumb a {
+    color: var(--color-primary-bright);
+    text-decoration: none;
+    transition: color var(--transition-base);
+  }
+
+  .breadcrumb a:hover,
+  .breadcrumb a:focus-visible {
+    color: var(--color-text);
+  }
+
+  /* Hero */
+  .founder-hero {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .founder-hero h1 {
+    margin: 0;
+    font-size: var(--text-4xl);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.1;
+    color: var(--color-text);
+  }
+
+  /* All sections base styles */
+  section {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  section h2 {
+    margin: 0;
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+  }
+
+  section p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  /* Introduction */
+  .founder-intro {
+    /* Uses base section styles */
+  }
+
+  /* Building Section */
+  .building-section {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .building-section h2 {
+    margin: 0;
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+  }
+
+  .building-section p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .building-moment {
+    margin-top: 1rem !important;
+    font-size: var(--text-lg) !important;
+  }
+
+  .building-question {
+    margin: 1.5rem 0;
+    padding: 1.5rem 2rem;
+    background: rgba(10, 147, 150, 0.08);
+    border-left: 3px solid var(--color-primary-bright);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-medium);
+    font-style: italic;
+    color: var(--color-text);
+    text-align: center;
+  }
+
+  /* Systems Section */
+  .systems-section {
+    /* Uses base section styles */
+  }
+
+  .systems-emphasis {
+    font-size: var(--text-lg) !important;
+    font-weight: var(--font-weight-medium) !important;
+    color: var(--color-text) !important;
+    margin-top: 1rem !important;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    font-style: italic;
+  }
+
+  /* Ethos Section */
+  .ethos-section {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .ethos-section h2 {
+    margin: 0;
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+  }
+
+  .ethos-quote {
+    margin: 1rem 0;
+    padding: 2rem;
+    background: rgba(6, 12, 22, 0.4);
+    border-radius: var(--radius-sm);
+    display: grid;
+    gap: 1rem;
+  }
+
+  .ethos-quote p {
+    margin: 0;
+    font-size: var(--text-lg);
+    line-height: 1.7;
+    color: var(--color-text);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .ethos-section > p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  /* Forward Section */
+  .forward-section {
+    /* Uses base section styles */
+  }
+
+  .forward-emphasis {
+    font-size: var(--text-xl) !important;
+    font-weight: var(--font-weight-medium) !important;
+    color: var(--color-text) !important;
+    margin-top: 1rem !important;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* Connect Section */
+  .connect-section {
+    display: grid;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .connect-section h2 {
+    margin: 0;
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+  }
+
+  .connect-section > p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .connect-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  /* Navigation */
+  .founder-nav {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .founder-hero h1 {
+      font-size: var(--text-3xl);
+    }
+
+    .building-question {
+      padding: 1rem 1.5rem;
+      font-size: var(--text-lg);
+    }
+
+    .connect-links,
+    .founder-nav {
+      flex-direction: column;
+    }
+  }
+</style>
