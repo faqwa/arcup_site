@@ -1,13 +1,12 @@
 ---
 // ============================================================================
 // FILE: src/pages/projects.astro
-// ACTION: FULL REPLACEMENT
+// ACTION: FULL REPLACEMENT - Complete rewrite with correct hierarchy
 // CHANGES: 
-// 1. Reordered sections (Active Projects first, then Getting Involved)
-// 2. Replaced "Propose Your Own" with "Build Your Own" empowerment section
-// 3. Updated hero copy to be punchier
-// 4. Separated active vs all projects
-// 5. Using SectionHeader component for consistency
+// 1. Hero → Getting Involved → All Projects → Build Your Own → Legal
+// 2. Dynamic project loading from markdown
+// 3. SectionHeader component throughout
+// 4. Cyan colored <strong> and <em> in hero
 // ============================================================================
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ArcCanvas from "../components/ArcCanvas.astro";
@@ -25,10 +24,8 @@ import { withBase } from '../utils/paths';
 import { buildSEO } from '../utils/seo';
 import { EXTERNAL_LINKS } from '../config/constants';
 
-// Get all projects and separate by status
+// Get all projects dynamically
 const allProjects = await getCollection('projects');
-const activeProjects = allProjects.filter(p => p.data.status === 'active');
-const otherProjects = allProjects.filter(p => p.data.status !== 'active');
 
 const seo = buildSEO({
   title: "Projects",
@@ -49,41 +46,11 @@ const seo = buildSEO({
       <p class="eyebrow">Early-Stage Collaborative Research</p>
       <h1 id="projects-title">Projects</h1>
       <p class="lead">
-        <strong>Real problems. Open solutions.</strong> Each project tackles ecological repair 
-        through <em>collaborative research</em> — testing hypotheses, building hardware, and 
-        sharing everything we learn. <strong>You can join at any stage.</strong>
+        Each project applies RE:TECH principles — <em>open, safe, iterative</em> — and follows arc^'s licensing and governance. 
+        <strong>These are real-world challenges that need collaborative solutions.</strong> Whether you're testing a hypothesis, 
+        building hardware, or bringing community knowledge — there's a way in.
       </p>
     </header>
-
-    <!-- ACTIVE PROJECTS SECTION (Priority placement!) -->
-    {activeProjects.length > 0 && (
-      <section class="active-projects-section" aria-labelledby="active-projects-title">
-        <SectionHeader 
-          title="Active Projects" 
-          subtitle="These projects are actively seeking collaborators and building in public."
-        />
-        
-        <div class="projects-grid">
-          {activeProjects.map((project) => (
-            <Card as="article" class="project-card">
-              <div class="card-header">
-                <h3>
-                  <a href={withBase(`/projects/${project.slug}`)}>{project.data.title}</a>
-                </h3>
-                <StatusBadge status={project.data.status} />
-              </div>
-              <p class="card-summary">{project.data.summary}</p>
-              <p class="card-updated">Last updated: {project.data.lastUpdated}</p>
-              <div class="card-actions">
-                <LinkButton href={withBase(`/projects/${project.slug}`)} variant="outline" icon="arrow-right">
-                  Learn More
-                </LinkButton>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </section>
-    )}
 
     <!-- GETTING INVOLVED SECTION -->
     <section class="getting-involved-section" aria-labelledby="getting-involved-title">
@@ -122,7 +89,35 @@ const seo = buildSEO({
       </div>
     </section>
 
-    <!-- BUILD YOUR OWN SECTION (Replaces "Propose Your Own") -->
+    <!-- ALL PROJECTS SECTION -->
+    <section class="all-projects-section" aria-labelledby="all-projects-title">
+      <SectionHeader 
+        title="All Projects"
+        subtitle="Each project follows RE:TECH principles — open, safe, iterative — and follows arc^'s licensing and governance."
+      />
+      
+      <div class="projects-grid">
+        {allProjects.map((project) => (
+          <Card as="article" class="project-card">
+            <div class="card-header">
+              <h3>
+                <a href={withBase(`/projects/${project.slug}`)}>{project.data.title}</a>
+              </h3>
+              <StatusBadge status={project.data.status} />
+            </div>
+            <p class="card-summary">{project.data.summary}</p>
+            <p class="card-updated">Last updated: {project.data.lastUpdated}</p>
+            <div class="card-actions">
+              <LinkButton href={withBase(`/projects/${project.slug}`)} variant="outline" icon="arrow-right">
+                Learn More
+              </LinkButton>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </section>
+
+    <!-- BUILD YOUR OWN SECTION -->
     <section class="build-your-own-section" aria-labelledby="build-your-own-title">
       <SectionHeader 
         title="Build Your Own" 
@@ -146,36 +141,6 @@ const seo = buildSEO({
         </div>
       </Card>
     </section>
-
-    <!-- ALL PROJECTS SECTION (if there are non-active projects) -->
-    {otherProjects.length > 0 && (
-      <section class="all-projects-section" aria-labelledby="all-projects-title">
-        <SectionHeader 
-          title="All Projects" 
-          subtitle="Including early ideas, paused work, and completed research."
-        />
-        
-        <div class="projects-grid">
-          {otherProjects.map((project) => (
-            <Card as="article" class="project-card">
-              <div class="card-header">
-                <h3>
-                  <a href={withBase(`/projects/${project.slug}`)}>{project.data.title}</a>
-                </h3>
-                <StatusBadge status={project.data.status} />
-              </div>
-              <p class="card-summary">{project.data.summary}</p>
-              <p class="card-updated">Last updated: {project.data.lastUpdated}</p>
-              <div class="card-actions">
-                <LinkButton href={withBase(`/projects/${project.slug}`)} variant="outline" icon="arrow-right">
-                  Learn More
-                </LinkButton>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </section>
-    )}
 
     <!-- LEGAL REMINDER -->
     <section class="legal-section">
