@@ -1,0 +1,267 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import Card from "../components/Card.astro";
+import LinkButton from "../components/LinkButton.astro";
+import StatusBadge from "../components/StatusBadge.astro";
+import CalloutPanel from "../components/CalloutPanel.astro";
+import SectionDivider from "../components/SectionDivider.astro";
+import "../styles/global.css";
+
+import { withBase } from "../utils/paths";
+import { buildSEO } from "../utils/seo";
+
+const seo = buildSEO({
+  title: "Template Showcase",
+  description: "Layout playground for reviewing ArcUp component combinations.",
+  path: "/template",
+  siteUrl: Astro.site,
+});
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  bodyClass="page-template"
+  seo={seo}
+  navActive="projects"
+>
+  <main id="main-content" class="page-shell">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href={withBase("/")}>Home</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Template Showcase</span>
+    </nav>
+    <section class="surface-panel">
+      <SectionHeader
+        eyebrow="Template Eyebrow"
+        title="Template Hero Title"
+        subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        align="left"
+        headingLevel="h1"
+      />
+
+      <p class="lead">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Integer vitae neque sed urna vestibulum
+        pretium in id risus.
+      </p>
+
+      <div class="hero-actions">
+        <LinkButton href={withBase("/projects")} variant="primary" icon="arrow-right">
+          Primary Action
+        </LinkButton>
+        <LinkButton href={withBase("/about")} variant="outline" icon="arrow-right">
+          Secondary Action
+        </LinkButton>
+        <LinkButton href={withBase("/join")} variant="ghost" icon="arrow-right">
+          Ghost Action
+        </LinkButton>
+      </div>
+    </section>
+
+    <section>
+      <SectionHeader
+        eyebrow="Buttons"
+        title="Button Variations"
+        subtitle="Demonstrates primary, outline, and ghost button styles using the link button component."
+        align="center"
+        headingLevel="h2"
+      />
+
+      <div class="hero-actions">
+        <LinkButton href={withBase("/join")} variant="primary" icon="arrow-right">
+          Primary Button
+        </LinkButton>
+        <LinkButton href={withBase("/projects")} variant="outline" icon="arrow-right">
+          Secondary Button
+        </LinkButton>
+        <LinkButton href={withBase("/how")} variant="ghost" icon="arrow-right">
+          Ghost Button
+        </LinkButton>
+      </div>
+    </section>
+
+    <nav class="home-nav-cards" aria-label="Template navigation cards">
+      <a href={withBase("/about")} class="nav-card">
+        <h3>About Section</h3>
+        <p>Mirrors the homepage navigation cards with arrow reveal on hover.</p>
+        <span class="nav-card-arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a href={withBase("/projects")} class="nav-card">
+        <h3>Projects Section</h3>
+        <p>Shows how the arrow icon animates into view for interactive links.</p>
+        <span class="nav-card-arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a href={withBase("/how")} class="nav-card">
+        <h3>Methods Section</h3>
+        <p>Uses the same home-nav-cards layout for consistency checks.</p>
+        <span class="nav-card-arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a href={withBase("/join")} class="nav-card">
+        <h3>Join Section</h3>
+        <p>Ensures hover arrow behaviour is ready for reuse across pages.</p>
+        <span class="nav-card-arrow" aria-hidden="true">→</span>
+      </a>
+    </nav>
+
+    <SectionDivider variant="subtle" spacing="compact" />
+
+    <section>
+      <SectionHeader
+        eyebrow="Three Column"
+        title="Card Variants"
+        subtitle="Showcases default, surface, outline, and enhanced card content combinations."
+        align="left"
+        headingLevel="h2"
+      />
+
+      <div class="card-grid">
+        <Card variant="default" as="article">
+          <h3>Default Variant</h3>
+          <p>
+            Uses the default background option for scenarios where stronger contrast is preferred against the page
+            surface.
+          </p>
+          <LinkButton href={withBase("/projects")} variant="ghost" icon="arrow-right">
+            Explore Projects
+          </LinkButton>
+        </Card>
+
+        <Card as="article">
+          <span class="eyebrow">Step 01</span>
+          <h3>Numbered Badge</h3>
+          <p>
+            Presents a simple numbered marker using existing typography tokens for outlining sequential steps without
+            extra styling.
+          </p>
+          <LinkButton href={withBase("/how")} variant="ghost" icon="arrow-right">
+            View Process
+          </LinkButton>
+        </Card>
+
+        <Card as="article">
+          <h3>Hover Glow Card</h3>
+          <p>
+            Leverages the built-in hover elevation to communicate interactivity. Move the pointer to observe the glow
+            response.
+          </p>
+          <LinkButton href={withBase("/join")} variant="outline" icon="arrow-right">
+            Interact
+          </LinkButton>
+        </Card>
+      </div>
+    </section>
+
+    <section>
+      <SectionHeader
+        eyebrow="Two Column"
+        title="Card Layout Variations"
+        subtitle="Examples combining status indicators, arrow icons, and alternative padding."
+        align="center"
+        headingLevel="h2"
+      />
+
+      <div class="card-grid">
+        <Card as="article" padding="spacious">
+          <StatusBadge status="active" />
+          <h3>Status Enabled Card</h3>
+          <p>
+            Integrates a status badge component for communicating project state within a content panel.
+          </p>
+          <LinkButton href={withBase("/projects")} icon="arrow-right">
+            Open Project
+          </LinkButton>
+        </Card>
+
+        <Card as="article" variant="outline" hover={false} padding="compact">
+          <h3>Arrow Icon CTA</h3>
+          <p>
+            Demonstrates an outline treatment with the arrow icon enabled on the action link for directional emphasis.
+          </p>
+          <LinkButton href={withBase("/about")} variant="primary" icon="arrow-right">
+            Learn About Us
+          </LinkButton>
+        </Card>
+      </div>
+    </section>
+
+    <section>
+      <SectionHeader
+        eyebrow="Raw Class Example"
+        title="Manual Card Markup"
+        subtitle="Demonstrates direct use of the card utility classes without the Card component wrapper."
+        align="left"
+        headingLevel="h2"
+      />
+
+      <div class="card-grid">
+        <div class="card card--surface card--padding-spacious card--hover">
+          <h3>Utility Class Card</h3>
+          <p>
+            This panel uses the combined class string <code>card card--surface card--padding-spacious card--hover</code> to
+            match legacy implementations that render cards without the component abstraction.
+          </p>
+          <a class="link-button link-button--outline" href={withBase("/projects")}>
+            Review Legacy Usage
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="surface-panel">
+      <SectionHeader
+        eyebrow="Callouts"
+        title="Callout Panel Example"
+        subtitle="Use callouts to highlight important notices, warnings, or quick reference summaries."
+        align="left"
+        headingLevel="h2"
+      />
+
+      <CalloutPanel variant="info" icon="💡" title="Helpful Context">
+        <p>
+          Callout panels inherit global spacing tokens and surface treatments, making them ideal for emphasising compact
+          notes without bespoke styling.
+        </p>
+      </CalloutPanel>
+    </section>
+
+    <section class="acknowledgements-section">
+      <SectionHeader
+        eyebrow="Acknowledgements"
+        title="Hybrid Grid Placeholder"
+        subtitle="Structure mirrors the acknowledgements section so upcoming CSS can be validated."
+        align="left"
+        headingLevel="h2"
+      />
+
+      <div class="acknowledgements-intro">
+        <p><strong>Placeholder copy:</strong> Introduce the collaborators or communities being recognised.</p>
+      </div>
+
+      <div class="acknowledgements-grid">
+        <article class="acknowledgement-card">
+          <h3>Placeholder Item One</h3>
+          <p>Space reserved for name, link, or description content.</p>
+        </article>
+
+        <article class="acknowledgement-card">
+          <h3>Placeholder Item Two</h3>
+          <p>Use this block to verify hybrid grid alignments.</p>
+        </article>
+
+        <article class="acknowledgement-card">
+          <h3>Placeholder Item Three</h3>
+          <p>Helps confirm typography and spacing tokens once styles merge.</p>
+        </article>
+
+        <article class="acknowledgement-card">
+          <h3>Placeholder Item Four</h3>
+          <p>Ensures multi-column responsiveness for mixed content.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
