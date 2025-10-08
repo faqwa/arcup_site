@@ -1,0 +1,128 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArcCanvas from "../../components/ArcCanvas.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import PageNavigation from "../../components/PageNavigation.astro";
+import Card from "../../components/Card.astro";
+import LinkButton from "../../components/LinkButton.astro";
+import StatusBadge from "../../components/StatusBadge.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+
+import { getCollection } from 'astro:content';
+import "../../styles/pages/projects.css";
+
+import { withBase } from '../../utils/paths';
+import { buildSEO } from '../../utils/seo';
+import { EXTERNAL_LINKS } from '../../config/constants';
+
+const seo = buildSEO({
+  title: "About ArcUp",
+  description: "ArcUp is an open experimental research framework developing plasma technologies for ecological repair.",
+  path: "/about",
+  siteUrl: Astro.site,
+});
+---
+
+<BaseLayout title={seo.title} description={seo.description} seo={seo} bodyClass="page-generic">
+  <ArcCanvas />
+  <SiteHeader active="about" />
+
+  <main id="main-content" class="page-shell" aria-labelledby="page-title">
+
+    <!-- HERO SECTION -->
+    <header class="page-hero" aria-labelledby="page-title">
+      <p class="eyebrow">re:practising science & innovation</p>
+      <h1 id="page-title">About ArcUp</h1>
+      <p class="lead">
+        arc^ is an <strong>open experimental research framework</strong> developing plasma technologies for ecological repair and reslience - aligning reserach and innovation through the
+        <a href="https://repractice.xbyali.page">re:practice framework</a>,
+      </p>
+    </header>
+
+    <section class="page-section" aria-labelledby="section-1-title">
+    <SectionHeader
+        title="Our Focus"
+        subtitle="How ArcUp connects open research with planetary purpose — building transparent pathways between people, institutions, and local projects."
+        align="center"
+
+        />
+
+    <div class="card-grid">
+
+        <Card as="article" variant="surface">
+        <h3>Structure: Open by Design</h3>
+        <p>     <!-- can we get this colour muted -->
+
+            ArcUp unites ethics, technology, and experimentation to make plasma research
+            <strong>accessible to everyone.</strong>
+        </p>
+        <p>  <!-- can we keep this colouyr white -->
+            By sharing methods and results openly, the framework builds
+            <em>transparency, trust,</em> and collaboration between people, communities, and researchers.
+        </p>
+        </Card>
+
+        <Card as="article" variant="surface">
+        <h3>Purpose: Regeneration as Practice</h3>
+        <p><!-- can we get this colour muted -->
+            ArcUp turns research into a <strong>shared act of regeneration</strong> — open,
+            ethical, and collaborative.
+        </p>
+        <p> <!-- can we keep this colouyr white -->
+            Each experiment explores how plasma can support life systems and how
+            <em>open science</em> can model a more regenerative relationship with Earth.
+        </p>
+        </Card>
+    </div>
+    </section>
+
+
+    <!-- SECTION 2 -->
+    <section class="page-section" aria-labelledby="section-2-title">
+      <SectionHeader
+        title="What You’ll Find Here"
+        subtitle="Learn the story, people, and purpose behind ArcUp."
+      />
+      <div class="card-grid">
+        <Card as="article" class="info-card">
+          <h3>Origin</h3>
+          <p>How a small plasma–seed experiment became a framework for regenerative research.</p>
+          <LinkButton href={withBase('/about/origin')} variant="outline" icon="arrow-right">Read the Story</LinkButton>
+        </Card>
+        <Card as="article" class="info-card">
+          <h3>Founder</h3>
+          <p>Meet Ali Saleh and the systems thinking shaping ArcUp’s interdisciplinary approach.</p>
+          <LinkButton href={withBase('/about/founder')} variant="outline" icon="arrow-right">Meet Ali</LinkButton>
+        </Card>
+        <Card as="article" class="info-card">
+          <h3>Mission</h3>
+          <p>Discover the vision, phases, and long-term goal of a commons for plasma research.</p>
+          <LinkButton href={withBase('/about/mission')} variant="outline" icon="arrow-right">Explore the Mission</LinkButton>
+        </Card>
+      </div>
+    </section>
+
+    <!-- CTA FOOTER -->
+    <section class="cta-section" aria-labelledby="cta-title">
+      <SectionHeader
+        title="Be Part of the Work"
+        subtitle="ArcUp is a living framework—shaped by everyone who contributes."
+      />
+      <p>
+        Join the community, share ideas, or see what I am working on
+        <a href="https://workspace.xbyali.page">Workspace by Ali</a>.
+      </p>
+
+    </section>
+
+  </main>
+
+  <PageNavigation currentPage="about" />
+</BaseLayout>
+
+<!--
+NOTES:
+- Keeps total readable length under ~200 words before cards.
+- Cards act as navigation to subpages (Origin / Founder / Mission).
+- CTA footer can include ecosystem links if desired.
+-->

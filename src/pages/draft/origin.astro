@@ -1,0 +1,241 @@
+---
+// ============================================================================
+// PAGE: About / Origin of ArcUp
+// PURPOSE: Founding story + ethos of ArcUp
+// ----------------------------------------------------------------------------
+// NOTES:
+// - Uses ArcUp scaffold v1.0 structure
+// - Tone: reflective, human, invitational
+// - Audience: new collaborators, readers curious about the "why"
+// ============================================================================
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArcCanvas from "../../components/ArcCanvas.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import PageNavigation from "../../components/PageNavigation.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import SectionDivider from "../../components/SectionDivider.astro";
+import Card from "../../components/Card.astro";
+import CalloutPanel from "../../components/CalloutPanel.astro";
+import LinkButton from "../../components/LinkButton.astro";
+
+import "../../styles/pages/projects.css";
+import { withBase } from "../../utils/paths";
+import { buildSEO } from "../../utils/seo";
+
+const seo = buildSEO({
+  title: "Origin of ArcUp",
+  description: "How ArcUp began — a reflection on openness, curiosity, and care in science.",
+  path: "/about/origin",
+  siteUrl: Astro.site,
+});
+---
+
+<BaseLayout title={seo.title} description={seo.description} seo={seo} bodyClass="page-about">
+  <ArcCanvas />
+  <SiteHeader active="about" />
+
+  <main id="main-content" class="page-shell" aria-labelledby="page-title">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href={withBase("/about")}>About</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Origin</span>
+    </nav>
+
+    <!-- ================================================================ -->
+    <!-- HERO -->
+    <!-- ================================================================ -->
+    <header class="origin-hero" aria-labelledby="page-title">
+      <p class="eyebrow">How ArcUp Began</p>
+      <h1 id="page-title">What if the next breakthrough was built in the open?</h1>
+      <p class="lead">
+        What kind of world would we create?  
+        As I began building and testing ideas, I kept returning to that question—reflecting on what might change if discovery itself became shared.
+      </p>
+    </header>
+
+    <SectionDivider variant="default" spacing="compact" />
+
+    <!-- ================================================================ -->
+    <!-- SECTION 1 — The First Spark -->
+    <!-- ================================================================ -->
+    <section class="page-section" aria-labelledby="spark-title">
+      <SectionHeader
+        title="Early Experiments: The First Spark"
+        subtitle="From a flyback transformer to a living question."
+        align="center"
+      />
+
+      <div class="card-grid">
+        <Card as="article" class="start-card" variant="surface" hover={true}>
+          <span class="process-number">1</span>
+          <h3>Curiosity</h3>
+          <p>
+            I began reading plasma research papers from around the world, 
+            studying how others explored plasma–water interactions.
+          </p>
+        </Card>
+
+        <Card as="article" class="start-card" variant="surface" hover={true}>
+          <span class="process-number">2</span>
+          <h3>Learning the Basics</h3>
+          <p>
+            The papers were dense, so I turned to videos and tutorials. 
+            Watching others build home reactors helped me understand the core physics and electronics.
+          </p>
+        </Card>
+
+        <Card as="article" class="start-card" variant="surface" hover={true}>
+          <span class="process-number">3</span>
+          <h3>Building a Reactor</h3>
+          <p>
+            After days of trial and error, I created stable plasma arcs using a flyback transformer and a driver circuit.
+          </p>
+        </Card>
+
+        <Card as="article" class="start-card" variant="surface" hover={true}>
+          <span class="process-number">4</span>
+          <h3>Experimenting</h3>
+          <p>
+            I tested different electrodes and water types.  
+            Accidentally formed salt crystals, and discovered plasma-treated water improved seed germination.
+          </p>
+        </Card>
+
+        <Card as="article" class="start-card" variant="surface" hover={true}>
+          <span class="process-number">5</span>
+          <h3>Discovering Potential</h3>
+          <p>
+            Plasma could alter biological processes.  
+            I wondered how to design better systems for efficiency and ecological impact.
+          </p>
+        </Card>
+
+        <Card as="article" class="start-card" variant="surface" hover={true}>
+          <span class="process-number">6</span>
+          <h3>Sharing the Process</h3>
+          <p>
+            What if I shared my progress publicly?  
+            Would others join in, help improve it, or replicate it?  
+            That question became the seed of ArcUp.
+          </p>
+        </Card>
+      </div>
+
+      <CalloutPanel variant="info" icon="⚡" title="Collective Spark">
+        <p>
+          Watching seeds respond to plasma was the beginning of ArcUp.  
+          If one person could do this alone, imagine what we could create together.
+        </p>
+        <LinkButton href={withBase("/about/mission")} variant="ghost" icon="arrow-right">
+          Learn Why I Chose the Name ArcUp
+        </LinkButton>
+      </CalloutPanel>
+    </section>
+
+    <SectionDivider variant="default" spacing="compact" />
+
+    <!-- ================================================================ -->
+    <!-- SECTION 2 — The Pattern We Refuse -->
+    <!-- ================================================================ -->
+    <section class="page-section" aria-labelledby="pattern-title">
+    <SectionHeader
+        title="The Pattern We Refuse"
+        subtitle="Re-examining what progress has come to mean."
+        align="center"
+    />
+
+    <p>
+        Looking back across centuries, I saw a cycle of conflict, power, profit, and harm
+        repeating itself in the name of “progress.”
+    </p>
+    <p>
+        The current scientific paradigm isn’t so different. A pattern of extraction dressed up as progress:
+    </p>
+    <ul>
+        <li>We rely on funding cycles that gate curiosity.</li>
+        <li>Science becomes a strategy for competition.</li>
+        <li>Profit replaces purpose.</li>
+        <li>Knowledge is gated or delayed for the market.</li>
+        <li>Meaning is filtered through authority.</li>
+        <li>Scale replaces care.</li>
+        <li>And often, we recognise the harm only once it’s too late.</li>
+    </ul>
+
+    <p>
+        ArcUp was born from a refusal of that pattern.  
+        Let’s do things differently.  
+        Let’s not repeat the past—because the results will be the same.
+    </p>
+    </section>
+
+
+        <SectionDivider variant="strong" spacing="normal" />
+
+    <!-- ================================================================ -->
+    <!-- SECTION 3 — From Reflection to Framework -->
+    <!-- ================================================================ -->
+    <section class="page-section" aria-labelledby="framework-title">
+      <SectionHeader
+        title="A Framework, Not Another Investment"
+        subtitle="When reflection becomes collective practice."
+        align="center"
+      />
+
+      <p>
+        My early plasma experiments were only the beginning.  
+        ArcUp grew into a framework — a set of methods, values, and open tools for regenerative plasma research.  
+        A way to connect, collaborate, and build knowledge that serves life, not profit.
+      </p>
+
+      <p>
+        It’s science repractised:  
+        a reorientation toward transperncy and openness,  
+        a recommitment to curiosity and care,  
+        toward progress that heals rather than harms.  
+        Can innovation once again serve the planet, its communities and our future?
+      </p>
+    </section>
+
+    <SectionDivider variant="subtle" spacing="spacious" />
+
+    <!-- ================================================================ -->
+    <!-- SECTION 4 — Reflection / Closing -->
+    <!-- ================================================================ -->
+    <section class="reflection-section" aria-labelledby="reflection-title">
+      <SectionHeader
+        title="An Invitation"
+        subtitle="To research, to repair, to remember what science can be."
+        align="center"
+      />
+      <p class="reflection-text">
+        ArcUp began as one person’s experiment.  
+        My hope is that it grows into a collective practice —  
+        a shared opportunity to rethink what progress means and what kind of world we want to build.
+      </p>
+    </section>
+
+    <!-- Navigation -->
+    <nav class="origin-nav" aria-label="Continue exploring">
+      <LinkButton 
+        href={withBase("/about/founder")} 
+        variant="primary"
+        icon="arrow-right"
+      >
+        Meet the Founder
+      </LinkButton>
+      <LinkButton 
+        href={withBase("/about/mission")} 
+        variant="outline"
+        icon="arrow-right"
+      >
+        Explore the Mission
+      </LinkButton>
+    </nav>
+  </main>
+
+
+  <PageNavigation currentPage="about" />
+</BaseLayout>

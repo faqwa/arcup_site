@@ -61,6 +61,7 @@ export const SOCIAL_HANDLES = {
 
 /**
  * Navigation structure
+ * Items with dropdown property will show sub-navigation on hover
  */
 export const NAV_ITEMS = [
   { key: "home", label: "home", href: "/" },
@@ -69,14 +70,21 @@ export const NAV_ITEMS = [
     key: "how", 
     label: "how", 
     href: "/how",
-    // NEW: Dropdown items
+    // Dropdown for How - showing sub-pages only
     dropdown: [
-      { key: "how-main", label: "How We Work", href: "/how" },
       { key: "how-safety", label: "Safety", href: "/how/safety" },
       { key: "how-licensing", label: "Licensing", href: "/how/licensing" },
     ]
   },
-  { key: "about", label: "about", href: "/about" },
+  { 
+    key: "about", 
+    label: "about", 
+    href: "/about",
+    // Dropdown for About - showing sub-pages only
+    dropdown: [
+      { key: "about-founder", label: "Meet Ali", href: "/about/founder" },
+    ]
+  },
   { key: "join", label: "join", href: "/join" },
 ] as const;
 

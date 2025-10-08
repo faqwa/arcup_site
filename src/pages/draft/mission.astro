@@ -1,0 +1,286 @@
+---
+// ============================================================================
+// PAGE: About / Mission
+// PURPOSE: Define ArcUp’s purpose, values, and direction
+// ----------------------------------------------------------------------------
+// NOTES:
+// - Modular, visual, and collective tone (“we” voice)
+// - Keeps the emotional resonance but trims redundancy
+// ============================================================================
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArcCanvas from "../../components/ArcCanvas.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import PageNavigation from "../../components/PageNavigation.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import SectionDivider from "../../components/SectionDivider.astro";
+import Card from "../../components/Card.astro";
+import CalloutPanel from "../../components/CalloutPanel.astro";
+import LinkButton from "../../components/LinkButton.astro";
+
+import "../../styles/pages/about.css";
+import { withBase } from "../../utils/paths";
+import { buildSEO } from "../../utils/seo";
+import { EXTERNAL_LINKS } from "../../config/constants";
+
+const seo = buildSEO({
+  title: "ArcUp’s Mission",
+  description: "ArcUp’s purpose, principles, and path — building regenerative plasma systems openly and ethically.",
+  path: "/about/mission",
+  siteUrl: Astro.site,
+});
+---
+
+<BaseLayout title={seo.title} description={seo.description} seo={seo} bodyClass="page-about">
+  <ArcCanvas />
+  <SiteHeader active="about" />
+
+  <main id="main-content" class="page-shell" aria-labelledby="page-title">
+
+    <!-- ================================================================ -->
+    <!-- HERO -->
+    <!-- ================================================================ -->
+    <header class="page-hero" aria-labelledby="page-title">
+      <p class="eyebrow">About / Mission</p>
+      <h1 id="page-title">Why ArcUp Exists</h1>
+      <p class="lead">
+        ArcUp exists because <strong>how</strong> we make technology matters as much as what we make.
+      </p>
+      <p>
+        Our mission is to build regenerative plasma systems — openly, safely, and ethically — 
+        guided by the values of the Repractice Framework.
+      </p>
+    </header>
+
+    <SectionDivider variant="subtle" spacing="compact" />
+
+    <!-- ================================================================ -->
+    <!-- SECTION 1 — Purpose -->
+    <!-- ================================================================ -->
+    <section class="page-section" aria-labelledby="purpose-title">
+      <SectionHeader
+        title="The Purpose"
+        subtitle="Technology that regenerates, not extracts."
+        align="center"
+      />
+
+      <p>
+        We’re not creating products. We’re cultivating processes — transparent, interdisciplinary, 
+        and rooted in reciprocity. ArcUp began as a single experiment and grew into a collective method: 
+        a framework for open, regenerative research.
+      </p>
+
+      <CalloutPanel variant="info" icon="🌱" title="Guiding Ethos">
+        <p>
+          Every experiment is an act of care.  
+          Every circuit and dataset is a gesture toward healing our shared ecosystems.
+        </p>
+      </CalloutPanel>
+    </section>
+
+    <SectionDivider variant="default" spacing="normal" />
+
+    <!-- ================================================================ -->
+    <!-- SECTION 2 — Values -->
+    <!-- ================================================================ -->
+    <section class="page-section" aria-labelledby="values-title">
+      <SectionHeader
+        title="For the Many, Not the Few"
+        subtitle="Principles that define our collective practice."
+        align="center"
+      />
+
+      <div class="card-grid">
+        <Card as="article" variant="surface">
+          <h3>Openness</h3>
+          <p>
+            All research, data, and methods are shared under open licenses — enabling anyone to learn, build, and improve.
+          </p>
+        </Card>
+        <Card as="article" variant="surface">
+          <h3>Safety</h3>
+          <p>
+            We prioritise safe practices in plasma and electrical work, ensuring care for both people and environment.
+          </p>
+        </Card>
+        <Card as="article" variant="surface">
+          <h3>Reciprocity</h3>
+          <p>
+            Knowledge flows both ways — contributors give back through transparency, attribution, and open dialogue.
+          </p>
+        </Card>
+        <Card as="article" variant="surface">
+          <h3>Commons Integrity</h3>
+          <p>
+            ArcUp will never privatise discoveries. Defensive openness protects shared knowledge for all.
+          </p>
+        </Card>
+      </div>
+    </section>
+
+    <SectionDivider variant="strong" spacing="normal" />
+    <!-- ========================================================================
+         SECTION 3: ETYMOLOGY (Cultural Context + Mathematical Symbolism)
+         ======================================================================== -->
+    <section class="etymology-callout" aria-labelledby="etymology-heading">
+      <div class="etymology-content">
+        <h2 id="etymology-heading" class="visually-hidden">Origin of arc^</h2>
+        
+        <!-- Context intro -->
+        <p class="etymology-context">The name <em>arc^</em> holds dual meaning:</p>
+        
+        <!-- Pronunciation block -->
+        <div class="pronunciation-block">
+          <div class="pronunciation-title">
+            <span class="arc-text">arc<sup>^</sup></span>
+            <span class="pronunciation-text">/ark-up/</span>
+          </div>
+          <button class="audio-button" aria-label="Play pronunciation of arc up" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span class="button-text">Listen</span>
+          </button>
+        </div>
+        
+        <!-- Definitions -->
+        <div class="etymology-definitions">
+          <p class="etymology-definition">
+            <strong>"to arc up"</strong> <em>(Australian slang)</em><br>
+            to rise in defense of people and planet
+          </p>
+          
+          <p class="etymology-definition">
+            <strong>"^"</strong> <em>(mathematical notation)</em><br>
+            to the power of — amplifying change through the scientific method
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- ================================================================ -->
+    <!-- SECTION 3 — Meaning of the Name -->
+    <!-- ================================================================ -->
+    <section class="page-section" aria-labelledby="name-title">
+      <SectionHeader
+        title="Meaning of the Name — arc^"
+        subtitle="A symbol of resistance, connection, and renewal."
+        align="center"
+      />
+
+      <div class="card-grid">
+        <Card as="article" variant="outline">
+          <h3>↑ “To Arc Up”</h3>
+          <p>To rise in defense of people and planet.</p>
+        </Card>
+        <Card as="article" variant="outline">
+          <h3>^ “To the Power Of”</h3>
+          <p>Amplification through shared knowledge and collaboration.</p>
+        </Card>
+        <Card as="article" variant="outline">
+          <h3>⚡ “Plasma Arc”</h3>
+          <p>The energetic bridge between matter and air — symbolising transformation.</p>
+        </Card>
+      </div>
+
+      <p class="reflection-text center">
+        arc^ = resistance × regeneration × plasma energy  
+        <br />ArcUp is both metaphor and method — a spark that rises, connects, and transforms.
+      </p>
+      <!-- 💬 Claude: could use animated caret glyph or subtle electric glow underline here for motion. -->
+    </section>
+
+    <SectionDivider variant="default" spacing="normal" />
+
+    <!-- ================================================================ -->
+    <!-- SECTION 4 — The ArcUp Phases -->
+    <!-- ================================================================ -->
+    <section class="page-section" aria-labelledby="phases-title">
+      <SectionHeader
+        title="The ArcUp Phases — From Spark to Commons"
+        subtitle="How individual curiosity becomes collective capability."
+        align="center"
+      />
+
+      <div class="card-grid">
+        <Card as="article" variant="surface">
+          <h3>🌱 Phase 1 — Bench-Scale Experiments</h3>
+          <p>
+            Simple dielectric barrier discharge (DBD) setups test plasma–water interactions for purification, agriculture, 
+            and ecological applications. All results are shared openly to build a transparent foundation of reproducible research.
+          </p>
+        </Card>
+
+        <Card as="article" variant="surface">
+          <h3>🌍 Phase 2 — Community Prototyping</h3>
+          <p>
+            Shared templates and build guides evolve from open data.  
+            This phase builds a commons of plasma tools where knowledge circulates responsibly and safely.
+          </p>
+        </Card>
+
+        <Card as="article" variant="surface">
+          <h3>🔭 Phase 3 — Collaborative Application</h3>
+          <p>
+            Interdisciplinary teams and institutions co-develop plasma systems in real-world contexts.  
+            Governance shifts from ownership to custodianship — ensuring discoveries remain open for all.
+          </p>
+        </Card>
+      </div>
+
+      <CalloutPanel variant="neutral" icon="🧭" title="Our Direction">
+        <p>
+          ArcUp’s progress isn’t measured by products but by participation — 
+          by how widely knowledge and responsibility are shared.
+        </p>
+      </CalloutPanel>
+    </section>
+
+    <SectionDivider variant="strong" spacing="spacious" />
+
+    <!-- ================================================================ -->
+    <!-- SECTION 5 — The Broader Vision -->
+    <!-- ================================================================ -->
+    <section class="reflection-section" aria-labelledby="vision-title">
+      <SectionHeader
+        title="The Broader Vision"
+        subtitle="A living backbone for open plasma research."
+        align="center"
+      />
+      <p class="reflection-text">
+        ArcUp connects independent experimenters, academic labs, and communities across borders.  
+        It’s a space where knowledge moves freely between art, science, and culture — 
+        where technology can once again serve life.
+      </p>
+
+      <p class="reflection-text">
+        No property locked down. No gatekeeping of discovery.  
+        Just a shared field of practice — for people and planet alike.
+      </p>
+    </section>
+
+    <Card as="section" class="final-cta" variant="surface" padding="spacious">
+      <SectionHeader title="Ready to Join?" align="center" headingLevel="h2" />
+      <p>
+        Help build the open future of regenerative plasma technology.  
+        Your curiosity and care are what keep ArcUp alive.
+      </p>
+
+      <LinkButton
+        href={EXTERNAL_LINKS.formURL}
+        variant="primary"
+        size="large"
+        icon="external"
+      >
+        Fill Out Interest Form
+      </LinkButton>
+
+      <p class="final-note">
+        Or explore <a href={withBase("/how")}>how we work</a> and the 
+        <a href={withBase("/license")}>licenses</a> that keep our research open.
+      </p>
+    </Card>
+
+  </main>
+
+  <PageNavigation currentPage="about" />
+</BaseLayout>

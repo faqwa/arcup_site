@@ -1,10 +1,8 @@
 ---
 /**
- * How arc^ Works - Main Method Page (SIMPLIFIED)
+ * How arc^ Works - Main Method Page - SIMPLIFIED
  * File: src/pages/how.astro
- * 
- * Now focuses ONLY on the 7-step method
- * Safety and Licensing moved to sub-pages
+ * Matches projects page design patterns
  */
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ArcCanvas from "../components/ArcCanvas.astro";
@@ -18,7 +16,6 @@ import '../styles/pages/how.css';
 
 import { withBase } from '../utils/paths';
 import { buildSEO } from '../utils/seo';
-import { EXTERNAL_LINKS } from '../config/constants';
 
 const seo = buildSEO({
   title: "How arc^ Works",
@@ -44,22 +41,24 @@ const seo = buildSEO({
       </div>
     </header>
 
-    <!-- RE:EARTH LINK SECTION -->
-    <Card as="section" class="reearth-callout">
-      <div class="callout-content">
-        <SectionHeader
-          title="Philosophy & Principles"
-          align="left"
-          headingLevel="h2"
-        />
-        <p>arc^ is guided by <strong>re:earth</strong> — a regenerative technology framework that asks "what world does this create?" before building anything.</p>
-        <p>Re:earth includes the RE:TECH design approach and the ethical commitments that shape how we work. This philosophical foundation will soon live on its own site.</p>
-        <p class="callout-note">For now, understand that arc^ research is grounded in: openness, ecological interdependence, future-consciousness, harm prevention, and planetary restoration.</p>
-      </div>
-    </Card>
+    <!-- PHILOSOPHY -->
+    <section class="how-callout">
+      <Card>
+        <div class="method-content">
+          <SectionHeader
+            title="Philosophy & Principles"
+            align="left"
+            headingLevel="h2"
+          />
+          <p>arc^ is guided by <strong>re:earth</strong> — a regenerative technology framework that asks "what world does this create?" before building anything.</p>
+          <p>Re:earth includes the RE:TECH design approach and the ethical commitments that shape how we work. This philosophical foundation will soon live on its own site.</p>
+          <p class="callout-note">For now, understand that arc^ research is grounded in: openness, ecological interdependence, future-consciousness, harm prevention, and planetary restoration.</p>
+        </div>
+      </Card>
+    </section>
 
-    <!-- RESEARCH METHOD SECTION -->
-    <section class="method-section">
+    <!-- RESEARCH METHOD -->
+    <section>
       <SectionHeader
         title="Our Research Method"
         subtitle="Seven principles guide every arc^ project, ensuring transparency, collaboration, and replicability."
@@ -67,134 +66,87 @@ const seo = buildSEO({
         headingLevel="h2"
       />
 
-      <Card as="article" class="method-example">
-        <h3>Example: Community Garden Testing PAW</h3>
-        <p class="scenario-text">A community garden wants to test if plasma-activated water improves native plant germination. Here's how the process works:</p>
+      <div class="method-steps">
         
-        <div class="method-flow">
-          <div class="method-item">
-            <span class="method-num">01</span>
-            <div class="method-content">
-              <h4>Document Early</h4>
-              <p>Hypothesis and protocols published before starting. No hidden methods, no proprietary blackboxes.</p>
-            </div>
+        <Card as="article" class="method-step">
+          <div class="method-step-header">
+            <span class="method-num">1</span>
+            <h3>Start Open, Stay Open</h3>
           </div>
-          
-          <div class="method-item">
-            <span class="method-num">02</span>
-            <div class="method-content">
-              <h4>Show the Work</h4>
-              <p>Device specs, parameters, and data logged openly. Anyone can see what was done and how.</p>
-            </div>
+          <p>Document from day zero. Every hypothesis, design choice, and experiment goes public from the beginning. No "big reveal" launches — just incremental, transparent progress.</p>
+        </Card>
+
+        <Card as="article" class="method-step">
+          <div class="method-step-header">
+            <span class="method-num">2</span>
+            <h3>Safety Before Innovation</h3>
           </div>
-          
-          <div class="method-item">
-            <span class="method-num">03</span>
-            <div class="method-content">
-              <h4>Invite Review</h4>
-              <p>Local experts review protocol before experiments begin. Safety checks happen collaboratively.</p>
-            </div>
+          <p>Every project starts with risk assessment. We identify potential harms — ecological, social, physical — and design safeguards before we build. If we can't do it safely, we don't do it.</p>
+        </Card>
+
+        <Card as="article" class="method-step">
+          <div class="method-step-header">
+            <span class="method-num">3</span>
+            <h3>Share Everything</h3>
           </div>
-          
-          <div class="method-item">
-            <span class="method-num">04</span>
-            <div class="method-content">
-              <h4>Track Status</h4>
-              <p>Live updates with WIP markers and changelogs. Mistakes are documented, not hidden.</p>
-            </div>
+          <p>All designs, data, and documentation are released under open licenses. No paywalls. No patents. No proprietary lockdowns. Knowledge belongs in the commons.</p>
+        </Card>
+
+        <Card as="article" class="method-step">
+          <div class="method-step-header">
+            <span class="method-num">4</span>
+            <h3>Document Failures</h3>
           </div>
-          
-          <div class="method-item">
-            <span class="method-num">05</span>
-            <div class="method-content">
-              <h4>Credit Everyone</h4>
-              <p>All contributors listed in outputs. Attribution is transparent and complete.</p>
-            </div>
+          <p>Failed experiments get the same treatment as successful ones. We publish what didn't work, why it didn't work, and what we learned. Honesty over optics.</p>
+        </Card>
+
+        <Card as="article" class="method-step">
+          <div class="method-step-header">
+            <span class="method-num">5</span>
+            <h3>Invite Collaboration</h3>
           </div>
-          
-          <div class="method-item">
-            <span class="method-num">06</span>
-            <div class="method-content">
-              <h4>Co-Design</h4>
-              <p>Community chooses species based on restoration goals. Research serves local needs.</p>
-            </div>
+          <p>Research isn't a solo act. We invite feedback, contributions, and critiques from anyone willing to engage thoughtfully. The best ideas come from many minds, not just one.</p>
+        </Card>
+
+        <Card as="article" class="method-step">
+          <div class="method-step-header">
+            <span class="method-num">6</span>
+            <h3>Design for Replication</h3>
           </div>
-          
-          <div class="method-item">
-            <span class="method-num">07</span>
-            <div class="method-content">
-              <h4>Replicate</h4>
-              <p>Protocol shared for testing elsewhere before broader claims. One study isn't proof.</p>
-            </div>
+          <p>Every protocol is written to be reproducible by others. We use accessible tools, clear documentation, and open standards so anyone can verify and build on our work.</p>
+        </Card>
+
+        <Card as="article" class="method-step">
+          <div class="method-step-header">
+            <span class="method-num">7</span>
+            <h3>Serve Life, Not Profit</h3>
+          </div>
+          <p>The goal isn't commercialization. It's knowledge that serves ecological repair and human flourishing. If someone profits, it should be the commons, not private shareholders.</p>
+        </Card>
+
+      </div>
+    </section>
+
+    <!-- LEARN MORE SECTION -->
+    <section class="how-callout">
+      <Card variant="outline">
+        <div class="method-content">
+          <SectionHeader
+            title="Dive Deeper"
+            align="center"
+            headingLevel="h2"
+          />
+          <p>Want to understand our safety protocols or licensing approach in detail? Check out the dedicated pages below.</p>
+          <div class="how-actions">
+            <LinkButton href={withBase("/how/safety")} variant="primary">
+              Safety Protocols
+            </LinkButton>
+            <LinkButton href={withBase("/how/licensing")} variant="primary">
+              Open Licensing
+            </LinkButton>
           </div>
         </div>
-
-        <p class="outcome-text"><strong>Outcome:</strong> Data stays open, hardware stays open, garden owns the knowledge.</p>
       </Card>
-    </section>
-
-    <!-- RELATED PAGES - Safety & Licensing -->
-    <section class="getting-started-section">
-      <SectionHeader
-        title="How We Ensure Quality & <em>Ethics</em>"
-        subtitle="Our method is backed by rigorous safety protocols and open licensing."
-        align="center"
-        headingLevel="h2"
-      />
-
-      <div class="getting-started-cards">
-        <Card as="article" class="start-card">
-          <h3>Safety Protocols</h3>
-          <p>Learn how we ensure safety in plasma research through rigorous protocols and community accountability.</p>
-          <LinkButton href={withBase("/how/safety")} variant="outline" icon="arrow-right">
-            View Safety
-          </LinkButton>
-        </Card>
-
-        <Card as="article" class="start-card">
-          <h3>Open Licensing</h3>
-          <p>All outputs stay in the commons through copyleft licenses. No patents, no paywalls.</p>
-          <LinkButton href={withBase("/how/licensing")} variant="outline" icon="arrow-right">
-            View Licenses
-          </LinkButton>
-        </Card>
-      </div>
-    </section>
-
-    <!-- GETTING STARTED -->
-    <section class="getting-started-section">
-      <SectionHeader
-        title="Ready to Participate?"
-        subtitle="Whether you're here to learn, contribute, or collaborate — there's a path forward."
-        align="center"
-        headingLevel="h2"
-      />
-
-      <div class="getting-started-cards">
-        <Card as="article" class="start-card">
-          <h3>Explore Projects</h3>
-          <p>See what research is active, what needs contributions, and where your skills might fit. All projects follow the method outlined above.</p>
-          <LinkButton href={withBase("/projects")} variant="outline" icon="arrow-right">
-            Browse Projects
-          </LinkButton>
-        </Card>
-
-        <Card as="article" class="start-card">
-          <h3>Learn About Us</h3>
-          <p>Read about the people behind arc^ and the vision guiding this work. Understanding the context helps us collaborate effectively.</p>
-          <LinkButton href={withBase("/about")} variant="outline" icon="arrow-right">
-            About arc^
-          </LinkButton>
-        </Card>
-
-        <Card as="article" class="start-card">
-          <h3>Join the Work</h3>
-          <p>Reach out to discuss collaboration, propose a project, or ask questions. No formal applications — just authentic conversation.</p>
-          <LinkButton href={withBase("/join")} variant="outline" icon="arrow-right">
-            Get in Touch
-          </LinkButton>
-        </Card>
-      </div>
     </section>
 
   </main>

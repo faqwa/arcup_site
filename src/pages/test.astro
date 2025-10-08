@@ -1,0 +1,210 @@
+---
+// ============================================================================
+// ARCUP PAGE SCAFFOLD — FINAL TEMPLATE v1.0
+// PURPOSE: Standard layout structure for any ArcUp page
+// ----------------------------------------------------------------------------
+// INCLUDES:
+//   • HERO
+//   • SECTION 1 — Overview / Intro
+//   • SECTION 2 — Grid or Feature Cards
+//   • SECTION 3 — Optional Variants (A–D)
+//       A. Standard CTA
+//       B. Outline Callout
+//       C. Reflection Footer
+//       D. Final Join CTA
+// ============================================================================
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ArcCanvas from "../components/ArcCanvas.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import PageNavigation from "../components/PageNavigation.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import SectionDivider from "../components/SectionDivider.astro";
+import Card from "../components/Card.astro";
+import CalloutPanel from "../components/CalloutPanel.astro";
+import LinkButton from "../components/LinkButton.astro";
+
+import "../styles/pages/projects.css";
+import { withBase } from "../utils/paths";
+import { buildSEO } from "../utils/seo";
+import { EXTERNAL_LINKS } from "../config/constants";
+
+const seo = buildSEO({
+  title: "Test Scaffold Page",
+  description: "Reusable ArcUp scaffold for building and previewing page layouts.",
+  path: "/test",
+  siteUrl: Astro.site,
+});
+---
+
+<BaseLayout title={seo.title} description={seo.description} seo={seo} bodyClass="page-generic">
+  <ArcCanvas />
+  <SiteHeader active="page" />
+
+  <main id="main-content" class="page-shell" aria-labelledby="page-title">
+
+    <!-- ================================================================ -->
+    <!-- HERO -->
+    <!-- ================================================================ -->
+    <header class="page-hero" aria-labelledby="page-title">
+      <p class="eyebrow">Prototype Page</p>
+      <h1 id="page-title">ArcUp Page Scaffold</h1>
+      <p class="lead">
+        Use this as a base for <em>any</em> new ArcUp page. It mirrors all semantic, 
+        structural, and component conventions from your production pages.
+      </p>
+    </header>
+
+    <SectionDivider variant="subtle" spacing="compact" />
+
+    <!-- ================================================================ -->
+    <!-- SECTION 1 — Overview / Context -->
+    <!-- ================================================================ -->
+    <section class="page-section" aria-labelledby="section-1-title">
+      <SectionHeader
+        title="Section One"
+        subtitle="Describe the core purpose of this page or concept."
+        align="center"
+      />
+      <p>
+        ArcUp sections are built to be <strong>fluid</strong>, <em>modular</em>, and accessible.
+        Use paragraphs, lists, or inline links freely within this block.
+      </p>
+      <p>
+        You can also include supporting visuals or a CalloutPanel if needed:
+      </p>
+
+      <CalloutPanel variant="info" icon="💡" title="Design Tip">
+        <p>
+          CalloutPanels are perfect for highlighting safety notes, ethical reminders, or quick insights.
+        </p>
+      </CalloutPanel>
+    </section>
+
+    <SectionDivider variant="default" spacing="normal" />
+
+    <!-- ================================================================ -->
+    <!-- SECTION 2 — Grid / Feature Cards -->
+    <!-- ================================================================ -->
+    <section class="page-section" aria-labelledby="section-2-title">
+      <SectionHeader
+        title="Section Two"
+        subtitle="Demonstrate a grid of features, categories, or key ideas."
+        align="center"
+      />
+      <div class="card-grid">
+        <Card as="article" variant="surface">
+          <h3>Card One card-grid</h3>
+          <p>Use surface cards for balanced content density and soft elevation.</p>
+        </Card>
+        <Card as="article" variant="outline">
+          <h3>Card Two - article</h3>
+          <p>Outline cards work well for informational or visual pairings.</p>
+        </Card>
+      </div>
+    </section>
+
+    <SectionDivider variant="strong" spacing="spacious" />
+
+    <!-- ================================================================ -->
+    <!-- SECTION 3 — VARIANTS (Choose One) -->
+    <!-- ================================================================ -->
+    <!--
+      ── VARIANT A: Standard CTA
+    -->
+    <section class="cta-section" aria-labelledby="cta-title">
+      <SectionHeader
+        title="Join the Work"
+        subtitle="Encourage participation or continued exploration."
+        align="center"
+      />
+      <p>
+        class="cta-section"  for clear next steps — contribute, read, or connect.
+      </p>
+      <div class="button-wrapper">
+        <LinkButton href={withBase("/join")} variant="primary" icon="arrow-right">
+          Get Involved
+        </LinkButton>
+      </div>
+    </section>
+
+    <!--
+      ── VARIANT B: Outline Callout (How Page Style)
+    -->
+    <section class="how-callout">
+      <Card variant="outline">
+        <div class="method-content">
+          <SectionHeader title="Dive Deeper" align="center" headingLevel="h2" />
+          <p>
+          Card variant="outline" the dedicated pages below.
+          </p>
+          <div class="how-actions">
+            <LinkButton href={withBase("/how/safety")} variant="primary">
+              Safety Protocols
+            </LinkButton>
+            <LinkButton href={withBase("/how/licensing")} variant="primary">
+              Open Licensing
+            </LinkButton>
+          </div>
+        </div>
+      </Card>
+    </section>
+
+
+    <!--
+      ── VARIANT C: Reflection / Closing
+    -->
+
+    <section class="reflection-section" aria-labelledby="reflection-title">
+      <SectionHeader
+        title=class="reflection-section
+        subtitle="Closing thoughts, acknowledgments, or guiding principle."
+        align="center"
+      />
+      <p class="reflection-text">
+        Research is not just discovery — it’s care, reciprocity, and repair.
+      </p>
+    </section>
+
+
+    <!--
+      ── VARIANT D: Final Join CTA (Encapsulated in Card)
+    -->
+
+    <Card as="section" class="final-cta" variant="surface" padding="spacious">
+      <SectionHeader title="Ready to Join?" align="center" headingLevel="h2" />
+      <p>
+      class="final-cta" variant="surface" padding="spacious
+      </p>
+
+      <LinkButton
+        href={EXTERNAL_LINKS.formURL}
+        variant="primary"
+        size="large"
+        icon="external"
+      >
+        Fill Out Interest Form
+      </LinkButton>
+
+      <p class="final-note">
+        Not ready yet? Explore the
+        <a href={withBase("/projects")}>projects</a>,
+        learn <a href={withBase("/how")}>our methods</a>, or read
+        <a href={withBase("/about")}>who’s behind this</a>.
+      </p>
+    </Card>
+
+
+  </main>
+
+  <PageNavigation currentPage="page" />
+</BaseLayout>
+
+<!--
+NOTES:
+- Only keep one Variant (A–D) active at a time.
+- Use SectionDivider between major content groups for rhythm.
+- CalloutPanel supports variant="info" | "warning" | "success" | "neutral".
+- Card variants: 'surface' (default), 'outline', 'default'.
+- SectionHeader handles align="left" | "center" and headingLevel="h2-h4".
+-->

@@ -1,0 +1,253 @@
+---
+// ============================================================================
+// PAGE: About / Founder — Ali Saleh
+// PURPOSE: Human introduction, grounding ArcUp in personal story and ethos
+// ----------------------------------------------------------------------------
+// NOTES:
+// - Uses ArcUp scaffold v1.0 structure
+// - Tone: warm, transparent, grounded
+// - Focus: personal motivation, interdisciplinary view, ethical stance
+// ============================================================================
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArcCanvas from "../../components/ArcCanvas.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import PageNavigation from "../../components/PageNavigation.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import SectionDivider from "../../components/SectionDivider.astro";
+import Card from "../../components/Card.astro";
+import CalloutPanel from "../../components/CalloutPanel.astro";
+import LinkButton from "../../components/LinkButton.astro";
+
+import "../../styles/pages/about.css";
+import { withBase } from "../../utils/paths";
+import { buildSEO } from "../../utils/seo";
+import { EXTERNAL_LINKS } from "../../config/constants";
+
+const seo = buildSEO({
+  title: "Meet the Founder — Ali Saleh",
+  description: "Ali Saleh — student, systems thinker, and founder of ArcUp. Exploring how technology can serve life through open, regenerative research.",
+  path: "/about/founder",
+  siteUrl: Astro.site,
+});
+---
+
+<BaseLayout title={seo.title} description={seo.description} seo={seo} bodyClass="page-about">
+  <ArcCanvas />
+  <SiteHeader active="about" />
+
+  <main id="main-content" class="page-shell" aria-labelledby="page-title">
+
+    <!-- ================================================================ -->
+    <!-- HERO -->
+    <!-- ================================================================ -->
+    <header class="page-hero" aria-labelledby="page-title">
+      <p class="eyebrow">About / Founder</p>
+      <h1 id="page-title">Meet Ali Saleh</h1>
+      <p class="lead">
+        A student, tinkerer, and systems thinker — working to build technology that serves life instead of extracting from it.
+      </p>
+      <p>
+        My work bridges ecology, data, and design — grounded in the belief that openness and care can transform how science is done.
+      </p>
+    </header>
+
+    <SectionDivider variant="subtle" spacing="compact" />
+
+    <!-- ================================================================ -->
+    <!-- SECTION 1 — Background -->
+    <!-- ================================================================ -->
+    <section class="page-section" aria-labelledby="background-title">
+      <SectionHeader
+        title="Background"
+        subtitle="Where study, curiosity, and purpose intersect."
+        align="center"
+      />
+
+      <p>
+        I’m an undergraduate bioscience student based in Melbourne, Australia.  
+        My path crosses disciplines — from pollution degradation using triboelectric nanogenerators 
+        to restoration ecology and earlier studies in computer science.
+      </p>
+
+      <p>
+        I’m not a physicist or an engineer by training.  
+        I’m learning as I go, figuring things out in public, and using ArcUp 
+        to explore how ethics, technology, and ecology can be woven into one open practice.
+      </p>
+
+      <CalloutPanel variant="info" icon="🪴" title="Learning in Public">
+        <p>
+          Every experiment, success, and mistake is documented openly — because science grows stronger when everyone can see the process.
+        </p>
+      </CalloutPanel>
+    </section>
+
+    <SectionDivider variant="default" spacing="normal" />
+
+    <!-- ================================================================ -->
+    <!-- SECTION 2 — Systems View -->
+    <!-- ================================================================ -->
+    <section class="page-section" aria-labelledby="systems-title">
+      <SectionHeader
+        title="A Systems View"
+        subtitle="Where technology, ecology, and culture meet."
+        align="center"
+      />
+
+      <p>
+        I’ve always been drawn to how systems interconnect — biological, technological, and social.  
+        Through ArcUp, I explore how plasma, data, and design can support living systems rather than extract from them.
+      </p>
+
+      <div class="card-grid">
+        <Card as="article" variant="surface">
+          <h3>Interdisciplinary Practice</h3>
+          <p>
+            ArcUp sits between biology, physics, ethics, and design — inviting each field to inform the others.
+          </p>
+        </Card>
+        <Card as="article" variant="outline">
+          <h3>Ecological Thinking</h3>
+          <p>
+            Every technical decision carries ecological weight; regeneration, not exploitation, is the measure of success.
+          </p>
+        </Card>
+      </div>
+
+      <p>
+        Science, to me, is strongest when it listens — to ecosystems, to context, and to the people it serves.
+      </p>
+    </section>
+
+    <SectionDivider variant="strong" spacing="normal" />
+
+    <!-- ================================================================ -->
+    <!-- SECTION 3 — Personal Ethos -->
+    <!-- ================================================================ -->
+    <section class="page-section" aria-labelledby="ethos-title">
+      <SectionHeader
+        title="Personal Ethos"
+        subtitle="Principles that guide my research and design practice."
+        align="center"
+      />
+
+      <div class="card-grid">
+        <Card as="article" variant="outline">
+          <h3>Openness over Ownership</h3>
+          <p>
+            Knowledge belongs in the commons — science should circulate, not accumulate.
+          </p>
+        </Card>
+        <Card as="article" variant="outline">
+          <h3>Curiosity over Control</h3>
+          <p>
+            I approach research as an act of humility — a conversation with the unknown.
+          </p>
+        </Card>
+        <Card as="article" variant="outline">
+          <h3>Regeneration over Recognition</h3>
+          <p>
+            The goal isn’t acclaim; it’s repair — restoring balance between innovation and the living systems that sustain it.
+          </p>
+        </Card>
+      </div>
+    </section>
+
+    <SectionDivider variant="subtle" spacing="spacious" />
+
+    <!-- ================================================================ -->
+    <!-- SECTION 4 — Looking Forward -->
+    <!-- ================================================================ -->
+    <section class="page-section" aria-labelledby="future-title">
+      <SectionHeader
+        title="Looking Forward"
+        subtitle="Holding space for what ArcUp can become."
+        align="center"
+      />
+      <p>
+        ArcUp is still young — an evolving commons that anyone aligned with its purpose can join.  
+        My role is to hold the space: to guide its early shape, document openly, 
+        and build the ethical scaffolding that will allow others to expand it further.
+      </p>
+
+      <p>
+        ArcUp isn’t mine alone — it’s ours to grow, together.
+      </p>
+    </section>
+
+    <SectionDivider variant="strong" spacing="compact" />
+
+    <!-- ================================================================ -->
+    <!-- SECTION 5 — Final CTA -->
+    <!-- ================================================================ -->
+    <Card as="section" class="final-cta" variant="surface" padding="spacious">
+      <SectionHeader title="Connect & Collaborate" align="center" headingLevel="h2" />
+      <p>
+        Want to learn more about my broader work in ecology, technology, and systems thinking?
+      </p>
+
+      <div class="button-wrapper">
+        <LinkButton href="https://xbyali.page" variant="primary" icon="external">
+          Visit xbyali.page
+        </LinkButton>
+        <LinkButton href={withBase("/join")} variant="secondary" icon="arrow-right">
+          Join ArcUp
+        </LinkButton>
+      </div>
+
+      <p class="final-note">
+        You can also explore ArcUp’s <a href={withBase("/about/origin")}>origin story</a> or read 
+        <a href={withBase("/about/mission")}>our mission</a> next.
+      </p>
+    </Card>
+  <!-- ================================================================ -->
+    <!-- SECTION 4 — The ArcUp Phases -->
+    <!-- ================================================================ -->
+    <section class="page-section" aria-labelledby="phases-title">
+      <SectionHeader
+        title="The ArcUp Phases — From Spark to Commons"
+        subtitle="How individual curiosity becomes collective capability."
+        align="center"
+      />
+
+      <div class="card-grid">
+        <Card as="article" variant="surface">
+          <h3>🌱 Phase 1 — Bench-Scale Experiments</h3>
+          <p>
+            Simple dielectric barrier discharge (DBD) setups test plasma–water interactions for purification, agriculture, 
+            and ecological applications. All results are shared openly to build a transparent foundation of reproducible research.
+          </p>
+        </Card>
+
+        <Card as="article" variant="surface">
+          <h3>🌍 Phase 2 — Community Prototyping</h3>
+          <p>
+            Shared templates and build guides evolve from open data.  
+            This phase builds a commons of plasma tools where knowledge circulates responsibly and safely.
+          </p>
+        </Card>
+
+        <Card as="article" variant="surface">
+          <h3>🔭 Phase 3 — Collaborative Application</h3>
+          <p>
+            Interdisciplinary teams and institutions co-develop plasma systems in real-world contexts.  
+            Governance shifts from ownership to custodianship — ensuring discoveries remain open for all.
+          </p>
+        </Card>
+      </div>
+
+      <CalloutPanel variant="neutral" icon="🧭" title="Our Direction">
+        <p>
+          ArcUp’s progress isn’t measured by products but by participation — 
+          by how widely knowledge and responsibility are shared.
+        </p>
+      </CalloutPanel>
+    </section>
+
+    <SectionDivider variant="strong" spacing="spacious" />
+
+  </main>
+
+  <PageNavigation currentPage="about" />
+</BaseLayout>

@@ -1,11 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ArcCanvas from "../components/ArcCanvas.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import PageNavigation from "../components/PageNavigation.astro";
 import Card from "../components/Card.astro";
 import LinkButton from "../components/LinkButton.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+
+import "../styles/pages/about.css";
 import { withBase } from '../utils/paths';
 import { buildSEO } from '../utils/seo';
+import { EXTERNAL_LINKS } from '../config/constants';
 
 const seo = buildSEO({
   title: "About ArcUp",
@@ -15,137 +20,107 @@ const seo = buildSEO({
 });
 ---
 
-<BaseLayout {...seo}>
+<BaseLayout title={seo.title} description={seo.description} seo={seo} bodyClass="page-generic">
+  <ArcCanvas />
   <SiteHeader active="about" />
-  
-  <main id="main-content" class="page-shell page-about-overview">
-    
-    <!-- Hero Section -->
-    <header class="about-hero">
-      <h1>About ArcUp</h1>
-      <p class="about-lede" aria-label="ArcUp overview introduction">
-        ArcUp is an open experimental research framework exploring how plasma technologies can support ecological repair. 
-        It is part of the broader <a href="https://www.xbyali.page" target="_blank" rel="noopener">xbyali.page</a> ecosystem — 
-        connecting philosophy, ethics, and experimentation through the <em>Repractice Framework</em>.
-      </p>
-      <p class="about-lede">
-        ArcUp serves as the backbone of open plasma research, building transparent pathways between individuals, 
-        institutions, and communities who want to develop technology for <em>the planet, not the market</em>.
-      </p>
-      <p class="about-lede-emphasis">
-        ArcUp exists to make research a collective act of care.
+
+  <main id="main-content" class="page-shell" aria-labelledby="page-title">
+
+    <!-- HERO SECTION -->
+    <header class="page-hero" aria-labelledby="page-title">
+      <p class="eyebrow">re:practising science & innovation</p>
+      <h1 id="page-title">About ArcUp</h1>
+      <p class="lead">
+        arc^ is an <strong>open experimental research framework</strong> developing plasma technologies for ecological repair and reslience - aligning reserach and innovation through the
+        <a href="https://repractice.xbyali.page">re:practice framework</a>,
       </p>
     </header>
 
-    <!-- Navigation Cards Section -->
-    <section class="about-section">
-      <h2 class="section-title">What You'll Find Here</h2>
-      <p class="section-intro" aria-label="Navigation summary of ArcUp About section">
-        This section introduces the story, people, and purpose behind ArcUp. 
-        Each page expands the framework's story from reflection to practice.
-      </p>
+    <section class="page-section" aria-labelledby="section-1-title">
+    <SectionHeader
+        title="Our Focus"
+        subtitle="How ArcUp connects open research with planetary purpose — building transparent pathways between people, institutions, and local projects."
+        align="center"
 
-      <div class="about-nav-grid">
-        
-        <Card as="article" class="about-nav-card">
-          <div class="nav-card-content">
-            <h3>Origin</h3>
-            <p>How a small experiment with plasma and seeds became an open framework for regenerative research.</p>
-          </div>
-          <LinkButton 
-            href={withBase("/about/origin")} 
-            variant="outline"
-            icon="arrow-right"
-          >
-            Read the Story
-          </LinkButton>
+        />
+
+    <div class="card-grid">
+
+        <Card as="article" variant="surface">
+        <h3>Structure: Open by Design</h3>
+        <p>     <!-- can we get this colour muted -->
+
+            ArcUp unites ethics, technology, and experimentation to make plasma research
+            <strong>accessible to everyone.</strong>
+        </p>
+        <p>  <!-- can we keep this colouyr white -->
+            By sharing methods and results openly, the framework builds
+            <em>transparency, trust,</em> and collaboration between people, communities, and researchers.
+        </p>
         </Card>
 
-        <Card as="article" class="about-nav-card">
-          <div class="nav-card-content">
-            <h3>Founder</h3>
-            <p>Meet Ali Saleh, and the systems thinking that guides ArcUp's interdisciplinary approach.</p>
-          </div>
-          <LinkButton 
-            href={withBase("/about/founder")} 
-            variant="outline"
-            icon="arrow-right"
-          >
-            Meet Ali
-          </LinkButton>
+        <Card as="article" variant="surface">
+        <h3>Purpose: Regeneration as Practice</h3>
+        <p><!-- can we get this colour muted -->
+            ArcUp turns research into a <strong>shared act of regeneration</strong> — open,
+            ethical, and collaborative.
+        </p>
+        <p> <!-- can we keep this colouyr white -->
+            Each experiment explores how plasma can support life systems and how
+            <em>open science</em> can model a more regenerative relationship with Earth.
+        </p>
         </Card>
+    </div>
+    </section>
 
-        <Card as="article" class="about-nav-card">
-          <div class="nav-card-content">
-            <h3>Mission</h3>
-            <p>What drives the work, how the phases unfold, and the vision for a commons of plasma research.</p>
-          </div>
-          <LinkButton 
-            href={withBase("/about/mission")} 
-            variant="outline"
-            icon="arrow-right"
-          >
-            Explore the Mission
-          </LinkButton>
+
+    <!-- SECTION 2 -->
+    <section class="page-section" aria-labelledby="section-2-title">
+      <SectionHeader
+        title="What You’ll Find Here"
+        subtitle="Learn the story, people, and purpose behind ArcUp."
+      />
+      <div class="card-grid">
+        <Card as="article" class="info-card">
+          <h3>Origin</h3>
+          <p>How a small plasma–seed experiment became a framework for regenerative research.</p>
+          <LinkButton href={withBase('/about/origin')} variant="outline" icon="arrow-right">Read the Story</LinkButton>
         </Card>
-
+        <Card as="article" class="info-card">
+          <h3>Founder</h3>
+          <p>Meet Ali Saleh and the systems thinking shaping ArcUp’s interdisciplinary approach.</p>
+          <LinkButton href={withBase('/about/founder')} variant="outline" icon="arrow-right">Meet Ali</LinkButton>
+        </Card>
+        <Card as="article" class="info-card">
+          <h3>Mission</h3>
+          <p>Discover the vision, phases, and long-term goal of a commons for plasma research.</p>
+          <LinkButton href={withBase('/about/mission')} variant="outline" icon="arrow-right">Explore the Mission</LinkButton>
+        </Card>
       </div>
     </section>
 
-    <!-- Living Framework Section -->
-    <Card as="section" class="framework-section">
-      <h2>A Living Framework</h2>
-      <p aria-label="ArcUp framework description">
-        ArcUp grows through open, iterative phases — from individual experiments to global collaboration. 
-        It isn't a company or lab; it's a <em>commons of practice</em>, shaped by every person who contributes to it.
-      </p>
+    <!-- CTA FOOTER -->
+    <section class="cta-section" aria-labelledby="cta-title">
+      <SectionHeader
+        title="Be Part of the Work"
+        subtitle="ArcUp is a living framework—shaped by everyone who contributes."
+      />
       <p>
-        Each experiment adds to a shared understanding of how plasma interacts with life — and how open science 
-        can model a more regenerative relationship with Earth.
+        Join the community, share ideas, or see what I am working on
+        <a href="https://workspace.xbyali.page">Workspace by Ali</a>.
       </p>
-      <p class="framework-closing">
-        ArcUp is science re-practised: transparent, ethical, and alive.
-      </p>
-    </Card>
-
-    <!-- Repractice Connection -->
-    <section class="repractice-connection">
-      <div class="repractice-divider" aria-hidden="true"></div>
-      <div class="repractice-content">
-        <h2>Connection to Repractice</h2>
-        <p aria-label="Relationship between ArcUp and Repractice">
-          ArcUp operates under the ethical foundation of <em>Repractice</em>: research as care, transparency as principle, 
-          and collaboration as responsibility.
-        </p>
-        <p>
-          Repractice defines the values behind ArcUp's structure — ensuring that technology development remains 
-          non-extractive, interdisciplinary, and accessible to all.
-        </p>
-        <LinkButton 
-          href={withBase("/how")} 
-          variant="outline"
-          icon="arrow-right"
-        >
-          Explore Repractice Methods
+      <div class="button-wrapper">
+        <LinkButton href={withBase('/join')} variant="primary" icon="arrow-right">
+          Get Involved
         </LinkButton>
       </div>
-    </section>
-
-    <!-- Closing Invitation -->
-    <section class="closing-invitation">
-      <p aria-label="Closing invitation for visitors to engage">
-        ArcUp is still forming — a workbench, a library, a community in motion. 
-        You're invited to explore, question, and shape it with us.
-      </p>
-      <p class="invitation-emphasis">
-        Begin wherever you feel drawn — to the science, the story, or the ethics that hold it all together.
-      </p>
     </section>
 
   </main>
 
   <PageNavigation currentPage="about" />
 </BaseLayout>
+
 
 <style>
   .page-about-overview {

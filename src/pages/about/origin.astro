@@ -14,7 +14,7 @@ const seo = buildSEO({
 });
 ---
 
-<BaseLayout {...seo}>
+<BaseLayout title={seo.title} description={seo.description} seo={seo} bodyClass="page-about">
   <SiteHeader active="about" />
   
   <main id="main-content" class="page-shell page-origin">

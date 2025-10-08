@@ -1,193 +1,342 @@
 /* ============================================
-   ABOUT PAGE STYLES (CLEANED UP)
-   Personal page about Ali and arc^
-   
-   MIGRATION NOTES:
-   - Removed .button and .button--outline styles (now using LinkButton component)
-   - Removed duplicate section header styles (now using SectionHeader component)
-   - Removed .surface-panel styles (now using Card component)
-   - Kept page-specific layout and content styles
+   FILE: src/styles/pages/projects.css
+   ACTION: FULL REPLACEMENT
+   CHANGES:
+   1. Fixed responsive grid with explicit breakpoints (1/2/3/4 columns)
+   2. Added styles for new "Build Your Own" section
+   3. Added styles for separated active/all projects sections
+   4. Removed old "propose" section styles
    ============================================ */
 
 /* ============================================
-   PAGE LAYOUT
+   PROJECTS HERO
    ============================================ */
-.page-about {
-  gap: clamp(3rem, 6vw, 5rem);
-}
-
-/* ============================================
-   HERO
-   ============================================ */
-.about-hero {
+.projects-hero {
   display: grid;
   gap: 1.5rem;
   text-align: center;
   padding: clamp(2rem, 5vw, 3rem) 0;
 }
 
-.about-hero h1 {
+.projects-hero h1 {
   margin: 0;
   font-size: clamp(2.5rem, 6vw, 3.5rem);
 }
 
-.about-lede {
-  margin: 0;
-  font-size: clamp(1.1rem, 2.8vw, 1.25rem);
-  line-height: 1.65;
-  color: var(--color-text-muted);
+.projects-hero .lead {
+  max-width: 72ch;
+  margin: 0 auto;
 }
 
-/* ============================================
-   ABOUT SECTIONS
-   ============================================ */
-.about-section {
-  display: grid;
-  gap: 1.5rem;
+/* Emphasis styling for projects page */
+.projects-hero .lead strong {
+  color: var(--color-primary-bright);
+  font-weight: 600;
 }
 
-/* REMOVED: Section header styles - now handled by SectionHeader component
-.about-section h2 {
-  margin: 0;
-  font-size: clamp(1.6rem, 4vw, 2rem);
-  color: var(--color-text);
-}
-*/
-
-.about-content {
-  display: grid;
-  gap: 1rem;
-}
-
-.about-content p {
-  margin: 0;
-  line-height: 1.7;
-  color: var(--color-text-muted);
-  font-size: clamp(1rem, 2.5vw, 1.1rem);
-}
-
-.about-content em {
+.projects-hero .lead em {
   color: var(--color-primary-bright);
   font-style: italic;
 }
 
 /* ============================================
-   FULL STORY SECTION
-   Page-specific layout only - Card component handles panel styling
+   ACTIVE PROJECTS SECTION
    ============================================ */
-.full-story-section {
-  /* Keep page-specific overrides here if needed */
-  /* The Card component handles: background, padding, border-radius, shadow */
+/* REMOVED - No longer separating active projects */
+
+/* ============================================
+   GETTING INVOLVED SECTION
+   ============================================ */
+.getting-involved-section {
+  max-width: 100ch;
+  margin: 0 auto clamp(3rem, 6vw, 5rem) auto;
 }
 
-.full-story-section p {
+.involvement-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* Responsive involvement grid */
+@media (min-width: 640px) {
+  .involvement-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .involvement-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.involvement-card {
+  padding: 2rem;
+  text-align: center;
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  transition: all var(--transition-base);
+}
+
+.involvement-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(93, 225, 228, 0.4);
+}
+
+.involvement-card .card-icon {
+  font-size: 3rem;
+  line-height: 1;
+  margin: 0 auto;
+}
+
+.involvement-card h3 {
+  margin: 0;
+  font-size: clamp(1.2rem, 3vw, 1.35rem);
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.involvement-card p {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  font-size: 1.02rem;
+}
+
+.involvement-card .card-note {
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.95rem;
+}
+
+.involvement-cta {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+/* ============================================
+   BUILD YOUR OWN SECTION
+   ============================================ */
+.build-your-own-section {
+  max-width: 75ch;
+  margin: 0 auto clamp(3rem, 6vw, 5rem) auto;
+}
+
+.build-your-own-content {
+  padding: clamp(2rem, 5vw, 3rem);
+}
+
+.build-your-own-content p {
   margin: 0 0 1.5rem 0;
   line-height: 1.7;
   color: var(--color-text-muted);
 }
 
-/* REMOVED: surface-panel styles - now handled by Card component
-.surface-panel {
-  background: rgba(6, 12, 22, 0.42);
-  border: 1px solid rgba(93, 225, 228, 0.12);
-  border-radius: var(--radius-lg);
-  padding: clamp(1.5rem, 4vw, 2rem);
-  box-shadow: var(--shadow-soft);
-}
-*/
-
-/* ============================================
-   VALUES REMINDER SECTION
-   ============================================ */
-.values-reminder {
-  display: grid;
-  gap: 1.5rem;
+.build-your-own-content p:last-of-type {
+  margin-bottom: 0;
 }
 
-/* REMOVED: Section header styles - now handled by SectionHeader component
-.values-reminder h2 {
-  margin: 0;
-  font-size: clamp(1.6rem, 4vw, 2rem);
+.build-your-own-content .button-wrapper {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-end; /* Align button to the right */
+}
+
+.build-your-own-content a {
+  color: var(--color-primary-bright);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.build-your-own-content a:hover {
   color: var(--color-text);
 }
-*/
 
-.values-reminder p {
-  margin: 0;
-  line-height: 1.7;
-  color: var(--color-text-muted);
-  font-size: clamp(1rem, 2.5vw, 1.1rem);
+.build-your-own-content em {
+  color: var(--color-primary-bright);
+  font-style: italic;
 }
 
-.values-links {
+.build-your-own-content strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* ============================================
+   ALL PROJECTS SECTION
+   ============================================ */
+.all-projects-section {
+  max-width: 100%;
+  margin: 0 auto clamp(3rem, 6vw, 5rem) auto;
+}
+
+.project-category {
+  margin-bottom: clamp(3rem, 5vw, 4rem);
+  width: 100%; /* Force full width */
+  display: block; /* Ensure it's a block element */
+}
+
+.project-category:last-child {
+  margin-bottom: 0;
+}
+
+.category-heading {
+  margin: 0 0 2rem 0; /* Increased bottom margin */
+  font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+  color: var(--color-primary-bright);
+  font-weight: 600;
+  text-align: left; /* Changed to left align */
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(93, 225, 228, 0.2); /* Add visual separator */
+}
+
+/* ============================================
+   PROJECTS GRID - SMART RESPONSIVE LAYOUT
+   Max 3 columns, adapts based on screen width
+   Mobile: 1 column
+   Tablet: 2 columns
+   Desktop: 3 columns (max)
+   ============================================ */
+.projects-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 640px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: 3 columns MAX */
+@media (min-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Smart sizing for different card counts */
+.projects-grid:has(.project-card:only-child) {
+  grid-template-columns: 1fr;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .projects-grid:has(.project-card:nth-child(2):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+}
+
+.project-card {
+  padding: clamp(1.5rem, 4vw, 2rem);
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  transition: all var(--transition-base);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(93, 225, 228, 0.4);
+}
+
+.card-header {
   display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
 }
 
-/* REMOVED: Button styles - now handled by LinkButton component
-.button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-md);
-  font-size: var(--text-base);
-  font-weight: var(--font-weight-medium);
-  text-decoration: none;
-  transition: all var(--transition-base);
-  border: 1px solid transparent;
+.card-header h4 {
+  margin: 0;
+  font-size: clamp(1.15rem, 2.5vw, 1.3rem);
+  line-height: 1.3;
+  flex: 1;
+  min-width: 200px;
 }
 
-.button--outline {
-  background: transparent;
-  border-color: rgba(93, 225, 228, 0.3);
+.card-header h4 a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.card-header h4 a:hover {
   color: var(--color-primary-bright);
 }
 
-.button--outline:hover {
-  background: rgba(93, 225, 228, 0.08);
-  border-color: rgba(93, 225, 228, 0.5);
+.card-summary {
+  margin: 0;
+  font-size: clamp(0.98rem, 2.2vw, 1.05rem);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.card-updated {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.card-actions {
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/* ============================================
+   LEGAL SECTION
+   ============================================ */
+.legal-section {
+  max-width: 75ch;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 2rem);
+  text-align: center;
+}
+
+.legal-section h3 {
+  margin: 0 0 1rem 0;
+  font-size: clamp(1.4rem, 3.5vw, 1.6rem);
+}
+
+.legal-section p {
+  margin: 0 0 1rem 0;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.legal-section p:last-child {
+  margin-bottom: 0;
+}
+
+.legal-section a {
+  color: var(--color-primary-bright);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.legal-section a:hover {
   color: var(--color-text);
 }
-*/
 
-/* ============================================
-   RESPONSIVE ADJUSTMENTS
-   ============================================ */
-@media (max-width: 640px) {
-  .values-links {
-    flex-direction: column;
-  }
+.legal-section em {
+  color: var(--color-primary-bright);
+  font-style: italic;
 }
 
 /* ============================================
-   CLEANUP SUMMARY
-   ============================================
-   
-   REMOVED STYLES (now handled by components):
-   ✅ .about-section h2 → SectionHeader component
-   ✅ .values-reminder h2 → SectionHeader component
-   ✅ .surface-panel → Card component
-   ✅ .button → LinkButton component
-   ✅ .button--outline → LinkButton component (variant="outline")
-   
-   KEPT STYLES (page-specific):
-   ✓ .page-about - page layout
-   ✓ .about-hero - hero section layout
-   ✓ .about-lede - hero description styling
-   ✓ .about-section - section layout
-   ✓ .about-content - content area layout
-   ✓ .about-content p - paragraph styling
-   ✓ .about-content em - emphasis styling
-   ✓ .full-story-section - section-specific overrides
-   ✓ .values-reminder - section layout
-   ✓ .values-links - button container layout
-   ✓ Media queries for responsive design
-   
-   BENEFITS:
-   - Reduced CSS bundle size
-   - No duplicate styles across pages
-   - Easier maintenance (change component once, updates everywhere)
-   - Consistent styling automatically
+   RESPONSIVE
    ============================================ */
+@media (max-width: 640px) {
+  .involvement-card .card-icon {
+    font-size: 2.5rem;
+  }
+}
