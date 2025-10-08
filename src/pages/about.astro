@@ -1,13 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ArcCanvas from "../components/ArcCanvas.astro";
-import SiteHeader from "../components/SiteHeader.astro";
 import PageNavigation from "../components/PageNavigation.astro";
 import Card from "../components/Card.astro";
 import LinkButton from "../components/LinkButton.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 
-import "../styles/pages/about.css";
 import { withBase } from '../utils/paths';
 import { buildSEO } from '../utils/seo';
 import { EXTERNAL_LINKS } from '../config/constants';
@@ -20,9 +18,14 @@ const seo = buildSEO({
 });
 ---
 
-<BaseLayout title={seo.title} description={seo.description} seo={seo} bodyClass="page-generic">
-  <ArcCanvas />
-  <SiteHeader active="about" />
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  seo={seo}
+  bodyClass="page-generic"
+  navActive="about"
+>
+  <ArcCanvas slot="before-header" />
 
   <main id="main-content" class="page-shell" aria-labelledby="page-title">
 
@@ -48,12 +51,12 @@ const seo = buildSEO({
 
         <Card as="article" variant="surface">
         <h3>Structure: Open by Design</h3>
-        <p>     <!-- can we get this colour muted -->
+        <p>
 
             ArcUp unites ethics, technology, and experimentation to make plasma research
             <strong>accessible to everyone.</strong>
         </p>
-        <p>  <!-- can we keep this colouyr white -->
+        <p>
             By sharing methods and results openly, the framework builds
             <em>transparency, trust,</em> and collaboration between people, communities, and researchers.
         </p>
@@ -61,11 +64,11 @@ const seo = buildSEO({
 
         <Card as="article" variant="surface">
         <h3>Purpose: Regeneration as Practice</h3>
-        <p><!-- can we get this colour muted -->
+        <p>
             ArcUp turns research into a <strong>shared act of regeneration</strong> — open,
             ethical, and collaborative.
         </p>
-        <p> <!-- can we keep this colouyr white -->
+        <p>
             Each experiment explores how plasma can support life systems and how
             <em>open science</em> can model a more regenerative relationship with Earth.
         </p>
@@ -122,216 +125,3 @@ const seo = buildSEO({
 </BaseLayout>
 
 
-<style>
-  .page-about-overview {
-    display: grid;
-    gap: var(--section-gap);
-  }
-
-  /* Hero Section */
-  .about-hero {
-    max-width: 85ch;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .about-hero h1 {
-    margin: 0 0 1.5rem 0;
-    font-size: var(--text-4xl);
-    font-weight: var(--font-weight-bold);
-    line-height: 1.1;
-    color: var(--color-text);
-  }
-
-  .about-lede {
-    margin: 0 0 1.5rem 0;
-    font-size: var(--text-lg);
-    line-height: 1.7;
-    color: var(--color-text-muted);
-  }
-
-  .about-lede a {
-    color: var(--color-primary-bright);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(93, 225, 228, 0.3);
-    transition: all var(--transition-base);
-  }
-
-  .about-lede a:hover,
-  .about-lede a:focus-visible {
-    color: var(--color-text);
-    border-bottom-color: var(--color-primary-bright);
-  }
-
-  .about-lede-emphasis {
-    margin: 2rem 0 0 0;
-    font-size: var(--text-xl);
-    font-weight: var(--font-weight-medium);
-    color: var(--color-text);
-  }
-
-  /* About Section */
-  .about-section {
-    max-width: 95ch;
-    margin: 0 auto;
-  }
-
-  .section-title {
-    margin: 0 0 1rem 0;
-    font-size: var(--text-2xl);
-    color: var(--color-text);
-    text-align: center;
-  }
-
-  .section-intro {
-    margin: 0 0 3rem 0;
-    font-size: var(--text-base);
-    line-height: 1.7;
-    color: var(--color-text-muted);
-    text-align: center;
-    max-width: 75ch;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* Navigation Cards Grid */
-  .about-nav-grid {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-  }
-
-  .about-nav-card {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    transition: all var(--transition-base);
-  }
-
-  .about-nav-card:hover {
-    transform: translateY(-4px);
-  }
-
-  .nav-card-content {
-    flex: 1;
-    display: grid;
-    gap: 0.75rem;
-  }
-
-  .nav-card-content h3 {
-    margin: 0;
-    font-size: var(--text-xl);
-    color: var(--color-text);
-  }
-
-  .nav-card-content p {
-    margin: 0;
-    font-size: var(--text-base);
-    line-height: 1.7;
-    color: var(--color-text-muted);
-  }
-
-  /* Framework Section */
-  .framework-section {
-    max-width: 85ch;
-    margin: 0 auto;
-  }
-
-  .framework-section h2 {
-    margin: 0 0 1.5rem 0;
-    font-size: var(--text-2xl);
-    color: var(--color-text);
-  }
-
-  .framework-section p {
-    margin: 0 0 1.5rem 0;
-    line-height: 1.7;
-    color: var(--color-text-muted);
-  }
-
-  .framework-section p:last-child {
-    margin-bottom: 0;
-  }
-
-  .framework-closing {
-    margin-top: 2rem !important;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--color-border);
-    font-size: var(--text-lg);
-    font-weight: var(--font-weight-medium);
-    color: var(--color-text);
-  }
-
-  /* Repractice Connection */
-  .repractice-connection {
-    max-width: 85ch;
-    margin: 0 auto;
-  }
-
-  .repractice-divider {
-    width: 60%;
-    height: 1px;
-    margin: 0 auto 3rem auto;
-    background: linear-gradient(
-      to right,
-      transparent,
-      var(--color-primary-bright),
-      transparent
-    );
-    opacity: 0.3;
-  }
-
-  .repractice-content {
-    display: grid;
-    gap: 1.5rem;
-  }
-
-  .repractice-content h2 {
-    margin: 0;
-    font-size: var(--text-2xl);
-    color: var(--color-text);
-    text-align: center;
-  }
-
-  .repractice-content p {
-    margin: 0;
-    line-height: 1.7;
-    color: var(--color-text-muted);
-    text-align: center;
-  }
-
-  /* Closing Invitation */
-  .closing-invitation {
-    max-width: 75ch;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .closing-invitation p {
-    margin: 0 0 1.5rem 0;
-    font-size: var(--text-lg);
-    line-height: 1.7;
-    color: var(--color-text-muted);
-  }
-
-  .closing-invitation p:last-child {
-    margin-bottom: 0;
-  }
-
-  .invitation-emphasis {
-    font-size: var(--text-xl) !important;
-    font-weight: var(--font-weight-medium);
-    color: var(--color-text) !important;
-  }
-
-  /* Responsive */
-  @media (max-width: 640px) {
-    .about-hero h1 {
-      font-size: var(--text-3xl);
-    }
-
-    .about-nav-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>

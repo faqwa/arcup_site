@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Footer from '../components/Footer.astro';
+import SiteHeader from '../components/SiteHeader.astro';
 
 interface Props {
   title?: string;
@@ -23,6 +24,8 @@ interface Props {
       image?: string;
     };
   };
+  navActive?: string;
+  showSiteHeader?: boolean;
 }
 
 const {
@@ -30,6 +33,8 @@ const {
   description = "arc^ is an open research framework building plasma technology for ecological repair. We work openly, share everything, and build technology that serves life over profit.",
   bodyClass = "",
   seo = {},
+  navActive = "home",
+  showSiteHeader = true,
 } = Astro.props;
 
 // SEO data
@@ -110,10 +115,14 @@ const bodyClasses = ["site-body", bodyClass].filter(Boolean).join(" ");
   <body class={bodyClasses}>
     <!-- Skip to main content -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    
+
+    <slot name="before-header" />
+
+    {showSiteHeader && <SiteHeader active={navActive} />}
+
     <!-- Page content -->
     <slot />
-    
+
     <!-- Universal footer -->
     <Footer />
     

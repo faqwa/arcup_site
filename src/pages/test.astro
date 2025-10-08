@@ -16,7 +16,6 @@
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ArcCanvas from "../components/ArcCanvas.astro";
-import SiteHeader from "../components/SiteHeader.astro";
 import PageNavigation from "../components/PageNavigation.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import SectionDivider from "../components/SectionDivider.astro";
@@ -24,7 +23,6 @@ import Card from "../components/Card.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
 import LinkButton from "../components/LinkButton.astro";
 
-import "../styles/pages/projects.css";
 import { withBase } from "../utils/paths";
 import { buildSEO } from "../utils/seo";
 import { EXTERNAL_LINKS } from "../config/constants";
@@ -37,9 +35,14 @@ const seo = buildSEO({
 });
 ---
 
-<BaseLayout title={seo.title} description={seo.description} seo={seo} bodyClass="page-generic">
-  <ArcCanvas />
-  <SiteHeader active="page" />
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  seo={seo}
+  bodyClass="page-generic"
+  navActive="home"
+>
+  <ArcCanvas slot="before-header" />
 
   <main id="main-content" class="page-shell" aria-labelledby="page-title">
 
