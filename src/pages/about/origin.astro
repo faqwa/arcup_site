@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import SiteHeader from "../../components/SiteHeader.astro";
 import Card from "../../components/Card.astro";
 import LinkButton from "../../components/LinkButton.astro";
 import { withBase } from '../../utils/paths';
@@ -14,9 +13,13 @@ const seo = buildSEO({
 });
 ---
 
-<BaseLayout title={seo.title} description={seo.description} seo={seo} bodyClass="page-about">
-  <SiteHeader active="about" />
-  
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  seo={seo}
+  bodyClass="page-about"
+  navActive="about"
+>
   <main id="main-content" class="page-shell page-origin">
     
     <!-- Breadcrumb -->

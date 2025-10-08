@@ -10,7 +10,6 @@
 // ============================================================================
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ArcCanvas from "../components/ArcCanvas.astro";
-import SiteHeader from "../components/SiteHeader.astro";
 import PageNavigation from "../components/PageNavigation.astro";
 import Card from "../components/Card.astro";
 import LinkButton from "../components/LinkButton.astro";
@@ -52,9 +51,14 @@ const seo = buildSEO({
 });
 ---
 
-<BaseLayout title={seo.title} description={seo.description} bodyClass="page-projects" seo={seo}>
-  <ArcCanvas />
-  <SiteHeader active="projects" />
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  bodyClass="page-projects"
+  seo={seo}
+  navActive="projects"
+>
+  <ArcCanvas slot="before-header" />
 
   <main id="main-content" class="page-shell" aria-labelledby="projects-title">
     
