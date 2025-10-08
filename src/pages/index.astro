@@ -4,7 +4,6 @@
 // ============================================================================
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ArcCanvas from "../components/ArcCanvas.astro";
-import SiteHeader from "../components/SiteHeader.astro";
 import PageNavigation from "../components/PageNavigation.astro";
 import LinkButton from "../components/LinkButton.astro";
 import '../styles/pages/home.css';
@@ -24,14 +23,14 @@ const seo = buildSEO({
 });
 ---
 
-<BaseLayout 
+<BaseLayout
   title={seo.title}
-  description={seo.description} 
-  bodyClass="page-home" 
+  description={seo.description}
+  bodyClass="page-home"
   seo={seo}
+  navActive="home"
 >
-  <ArcCanvas />
-  <SiteHeader active="home" />
+  <ArcCanvas slot="before-header" />
 
   <main id="main-content" class="page-shell" aria-labelledby="main-title">
 

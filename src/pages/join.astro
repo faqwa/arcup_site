@@ -4,7 +4,6 @@
 // ============================================================================
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ArcCanvas from "../components/ArcCanvas.astro";
-import SiteHeader from "../components/SiteHeader.astro";
 import PageNavigation from "../components/PageNavigation.astro";
 
 // NEW: Import shared components - but use sparingly to preserve design
@@ -30,9 +29,14 @@ const seo = buildSEO({
 });
 ---
 
-<BaseLayout title={seo.title} description={seo.description} bodyClass="page-join" seo={seo}>
-  <ArcCanvas />
-  <SiteHeader active="join" />
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  bodyClass="page-join"
+  seo={seo}
+  navActive="join"
+>
+  <ArcCanvas slot="before-header" />
 
   <main id="main-content" class="page-shell" aria-labelledby="join-title">
     
