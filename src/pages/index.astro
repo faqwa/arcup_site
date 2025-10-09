@@ -29,6 +29,7 @@ const seo = buildSEO({
   seo={seo}
   navActive="home"
 >
+  <!-- LAYOUT SLOT: interactive arc canvas background prior to header -->
   <ArcCanvas slot="before-header" />
 
   <main id="main-content" class="page-shell" aria-labelledby="main-title">
@@ -37,61 +38,73 @@ const seo = buildSEO({
          HERO SECTION — Core Message
          ======================================================================== -->
       <header class="home-hero" aria-labelledby="main-title" aria-describedby="home-summary">
+        <!-- HERO EYEBROW: concise mission cue -->
         <p class="eyebrow">Open Research for a Thriving Earth</p>
 
+        <!-- HERO TITLE: primary brand mark -->
         <h1 id="main-title" class="hero-title">arc^</h1>
 
+        <!-- HERO LEDE: high-level summary of ArcUp focus -->
         <p class="lead home-lede">
-          <em>ArcUp</em> is an open experimental research framework developing 
+          <em>ArcUp</em> is an open experimental research framework developing
           <strong>plasma-based systems for ecological regeneration and resilience.</strong>
         </p>
 
+        <!-- HERO CONTEXT: supporting mission statement -->
         <p class="home-body">
-          We explore how controlled electrical discharges can purify water systems, 
-          restore soil function, and repair damaged ecosystems — 
+          We explore how controlled electrical discharges can purify water systems,
+          restore soil function, and repair damaged ecosystems —
           guided by the belief that technology should <em>serve life, not profit.</em>
         </p>
 
+        <!-- HERO ETHICS CALLOUT: links to guiding framework -->
         <p class="home-context">
-          Our work follows the 
+          Our work follows the
           <a href="https://repractice.xbyali.page" class="underline" target="_blank" rel="noopener noreferrer">
             Repractice Ethical Framework
-          </a>, 
+          </a>,
           ensuring all research remains <em>open, regenerative, and accountable to the commons.</em>
         </p>
 
-      <div class="hero-actions">
-        <LinkButton href={withBase("/projects")} variant="primary" icon="arrow-right">
-          Start with a Project Idea
-        </LinkButton>
-        <LinkButton href={withBase("/how")} variant="outline" icon="arrow-right">
-           Learn Our Approach
-        </LinkButton>
-      </div>
-    </header>
+        <!-- HERO ACTIONS: primary navigation CTAs -->
+        <div class="hero-actions">
+          <!-- CTA BUTTON: direct path to projects overview -->
+          <LinkButton href={withBase("/projects")} variant="primary" icon="arrow-right">
+            Start with a Project Idea
+          </LinkButton>
+          <!-- CTA BUTTON: path to methodology page -->
+          <LinkButton href={withBase("/how")} variant="outline" icon="arrow-right">
+             Learn Our Approach
+          </LinkButton>
+        </div>
+      </header>
 
     <!-- ========================================================================
          SITE NAVIGATION — Key Pages
          ======================================================================== -->
     <nav class="home-nav-cards" aria-label="Main site sections">
+      <!-- NAV CARD: overview of ArcUp background -->
       <a href={withBase("/about")} class="nav-card">
         <h3>About</h3>
         <p>Learn where ArcUp began and how it aligns with Repractice ethics</p>
         <span class="nav-card-arrow" aria-hidden="true">→</span>
       </a>
 
+      <!-- NAV CARD: list of active research initiatives -->
       <a href={withBase("/projects")} class="nav-card">
         <h3>Projects</h3>
         <p>Explore open plasma research and ecological applications</p>
         <span class="nav-card-arrow" aria-hidden="true">→</span>
       </a>
 
+      <!-- NAV CARD: process and methodology resources -->
       <a href={withBase("/how")} class="nav-card">
         <h3>How We Work</h3>
         <p>Discover our methods, ethics, and approach to open experimentation</p>
         <span class="nav-card-arrow" aria-hidden="true">→</span>
       </a>
 
+      <!-- NAV CARD: invitation for collaborators -->
       <a href={withBase("/join")} class="nav-card">
         <h3>Join</h3>
         <p>Collaborate with us—engineers, scientists, and storytellers welcome</p>
@@ -101,11 +114,13 @@ const seo = buildSEO({
 
   </main>
 
+  <!-- PAGE NAVIGATION: persistent footer nav between primary sections -->
   <PageNavigation currentPage="home" />
 
   <!-- ========================================================================
        AUDIO PRONUNCIATION SCRIPT
        ======================================================================== -->
+  <!-- SCRIPT: provides fallback pronunciation playback for "arc up" -->
   <script>
     const btn = document.querySelector('.audio-button');
     if (btn) {

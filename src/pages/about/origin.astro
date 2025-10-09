@@ -22,19 +22,19 @@ const seo = buildSEO({
 >
   <main id="main-content" class="page-shell page-origin">
     
-    <!-- Breadcrumb -->
+    <!-- BREADCRUMB: Indicates position within About section -->
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href={withBase("/about")}>About</a>
       <span aria-hidden="true">/</span>
       <span aria-current="page">Origin</span>
     </nav>
 
-    <!-- Hero -->
+    <!-- HERO SECTION: Sets tone for origin story -->
     <header class="origin-hero">
       <h1>How ArcUp Began</h1>
     </header>
 
-    <!-- The Question -->
+    <!-- SECTION: Foundational question that inspired ArcUp -->
     <section class="origin-section">
       <h2 aria-label="Introduction: The question that inspired ArcUp">A Question That Started It All</h2>
       <p class="origin-question">
@@ -50,12 +50,12 @@ const seo = buildSEO({
       </p>
     </section>
 
-    <!-- Early Experiments -->
+    <!-- SECTION: Early experiments illustrating first successes -->
     <Card as="section" class="experiments-section">
       <h2 aria-label="ArcUp early experiments with plasma and seed germination">Early Experiments — The First Spark</h2>
       <div class="experiments-content">
         <p>
-          ArcUp began in a small room with a flyback transformer, a driver circuit, and a few glass electrodes. 
+          ArcUp began in a small room with a flyback transformer, a driver circuit, and a few glass electrodes.
           I had been reading plasma research papers from around the world — seeing how different teams were exploring 
           plasma-water interactions — and decided to test it for myself.
         </p>
@@ -75,13 +75,14 @@ const seo = buildSEO({
       </div>
     </Card>
 
-    <!-- The Pattern -->
+    <!-- SECTION: Systemic pattern ArcUp challenges -->
     <section class="pattern-section">
       <h2 aria-label="The systemic issues ArcUp responds to">The Pattern We Refuse</h2>
       <p>
         Looking back across centuries, I saw a cycle repeating:
       </p>
-      
+
+      <!-- DIAGRAM: Visualizes cycle of extraction -->
       <div class="pattern-cycle">
         <div class="cycle-item">Conflict</div>
         <div class="cycle-arrow">→</div>
@@ -100,6 +101,7 @@ const seo = buildSEO({
         A pattern of extraction dressed up as progress.
       </p>
 
+      <!-- CALLOUT CARD: Lists contemporary manifestations -->
       <Card class="pattern-today">
         <h3>Today it looks like this:</h3>
         <ul class="pattern-list">
@@ -110,6 +112,7 @@ const seo = buildSEO({
         </ul>
       </Card>
 
+      <!-- TEXT BLOCK: Response framing -->
       <div class="pattern-response">
         <p>
           ArcUp was born from a refusal of that pattern. It's not rebellion for its own sake — it's a reorientation.
@@ -120,17 +123,18 @@ const seo = buildSEO({
       </div>
     </section>
 
-    <!-- Framework -->
+    <!-- SECTION: Transition from experiment to shared framework -->
     <Card as="section" class="framework-origin-section">
       <h2 aria-label="Transition from individual experiment to open framework">A Framework, Not a Lab</h2>
       <p>
-        ArcUp grew from this reflection into a framework — a set of methods, values, and open tools for regenerative 
-        plasma research. It integrates my background in ecology, computer science, and systems thinking, but sits 
+        ArcUp grew from this reflection into a framework — a set of methods, values, and open tools for regenerative
+        plasma research. It integrates my background in ecology, computer science, and systems thinking, but sits
         outside the usual institutions that govern innovation.
       </p>
       <p>
         It's science re-practised — built to serve <em>life</em>, not ownership.
       </p>
+      <!-- CLOSING STATEMENTS: Invitation to collaborate -->
       <div class="framework-closing">
         <p>
           Arc^ began as one person's experiment.
@@ -141,10 +145,10 @@ const seo = buildSEO({
       </div>
     </Card>
 
-    <!-- Navigation -->
+    <!-- NAVIGATION: Links to related About subpages -->
     <nav class="origin-nav" aria-label="Continue exploring">
-      <LinkButton 
-        href={withBase("/about/founder")} 
+      <LinkButton
+        href={withBase("/about/founder")}
         variant="primary"
         icon="arrow-right"
       >

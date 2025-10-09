@@ -39,7 +39,7 @@ const seo = buildSEO({
 
   <main id="main-content" class="page-shell" aria-labelledby="join-title">
     
-    <!-- HERO - No changes -->
+    <!-- HERO SECTION: Invitation for contributors to join ArcUp framework -->
     <header class="join-hero" aria-labelledby="join-title">
       <p class="eyebrow">Building Technology for a Better Future</p>
       <h1 id="join-title">Join arc^</h1>
@@ -52,10 +52,10 @@ const seo = buildSEO({
       </p>
     </header>
 
-    <!-- ACKNOWLEDGEMENTS SECTION 
-         MINIMAL CHANGE: Only replace surface-panel with Card 
-         Keep ALL original HTML structure and classes -->
+    <!-- SECTION: Acknowledgements of open science movements supporting ArcUp -->
+    <!-- NOTE: Layout preserved from prior migration guidance -->
     <Card as="section" class="acknowledgements-section" aria-labelledby="acknowledgements-heading">
+      <!-- INTRO TEXT: Sets context for inspiration list -->
       <div class="acknowledgements-intro-text">
         <p>Before you think this is just hypothetical — <strong>we are not alone.</strong> Others have already spearheaded this movement.</p>
       </div>
@@ -67,46 +67,56 @@ const seo = buildSEO({
         headingLevel="h2"
       />
 
+      <!-- SUBHEAD: Describes list of peer inspirations -->
       <div class="acknowledgements-intro">
         <p><strong>We draw inspiration and learn from:</strong></p>
       </div>
 
+      <!-- GRID: Showcase of organizations and communities influencing ArcUp -->
       <div class="acknowledgements-grid">
+        <!-- CARD: Open Hardware Science collective -->
         <article class="acknowledgement-card">
           <h3><a href="https://openhardware.science/" target="_blank" rel="noopener">Open Hardware Science</a></h3>
           <p>Demonstrating that scientific tools can be accessible, repairable, and shared freely across borders and institutions.</p>
         </article>
 
+        <!-- CARD: GOSH Community network -->
         <article class="acknowledgement-card">
           <h3><a href="https://www.gosh-community.org/" target="_blank" rel="noopener">GOSH Community</a></h3>
           <p>Building a global network where hardware knowledge flows freely, centering equity and local agency in tool development.</p>
         </article>
 
+        <!-- CARD: Public Lab community science pioneers -->
         <article class="acknowledgement-card">
           <h3><a href="https://publiclab.org/" target="_blank" rel="noopener">Public Lab</a></h3>
           <p>Pioneering community science with accessible tools for environmental monitoring and data sovereignty.</p>
         </article>
 
+        <!-- CARD: Appropedia collaborative knowledge base -->
         <article class="acknowledgement-card">
           <h3><a href="https://www.appropedia.org/" target="_blank" rel="noopener">Appropedia</a></h3>
           <p>Creating a living library of sustainable technology and collaborative problem-solving for communities worldwide.</p>
         </article>
 
+        <!-- CARD: Open Source Hardware Association advocates -->
         <article class="acknowledgement-card">
           <h3><a href="https://www.oshwa.org/" target="_blank" rel="noopener">OSHWA</a></h3>
           <p>Advocating for open source hardware principles and building infrastructure for collaborative innovation.</p>
         </article>
 
+        <!-- CARD: Farm Hack agricultural tool community -->
         <article class="acknowledgement-card">
           <h3><a href="https://farmhack.org/" target="_blank" rel="noopener">Farm Hack</a></h3>
           <p>Empowering farmers as designers and innovators, sharing agricultural tools and knowledge in the commons.</p>
         </article>
 
+        <!-- CARD: Community Science alliances around the world -->
         <article class="acknowledgement-card">
           <h3><a href="https://www.scienceforsociety.org/" target="_blank" rel="noopener">Community Science</a></h3>
           <p>Movements globally that center local knowledge, consent-based research, and accountability to communities.</p>
         </article>
 
+        <!-- CARD: Creative Commons stewardship of open licensing -->
         <article class="acknowledgement-card">
           <h3><a href="https://creativecommons.org/science/" target="_blank" rel="noopener">Creative Commons</a></h3>
           <p>Building legal infrastructure that lets knowledge flow freely while protecting creator rights and community interests.</p>
@@ -118,8 +128,7 @@ const seo = buildSEO({
       </p>
     </Card>
 
-    <!-- GETTING STARTED SECTION
-         Keep ALL original structure - only change surface-panel wrapper -->
+    <!-- SECTION: Getting started pathways for new contributors -->
     <section class="getting-started-section">
       <SectionHeader
         title="How to Get Started"
@@ -128,19 +137,23 @@ const seo = buildSEO({
         headingLevel="h2"
       />
 
+      <!-- GRID: Three-step process cards -->
       <div class="getting-started-grid">
+        <!-- CARD: Onboarding guidance for students and researchers -->
         <Card as="article" class="start-card">
           <span class="process-number">1</span>
           <h3>Students & Researchers</h3>
           <p>If you're working on a thesis, final-year project, or independent research, you can integrate arc^ projects into your academic work. You'll need supervisor approval and a commitment to open licensing.</p>
         </Card>
 
+        <!-- CARD: Entry path for independent contributors -->
         <Card as="article" class="start-card">
           <span class="process-number">2</span>
           <h3>Independent Contributors</h3>
           <p>Makers, engineers, and technical contributors can jump into hardware design, code, or data analysis. Start by exploring existing projects and proposing contributions.</p>
         </Card>
 
+        <!-- CARD: Engagement channel for community partners -->
         <Card as="article" class="start-card">
           <span class="process-number">3</span>
           <h3>Community Partners</h3>
@@ -149,8 +162,7 @@ const seo = buildSEO({
       </div>
     </section>
 
-    <!-- WAYS TO CONTRIBUTE SECTION
-         Keep ALL original structure -->
+    <!-- SECTION: Menu of contribution areas and responsibilities -->
     <section class="contribute-section">
       <SectionHeader
         title="Ways to Contribute"
@@ -159,8 +171,9 @@ const seo = buildSEO({
         headingLevel="h2"
       />
 
+      <!-- GRID: Contribution area cards with icons -->
       <div class="contribute-grid">
-        <!-- Card 1: Hardware Development -->
+        <!-- CARD: Hardware development focus -->
         <Card as="article" class="contribute-card">
           <div class="card-icon">⚡</div>
           <h3>Hardware Development</h3>
@@ -175,7 +188,7 @@ const seo = buildSEO({
           <p class="ideal-for"><strong>Ideal for:</strong> Electrical engineers, makers, hardware hackers</p>
         </Card>
 
-        <!-- Card 2: Software & Data -->
+        <!-- CARD: Software and data contribution focus -->
         <Card as="article" class="contribute-card">
           <div class="card-icon">💻</div>
           <h3>Software & Data</h3>
@@ -190,7 +203,7 @@ const seo = buildSEO({
           <p class="ideal-for"><strong>Ideal for:</strong> Developers, data scientists, UX designers</p>
         </Card>
 
-        <!-- Card 3: Documentation & Media -->
+        <!-- CARD: Documentation and media storytelling -->
         <Card as="article" class="contribute-card">
           <div class="card-icon">📝</div>
           <h3>Documentation & Media</h3>
@@ -205,7 +218,7 @@ const seo = buildSEO({
           <p class="ideal-for"><strong>Ideal for:</strong> Writers, designers, videographers, educators</p>
         </Card>
 
-        <!-- Card 4: Field Testing -->
+        <!-- CARD: Field testing partnership focus -->
         <Card as="article" class="contribute-card">
           <div class="card-icon">🌱</div>
           <h3>Field Testing</h3>
@@ -220,7 +233,7 @@ const seo = buildSEO({
           <p class="ideal-for"><strong>Ideal for:</strong> Farmers, gardeners, land stewards</p>
         </Card>
 
-        <!-- Card 5: Research Support -->
+        <!-- CARD: Research support and validation -->
         <Card as="article" class="contribute-card">
           <div class="card-icon">🔬</div>
           <h3>Research Support</h3>
@@ -235,7 +248,7 @@ const seo = buildSEO({
           <p class="ideal-for"><strong>Ideal for:</strong> Independent researchers, students (any discipline), data analysts</p>
         </Card>
 
-        <!-- Card 6: Community Partnerships -->
+        <!-- CARD: Community partnership collaboration -->
         <Card as="article" class="contribute-card">
           <div class="card-icon">🌍</div>
           <h3>Community Partnerships</h3>
@@ -252,8 +265,7 @@ const seo = buildSEO({
       </div>
     </section>
 
-    <!-- EXPECTATIONS SECTION
-         Keep ALL original structure -->
+    <!-- SECTION: Expectations and working agreements -->
     <section class="expectations-section">
       <SectionHeader
         title="What to Expect"
@@ -262,32 +274,39 @@ const seo = buildSEO({
         headingLevel="h2"
       />
 
+      <!-- GRID: Six principles guiding participation -->
       <div class="expectations-grid">
+        <!-- CARD: Safety protocols reminder -->
         <Card as="article" class="expectation-card">
           <h3>Safety First</h3>
           <p>High-voltage plasma requires proper protocols. Safety concerns are non-negotiable. If you're unsure about a procedure, ask before proceeding.</p>
         </Card>
 
+        <!-- CARD: Open documentation requirement -->
         <Card as="article" class="expectation-card">
           <h3>Open by Default</h3>
           <p>All work is documented and shared openly. Experiments are logged from day one, not just when results are favorable. Data, methods, and designs remain in the commons.</p>
         </Card>
 
+        <!-- CARD: Emphasis on learning through failure -->
         <Card as="article" class="expectation-card">
           <h3>Learn Through Failure</h3>
           <p>Mistakes are expected and documented. Early-stage work is messy — that's normal. Replication across contexts is how we build confidence in results.</p>
         </Card>
 
+        <!-- CARD: Attribution standards -->
         <Card as="article" class="expectation-card">
           <h3>Credit & Attribution</h3>
           <p>All contributors are named and credited. Your contributions matter and will be acknowledged publicly in outputs and documentation.</p>
         </Card>
 
+        <!-- CARD: Consent-centered collaboration -->
         <Card as="article" class="expectation-card">
           <h3>Consent-Based</h3>
           <p>Communities are partners, not subjects. All engagement is informed, voluntary, and shaped by local knowledge and priorities.</p>
         </Card>
 
+        <!-- CARD: Anti-extractive principle -->
         <Card as="article" class="expectation-card">
           <h3>No Extraction</h3>
           <p>arc^ refuses extractive models. If you're here to extract value without giving back, this isn't the place. Collaboration is reciprocal.</p>
@@ -295,8 +314,7 @@ const seo = buildSEO({
       </div>
     </section>
 
-    <!-- FINAL CTA
-         Only replace button with LinkButton -->
+    <!-- CTA SECTION: Final invitation to submit interest form -->
     <Card as="section" class="final-cta">
       <SectionHeader
         title="Ready to Join?"

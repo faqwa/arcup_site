@@ -34,7 +34,7 @@ const seo = buildSEO({
 
   <main id="main-content" class="page-shell" aria-labelledby="how-title">
     
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION: Introduces research philosophy and promises transparency -->
     <header class="how-hero" aria-labelledby="how-title">
       <p class="eyebrow">Our Research Framework</p>
       <h1 id="how-title">How arc^ Works</h1>
@@ -44,7 +44,7 @@ const seo = buildSEO({
       </div>
     </header>
 
-    <!-- PHILOSOPHY -->
+    <!-- CALLOUT SECTION: Philosophy and foundational principles overview -->
     <section class="how-callout">
       <Card>
         <div class="method-content">
@@ -53,6 +53,7 @@ const seo = buildSEO({
             align="left"
             headingLevel="h2"
           />
+          <!-- TEXT BLOCK: Summary of guiding framework -->
           <p>arc^ is guided by <strong>re:earth</strong> — a regenerative technology framework that asks "what world does this create?" before building anything.</p>
           <p>Re:earth includes the RE:TECH design approach and the ethical commitments that shape how we work. This philosophical foundation will soon live on its own site.</p>
           <p class="callout-note">For now, understand that arc^ research is grounded in: openness, ecological interdependence, future-consciousness, harm prevention, and planetary restoration.</p>
@@ -60,7 +61,7 @@ const seo = buildSEO({
       </Card>
     </section>
 
-    <!-- RESEARCH METHOD -->
+    <!-- SECTION: Seven-step research methodology -->
     <section>
       <SectionHeader
         title="Our Research Method"
@@ -69,8 +70,10 @@ const seo = buildSEO({
         headingLevel="h2"
       />
 
+      <!-- GRID: Sequential method step cards -->
       <div class="method-steps">
-        
+
+        <!-- CARD: Commitment to openness from start -->
         <Card as="article" class="method-step">
           <div class="method-step-header">
             <span class="method-num">1</span>
@@ -79,6 +82,7 @@ const seo = buildSEO({
           <p>Document from day zero. Every hypothesis, design choice, and experiment goes public from the beginning. No "big reveal" launches — just incremental, transparent progress.</p>
         </Card>
 
+        <!-- CARD: Prioritize safety considerations -->
         <Card as="article" class="method-step">
           <div class="method-step-header">
             <span class="method-num">2</span>
@@ -87,6 +91,7 @@ const seo = buildSEO({
           <p>Every project starts with risk assessment. We identify potential harms — ecological, social, physical — and design safeguards before we build. If we can't do it safely, we don't do it.</p>
         </Card>
 
+        <!-- CARD: Sharing outputs openly -->
         <Card as="article" class="method-step">
           <div class="method-step-header">
             <span class="method-num">3</span>
@@ -95,6 +100,7 @@ const seo = buildSEO({
           <p>All designs, data, and documentation are released under open licenses. No paywalls. No patents. No proprietary lockdowns. Knowledge belongs in the commons.</p>
         </Card>
 
+        <!-- CARD: Transparently document failures -->
         <Card as="article" class="method-step">
           <div class="method-step-header">
             <span class="method-num">4</span>
@@ -103,6 +109,7 @@ const seo = buildSEO({
           <p>Failed experiments get the same treatment as successful ones. We publish what didn't work, why it didn't work, and what we learned. Honesty over optics.</p>
         </Card>
 
+        <!-- CARD: Emphasize collaboration -->
         <Card as="article" class="method-step">
           <div class="method-step-header">
             <span class="method-num">5</span>
@@ -111,6 +118,7 @@ const seo = buildSEO({
           <p>Research isn't a solo act. We invite feedback, contributions, and critiques from anyone willing to engage thoughtfully. The best ideas come from many minds, not just one.</p>
         </Card>
 
+        <!-- CARD: Focus on replicability -->
         <Card as="article" class="method-step">
           <div class="method-step-header">
             <span class="method-num">6</span>
@@ -119,6 +127,7 @@ const seo = buildSEO({
           <p>Every protocol is written to be reproducible by others. We use accessible tools, clear documentation, and open standards so anyone can verify and build on our work.</p>
         </Card>
 
+        <!-- CARD: Center ecological benefit -->
         <Card as="article" class="method-step">
           <div class="method-step-header">
             <span class="method-num">7</span>
@@ -130,7 +139,7 @@ const seo = buildSEO({
       </div>
     </section>
 
-    <!-- LEARN MORE SECTION -->
+    <!-- CALLOUT SECTION: Links to detailed safety and licensing resources -->
     <section class="how-callout">
       <Card variant="outline">
         <div class="method-content">
@@ -139,6 +148,7 @@ const seo = buildSEO({
             align="center"
             headingLevel="h2"
           />
+          <!-- CTA GROUP: Navigation to subpages -->
           <p>Want to understand our safety protocols or licensing approach in detail? Check out the dedicated pages below.</p>
           <div class="how-actions">
             <LinkButton href={withBase("/how/safety")} variant="primary">

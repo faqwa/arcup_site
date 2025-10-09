@@ -58,14 +58,14 @@ const hasLinks = project.data.links && project.data.links.length > 0;
 
   <main id="main-content" class="page-shell project-detail-shell">
     
-    <!-- BREADCRUMB -->
+    <!-- BREADCRUMB: Contextual navigation back to projects list -->
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href={withBase("/projects")}>Projects</a>
       <span aria-hidden="true">/</span>
       <span aria-current="page">{project.data.title}</span>
     </nav>
 
-    <!-- PROJECT HERO -->
+    <!-- HERO SECTION: Project title, status, and summary -->
     <header class="project-hero">
       <div class="project-meta">
         <StatusBadge status={project.data.status} />
@@ -103,17 +103,17 @@ const hasLinks = project.data.links && project.data.links.length > 0;
     </Card>
     -->
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN CONTENT: Markdown body and supporting sections -->
     <article class="project-content">
-      
-      <!-- Project Description (from markdown) -->
+
+      <!-- SECTION: Project description rendered from markdown -->
       <section class="content-section">
         <Content />
       </section>
 
-      <!-- Research Questions -->
+      <!-- SECTION: Research questions checklist -->
       <section class="content-section">
-        <SectionHeader 
+        <SectionHeader
           title="Research Questions"
           align="left"
           headingLevel="h2"
@@ -125,14 +125,16 @@ const hasLinks = project.data.links && project.data.links.length > 0;
         </ul>
       </section>
 
-      <!-- What We're Looking For -->
+      <!-- SECTION: Participation needs across expertise, resources, and support -->
       <section class="content-section">
-        <SectionHeader 
+        <SectionHeader
           title="What We're Looking For"
           align="left"
           headingLevel="h2"
         />
+        <!-- GRID: Three columns for different contribution types -->
         <div class="needs-grid">
+          <!-- COLUMN: Expertise needs -->
           <div class="need-item">
             <h3>Expertise</h3>
             <ul>
@@ -141,6 +143,7 @@ const hasLinks = project.data.links && project.data.links.length > 0;
               ))}
             </ul>
           </div>
+          <!-- COLUMN: Material resource needs -->
           <div class="need-item">
             <h3>Resources</h3>
             <ul>
@@ -149,6 +152,7 @@ const hasLinks = project.data.links && project.data.links.length > 0;
               ))}
             </ul>
           </div>
+          <!-- COLUMN: Support roles needed -->
           <div class="need-item">
             <h3>Support</h3>
             <ul>
@@ -160,14 +164,15 @@ const hasLinks = project.data.links && project.data.links.length > 0;
         </div>
       </section>
 
-      <!-- Project Timeline (CONDITIONAL) -->
+      <!-- SECTION (OPTIONAL): Project timeline milestones -->
       {hasTimeline && (
         <section class="content-section">
-          <SectionHeader 
+          <SectionHeader
             title="Project Timeline"
             align="left"
             headingLevel="h2"
           />
+          <!-- LIST: Chronological phases -->
           <div class="timeline">
             {project.data.timeline.map((phase) => (
               <div class="timeline-item">
@@ -184,15 +189,16 @@ const hasLinks = project.data.links && project.data.links.length > 0;
         </section>
       )}
 
-      <!-- How to Contribute (CONDITIONAL) -->
+      <!-- SECTION (OPTIONAL): Specific contribution paths -->
       {hasContributions && (
         <section class="content-section">
-          <SectionHeader 
+          <SectionHeader
             title="How to Contribute"
             subtitle="There are multiple ways to get involved, regardless of your background."
             align="left"
             headingLevel="h2"
           />
+          <!-- GRID: Contribution cards from content collection -->
           <div class="contribution-cards">
             {project.data.contributions.map((contrib) => (
               <div class="contrib-card">
@@ -206,21 +212,23 @@ const hasLinks = project.data.links && project.data.links.length > 0;
 
     </article>
 
-    <!-- LINKS & RESOURCES -->
+    <!-- SECTION: Links and resource downloads (with empty state) -->
     <Card as="section" class="resources-section">
-      <SectionHeader 
+      <SectionHeader
         title="Links & Resources"
         align="center"
         headingLevel="h2"
       />
-      
+
       {hasLinks ? (
         <>
+          <!-- INTRO TEXT: Context for resource list -->
           <p class="resources-intro">As this project develops, we'll share documentation, data, and code here. Everything stays open.</p>
+          <!-- GRID: External resources with status indicators -->
           <div class="links-grid">
             {project.data.links.map((link) => (
-              <a 
-                href={link.url || '#'} 
+              <a
+                href={link.url || '#'}
                 class={`resource-link ${link.status === 'coming-soon' ? 'disabled' : ''}`}
                 aria-disabled={link.status === 'coming-soon'}
               >
@@ -237,10 +245,11 @@ const hasLinks = project.data.links && project.data.links.length > 0;
           </div>
         </>
       ) : (
+        <!-- EMPTY STATE: Encourages contributors to supply resources -->
         <CalloutPanel variant="info">
           <p>
-            <strong>Documentation in progress.</strong> This project is in early stages. 
-            As we develop hypotheses, run experiments, and document findings, we'll share 
+            <strong>Documentation in progress.</strong> This project is in early stages.
+            As we develop hypotheses, run experiments, and document findings, we'll share
             everything here — data, code, CAD files, and learnings.
           </p>
           <p style="margin-bottom: 0;">
@@ -250,18 +259,20 @@ const hasLinks = project.data.links && project.data.links.length > 0;
       )}
     </Card>
 
-    <!-- JOIN CTA -->
+    <!-- CTA SECTION: Invitation to join or return to listing -->
     <Card as="section" class="join-cta-section">
-      <SectionHeader 
+      <SectionHeader
         title="Join This Project"
         subtitle="The project is in early stages, which means you can help shape the direction."
         align="center"
         headingLevel="h2"
       />
       <div class="cta-buttons">
+        <!-- CTA: External form for participation -->
         <LinkButton href={EXTERNAL_LINKS.formURL} variant="primary" icon="external">
           Get Involved
         </LinkButton>
+        <!-- CTA: Back navigation to project index -->
         <LinkButton href={withBase("/projects")} variant="outline" icon="arrow-right">
           ← Back to All Projects
         </LinkButton>

@@ -35,7 +35,7 @@ const seo = buildSEO({
 
   <main id="main-content" class="page-shell" aria-labelledby="safety-title">
     
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION: Positions safety commitments for plasma research -->
     <header class="how-hero" aria-labelledby="safety-title">
       <p class="eyebrow">Our Commitment</p>
       <h1 id="safety-title">Safety Protocols</h1>
@@ -44,7 +44,7 @@ const seo = buildSEO({
       </div>
     </header>
 
-    <!-- SAFETY GRID -->
+    <!-- SECTION: Detailed safety domains and protocols -->
     <section class="safety-section">
       <SectionHeader
         title="Safety is <em>Non-Negotiable</em>"
@@ -53,37 +53,44 @@ const seo = buildSEO({
         headingLevel="h2"
       />
 
+      <!-- GRID: Six safety focus areas -->
       <div class="safety-grid">
+        <!-- CARD: Electrical safety standards -->
         <Card as="article" class="safety-card">
           <div class="safety-icon">⚡</div>
           <h3>High-Voltage Protocols</h3>
           <p>All electrical work follows safety standards. Devices include kill switches, grounding, and isolation. No improvisation with power systems.</p>
         </Card>
 
+        <!-- CARD: Chemical monitoring practices -->
         <Card as="article" class="safety-card">
           <div class="safety-icon">🧪</div>
           <h3>Chemical Safety</h3>
           <p>Plasma generates reactive oxygen and nitrogen species. We test water chemistry before and after treatment. No application without baseline data.</p>
         </Card>
 
+        <!-- CARD: Ecological safeguard measures -->
         <Card as="article" class="safety-card">
           <div class="safety-icon">🌿</div>
           <h3>Ecological Safety</h3>
           <p>Field trials start small and controlled. We monitor for unintended impacts on soil, water, and organisms. If harm appears, we pause.</p>
         </Card>
 
+        <!-- CARD: Community consent requirements -->
         <Card as="article" class="safety-card">
           <div class="safety-icon">👥</div>
           <h3>Community Safety</h3>
           <p>No experimentation on land without informed consent from those who live there. Community veto power is real and respected.</p>
         </Card>
 
+        <!-- CARD: Dual-use risk mitigation -->
         <Card as="article" class="safety-card">
           <div class="safety-icon">🛑</div>
           <h3>Dual-Use Prevention</h3>
           <p>If research trends toward weaponization, surveillance, or exploitation — we stop. No exceptions, even if technically interesting.</p>
         </Card>
 
+        <!-- CARD: Transparent documentation culture -->
         <Card as="article" class="safety-card">
           <div class="safety-icon">📋</div>
           <h3>Documentation</h3>
@@ -91,13 +98,14 @@ const seo = buildSEO({
         </Card>
       </div>
 
+      <!-- CALLOUT: Reiterate core decision principle -->
       <Card class="safety-principle">
         <h3>Core Principle</h3>
         <p>When in doubt, we consult experts. When risk is unclear, we pause. When harm is likely, we stop. Research can wait — safety cannot.</p>
       </Card>
     </section>
 
-    <!-- RELATED PAGES -->
+    <!-- SECTION: Navigation to related methodology resources -->
     <section class="getting-started-section">
       <SectionHeader
         title="Related"
@@ -106,7 +114,9 @@ const seo = buildSEO({
         headingLevel="h2"
       />
 
+      <!-- GRID: Related resource cards -->
       <div class="getting-started-cards">
+        <!-- CARD: Link to overall methods page -->
         <Card as="article" class="start-card">
           <h3>How We Work</h3>
           <p>Understand our 7-step research method and RE:TECH principles.</p>
@@ -115,6 +125,7 @@ const seo = buildSEO({
           </LinkButton>
         </Card>
 
+        <!-- CARD: Link to licensing practices -->
         <Card as="article" class="start-card">
           <h3>Open Licensing</h3>
           <p>All outputs stay in the commons through copyleft licenses.</p>
@@ -123,6 +134,7 @@ const seo = buildSEO({
           </LinkButton>
         </Card>
 
+        <!-- CARD: Link to participation details -->
         <Card as="article" class="start-card">
           <h3>Join the Work</h3>
           <p>Ready to contribute? Learn how to get involved.</p>
