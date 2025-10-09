@@ -40,7 +40,7 @@ const seo = buildSEO({
 
   <main id="main-content" class="page-shell" aria-labelledby="page-title">
 
-    <!-- Breadcrumb -->
+    <!-- BREADCRUMB: Draft navigation for origin story -->
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href={withBase("/about")}>About</a>
       <span aria-hidden="true">/</span>
@@ -48,7 +48,7 @@ const seo = buildSEO({
     </nav>
 
     <!-- ================================================================ -->
-    <!-- HERO -->
+    <!-- HERO SECTION: Frames central question about open discovery -->
     <!-- ================================================================ -->
     <header class="origin-hero" aria-labelledby="page-title">
       <p class="eyebrow">How ArcUp Began</p>
@@ -62,7 +62,7 @@ const seo = buildSEO({
     <SectionDivider variant="default" spacing="compact" />
 
     <!-- ================================================================ -->
-    <!-- SECTION 1 — The First Spark -->
+    <!-- SECTION: Step-by-step recount of early experiments -->
     <!-- ================================================================ -->
     <section class="page-section" aria-labelledby="spark-title">
       <SectionHeader
@@ -71,25 +71,29 @@ const seo = buildSEO({
         align="center"
       />
 
+      <!-- GRID: Six-stage experimentation journey -->
       <div class="card-grid">
+        <!-- CARD: Research curiosity phase -->
         <Card as="article" class="start-card" variant="surface" hover={true}>
           <span class="process-number">1</span>
           <h3>Curiosity</h3>
           <p>
-            I began reading plasma research papers from around the world, 
+            I began reading plasma research papers from around the world,
             studying how others explored plasma–water interactions.
           </p>
         </Card>
 
+        <!-- CARD: Foundational learning phase -->
         <Card as="article" class="start-card" variant="surface" hover={true}>
           <span class="process-number">2</span>
           <h3>Learning the Basics</h3>
           <p>
-            The papers were dense, so I turned to videos and tutorials. 
+            The papers were dense, so I turned to videos and tutorials.
             Watching others build home reactors helped me understand the core physics and electronics.
           </p>
         </Card>
 
+        <!-- CARD: Building hardware phase -->
         <Card as="article" class="start-card" variant="surface" hover={true}>
           <span class="process-number">3</span>
           <h3>Building a Reactor</h3>
@@ -98,38 +102,42 @@ const seo = buildSEO({
           </p>
         </Card>
 
+        <!-- CARD: Experiment iteration phase -->
         <Card as="article" class="start-card" variant="surface" hover={true}>
           <span class="process-number">4</span>
           <h3>Experimenting</h3>
           <p>
-            I tested different electrodes and water types.  
+            I tested different electrodes and water types.
             Accidentally formed salt crystals, and discovered plasma-treated water improved seed germination.
           </p>
         </Card>
 
+        <!-- CARD: Insight about potential -->
         <Card as="article" class="start-card" variant="surface" hover={true}>
           <span class="process-number">5</span>
           <h3>Discovering Potential</h3>
           <p>
-            Plasma could alter biological processes.  
+            Plasma could alter biological processes.
             I wondered how to design better systems for efficiency and ecological impact.
           </p>
         </Card>
 
+        <!-- CARD: Motivation to share openly -->
         <Card as="article" class="start-card" variant="surface" hover={true}>
           <span class="process-number">6</span>
           <h3>Sharing the Process</h3>
           <p>
-            What if I shared my progress publicly?  
-            Would others join in, help improve it, or replicate it?  
+            What if I shared my progress publicly?
+            Would others join in, help improve it, or replicate it?
             That question became the seed of ArcUp.
           </p>
         </Card>
       </div>
 
+      <!-- CALLOUT: Encourages collective experimentation -->
       <CalloutPanel variant="info" icon="⚡" title="Collective Spark">
         <p>
-          Watching seeds respond to plasma was the beginning of ArcUp.  
+          Watching seeds respond to plasma was the beginning of ArcUp.
           If one person could do this alone, imagine what we could create together.
         </p>
         <LinkButton href={withBase("/about/mission")} variant="ghost" icon="arrow-right">
@@ -141,7 +149,7 @@ const seo = buildSEO({
     <SectionDivider variant="default" spacing="compact" />
 
     <!-- ================================================================ -->
-    <!-- SECTION 2 — The Pattern We Refuse -->
+    <!-- SECTION: Critique of extractive innovation patterns -->
     <!-- ================================================================ -->
     <section class="page-section" aria-labelledby="pattern-title">
     <SectionHeader
@@ -178,7 +186,7 @@ const seo = buildSEO({
         <SectionDivider variant="strong" spacing="normal" />
 
     <!-- ================================================================ -->
-    <!-- SECTION 3 — From Reflection to Framework -->
+    <!-- SECTION: Transition from personal reflection to shared framework -->
     <!-- ================================================================ -->
     <section class="page-section" aria-labelledby="framework-title">
       <SectionHeader
@@ -205,7 +213,7 @@ const seo = buildSEO({
     <SectionDivider variant="subtle" spacing="spacious" />
 
     <!-- ================================================================ -->
-    <!-- SECTION 4 — Reflection / Closing -->
+    <!-- SECTION: Closing invitation to collaborate -->
     <!-- ================================================================ -->
     <section class="reflection-section" aria-labelledby="reflection-title">
       <SectionHeader
@@ -214,16 +222,16 @@ const seo = buildSEO({
         align="center"
       />
       <p class="reflection-text">
-        ArcUp began as one person’s experiment.  
-        My hope is that it grows into a collective practice —  
+        ArcUp began as one person’s experiment.
+        My hope is that it grows into a collective practice —
         a shared opportunity to rethink what progress means and what kind of world we want to build.
       </p>
     </section>
 
-    <!-- Navigation -->
+    <!-- NAVIGATION: Draft links to related About pages -->
     <nav class="origin-nav" aria-label="Continue exploring">
-      <LinkButton 
-        href={withBase("/about/founder")} 
+      <LinkButton
+        href={withBase("/about/founder")}
         variant="primary"
         icon="arrow-right"
       >

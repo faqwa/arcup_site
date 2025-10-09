@@ -47,7 +47,7 @@ const seo = buildSEO({
   <main id="main-content" class="page-shell" aria-labelledby="page-title">
 
     <!-- ================================================================ -->
-    <!-- HERO -->
+    <!-- HERO SECTION: Demonstrates scaffold hero pattern -->
     <!-- ================================================================ -->
     <header class="page-hero" aria-labelledby="page-title">
       <p class="eyebrow">Prototype Page</p>
@@ -61,7 +61,7 @@ const seo = buildSEO({
     <SectionDivider variant="subtle" spacing="compact" />
 
     <!-- ================================================================ -->
-    <!-- SECTION 1 — Overview / Context -->
+    <!-- SECTION: Overview/context template block -->
     <!-- ================================================================ -->
     <section class="page-section" aria-labelledby="section-1-title">
       <SectionHeader
@@ -87,7 +87,7 @@ const seo = buildSEO({
     <SectionDivider variant="default" spacing="normal" />
 
     <!-- ================================================================ -->
-    <!-- SECTION 2 — Grid / Feature Cards -->
+    <!-- SECTION: Example grid/feature card layout -->
     <!-- ================================================================ -->
     <section class="page-section" aria-labelledby="section-2-title">
       <SectionHeader
@@ -95,6 +95,7 @@ const seo = buildSEO({
         subtitle="Demonstrate a grid of features, categories, or key ideas."
         align="center"
       />
+      <!-- GRID: Mixed card variants for reference -->
       <div class="card-grid">
         <Card as="article" variant="surface">
           <h3>Card One card-grid</h3>
@@ -110,11 +111,12 @@ const seo = buildSEO({
     <SectionDivider variant="strong" spacing="spacious" />
 
     <!-- ================================================================ -->
-    <!-- SECTION 3 — VARIANTS (Choose One) -->
+    <!-- SECTION: Variant examples for downstream reuse -->
     <!-- ================================================================ -->
     <!--
       ── VARIANT A: Standard CTA
     -->
+    <!-- CTA SECTION: Standard gradient-style join prompt -->
     <section class="cta-section" aria-labelledby="cta-title">
       <SectionHeader
         title="Join the Work"
@@ -134,6 +136,7 @@ const seo = buildSEO({
     <!--
       ── VARIANT B: Outline Callout (How Page Style)
     -->
+    <!-- CALLOUT SECTION: Outline card grouping CTAs -->
     <section class="how-callout">
       <Card variant="outline">
         <div class="method-content">
@@ -158,6 +161,7 @@ const seo = buildSEO({
       ── VARIANT C: Reflection / Closing
     -->
 
+    <!-- REFLECTION SECTION: Closing sentiment pattern -->
     <section class="reflection-section" aria-labelledby="reflection-title">
       <SectionHeader
         title=class="reflection-section
@@ -174,6 +178,7 @@ const seo = buildSEO({
       ── VARIANT D: Final Join CTA (Encapsulated in Card)
     -->
 
+    <!-- CTA CARD SECTION: Final interest form prompt -->
     <Card as="section" class="final-cta" variant="surface" padding="spacious">
       <SectionHeader title="Ready to Join?" align="center" headingLevel="h2" />
       <p>

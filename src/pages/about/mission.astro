@@ -22,19 +22,19 @@ const seo = buildSEO({
 >
   <main id="main-content" class="page-shell page-mission">
     
-    <!-- Breadcrumb -->
+    <!-- BREADCRUMB: Locates mission page within About hierarchy -->
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href={withBase("/about")}>About</a>
       <span aria-hidden="true">/</span>
       <span aria-current="page">Mission</span>
     </nav>
 
-    <!-- Hero -->
+    <!-- HERO SECTION: States overarching mission question -->
     <header class="mission-hero">
       <h1>Why ArcUp Exists</h1>
     </header>
 
-    <!-- Purpose -->
+    <!-- SECTION: Defines purpose and guiding values -->
     <section class="mission-section">
       <h2 aria-label="ArcUp mission statement and purpose">The Purpose</h2>
       <p>
@@ -49,7 +49,7 @@ const seo = buildSEO({
       </p>
     </section>
 
-    <!-- For the Many -->
+    <!-- SECTION: Emphasizes inclusive, regenerative mission -->
     <Card as="section" class="many-section">
       <h2 aria-label="ArcUp's ethical alignment and inclusivity">For the Many, Not the Few</h2>
       <p>
@@ -60,31 +60,35 @@ const seo = buildSEO({
         communities, our ecosystems, and our shared humanity.
       </p>
       <p>
-        Our mission is to make plasma research accessible across disciplines — bridging engineers, biologists, artists, 
+        Our mission is to make plasma research accessible across disciplines — bridging engineers, biologists, artists,
         and institutions — so that ecological restoration becomes a shared, global experiment.
       </p>
     </Card>
 
-    <!-- Name Meaning -->
+    <!-- SECTION: Breaks down meaning of the name arc^ -->
     <section class="name-section">
       <h2 aria-label="Meaning and symbolism of the name arc^">Meaning of the Name — arc<span class="caret">^</span></h2>
       <p class="name-intro">
         The name carries three intertwined meanings:
       </p>
 
+      <!-- GRID: Three interpretations of the name -->
       <div class="name-meanings">
+        <!-- CARD: Rising in defense interpretation -->
         <Card as="article" class="meaning-card">
           <div class="meaning-symbol">↑</div>
           <h3>"to arc up"</h3>
           <p>to rise in defense of people and planet</p>
         </Card>
 
+        <!-- CARD: Power notation interpretation -->
         <Card as="article" class="meaning-card">
           <div class="meaning-symbol">^</div>
           <h3>"^ to the power of"</h3>
           <p>representing amplification through shared knowledge</p>
         </Card>
 
+        <!-- CARD: Plasma arc metaphor -->
         <Card as="article" class="meaning-card">
           <div class="meaning-symbol">⚡</div>
           <h3>"plasma arc"</h3>
@@ -92,6 +96,7 @@ const seo = buildSEO({
         </Card>
       </div>
 
+      <!-- EQUATION: Summarizes symbolic formula -->
       <div class="name-equation">
         <p class="equation-text">
           arc<span class="caret">^</span> = resistance × regeneration × plasma energy
@@ -102,12 +107,14 @@ const seo = buildSEO({
       </div>
     </section>
 
-    <!-- Phases -->
+    <!-- SECTION: Outlines phased roadmap for ArcUp -->
     <section class="phases-section">
       <h2 aria-label="ArcUp phased development model">The ArcUp Phases — From Spark to Commons</h2>
 
+      <!-- GRID: Three-phase development journey -->
       <div class="phases-grid">
-        
+
+        <!-- CARD: Phase 1 details -->
         <Card as="article" class="phase-card">
           <div class="phase-icon">🌱</div>
           <h3>Phase 1 — Bench-Scale, Open Experiments</h3>
@@ -116,7 +123,7 @@ const seo = buildSEO({
               Hands-on exploration using dielectric barrier discharge (DBD) setups — simple, accessible, off-the-shelf components.
             </p>
             <p>
-              We test plasma-water interactions for purification, agriculture, and ecological applications, sharing results 
+              We test plasma-water interactions for purification, agriculture, and ecological applications, sharing results
               openly so others can replicate and improve them.
             </p>
             <p class="phase-outcome">
@@ -125,6 +132,7 @@ const seo = buildSEO({
           </div>
         </Card>
 
+        <!-- CARD: Phase 2 details -->
         <Card as="article" class="phase-card">
           <div class="phase-icon">🌍</div>
           <h3>Phase 2 — Community Prototyping Framework</h3>
@@ -133,22 +141,23 @@ const seo = buildSEO({
               As results mature, we develop shared templates — community-ready DBD frameworks and build guides.
             </p>
             <p>
-              The goal is to form a commons of plasma tools where data, blueprints, and safety notes circulate openly yet 
+              The goal is to form a commons of plasma tools where data, blueprints, and safety notes circulate openly yet
               responsibly, ensuring variants remain traceable and free from enclosure.
             </p>
           </div>
         </Card>
 
+        <!-- CARD: Phase 3 details -->
         <Card as="article" class="phase-card">
           <div class="phase-icon">🔭</div>
           <h3>Phase 3 — Collaborative Application</h3>
           <div class="phase-content">
             <p>
-              When the work reaches maturity, interdisciplinary teams and institutions can collaborate to apply plasma 
+              When the work reaches maturity, interdisciplinary teams and institutions can collaborate to apply plasma
               systems in real-world ecological contexts.
             </p>
             <p>
-              At this stage, governance matters: defensive openness replaces property. ArcUp invites collective custodianship, 
+              At this stage, governance matters: defensive openness replaces property. ArcUp invites collective custodianship,
               ensuring that no discovery becomes privately locked down and that all benefit flows back to the commons.
             </p>
           </div>
@@ -157,17 +166,18 @@ const seo = buildSEO({
       </div>
     </section>
 
-    <!-- Vision -->
+    <!-- SECTION: Concluding vision and key principles -->
     <Card as="section" class="vision-section">
       <h2 aria-label="ArcUp broader mission and closing reflection">The Broader Vision</h2>
       <p>
-        ArcUp's mission is to create a living backbone for open plasma research — one that connects independent experimenters, 
+        ArcUp's mission is to create a living backbone for open plasma research — one that connects independent experimenters,
         academic labs, and communities across borders.
       </p>
       <p>
-        We're building a space where knowledge moves freely between art, science, and culture — where technology can once 
+        We're building a space where knowledge moves freely between art, science, and culture — where technology can once
         again serve <em>life</em>.
       </p>
+      <!-- LIST: Core commitments that anchor vision -->
       <div class="vision-principles">
         <p>No property locked down.</p>
         <p>No gatekeeping of discovery.</p>
@@ -175,11 +185,11 @@ const seo = buildSEO({
       </div>
     </Card>
 
-    <!-- CTA to Repractice -->
+    <!-- CTA SECTION: Direct link to methodology for deeper context -->
     <div class="repractice-cta">
       <p>Want to understand the ethical foundation?</p>
-      <LinkButton 
-        href={withBase("/how")} 
+      <LinkButton
+        href={withBase("/how")}
         variant="primary"
         icon="arrow-right"
       >
@@ -187,10 +197,10 @@ const seo = buildSEO({
       </LinkButton>
     </div>
 
-    <!-- Navigation -->
+    <!-- NAVIGATION: Links to related About resources -->
     <nav class="mission-nav" aria-label="Continue exploring">
-      <LinkButton 
-        href={withBase("/about/founder")} 
+      <LinkButton
+        href={withBase("/about/founder")}
         variant="outline"
         icon="arrow-right"
       >

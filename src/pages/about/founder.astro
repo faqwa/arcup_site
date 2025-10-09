@@ -35,20 +35,20 @@ const seo = buildSEO({
 
   <main id="main-content" class="page-shell" aria-labelledby="founder-title">
     
-    <!-- Breadcrumb -->
+    <!-- BREADCRUMB: Contextual navigation back to About hub -->
     <nav class="breadcrumb" aria-label="Breadcrumb" style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--color-text-muted); padding: 1rem 0 0 0;">
       <a href={withBase("/about")} style="color: var(--color-primary-bright); text-decoration: none;">About</a>
       <span aria-hidden="true">/</span>
       <span aria-current="page">Founder</span>
     </nav>
 
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION: Introduces founder and mission-driven perspective -->
     <header class="about-hero" aria-labelledby="founder-title">
       <h1 id="founder-title">Meet Ali</h1>
       <p class="lead">A student, tinkerer, and systems thinker trying to build technology that <em>serves life</em> instead of extracting from it.</p>
     </header>
 
-    <!-- INTRODUCTION -->
+    <!-- SECTION: Personal background and interdisciplinary roots -->
     <section>
       <Card>
         <div class="about-content">
@@ -63,7 +63,7 @@ const seo = buildSEO({
       </Card>
     </section>
 
-    <!-- BUILDING ARC^ -->
+    <!-- SECTION: Origin story of ArcUp experiments -->
     <section>
       <Card>
         <div class="about-content">
@@ -72,6 +72,7 @@ const seo = buildSEO({
             align="left"
             headingLevel="h2"
           />
+          <!-- STORY BLOCK: Early experiments with plasma-treated water -->
           <p>My first experiments were small: plasma discharges across glass electrodes, powered by flyback transformers and a Z-driver circuit. I was testing how plasma-treated water might affect seed germination — and it did.</p>
           <p>Watching seeds respond to plasma sparked a question that changed everything:</p>
           <p style="margin: 1.5rem 0; padding: 1.5rem; background: rgba(10, 147, 150, 0.08); border-left: 3px solid var(--color-primary-bright); border-radius: var(--radius-sm); font-style: italic; color: var(--color-text); text-align: center;"><em>What would it look like if this was built in the open?</em></p>
@@ -80,7 +81,7 @@ const seo = buildSEO({
       </Card>
     </section>
 
-    <!-- SYSTEMS VIEW -->
+    <!-- SECTION: Systems-thinking perspective -->
     <section>
       <Card>
         <div class="about-content">
@@ -89,6 +90,7 @@ const seo = buildSEO({
             align="left"
             headingLevel="h2"
           />
+          <!-- TEXT BLOCK: Integrating disciplines and ethics -->
           <p>I've always been drawn to how systems interconnect — ecological, technological, social. Through arc^, I'm exploring how plasma, data, and design can <em>support living systems</em> rather than extract from them.</p>
           <p>This is why arc^ stays interdisciplinary: it sits between biology, physics, ethics, and culture, and invites each field to inform the others.</p>
           <p style="font-weight: 500; color: var(--color-text); margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border); font-style: italic;">Science is strongest when it listens — to ecosystems, to people, to context.</p>
@@ -96,7 +98,7 @@ const seo = buildSEO({
       </Card>
     </section>
 
-    <!-- PERSONAL ETHOS -->
+    <!-- SECTION: Personal ethos statements -->
     <section>
       <Card variant="outline">
         <div class="about-content">
@@ -105,6 +107,7 @@ const seo = buildSEO({
             align="left"
             headingLevel="h2"
           />
+          <!-- TEXT BLOCK: Values guiding founder -->
           <p style="font-size: clamp(1.1rem, 2.5vw, 1.2rem); font-style: italic; color: var(--color-text);">For me, arc^ isn't a project — it's a way of doing research differently.</p>
           <p style="font-size: clamp(1.1rem, 2.5vw, 1.2rem); font-style: italic; color: var(--color-text);">One that values <em>openness over ownership</em>, <em>curiosity over control</em>, and <em>regeneration over recognition</em>.</p>
           <p style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border);">I believe the best science is that which serves — restoring balance between innovation and the living world that sustains it.</p>
@@ -112,7 +115,7 @@ const seo = buildSEO({
       </Card>
     </section>
 
-    <!-- LOOKING FORWARD -->
+    <!-- SECTION: Future vision and stewardship -->
     <section>
       <Card>
         <div class="about-content">
@@ -121,6 +124,7 @@ const seo = buildSEO({
             align="left"
             headingLevel="h2"
           />
+          <!-- TEXT BLOCK: Invitation for shared ownership -->
           <p>arc^ is still young — an evolving commons that anyone aligned with its purpose can join.</p>
           <p>My role is to hold the space: to guide its early shape, document openly, and build the ethical scaffolding that will let others expand it further.</p>
           <p style="font-weight: 500; color: var(--color-text); margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border);"><em>arc^ isn't mine alone — it's ours to grow, together.</em></p>
@@ -128,7 +132,7 @@ const seo = buildSEO({
       </Card>
     </section>
 
-    <!-- CONNECT -->
+    <!-- SECTION: Calls to connect with founder and join arc^ -->
     <section class="about-callout">
       <Card variant="outline">
         <div class="about-content">
@@ -137,17 +141,18 @@ const seo = buildSEO({
             align="center"
             headingLevel="h2"
           />
+          <!-- CTA GROUP: External site and join page -->
           <p>Want to learn more about my broader work in ecology, technology, and systems thinking?</p>
           <div class="about-actions">
-            <LinkButton 
+            <LinkButton
               href={EXTERNAL_LINKS.personalSite}
               variant="outline"
               icon="external"
             >
               Visit xbyali.page
             </LinkButton>
-            <LinkButton 
-              href={withBase("/join")} 
+            <LinkButton
+              href={withBase("/join")}
               variant="primary"
               icon="arrow-right"
             >
@@ -158,11 +163,11 @@ const seo = buildSEO({
       </Card>
     </section>
 
-    <!-- NAVIGATION -->
+    <!-- SECTION: Secondary navigation back to About overview -->
     <section class="about-callout">
       <div class="about-actions">
-        <LinkButton 
-          href={withBase("/about")} 
+        <LinkButton
+          href={withBase("/about")}
           variant="outline"
         >
           ← Back to About

@@ -42,7 +42,7 @@ const seo = buildSEO({
   <main id="main-content" class="page-shell" aria-labelledby="page-title">
 
     <!-- ================================================================ -->
-    <!-- HERO -->
+    <!-- HERO SECTION: Draft introduction to Ali Saleh -->
     <!-- ================================================================ -->
     <header class="page-hero" aria-labelledby="page-title">
       <p class="eyebrow">About / Founder</p>
@@ -58,7 +58,7 @@ const seo = buildSEO({
     <SectionDivider variant="subtle" spacing="compact" />
 
     <!-- ================================================================ -->
-    <!-- SECTION 1 — Background -->
+    <!-- SECTION: Background narrative and learning philosophy -->
     <!-- ================================================================ -->
     <section class="page-section" aria-labelledby="background-title">
       <SectionHeader
@@ -68,17 +68,18 @@ const seo = buildSEO({
       />
 
       <p>
-        I’m an undergraduate bioscience student based in Melbourne, Australia.  
-        My path crosses disciplines — from pollution degradation using triboelectric nanogenerators 
+        I’m an undergraduate bioscience student based in Melbourne, Australia.
+        My path crosses disciplines — from pollution degradation using triboelectric nanogenerators
         to restoration ecology and earlier studies in computer science.
       </p>
 
       <p>
-        I’m not a physicist or an engineer by training.  
-        I’m learning as I go, figuring things out in public, and using ArcUp 
+        I’m not a physicist or an engineer by training.
+        I’m learning as I go, figuring things out in public, and using ArcUp
         to explore how ethics, technology, and ecology can be woven into one open practice.
       </p>
 
+      <!-- CALLOUT: Highlights learn-in-public ethos -->
       <CalloutPanel variant="info" icon="🪴" title="Learning in Public">
         <p>
           Every experiment, success, and mistake is documented openly — because science grows stronger when everyone can see the process.
@@ -89,7 +90,7 @@ const seo = buildSEO({
     <SectionDivider variant="default" spacing="normal" />
 
     <!-- ================================================================ -->
-    <!-- SECTION 2 — Systems View -->
+    <!-- SECTION: Systems-level perspective on ArcUp -->
     <!-- ================================================================ -->
     <section class="page-section" aria-labelledby="systems-title">
       <SectionHeader
@@ -99,17 +100,20 @@ const seo = buildSEO({
       />
 
       <p>
-        I’ve always been drawn to how systems interconnect — biological, technological, and social.  
+        I’ve always been drawn to how systems interconnect — biological, technological, and social.
         Through ArcUp, I explore how plasma, data, and design can support living systems rather than extract from them.
       </p>
 
+      <!-- GRID: Supporting perspective cards -->
       <div class="card-grid">
+        <!-- CARD: Interdisciplinary practice -->
         <Card as="article" variant="surface">
           <h3>Interdisciplinary Practice</h3>
           <p>
             ArcUp sits between biology, physics, ethics, and design — inviting each field to inform the others.
           </p>
         </Card>
+        <!-- CARD: Ecological thinking -->
         <Card as="article" variant="outline">
           <h3>Ecological Thinking</h3>
           <p>
@@ -126,7 +130,7 @@ const seo = buildSEO({
     <SectionDivider variant="strong" spacing="normal" />
 
     <!-- ================================================================ -->
-    <!-- SECTION 3 — Personal Ethos -->
+    <!-- SECTION: Personal ethos principles -->
     <!-- ================================================================ -->
     <section class="page-section" aria-labelledby="ethos-title">
       <SectionHeader
@@ -135,19 +139,23 @@ const seo = buildSEO({
         align="center"
       />
 
+      <!-- GRID: Value statements cards -->
       <div class="card-grid">
+        <!-- CARD: Openness value -->
         <Card as="article" variant="outline">
           <h3>Openness over Ownership</h3>
           <p>
             Knowledge belongs in the commons — science should circulate, not accumulate.
           </p>
         </Card>
+        <!-- CARD: Curiosity value -->
         <Card as="article" variant="outline">
           <h3>Curiosity over Control</h3>
           <p>
             I approach research as an act of humility — a conversation with the unknown.
           </p>
         </Card>
+        <!-- CARD: Regeneration value -->
         <Card as="article" variant="outline">
           <h3>Regeneration over Recognition</h3>
           <p>
@@ -160,7 +168,7 @@ const seo = buildSEO({
     <SectionDivider variant="subtle" spacing="spacious" />
 
     <!-- ================================================================ -->
-    <!-- SECTION 4 — Looking Forward -->
+    <!-- SECTION: Future vision and stewardship role -->
     <!-- ================================================================ -->
     <section class="page-section" aria-labelledby="future-title">
       <SectionHeader
@@ -182,7 +190,7 @@ const seo = buildSEO({
     <SectionDivider variant="strong" spacing="compact" />
 
     <!-- ================================================================ -->
-    <!-- SECTION 5 — Final CTA -->
+    <!-- SECTION: Final call to connect and collaborate -->
     <!-- ================================================================ -->
     <Card as="section" class="final-cta" variant="surface" padding="spacious">
       <SectionHeader title="Connect & Collaborate" align="center" headingLevel="h2" />
@@ -190,6 +198,7 @@ const seo = buildSEO({
         Want to learn more about my broader work in ecology, technology, and systems thinking?
       </p>
 
+      <!-- CTA GROUP: External site and join link -->
       <div class="button-wrapper">
         <LinkButton href="https://xbyali.page" variant="primary" icon="external">
           Visit xbyali.page
@@ -200,12 +209,12 @@ const seo = buildSEO({
       </div>
 
       <p class="final-note">
-        You can also explore ArcUp’s <a href={withBase("/about/origin")}>origin story</a> or read 
+        You can also explore ArcUp’s <a href={withBase("/about/origin")}>origin story</a> or read
         <a href={withBase("/about/mission")}>our mission</a> next.
       </p>
     </Card>
   <!-- ================================================================ -->
-    <!-- SECTION 4 — The ArcUp Phases -->
+    <!-- SECTION: Outline of ArcUp development phases -->
     <!-- ================================================================ -->
     <section class="page-section" aria-labelledby="phases-title">
       <SectionHeader
@@ -214,35 +223,40 @@ const seo = buildSEO({
         align="center"
       />
 
+      <!-- GRID: Phase roadmap cards -->
       <div class="card-grid">
+        <!-- CARD: Phase 1 summary -->
         <Card as="article" variant="surface">
           <h3>🌱 Phase 1 — Bench-Scale Experiments</h3>
           <p>
-            Simple dielectric barrier discharge (DBD) setups test plasma–water interactions for purification, agriculture, 
+            Simple dielectric barrier discharge (DBD) setups test plasma–water interactions for purification, agriculture,
             and ecological applications. All results are shared openly to build a transparent foundation of reproducible research.
           </p>
         </Card>
 
+        <!-- CARD: Phase 2 summary -->
         <Card as="article" variant="surface">
           <h3>🌍 Phase 2 — Community Prototyping</h3>
           <p>
-            Shared templates and build guides evolve from open data.  
+            Shared templates and build guides evolve from open data.
             This phase builds a commons of plasma tools where knowledge circulates responsibly and safely.
           </p>
         </Card>
 
+        <!-- CARD: Phase 3 summary -->
         <Card as="article" variant="surface">
           <h3>🔭 Phase 3 — Collaborative Application</h3>
           <p>
-            Interdisciplinary teams and institutions co-develop plasma systems in real-world contexts.  
+            Interdisciplinary teams and institutions co-develop plasma systems in real-world contexts.
             Governance shifts from ownership to custodianship — ensuring discoveries remain open for all.
           </p>
         </Card>
       </div>
 
+      <!-- CALLOUT: Emphasizes participation over products -->
       <CalloutPanel variant="neutral" icon="🧭" title="Our Direction">
         <p>
-          ArcUp’s progress isn’t measured by products but by participation — 
+          ArcUp’s progress isn’t measured by products but by participation —
           by how widely knowledge and responsibility are shared.
         </p>
       </CalloutPanel>

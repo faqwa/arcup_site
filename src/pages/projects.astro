@@ -61,7 +61,7 @@ const seo = buildSEO({
 
   <main id="main-content" class="page-shell" aria-labelledby="projects-title">
     
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION: Overview of ArcUp project portfolio and participation invite -->
     <header class="projects-hero" aria-labelledby="projects-title">
       <p class="eyebrow">Early-Stage Collaborative Research</p>
       <h1 id="projects-title">Projects</h1>
@@ -72,14 +72,16 @@ const seo = buildSEO({
       </p>
     </header>
 
-    <!-- GETTING INVOLVED SECTION -->
+    <!-- SECTION: Audience-specific guidance on how to engage -->
     <section class="getting-involved-section" aria-labelledby="getting-involved-title">
-      <SectionHeader 
-        title="Getting Involved" 
+      <SectionHeader
+        title="Getting Involved"
         subtitle="arc^ is in early stages, which means you can help shape the direction from the ground up."
       />
-      
+
+      <!-- GRID: Three involvement pathways -->
       <div class="involvement-grid">
+        <!-- CARD: Student participation details -->
         <Card as="article" class="involvement-card">
           <div class="card-icon">🎓</div>
           <h3>For Students</h3>
@@ -87,6 +89,7 @@ const seo = buildSEO({
           <p class="card-note">We're here to support you — whether that's access to equipment, guidance on safety protocols, or help framing research questions.</p>
         </Card>
 
+        <!-- CARD: Researcher collaboration details -->
         <Card as="article" class="involvement-card">
           <div class="card-icon">🔬</div>
           <h3>For Researchers</h3>
@@ -94,6 +97,7 @@ const seo = buildSEO({
           <p class="card-note">This isn't about gatekeeping — it's about learning together and building on each other's insights.</p>
         </Card>
 
+        <!-- CARD: General community invitation -->
         <Card as="article" class="involvement-card">
           <div class="card-icon">🛠️</div>
           <h3>For Everyone</h3>
@@ -102,6 +106,7 @@ const seo = buildSEO({
         </Card>
       </div>
 
+      <!-- CTA: Link to external involvement form -->
       <div class="involvement-cta">
         <LinkButton href={EXTERNAL_LINKS.formURL} variant="primary" icon="external">
           Get Involved
@@ -109,21 +114,24 @@ const seo = buildSEO({
       </div>
     </section>
 
-    <!-- ALL PROJECTS SECTION (with categories) -->
+    <!-- SECTION: Dynamic project listing grouped by category -->
     <section class="all-projects-section" aria-labelledby="all-projects-title">
-      <SectionHeader 
+      <SectionHeader
         title="All Projects"
         subtitle="Each project follows RE:TECH principles — open, safe, iterative — and follows arc^'s licensing and governance."
       />
-      
+
+      <!-- LOOP: Iterate over project categories generated above -->
       {categories.map((category) => (
         <div class="project-category">
           {category !== 'Other' && (
             <h3 class="category-heading">{category}</h3>
           )}
-          
+
+          <!-- GRID: Project cards within {category} -->
           <div class="projects-grid">
             {projectsByCategory[category].map((project) => (
+              <!-- CARD: Individual project summary with status badge -->
               <Card as="article" class="project-card">
                 <div class="card-header">
                   <h4>
@@ -133,6 +141,7 @@ const seo = buildSEO({
                 </div>
                 <p class="card-summary">{project.data.summary}</p>
                 <p class="card-updated">Last updated: {project.data.lastUpdated}</p>
+                <!-- CTA: Button linking to full project page -->
                 <div class="card-actions">
                   <LinkButton href={withBase(`/projects/${project.slug}`)} variant="outline" icon="arrow-right">
                     Learn More
@@ -145,23 +154,25 @@ const seo = buildSEO({
       ))}
     </section>
 
-    <!-- BUILD YOUR OWN SECTION -->
+    <!-- SECTION: Encouragement to start new projects within framework -->
     <section class="build-your-own-section" aria-labelledby="build-your-own-title">
-      <SectionHeader 
-        title="Build Your Own" 
+      <SectionHeader
+        title="Build Your Own"
         subtitle="Don't see what you're looking for? You don't need our permission."
       />
-      
+
+      <!-- CALLOUT CARD: Highlights self-directed project pathway -->
       <Card class="build-your-own-content">
         <p>
-          arc^ isn't about gatekeeping — it's about <em>enabling</em>. If you understand 
-          <a href={withBase("/how")}>our philosophy</a> and commit to our <a href={withBase("/how/safety")}>safety protocols</a> 
+          arc^ isn't about gatekeeping — it's about <em>enabling</em>. If you understand
+          <a href={withBase("/how")}>our philosophy</a> and commit to our <a href={withBase("/how/safety")}>safety protocols</a>
           and <a href={withBase("/how/licensing")}>open licensing</a>, you can start your own arc^ project.
         </p>
         <p>
-          <strong>You have the power.</strong> Document your work. Share openly. Build for 
+          <strong>You have the power.</strong> Document your work. Share openly. Build for
           <em>life over profit</em>. That's all we ask.
         </p>
+        <!-- CTA: Link to philosophy overview -->
         <div class="button-wrapper">
           <LinkButton href={withBase("/how")} variant="outline" icon="arrow-right">
             Learn the Philosophy
@@ -170,7 +181,7 @@ const seo = buildSEO({
       </Card>
     </section>
 
-    <!-- LEGAL REMINDER -->
+    <!-- SECTION: Legal reminder about open licensing commitments -->
     <section class="legal-section">
       <h3>Open by Default</h3>
       <p>All arc^ projects follow our <a href={withBase("/how/licensing")}>non-extractive licensing model</a>. Research outputs, data, and designs stay in the commons.</p>

@@ -32,7 +32,7 @@ const seo = buildSEO({
 
   <main id="main-content" class="page-shell" aria-labelledby="page-title">
 
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION: Draft overview of ArcUp purpose -->
     <header class="page-hero" aria-labelledby="page-title">
       <p class="eyebrow">re:practising science & innovation</p>
       <h1 id="page-title">About ArcUp</h1>
@@ -42,6 +42,7 @@ const seo = buildSEO({
       </p>
     </header>
 
+    <!-- SECTION: Draft focus overview cards -->
     <section class="page-section" aria-labelledby="section-1-title">
     <SectionHeader
         title="Our Focus"
@@ -50,8 +51,10 @@ const seo = buildSEO({
 
         />
 
+    <!-- GRID: Dual-card breakdown of structure and purpose themes -->
     <div class="card-grid">
 
+        <!-- CARD: Structure emphasis -->
         <Card as="article" variant="surface">
         <h3>Structure: Open by Design</h3>
         <p>     <!-- can we get this colour muted -->
@@ -65,6 +68,7 @@ const seo = buildSEO({
         </p>
         </Card>
 
+        <!-- CARD: Purpose emphasis -->
         <Card as="article" variant="surface">
         <h3>Purpose: Regeneration as Practice</h3>
         <p><!-- can we get this colour muted -->
@@ -80,23 +84,27 @@ const seo = buildSEO({
     </section>
 
 
-    <!-- SECTION 2 -->
+    <!-- SECTION: Draft navigation cards to subpages -->
     <section class="page-section" aria-labelledby="section-2-title">
       <SectionHeader
         title="What You’ll Find Here"
         subtitle="Learn the story, people, and purpose behind ArcUp."
       />
+      <!-- GRID: Links to Origin, Founder, and Mission drafts -->
       <div class="card-grid">
+        <!-- CARD: Origin draft link -->
         <Card as="article" class="info-card">
           <h3>Origin</h3>
           <p>How a small plasma–seed experiment became a framework for regenerative research.</p>
           <LinkButton href={withBase('/about/origin')} variant="outline" icon="arrow-right">Read the Story</LinkButton>
         </Card>
+        <!-- CARD: Founder draft link -->
         <Card as="article" class="info-card">
           <h3>Founder</h3>
           <p>Meet Ali Saleh and the systems thinking shaping ArcUp’s interdisciplinary approach.</p>
           <LinkButton href={withBase('/about/founder')} variant="outline" icon="arrow-right">Meet Ali</LinkButton>
         </Card>
+        <!-- CARD: Mission draft link -->
         <Card as="article" class="info-card">
           <h3>Mission</h3>
           <p>Discover the vision, phases, and long-term goal of a commons for plasma research.</p>
@@ -105,7 +113,7 @@ const seo = buildSEO({
       </div>
     </section>
 
-    <!-- CTA FOOTER -->
+    <!-- CTA SECTION: Draft invite to engage and follow workspace -->
     <section class="cta-section" aria-labelledby="cta-title">
       <SectionHeader
         title="Be Part of the Work"

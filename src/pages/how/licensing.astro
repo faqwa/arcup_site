@@ -35,7 +35,7 @@ const seo = buildSEO({
 
   <main id="main-content" class="page-shell" aria-labelledby="licensing-title">
     
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION: Establishes commitment to open licensing -->
     <header class="how-hero" aria-labelledby="licensing-title">
       <p class="eyebrow">Knowledge in the Commons</p>
       <h1 id="licensing-title">Open Licensing</h1>
@@ -44,7 +44,7 @@ const seo = buildSEO({
       </div>
     </header>
 
-    <!-- WHY OPEN -->
+    <!-- CALLOUT SECTION: Rationale for open licensing stance -->
     <section class="how-callout">
       <Card>
         <div class="licensing-content">
@@ -53,6 +53,7 @@ const seo = buildSEO({
             align="left"
             headingLevel="h2"
           />
+          <!-- TEXT BLOCK: Explains anti-extractive philosophy -->
           <p>Proprietary technology is extractive. It locks knowledge behind paywalls, limits who can contribute, and serves profit over collective good.</p>
           <p>We use <strong>copyleft licenses</strong> to ensure that arc^ research remains open, accessible, and non-extractive. Anyone can use, modify, and build on our work — as long as derivatives stay open too.</p>
           <p>This isn't just ideology. It's a practical commitment to <em>keeping knowledge in the commons</em> where it can serve the most people.</p>
@@ -60,7 +61,7 @@ const seo = buildSEO({
       </Card>
     </section>
 
-    <!-- LICENSE GRID -->
+    <!-- SECTION: Breakdown of license types used by ArcUp -->
     <section>
       <SectionHeader
         title="Our Licenses"
@@ -69,8 +70,10 @@ const seo = buildSEO({
         headingLevel="h2"
       />
 
+      <!-- GRID: License cards for hardware, documentation, and software -->
       <div class="license-grid">
-        
+
+        <!-- CARD: Hardware licensing details -->
         <Card as="article" class="license-card">
           <div class="license-header">
             <h3>CERN-OHL-S v2</h3>
@@ -90,6 +93,7 @@ const seo = buildSEO({
           </a>
         </Card>
 
+        <!-- CARD: Documentation licensing details -->
         <Card as="article" class="license-card">
           <div class="license-header">
             <h3>CC BY-NC-SA 4.0</h3>
@@ -109,6 +113,7 @@ const seo = buildSEO({
           </a>
         </Card>
 
+        <!-- CARD: Software licensing details -->
         <Card as="article" class="license-card">
           <div class="license-header">
             <h3>AGPL-3.0</h3>
@@ -131,7 +136,7 @@ const seo = buildSEO({
       </div>
     </section>
 
-    <!-- COMMERCIAL USE -->
+    <!-- CALLOUT SECTION: Guidance on commercial applications -->
     <section class="how-callout">
       <Card variant="outline">
         <div class="licensing-content">
@@ -140,6 +145,7 @@ const seo = buildSEO({
             align="left"
             headingLevel="h2"
           />
+          <!-- TEXT BLOCK: Clarifies conditions for market activity -->
           <p>Our documentation is non-commercial, but hardware and software licenses allow commercial use — <em>as long as derivatives stay open</em>.</p>
           <p>This means you can build and sell products based on arc^ designs, but you must share your modifications and improvements under the same open licenses.</p>
           <p><strong>Why?</strong> We're not anti-market. We're anti-extraction. If someone builds a business using arc^ work, the knowledge they generate should flow back to the commons, not disappear behind patents.</p>
@@ -147,7 +153,7 @@ const seo = buildSEO({
       </Card>
     </section>
 
-    <!-- PRINCIPLE -->
+    <!-- CALLOUT SECTION: Core principle reminder -->
     <section class="how-callout">
       <Card>
         <div class="licensing-content">
@@ -156,13 +162,14 @@ const seo = buildSEO({
             align="center"
             headingLevel="h2"
           />
+          <!-- TEXT BLOCK: Reinforces commons-first ethos -->
           <p style="text-align: center;">Knowledge is not property. It's a commons that grows when shared.</p>
           <p style="text-align: center;">Our licensing ensures that arc^ research serves <em>collective futures</em>, not private shareholders.</p>
         </div>
       </Card>
     </section>
 
-    <!-- NAVIGATION -->
+    <!-- SECTION: Navigation buttons to related pages -->
     <section class="how-callout">
       <div class="how-actions">
         <LinkButton href={withBase("/how/safety")} variant="outline">
