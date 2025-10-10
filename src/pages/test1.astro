@@ -197,93 +197,84 @@ const seo = buildSEO({
     <!-- VISUAL: Divider between major content sections -->
     <SectionDivider variant="subtle" spacing="compact" />
 
-    <!-- 
-
-    GETTING INVOLVED 
-
-    Integrating this into the copy
-
-Each card could open with a recognition line that mirrors the reader’s internal question.
-For example:
-
-<Card ...>
-  <h3>🎓 For Students</h3>
-  <p><strong>Wondering if open research can fit within your degree?</strong>
-     It can. ArcUp projects are designed for coursework alignment — you’ll work under your supervisor’s guidance while contributing to shared data.</p>
-
-
-or
-
-<Card ...>
-  <h3>🔬 For Researchers</h3>
-  <p><strong>Looking for rigor and openness in the same field?</strong>
-     ArcUp’s early protocols need peer scrutiny and method design — your expertise defines what responsible plasma research looks like.</p>
-
-
-and
-
-<Card ...>
-  <h3>🛠️ For Everyone</h3>
-  <p><strong>Think this is beyond your skill set?</strong>
-     If you can follow a safety guide and keep notes, you’re already part of the experiment. We’ll teach you the rest.</p>
-
-
-     ========================================================================
-     GETTING INVOLVED SECTION
-     Invitation for students, researchers, and communities
-     ======================================================================== 
-    <section class="home-section" aria-labelledby="getting-involved-title">
+    <!-- ========================================================================
+         GETTING INVOLVED SECTION
+         Invitation for students, researchers, and communities
+         ======================================================================== -->
+    <section class="page-section page-section--center" aria-labelledby="getting-involved-title">
+      <!-- COMPONENT: SectionHeader establishes section context -->
       <SectionHeader
-        id="getting-involved-title"
         eyebrow="Participation"
         title="Getting Involved"
         subtitle="ArcUp is in its early stages — you can help shape its direction from the ground up."
         align="center"
       />
 
-      <div class="involved-grid card-grid" role="list">
+      <!-- UNIVERSAL PATTERN: card-grid--3 for three audience pathways -->
+      <div class="card-grid card-grid--3" role="list">
+        <!-- CARD: Student participation pathway -->
         <Card as="article" variant="surface" hover={true} role="listitem">
-          <h3>🎓 For Students</h3>
+          <div class="card-icon">🎓</div>
+          <h3>For Students</h3>
           <p>
-            Working on a final-year project, honours thesis, or PhD? 
-            You can explore <em>arc^</em> projects as part of your coursework. 
-            We're here to support you — whether that means access to equipment, 
-            safety guidance, or help framing research questions.
+            <strong>Wondering if open research can fit within your degree?</strong>
+            It can. ArcUp projects are designed for coursework alignment — you'll work under your supervisor's guidance while contributing to shared data.
           </p>
-          <p class="focus-status">
-            <em>What you’ll need:</em> a project proposal, supervisor approval, and commitment to open licensing.
+          <p class="card-note">
+            <em>What you'll need: a project proposal, supervisor approval, and commitment to open licensing.</em>
           </p>
         </Card>
 
+        <!-- CARD: Researcher collaboration pathway -->
         <Card as="article" variant="surface" hover={true} role="listitem">
-          <h3>🔬 For Researchers</h3>
+          <div class="card-icon">🔬</div>
+          <h3>For Researchers</h3>
           <p>
-            Have expertise in plasma physics, materials science, or ecological systems? 
-            Your insight can help validate early results or open new lines of inquiry.
-            This isn’t about gatekeeping — it’s about learning together and building on shared knowledge.
+            <strong>Looking for rigor and openness in the same field?</strong>
+            ArcUp's early protocols need peer scrutiny and method design — your expertise defines what responsible plasma research looks like.
           </p>
-          <p class="focus-status">
-            <em>What’s available now:</em> emerging research questions, experimental frameworks, and opportunities for method development.
+          <p class="card-note">
+            <em>What's available now: emerging research questions, experimental frameworks, and opportunities for method development.</em>
           </p>
         </Card>
 
+        <!-- CARD: General community participation pathway -->
         <Card as="article" variant="surface" hover={true} role="listitem">
-          <h3>🛠️ For Everyone</h3>
+          <div class="card-icon">🛠️</div>
+          <h3>For Everyone</h3>
           <p>
-            You don’t need a degree to contribute. Makers, growers, designers, and community members 
-            all have perspectives essential to building regenerative technology. 
-            If you’re curious, safety-minded, and ready to learn — there’s a place for you.
+            <strong>Think this is beyond your skill set?</strong>
+            If you can follow a safety guide and keep notes, you're already part of the experiment. We'll teach you the rest.
           </p>
-          <p class="focus-status">
-            <em>Best way to start:</em> browse projects that interest you and reach out to begin a conversation.
+          <p class="card-note">
+            <em>Best way to start: browse projects that interest you and reach out to begin a conversation.</em>
           </p>
         </Card>
       </div>
+
+      <!-- UNIVERSAL PATTERN: section-cta for primary engagement action -->
+      <div class="section-cta">
+        <LinkButton 
+          href={withBase("/join")} 
+          variant="primary" 
+          icon="arrow-right"
+          aria-label="Learn how to join ArcUp's research community"
+        >
+          Join the Community
+        </LinkButton>
+        <LinkButton 
+          href="https://workspace.arcup.example"
+          variant="outline" 
+          icon="external-link"
+          aria-label="Visit ArcUp's research workspace and dashboard"
+        >
+          Explore Workspace
+        </LinkButton>
+      </div>
     </section>
 
+    <!-- VISUAL: Divider maintains rhythm before navigation -->
     <SectionDivider variant="subtle" spacing="normal" />
-
-    -->
 
     <!-- ========================================================================
          PAGE NAVIGATION

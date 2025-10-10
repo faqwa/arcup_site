@@ -1,19 +1,35 @@
 ---
+// ============================================================================
+// TEMPLATE.ASTRO - UNIVERSAL PATTERN SHOWCASE
+// Complete reference for building any ArcUp page using global-v2.css
+// ============================================================================
+/*
+AI Summary Metadata:
+title: ArcUp Template - Universal Design Patterns
+summary: Comprehensive showcase of all reusable patterns, components, and layouts available in the ArcUp design system.
+keywords: design system, component library, layout patterns, UI templates
+ai_content_highlights:
+  - Complete demonstration of universal CSS patterns
+  - Hero, section, card grid, and navigation examples
+  - All component variants shown (buttons, cards, badges)
+  - Copy-paste ready code blocks for rapid page building
+*/
+
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ArcCanvas from "../components/ArcCanvas.astro";
 import SectionHeader from "../components/SectionHeader.astro";
+import SectionDivider from "../components/SectionDivider.astro";
 import Card from "../components/Card.astro";
 import LinkButton from "../components/LinkButton.astro";
 import StatusBadge from "../components/StatusBadge.astro";
 import CalloutPanel from "../components/CalloutPanel.astro";
-import SectionDivider from "../components/SectionDivider.astro";
-import "../styles/global.css";
 
 import { withBase } from "../utils/paths";
 import { buildSEO } from "../utils/seo";
 
 const seo = buildSEO({
-  title: "Template Showcase",
-  description: "Layout playground for reviewing ArcUp component combinations.",
+  title: "ArcUp Template - Universal Patterns",
+  description: "Complete showcase of all universal design patterns, components, and layouts for building consistent ArcUp pages.",
   path: "/template",
   siteUrl: Astro.site,
 });
@@ -26,241 +42,355 @@ const seo = buildSEO({
   seo={seo}
   navActive="projects"
 >
-  <main id="main-content" class="page-shell">
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href={withBase("/")}>Home</a>
-      <span aria-hidden="true">/</span>
-      <span aria-current="page">Template Showcase</span>
-    </nav>
-    <section class="surface-panel">
-      <SectionHeader
-        eyebrow="Template Eyebrow"
-        title="Template Hero Title"
-        subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-        align="center"
-      />
+  <ArcCanvas slot="before-header" />
 
+  <main id="main-content" class="page-shell" aria-labelledby="page-title">
+
+    <!-- ========================================================================
+         PATTERN 1: PAGE HERO (Standard)
+         ======================================================================== -->
+    <header class="page-hero" aria-labelledby="page-title">
+      <p class="eyebrow">Pattern Showcase</p>
+      <h1 id="page-title">Universal Template</h1>
       <p class="lead">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Integer vitae neque sed urna vestibulum
-        pretium in id risus.
+        This template demonstrates every universal pattern available in <strong>global-v2.css</strong>.
+        Use these examples to build any page quickly and consistently.
       </p>
-
-      <div class="hero-actions">
+      
+      <div class="section-cta">
         <LinkButton href={withBase("/projects")} variant="primary" icon="arrow-right">
           Primary Action
         </LinkButton>
         <LinkButton href={withBase("/about")} variant="outline" icon="arrow-right">
           Secondary Action
         </LinkButton>
-        <LinkButton href={withBase("/join")} variant="ghost" icon="arrow-right">
-          Ghost Action
+      </div>
+    </header>
+
+    <SectionDivider />
+
+    <!-- ========================================================================
+         PATTERN 2: PAGE HERO (Large Title)
+         ======================================================================== -->
+    <header class="page-hero">
+      <p class="eyebrow">Alternative Hero Pattern</p>
+      <h1 class="hero-title">arc^</h1>
+      <p class="lead">
+        Use <code>.hero-title</code> class for extra-large display titles.
+      </p>
+    </header>
+
+    <SectionDivider />
+
+    <!-- ========================================================================
+         PATTERN 3: SECTION WITH SECTIONHEADER
+         ======================================================================== -->
+    <section class="page-section page-section--center">
+      <SectionHeader
+        eyebrow="Component Pattern"
+        title="Section with SectionHeader"
+        subtitle="Use the SectionHeader component for consistent heading blocks."
+        align="center"
+      />
+      
+      <p>Additional content goes here after the SectionHeader component.</p>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ========================================================================
+         PATTERN 4: PROSE CONTENT
+         ======================================================================== -->
+    <section class="page-section">
+      <SectionHeader
+        title="Prose Content Pattern"
+        subtitle="For text-heavy sections with multiple paragraphs"
+        align="left"
+      />
+      
+      <div class="content-prose">
+        <p>
+          <strong>The content-prose container</strong> provides optimal typography for reading.
+          It handles spacing, line-height, and emphasis colors automatically.
+        </p>
+        
+        <p>
+          Paragraphs inside <code>.content-prose</code> get proper spacing, 
+          <strong>bold text</strong> is highlighted, and 
+          <em>italic text</em> uses the accent color.
+        </p>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ========================================================================
+         PATTERN 5: 2-COLUMN CARD GRID
+         ======================================================================== -->
+    <section class="page-section page-section--center">
+      <SectionHeader
+        eyebrow="Card Grid Patterns"
+        title="2-Column Grid"
+        subtitle="Use card-grid--2 for side-by-side cards."
+        align="center"
+      />
+      
+      <div class="card-grid card-grid--2" role="list">
+        <Card as="article" variant="surface" hover={true} role="listitem">
+          <h3>First Card</h3>
+          <p>
+            Cards in a 2-column grid display side-by-side on desktop,
+            then stack vertically on mobile.
+          </p>
+          <p class="card-note"><em>This is a card note with separator line.</em></p>
+        </Card>
+        
+        <Card as="article" variant="surface" hover={true} role="listitem">
+          <h3>Second Card</h3>
+          <p>
+            All cards maintain equal height. The card-note
+            is aligned at the bottom.
+          </p>
+          <p class="card-note"><em>Note appears at consistent position.</em></p>
+        </Card>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ========================================================================
+         PATTERN 6: 3-COLUMN CARD GRID
+         ======================================================================== -->
+    <section class="page-section page-section--center">
+      <SectionHeader
+        title="3-Column Grid"
+        subtitle="Use card-grid--3 for three-across layouts"
+        align="center"
+      />
+      
+      <div class="card-grid card-grid--3" role="list">
+        <Card as="article" variant="surface" hover={true} role="listitem">
+          <h3>Card One</h3>
+          <p>Three-column grids work great for features.</p>
+          <p class="card-note"><em>Status: Active</em></p>
+        </Card>
+        
+        <Card as="article" variant="surface" hover={true} role="listitem">
+          <h3>Card Two</h3>
+          <p>On large screens, these display three across.</p>
+          <p class="card-note"><em>Status: Testing</em></p>
+        </Card>
+        
+        <Card as="article" variant="surface" hover={true} role="listitem">
+          <h3>Card Three</h3>
+          <p>Mobile view stacks all cards.</p>
+          <p class="card-note"><em>Status: Ready</em></p>
+        </Card>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ========================================================================
+         PATTERN 7: 4-COLUMN CARD GRID (2×2)
+         ======================================================================== -->
+    <section class="page-section page-section--center">
+      <SectionHeader
+        title="4-Column Grid (2×2)"
+        subtitle="Use card-grid--4 for balanced 2×2 layouts."
+        align="center"
+      />
+      
+      <div class="card-grid card-grid--4" role="list">
+        <Card as="article" variant="surface" hover={true} role="listitem">
+          <h3>Technology</h3>
+          <p>
+            Four-card grids display as 2×2 on desktop and stack on mobile.
+          </p>
+          <p class="card-note"><em>Focus: Engineering & design</em></p>
+        </Card>
+        
+        <Card as="article" variant="surface" hover={true} role="listitem">
+          <h3>Water Systems</h3>
+          <p>
+            Each card maintains equal height with others in the grid.
+          </p>
+          <p class="card-note"><em>Focus: Chemistry & application</em></p>
+        </Card>
+        
+        <Card as="article" variant="surface" hover={true} role="listitem">
+          <h3>Organisms</h3>
+          <p>
+            Card headings use primary-bright color for hierarchy.
+          </p>
+          <p class="card-note"><em>Focus: Biology & safety</em></p>
+        </Card>
+        
+        <Card as="article" variant="surface" hover={true} role="listitem">
+          <h3>Ecosystems</h3>
+          <p>
+            Separator line above card-notes provides visual distinction.
+          </p>
+          <p class="card-note"><em>Focus: Ecology & modeling</em></p>
+        </Card>
+      </div>
+      
+      <div class="section-cta">
+        <LinkButton href={withBase("/how")} variant="outline" icon="arrow-right">
+          Learn More
         </LinkButton>
       </div>
     </section>
 
-    <section>
-      <SectionHeader
-        eyebrow="Buttons"
-        title="Button Variations"
-        subtitle="Demonstrates primary, outline, and ghost button styles using the link button component."
-        align="center"
-        headingLevel="h2"
-      />
+    <SectionDivider />
 
-      <div class="hero-actions">
-        <LinkButton href={withBase("/join")} variant="primary" icon="arrow-right">
+    <!-- ========================================================================
+         PATTERN 8: BUTTON VARIANTS
+         ======================================================================== -->
+    <section class="page-section page-section--center">
+      <SectionHeader
+        eyebrow="Components"
+        title="Button Variants"
+        subtitle="Primary, Outline, and Ghost styles"
+        align="center"
+      />
+      
+      <div class="section-cta">
+        <LinkButton href={withBase("/projects")} variant="primary" icon="arrow-right">
           Primary Button
         </LinkButton>
-        <LinkButton href={withBase("/projects")} variant="outline" icon="arrow-right">
-          Secondary Button
+        <LinkButton href={withBase("/about")} variant="outline" icon="arrow-right">
+          Outline Button
         </LinkButton>
-        <LinkButton href={withBase("/how")} variant="ghost" icon="arrow-right">
+        <LinkButton href={withBase("/join")} variant="ghost" icon="arrow-right">
           Ghost Button
         </LinkButton>
       </div>
     </section>
 
-    <nav class="home-nav-cards" aria-label="Template navigation cards">
-      <a href={withBase("/about")} class="nav-card">
-        <h3>About Section</h3>
-        <p>Mirrors the homepage navigation cards with arrow reveal on hover.</p>
-        <span class="nav-card-arrow" aria-hidden="true">→</span>
-      </a>
+    <SectionDivider />
 
-      <a href={withBase("/projects")} class="nav-card">
-        <h3>Projects Section</h3>
-        <p>Shows how the arrow icon animates into view for interactive links.</p>
-        <span class="nav-card-arrow" aria-hidden="true">→</span>
-      </a>
-
-      <a href={withBase("/how")} class="nav-card">
-        <h3>Methods Section</h3>
-        <p>Uses the same home-nav-cards layout for consistency checks.</p>
-        <span class="nav-card-arrow" aria-hidden="true">→</span>
-      </a>
-
-      <a href={withBase("/join")} class="nav-card">
-        <h3>Join Section</h3>
-        <p>Ensures hover arrow behaviour is ready for reuse across pages.</p>
-        <span class="nav-card-arrow" aria-hidden="true">→</span>
-      </a>
-    </nav>
-
-    <SectionDivider variant="subtle" spacing="compact" />
-
-    <section>
+    <!-- ========================================================================
+         PATTERN 9: STATUS BADGES
+         ======================================================================== -->
+    <section class="page-section page-section--center">
       <SectionHeader
-        eyebrow="Three Column"
-        title="Card Variants"
-        subtitle="Showcases default, surface, outline, and enhanced card content combinations."
-        align="left"
-        headingLevel="h2"
-      />
-
-      <div class="card-grid">
-        <Card variant="default" as="article">
-          <h3>Default Variant</h3>
-          <p>
-            Uses the default background option for scenarios where stronger contrast is preferred against the page
-            surface.
-          </p>
-          <LinkButton href={withBase("/projects")} variant="ghost" icon="arrow-right">
-            Explore Projects
-          </LinkButton>
-        </Card>
-
-        <Card as="article">
-          <span class="eyebrow">Step 01</span>
-          <h3>Numbered Badge</h3>
-          <p>
-            Presents a simple numbered marker using existing typography tokens for outlining sequential steps without
-            extra styling.
-          </p>
-          <LinkButton href={withBase("/how")} variant="ghost" icon="arrow-right">
-            View Process
-          </LinkButton>
-        </Card>
-
-        <Card as="article">
-          <h3>Hover Glow Card</h3>
-          <p>
-            Leverages the built-in hover elevation to communicate interactivity. Move the pointer to observe the glow
-            response.
-          </p>
-          <LinkButton href={withBase("/join")} variant="outline" icon="arrow-right">
-            Interact
-          </LinkButton>
-        </Card>
-      </div>
-    </section>
-
-    <section>
-      <SectionHeader
-        eyebrow="Two Column"
-        title="Card Layout Variations"
-        subtitle="Examples combining status indicators, arrow icons, and alternative padding."
+        title="Status Badges"
+        subtitle="Visual indicators for project state"
         align="center"
-        headingLevel="h2"
       />
-
-      <div class="card-grid">
-        <Card as="article" padding="spacious">
+      
+      <div class="card-grid card-grid--4" role="list">
+        <Card as="article" variant="surface" role="listitem">
+          <StatusBadge status="early-idea" />
+          <h3>Early Idea</h3>
+          <p>For projects in planning phase.</p>
+        </Card>
+        
+        <Card as="article" variant="surface" role="listitem">
           <StatusBadge status="active" />
-          <h3>Status Enabled Card</h3>
-          <p>
-            Integrates a status badge component for communicating project state within a content panel.
-          </p>
-          <LinkButton href={withBase("/projects")} icon="arrow-right">
-            Open Project
-          </LinkButton>
+          <h3>Active</h3>
+          <p>For projects in development.</p>
         </Card>
-
-        <Card as="article" variant="outline" hover={false} padding="compact">
-          <h3>Arrow Icon CTA</h3>
-          <p>
-            Demonstrates an outline treatment with the arrow icon enabled on the action link for directional emphasis.
-          </p>
-          <LinkButton href={withBase("/about")} variant="primary" icon="arrow-right">
-            Learn About Us
-          </LinkButton>
+        
+        <Card as="article" variant="surface" role="listitem">
+          <StatusBadge status="paused" />
+          <h3>Paused</h3>
+          <p>For temporarily on hold.</p>
+        </Card>
+        
+        <Card as="article" variant="surface" role="listitem">
+          <StatusBadge status="completed" />
+          <h3>Completed</h3>
+          <p>For finished projects.</p>
         </Card>
       </div>
     </section>
 
-    <section>
-      <SectionHeader
-        eyebrow="Raw Class Example"
-        title="Manual Card Markup"
-        subtitle="Demonstrates direct use of the card utility classes without the Card component wrapper."
-        align="left"
-        headingLevel="h2"
-      />
+    <SectionDivider />
 
-      <div class="card-grid">
-        <div class="card card--surface card--padding-spacious card--hover">
-          <h3>Utility Class Card</h3>
-          <p>
-            This panel uses the combined class string <code>card card--surface card--padding-spacious card--hover</code> to
-            match legacy implementations that render cards without the component abstraction.
-          </p>
-          <a class="link-button link-button--outline" href={withBase("/projects")}>
-            Review Legacy Usage
-          </a>
-        </div>
+    <!-- ========================================================================
+         PATTERN 10: CALLOUT PANELS
+         ======================================================================== -->
+    <section class="page-section">
+      <SectionHeader
+        title="Callout Panels"
+        subtitle="For notices and highlighted info"
+        align="center"
+      />
+      
+      <div class="card-grid card-grid--3">
+        <CalloutPanel variant="info">
+          <h3>Info Callout</h3>
+          <p>Use for helpful tips.</p>
+        </CalloutPanel>
+        
+        <CalloutPanel variant="warning">
+          <h3>Warning Callout</h3>
+          <p>Use for cautions.</p>
+        </CalloutPanel>
+        
+        <CalloutPanel variant="success">
+          <h3>Success Callout</h3>
+          <p>Use for confirmations.</p>
+        </CalloutPanel>
       </div>
     </section>
 
-    <section class="surface-panel">
+    <SectionDivider />
+
+    <!-- ========================================================================
+         PATTERN 11: CTA ALIGNMENT VARIANTS
+         ======================================================================== -->
+    <section class="page-section">
       <SectionHeader
-        eyebrow="Callouts"
-        title="Callout Panel Example"
-        subtitle="Use callouts to highlight important notices, warnings, or quick reference summaries."
-        align="left"
-        headingLevel="h2"
+        title="CTA Alignment Variants"
+        subtitle="Center, left, or right-aligned buttons"
+        align="center"
       />
-
-      <CalloutPanel variant="info" icon="💡" title="Helpful Context">
-        <p>
-          Callout panels inherit global spacing tokens and surface treatments, making them ideal for emphasising compact
-          notes without bespoke styling.
-        </p>
-      </CalloutPanel>
-    </section>
-
-    <section class="acknowledgements-section">
-      <SectionHeader
-        eyebrow="Acknowledgements"
-        title="Hybrid Grid Placeholder"
-        subtitle="Structure mirrors the acknowledgements section so upcoming CSS can be validated."
-        align="left"
-        headingLevel="h2"
-      />
-
-      <div class="acknowledgements-intro">
-        <p><strong>Placeholder copy:</strong> Introduce the collaborators or communities being recognised.</p>
+      
+      <div class="content-prose">
+        <p><strong>Centered (default):</strong></p>
       </div>
-
-      <div class="acknowledgements-grid">
-        <article class="acknowledgement-card">
-          <h3>Placeholder Item One</h3>
-          <p>Space reserved for name, link, or description content.</p>
-        </article>
-
-        <article class="acknowledgement-card">
-          <h3>Placeholder Item Two</h3>
-          <p>Use this block to verify hybrid grid alignments.</p>
-        </article>
-
-        <article class="acknowledgement-card">
-          <h3>Placeholder Item Three</h3>
-          <p>Helps confirm typography and spacing tokens once styles merge.</p>
-        </article>
-
-        <article class="acknowledgement-card">
-          <h3>Placeholder Item Four</h3>
-          <p>Ensures multi-column responsiveness for mixed content.</p>
-        </article>
+      <div class="section-cta">
+        <LinkButton href={withBase("/")} variant="primary">Centered Button</LinkButton>
+      </div>
+      
+      <div class="content-prose">
+        <p><strong>Left-aligned:</strong></p>
+      </div>
+      <div class="section-cta section-cta--left">
+        <LinkButton href={withBase("/")} variant="outline">Left-Aligned Button</LinkButton>
+      </div>
+      
+      <div class="content-prose">
+        <p><strong>Right-aligned:</strong></p>
+      </div>
+      <div class="section-cta section-cta--right">
+        <LinkButton href={withBase("/")} variant="ghost">Right-Aligned Button</LinkButton>
       </div>
     </section>
+
+    <SectionDivider />
+
+    <!-- ========================================================================
+         PATTERN 12: BREADCRUMB NAVIGATION
+         ======================================================================== -->
+    <section class="page-section">
+      <SectionHeader
+        title="Breadcrumb Navigation"
+        subtitle="For hierarchical page context"
+        align="center"
+      />
+      
+      <nav class="breadcrumb" aria-label="Breadcrumb Example">
+        <a href={withBase("/")}>Home</a>
+        <span aria-hidden="true">/</span>
+        <a href={withBase("/projects")}>Projects</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Current Page</span>
+      </nav>
+    </section>
+
   </main>
 </BaseLayout>
