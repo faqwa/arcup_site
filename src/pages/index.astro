@@ -1,18 +1,38 @@
 ---
 // ============================================================================
+// AI SUMMARY METADATA
+// ============================================================================
+/*
+AI Summary Metadata:
+title: ArcUp — Open Plasma Research for Ecological Repair
+summary: ArcUp is an open experimental research framework developing plasma-based systems for ecological regeneration, working transparently to make research accessible and actionable.
+keywords: plasma technology, ecological repair, open science, regenerative systems, plasma activated water, soil restoration, community research, ethical innovation
+ai_content_highlights:
+  - Open research framework for plasma-based ecological regeneration technologies
+  - Develops water purification and soil restoration systems using controlled electrical discharges
+  - Guided by Repractice Ethical Framework emphasizing transparency, accessibility, and life-serving technology
+  - Four-layer logic: Technology → Water → Organisms → Ecosystems
+  - Transparent, multi-scale research process aligning engineering with ecological accountability
+*/
+
+// ============================================================================
 // IMPORTS
 // ============================================================================
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ArcCanvas from "../components/ArcCanvas.astro";
 import PageNavigation from "../components/PageNavigation.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import SectionDivider from "../components/SectionDivider.astro";
+import Card from "../components/Card.astro";
 import LinkButton from "../components/LinkButton.astro";
+import "../styles/global-v2.css";
 
 import { withBase } from '../utils/paths';
 import { buildSEO } from '../utils/seo';
 import { EXTERNAL_LINKS } from '../config/constants';
 
 // ============================================================================
-// SEO
+// SEO CONFIGURATION
 // ============================================================================
 const seo = buildSEO({
   title: "arc^",
@@ -29,116 +49,227 @@ const seo = buildSEO({
   seo={seo}
   navActive="home"
 >
-  <!-- LAYOUT SLOT: interactive arc canvas background prior to header -->
+  <!-- PERFORMANCE: ArcCanvas loaded in before-header slot for optimal visual hierarchy -->
   <ArcCanvas slot="before-header" />
 
+  <!-- SEMANTIC: Main landmark with proper labeling for screen readers -->
   <main id="main-content" class="page-shell" aria-labelledby="main-title">
 
     <!-- ========================================================================
-         HERO SECTION — Core Message
+         HERO SECTION
+         Primary introduction communicating core mission and research framework
          ======================================================================== -->
-      <header class="home-hero" aria-labelledby="main-title" aria-describedby="home-summary">
-        <!-- HERO EYEBROW: concise mission cue -->
-        <p class="eyebrow">Open Research for a Thriving Earth</p>
+    <header class="page-hero" aria-labelledby="main-title">
+      <!-- ACCESSIBILITY: Eyebrow provides context before main heading -->
+      <p class="eyebrow">Open Research for a Thriving Earth</p>
 
-        <!-- HERO TITLE: primary brand mark -->
-        <h1 id="main-title" class="hero-title">arc^</h1>
+      <!-- SEMANTIC: h1 as primary page heading with hero-title class for large display -->
+      <h1 id="main-title" class="hero-title">arc^</h1>
 
-        <!-- HERO LEDE: high-level summary of ArcUp focus -->
-        <p class="lead home-lede">
-          <em>ArcUp</em> is an open experimental research framework developing
-          <strong>plasma-based systems for ecological regeneration and resilience.</strong>
+      <!-- Lead paragraph emphasizing key mission -->
+      <p class="lead">
+        <em>ArcUp</em> is an open experimental research framework advancing
+        <strong>plasma-based systems for ecological repair.</strong>
+      </p>
+
+      <!-- UNIVERSAL PATTERN: content-prose for multi-paragraph text blocks -->
+      <div class="content-prose">
+        <p>
+          Our research begins with <strong>technology</strong>—how controlled electrical discharges can be
+          generated safely and accessibly. From there we study how that energy interacts with
+          <strong>water</strong>, transforming chemistry and enabling reuse.
+          We trace its influence on <strong>organisms</strong>—microbes, plants, and humans—examining
+          functional and molecular responses. Finally, we observe how these effects scale within
+          <strong>ecosystems</strong>, testing whether local repair can strengthen whole landscapes.
         </p>
 
-        <!-- HERO CONTEXT: supporting mission statement -->
-        <p class="home-body">
-          We explore how controlled electrical discharges can purify water systems,
-          restore soil function, and repair damaged ecosystems —
-          guided by the belief that technology should <em>serve life, not profit.</em>
-        </p>
-
-        <!-- HERO ETHICS CALLOUT: links to guiding framework -->
-        <p class="home-context">
-          Our work follows the
-          <a href="https://repractice.xbyali.page" class="underline" target="_blank" rel="noopener noreferrer">
+        <p>
+          Every stage follows the
+          <a href="https://repractice.xbyali.page" target="_blank" rel="noopener noreferrer">
             Repractice Ethical Framework
           </a>,
-          ensuring all research remains <em>open, regenerative, and accountable to the commons.</em>
+          which keeps our work transparent, reproducible, and accountable to the commons.
         </p>
+      </div>
 
-        <!-- HERO ACTIONS: primary navigation CTAs -->
-        <div class="hero-actions">
-          <!-- CTA BUTTON: direct path to projects overview -->
-          <LinkButton href={withBase("/projects")} variant="primary" icon="arrow-right">
-            Start with a Project Idea
-          </LinkButton>
-          <!-- CTA BUTTON: path to methodology page -->
-          <LinkButton href={withBase("/how")} variant="outline" icon="arrow-right">
-             Learn Our Approach
-          </LinkButton>
-        </div>
-      </header>
+      <!-- UNIVERSAL PATTERN: section-cta for action buttons -->
+      <div class="section-cta">
+        <LinkButton 
+          href={withBase("/projects")} 
+          variant="primary" 
+          icon="arrow-right"
+        >
+          Explore Projects
+        </LinkButton>
+        <LinkButton 
+          href={withBase("/about")} 
+          variant="outline" 
+          icon="arrow-right"
+        >
+          About ArcUp
+        </LinkButton>
+      </div>
+    </header>
+
+    <!-- VISUAL: Subtle divider for section rhythm -->
+    <SectionDivider />
 
     <!-- ========================================================================
-         SITE NAVIGATION — Key Pages
+         RESEARCH FRAMEWORK SECTION
+         Four-layer logic presented in accessible card grid
          ======================================================================== -->
-    <nav class="home-nav-cards" aria-label="Main site sections">
-      <!-- NAV CARD: overview of ArcUp background -->
-      <a href={withBase("/about")} class="nav-card">
-        <h3>About</h3>
-        <p>Learn where ArcUp began and how it aligns with Repractice ethics</p>
-        <span class="nav-card-arrow" aria-hidden="true">→</span>
-      </a>
+    <section class="page-section page-section--center" aria-labelledby="research-framework-heading">
+      <!-- COMPONENT: SectionHeader for consistent heading pattern -->
+      <SectionHeader
+        eyebrow="Our Research Framework"
+        title="From Energy to Ecosystems"
+        subtitle="ArcUp studies how plasma interacts across four connected scales — from device to drop, organism to ecosystem."
+        align="center"
+      />
 
-      <!-- NAV CARD: list of active research initiatives -->
-      <a href={withBase("/projects")} class="nav-card">
-        <h3>Projects</h3>
-        <p>Explore open plasma research and ecological applications</p>
-        <span class="nav-card-arrow" aria-hidden="true">→</span>
-      </a>
+      <!-- UNIVERSAL PATTERN: card-grid--4 forces 4 columns on desktop -->
+      <div class="card-grid card-grid--4" role="list">
+        <!-- COMPONENT: Card wrapper for consistent surface treatment -->
+        <Card as="article" variant="surface" hover={true} role="listitem">
+          <h3>Technology</h3>
+          <p>
+            We design and study plasma systems that translate high-voltage energy into usable environmental tools.
+            Research spans DIY and community-built devices, safety testing, and scalable configurations for industrial and municipal contexts.
+          </p>
+          <!-- UNIVERSAL PATTERN: card-note for status/metadata -->
+          <p class="card-note">
+            <em>Focus: dielectric barrier discharge design, open hardware, and reproducible engineering.</em>
+          </p>
+        </Card>
 
-      <!-- NAV CARD: process and methodology resources -->
-      <a href={withBase("/how")} class="nav-card">
-        <h3>How We Work</h3>
-        <p>Discover our methods, ethics, and approach to open experimentation</p>
-        <span class="nav-card-arrow" aria-hidden="true">→</span>
-      </a>
+        <Card as="article" variant="surface" hover={true} role="listitem">
+          <h3>Water Systems</h3>
+          <p>
+            Water is the first medium of change. Plasma-activated water (PAW) is investigated for pollutant breakdown,
+            salinity management, and reuse in agriculture and wastewater treatment.
+            Each study measures both chemical kinetics and real-world practicality.
+          </p>
+          <p class="card-note">
+            <em>Focus: degradation of dyes and pesticides, desalination trials, and pathogen reduction.</em>
+          </p>
+        </Card>
 
-      <!-- NAV CARD: invitation for collaborators -->
-      <a href={withBase("/join")} class="nav-card">
-        <h3>Join</h3>
-        <p>Collaborate with us—engineers, scientists, and storytellers welcome</p>
-        <span class="nav-card-arrow" aria-hidden="true">→</span>
-      </a>
-    </nav>
+        <Card as="article" variant="surface" hover={true} role="listitem">
+          <h3>Organisms</h3>
+          <p>
+            We examine how plasma-treated environments influence living systems —
+            from microbial communities to plants and higher organisms.
+            Studies bridge molecular responses with physiological outcomes to assess safety and benefit.
+          </p>
+          <p class="card-note">
+            <em>Focus: plant stress physiology, microbiome modulation, and non-genetic inheritance pathways.</em>
+          </p>
+        </Card>
+
+        <Card as="article" variant="surface" hover={true} role="listitem">
+          <h3>Ecosystems</h3>
+          <p>
+            The final scale tests whether local interventions lead to systemic resilience.
+            Plasma methods are embedded into wetlands, soil–water interfaces, and restoration designs to model long-term ecological repair.
+          </p>
+          <p class="card-note">
+            <em>Focus: mesocosm experiments, nutrient cycling, and adaptive ecosystem modelling.</em>
+          </p>
+        </Card>
+      </div>
+
+      <!-- UNIVERSAL PATTERN: section-cta for follow-up action -->
+      <div class="section-cta">
+        <LinkButton 
+          href={withBase("/how")} 
+          variant="outline" 
+          icon="arrow-right"
+        >
+          Our Methodology
+        </LinkButton>
+      </div>
+    </section>
+
+    <!-- VISUAL: Divider between major content sections -->
+    <SectionDivider />
+
+    <!-- ========================================================================
+         GETTING INVOLVED SECTION
+         Invitation for students, researchers, and community members
+         ======================================================================== -->
+    <section class="page-section page-section--center" aria-labelledby="getting-involved-heading">
+      <!-- COMPONENT: SectionHeader establishes section context -->
+      <SectionHeader
+        eyebrow="Participation"
+        title="Getting Involved"
+        subtitle="ArcUp is in its early stages — you can help shape its direction from the ground up."
+        align="center"
+      />
+
+      <!-- UNIVERSAL PATTERN: card-grid--3 for three audience pathways -->
+      <div class="card-grid card-grid--3" role="list">
+        <!-- CARD: Student participation pathway -->
+        <Card as="article" variant="surface" hover={true} role="listitem">
+          <div class="card-icon">🎓</div>
+          <h3>For Students</h3>
+          <p>
+            <strong>Wondering if open research can fit within your degree?</strong>
+            It can. ArcUp projects are designed for coursework alignment — you'll work under your supervisor's guidance while contributing to shared data.
+          </p>
+          <p class="card-note">
+            <em>What you'll need: a project proposal, supervisor approval, and commitment to open licensing.</em>
+          </p>
+        </Card>
+
+        <!-- CARD: Researcher collaboration pathway -->
+        <Card as="article" variant="surface" hover={true} role="listitem">
+          <div class="card-icon">🔬</div>
+          <h3>For Researchers</h3>
+          <p>
+            <strong>Looking for rigor and openness in the same field?</strong>
+            ArcUp's early protocols need peer scrutiny and method design — your expertise defines what responsible plasma research looks like.
+          </p>
+          <p class="card-note">
+            <em>What's available now: emerging research questions, experimental frameworks, and opportunities for method development.</em>
+          </p>
+        </Card>
+
+        <!-- CARD: General community participation pathway -->
+        <Card as="article" variant="surface" hover={true} role="listitem">
+          <div class="card-icon">🛠️</div>
+          <h3>For Everyone</h3>
+          <p>
+            <strong>Think this is beyond your skill set?</strong>
+            If you can follow a safety guide and keep notes, you're already part of the experiment. We'll teach you the rest.
+          </p>
+          <p class="card-note">
+            <em>Best way to start: browse projects that interest you and reach out to begin a conversation.</em>
+          </p>
+        </Card>
+      </div>
+
+      <!-- UNIVERSAL PATTERN: section-cta for primary engagement actions -->
+      <div class="section-cta">
+        <LinkButton 
+          href={withBase("/join")} 
+          variant="primary" 
+          icon="arrow-right"
+        >
+          Join the Community
+        </LinkButton>
+        <LinkButton 
+          href={EXTERNAL_LINKS.discord}
+          variant="outline" 
+          icon="external"
+        >
+          Explore Workspace
+        </LinkButton>
+      </div>
+    </section>
+
+    <!-- VISUAL: Divider maintains rhythm before navigation -->
+    <SectionDivider />
+  <PageNavigation currentPage="about" />
 
   </main>
-
-  <!-- PAGE NAVIGATION: persistent footer nav between primary sections -->
-  <PageNavigation currentPage="home" />
-
-  <!-- ========================================================================
-       AUDIO PRONUNCIATION SCRIPT
-       ======================================================================== -->
-  <!-- SCRIPT: provides fallback pronunciation playback for "arc up" -->
-  <script>
-    const btn = document.querySelector('.audio-button');
-    if (btn) {
-      btn.addEventListener('click', () => {
-        const base = import.meta.env.BASE_URL || '/';
-        const audioPath = `${base}audio/EN-AU_ck1_arc_up.mp3`.replace('//', '/');
-        const audio = new Audio(audioPath);
-
-        audio.play().catch(err => {
-          console.error('Audio playback failed:', err);
-          if ('speechSynthesis' in window) {
-            const utterance = new SpeechSynthesisUtterance('arc up');
-            utterance.rate = 0.8;
-            utterance.pitch = 1;
-            window.speechSynthesis.speak(utterance);
-          }
-        });
-      });
-    }
-  </script>
 </BaseLayout>

@@ -12,6 +12,10 @@ export const EXTERNAL_LINKS = {
   youtube: "https://www.youtube.com/@arc-arcup",
   personalSite: "https://www.xbyali.page",
   github: "https://github.com/arcup",
+  
+  // NEW: Workspace URL for showing current progress/dashboard
+  // Replace this URL with your actual workspace location
+  workspace: "https://workspace.arcup.example.com", // TODO: Update with real URL
 } as const;
 
 /**
