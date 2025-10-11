@@ -1,0 +1,309 @@
+---
+// ============================================================================
+// PAGE: Homepage (Draft)
+// FILE: src/pages/draft/index.astro
+// ============================================================================
+// IMPORTS: home.css for homepage-specific styles
+// SECTIONS: HomeHero, Energy to Ecosystems, Getting Involved
+// ============================================================================
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ArcCanvas from "../components/ArcCanvas.astro";
+import HomeHero from "../components/HomeHero.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import SectionDivider from "../components/SectionDivider.astro";
+import Card from "../components/Card.astro";
+import LinkButton from "../components/LinkButton.astro";
+
+import { withBase } from "../utils/paths";
+import { buildSEO } from "../utils/seo";
+
+// Import homepage-specific styles
+import "../styles/home.css";
+
+const seo = buildSEO({
+  title: "ArcUp - Open Experimental Plasma Research",
+  description: "Building plasma technologies for ecological repair through transparent, collaborative, and ethical research.",
+  path: "/draft",
+  siteUrl: Astro.site,
+});
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  seo={seo}
+  bodyClass="page-home"
+  navActive="home"
+>
+  <ArcCanvas slot="before-header" />
+
+  <main id="main-content" class="page-shell" aria-labelledby="main-title">
+
+    <!-- ====================================================================
+         SECTION 1: HOME HERO
+         ==================================================================== -->
+    <HomeHero />
+
+    <SectionDivider />
+
+    <!-- ====================================================================
+         SECTION 2: FROM ENERGY TO ECOSYSTEMS
+         ==================================================================== -->
+    <section 
+      class="page-section page-section--center energy-ecosystems" 
+      aria-labelledby="energy-ecosystems-title"
+    >
+      
+      <SectionHeader
+        eyebrow="Research Across Four Scales"
+        title="From Energy to Ecosystems"
+        subtitle="ArcUp studies how plasma interacts across four connected scales — from device to droplet, organism to ecosystem."
+        align="center"
+      />
+
+      <div class="flow-container">
+        
+        <!-- Top row: Technology, Water, Organisms -->
+        <div class="ecosystem-top-row" role="list">
+          
+          <Card 
+            as="article" 
+            variant="surface" 
+            hover={true}
+            role="listitem"
+          >
+            <h3>
+              <span class="card-icon" aria-hidden="true">⚡</span>
+              Technology
+            </h3>
+            <p class="card-micro-summary">Building plasma systems that work</p>
+            
+            <p>
+              We design, build, and test plasma devices using accessible components. 
+              Each system is documented in full, from circuit diagrams to build logs, 
+              ensuring transparency and reproducibility.
+            </p>
+
+            <ul class="focus-list">
+              <li>Dielectric barrier discharges</li>
+              <li>Modular architecture</li>
+              <li>Safety protocols</li>
+            </ul>
+          </Card>
+
+          <Card 
+            as="article" 
+            variant="surface" 
+            hover={true}
+            role="listitem"
+          >
+            <h3>
+              <span class="card-icon" aria-hidden="true">💧</span>
+              Water
+            </h3>
+            <p class="card-micro-summary">Understanding plasma-water dynamics</p>
+            
+            <p>
+              Plasma interacts with water in complex ways — oxidizing contaminants, 
+              altering pH, and generating reactive species. We measure these changes 
+              to understand their potential for purification and treatment.
+            </p>
+
+            <ul class="focus-list">
+              <li>Reactive oxygen/nitrogen species</li>
+              <li>pH and conductivity shifts</li>
+              <li>Contaminant breakdown</li>
+            </ul>
+          </Card>
+
+          <Card 
+            as="article" 
+            variant="surface" 
+            hover={true}
+            role="listitem"
+          >
+            <h3>
+              <span class="card-icon" aria-hidden="true">🌿</span>
+              Organisms
+            </h3>
+            <p class="card-micro-summary">Effects on growth and resilience</p>
+            
+            <p>
+              Treated water affects plants, microbes, and soil. We track germination 
+              rates, root development, and microbial activity to identify safe, 
+              beneficial applications in agriculture and restoration.
+            </p>
+
+            <ul class="focus-list">
+              <li>Seed germination studies</li>
+              <li>Microbial community responses</li>
+              <li>Soil health indicators</li>
+            </ul>
+          </Card>
+
+        </div>
+
+        <!-- Flow connector with arrow -->
+        <div class="flow-connector">
+          <div class="flow-arrow" aria-hidden="true">
+            <svg width="2" height="60" viewBox="0 0 2 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="1" y1="0" x2="1" y2="50" stroke="url(#gradient)" stroke-width="2"/>
+              <path d="M1 60L0 54L1 56L2 54L1 60Z" fill="currentColor" class="arrow-tip"/>
+              <defs>
+                <linearGradient id="gradient" x1="1" y1="0" x2="1" y2="50" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="transparent"/>
+                  <stop offset="20%" stop-color="rgba(93, 225, 228, 0.3)"/>
+                  <stop offset="100%" stop-color="rgba(93, 225, 228, 0.6)"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          
+          <div class="connector-text">
+            <p class="eyebrow">Systemic Function</p>
+            <p class="connector-lead">
+              From controlled plasma experiments to planetary regeneration — where energy becomes ecology.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bottom: Ecosystems featured card -->
+        <div class="ecosystem-bottom">
+          <Card 
+            as="article" 
+            variant="surface"
+            hover={true}
+            class="card--featured"
+          >
+            <h3>
+              <span class="card-icon" aria-hidden="true">🌍</span>
+              Ecosystems
+            </h3>
+            <p class="card-micro-summary">Pathways to ecological repair</p>
+            
+            <p>
+              The ultimate goal is ecosystem-scale impact. We explore how localized 
+              interventions might scale, considering nutrient cycles, water flows, 
+              and community resilience in degraded landscapes. This work bridges 
+              laboratory findings with real-world restoration, guided by indigenous 
+              knowledge and community collaboration.
+            </p>
+
+            <ul class="focus-list">
+              <li>Soil regeneration pathways</li>
+              <li>Watershed-scale modeling</li>
+              <li>Community-led restoration</li>
+              <li>Long-term monitoring frameworks</li>
+            </ul>
+          </Card>
+        </div>
+
+      </div>
+
+    </section>
+
+    <SectionDivider />
+
+    <!-- ====================================================================
+         SECTION 3: GETTING INVOLVED
+         ==================================================================== -->
+    <section 
+      class="page-section page-section--center getting-involved" 
+      aria-labelledby="getting-involved-title"
+    >
+      
+      <SectionHeader
+        eyebrow="Participation"
+        title="Getting Involved"
+        subtitle="ArcUp is collaborative infrastructure for those building knowledge toward planetary repair and regeneration. ArcUp is in its early stages — you can help shape its direction from the ground up."
+        align="center"
+      />
+
+      <p class="bridge-text">
+        From research to participation — the framework opens outward.
+      </p>
+
+      <div class="participation-grid">
+        
+        <div class="glow-connector" aria-hidden="true"></div>
+
+        <Card 
+          as="article" 
+          variant="surface" 
+          hover={true}
+          role="listitem"
+        >
+          <div class="card-icon" aria-hidden="true">🎓</div>
+          <h3>For Students</h3>
+          <p>
+            <strong>Align your studies with open research.</strong> Work within coursework 
+            or thesis projects, using ArcUp as a living lab for hypothesis-testing, methods 
+            development, or community-engaged science.
+          </p>
+          <p class="card-note">
+            <em>What you'll need: proposal, supervisor approval, and open-license commitment.</em>
+          </p>
+        </Card>
+
+        <Card 
+          as="article" 
+          variant="surface" 
+          hover={true}
+          role="listitem"
+        >
+          <div class="card-icon" aria-hidden="true">🔬</div>
+          <h3>For Researchers</h3>
+          <p>
+            <strong>Blend rigor and openness.</strong> Validate frameworks, refine methods, 
+            share data openly, and collaborate across institutions. ArcUp supports peer review, 
+            replication studies, and co-authored publications.
+          </p>
+          <p class="card-note">
+            <em>Contribute experimental protocols, datasets, or peer review.</em>
+          </p>
+        </Card>
+
+        <Card 
+          as="article" 
+          variant="surface" 
+          hover={true}
+          role="listitem"
+        >
+          <div class="card-icon" aria-hidden="true">🌍</div>
+          <h3>For Practitioners &amp; Collectives</h3>
+          <p>
+            <strong>Apply plasma technologies in your context.</strong> Collaborate under shared 
+            safety standards, document outcomes, and contribute to the growing knowledge base of 
+            real-world applications.
+          </p>
+          <p class="card-note">
+            <em>Join field trials, share observations, build local capacity.</em>
+          </p>
+        </Card>
+
+      </div>
+
+      <div class="involvement-cta">
+        <LinkButton 
+          href={withBase("/join")} 
+          variant="primary" 
+          icon="arrow-right"
+          aria-label="Join the ArcUp community"
+        >
+          Join the Community
+        </LinkButton>
+        
+        <LinkButton 
+          href={withBase("/workspace")} 
+          variant="outline"
+          aria-label="Explore ArcUp workspace and documentation"
+        >
+          Explore Workspace →
+        </LinkButton>
+      </div>
+
+    </section>
+
+  </main>
+</BaseLayout>

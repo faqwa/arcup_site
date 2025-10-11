@@ -1,0 +1,281 @@
+---
+// ============================================================================
+// COMPONENT: FlowGrid.astro
+// PURPOSE: Connected multi-card layout with optional flow visualization
+// ----------------------------------------------------------------------------
+// USAGE: For sections showing progression, connected concepts, or multi-scale
+// FEATURES:
+// - Configurable columns (2, 3, or 4)
+// - Optional connecting gradient lines between cards
+// - Staggered fade-in animations
+// - Responsive grid that stacks on mobile
+// - Uses global-v2.css design tokens
+// ============================================================================
+
+interface Props {
+  columns?: 2 | 3 | 4;
+  connected?: boolean;
+  stagger?: boolean;
+  spacing?: 'normal' | 'spacious' | 'compact';
+}
+
+const { 
+  columns = 4,
+  connected = false,
+  stagger = true,
+  spacing = 'normal'
+} = Astro.props;
+
+// Generate spacing class
+const spacingClass = spacing === 'spacious' ? 'flow-grid--spacious' 
+  : spacing === 'compact' ? 'flow-grid--compact' 
+  : '';
+
+// Generate columns class
+const columnsClass = `flow-grid--${columns}`;
+
+// Generate feature classes
+const connectedClass = connected ? 'flow-grid--connected' : '';
+const staggerClass = stagger ? 'flow-grid--stagger' : '';
+---
+
+<div 
+  class={`flow-grid ${columnsClass} ${connectedClass} ${staggerClass} ${spacingClass}`}
+  role="list"
+>
+  <!-- Flow connector visual (only if connected prop is true) -->
+  {connected && (
+    <div class="flow-connector" aria-hidden="true"></div>
+  )}
+  
+  <!-- Card slots -->
+  <slot />
+</div>
+
+<style>
+  /* ========================================================================
+     FLOW GRID: Connected card layout system
+     ======================================================================== */
+  .flow-grid {
+    position: relative;
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2rem);
+    width: 100%;
+  }
+
+  /* ========================================================================
+     COLUMN VARIANTS
+     ======================================================================== */
+  
+  /* Mobile: Always single column */
+  @media (max-width: 767px) {
+    .flow-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Tablet: 2 columns for all variants */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .flow-grid--2,
+    .flow-grid--3,
+    .flow-grid--4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Desktop: Full column count */
+  @media (min-width: 1024px) {
+    .flow-grid--2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .flow-grid--3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .flow-grid--4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* ========================================================================
+     SPACING VARIANTS
+     ======================================================================== */
+  .flow-grid--compact {
+    gap: clamp(1rem, 2vw, 1.25rem);
+  }
+
+  .flow-grid--spacious {
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  /* ========================================================================
+     FLOW CONNECTOR: Horizontal gradient line connecting cards
+     Only visible on desktop when connected prop is true
+     ======================================================================== */
+  .flow-grid--connected {
+    padding-top: 1.5rem;
+  }
+
+  .flow-connector {
+    position: absolute;
+    top: 0;
+    left: 8%;
+    right: 8%;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(10, 147, 150, 0.3) 15%,
+      rgba(10, 147, 150, 0.3) 85%,
+      transparent
+    );
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Mobile: Hide connector on small screens */
+  @media (max-width: 1023px) {
+    .flow-connector {
+      display: none;
+    }
+  }
+
+  /* Optional: Animated glow pulse effect */
+  @media (prefers-reduced-motion: no-preference) {
+    .flow-connector::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(93, 225, 228, 0.2) 50%,
+        transparent
+      );
+      filter: blur(4px);
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% {
+        opacity: 0.3;
+      }
+      50% {
+        opacity: 0.6;
+      }
+    }
+  }
+
+  /* ========================================================================
+     STAGGERED ANIMATIONS
+     Applied to direct children (cards) when stagger prop is true
+     ======================================================================== */
+  @media (prefers-reduced-motion: no-preference) {
+    .flow-grid--stagger > :global(*) {
+      animation: fade-in-up 0.6s ease-out backwards;
+    }
+
+    /* 4-column stagger delays */
+    .flow-grid--4.flow-grid--stagger > :global(*:nth-child(1)) {
+      animation-delay: 0.1s;
+    }
+
+    .flow-grid--4.flow-grid--stagger > :global(*:nth-child(2)) {
+      animation-delay: 0.2s;
+    }
+
+    .flow-grid--4.flow-grid--stagger > :global(*:nth-child(3)) {
+      animation-delay: 0.3s;
+    }
+
+    .flow-grid--4.flow-grid--stagger > :global(*:nth-child(4)) {
+      animation-delay: 0.4s;
+    }
+
+    /* 3-column stagger delays */
+    .flow-grid--3.flow-grid--stagger > :global(*:nth-child(1)) {
+      animation-delay: 0.15s;
+    }
+
+    .flow-grid--3.flow-grid--stagger > :global(*:nth-child(2)) {
+      animation-delay: 0.3s;
+    }
+
+    .flow-grid--3.flow-grid--stagger > :global(*:nth-child(3)) {
+      animation-delay: 0.45s;
+    }
+
+    /* 2-column stagger delays */
+    .flow-grid--2.flow-grid--stagger > :global(*:nth-child(1)) {
+      animation-delay: 0.2s;
+    }
+
+    .flow-grid--2.flow-grid--stagger > :global(*:nth-child(2)) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  /* ========================================================================
+     ENHANCED CARD HOVER EFFECTS
+     When used within FlowGrid, cards get additional depth on hover
+     ======================================================================== */
+  .flow-grid :global(.card:hover) {
+    box-shadow: 
+      var(--shadow-soft),
+      0 0 25px rgba(10, 147, 150, 0.15);
+  }
+
+  /* Progressive depth variation - subtle visual hierarchy */
+  .flow-grid--connected > :global(*:nth-child(1)) {
+    transform: scale(0.98);
+  }
+
+  .flow-grid--connected > :global(*:nth-child(2)) {
+    transform: scale(0.99);
+  }
+
+  .flow-grid--connected > :global(*:nth-child(3)) {
+    transform: scale(1);
+  }
+
+  .flow-grid--connected > :global(*:nth-child(4)) {
+    transform: scale(1.01);
+  }
+
+  /* Subtle depth cues for progression feel */
+  @media (min-width: 1024px) {
+    .flow-grid--connected > :global(*:nth-child(1)) {
+      opacity: 0.92;
+    }
+
+    .flow-grid--connected > :global(*:nth-child(2)) {
+      opacity: 0.95;
+    }
+
+    .flow-grid--connected > :global(*:nth-child(3)) {
+      opacity: 0.98;
+    }
+
+    .flow-grid--connected > :global(*:nth-child(4)) {
+      opacity: 1;
+    }
+
+    .flow-grid--connected > :global(*:hover) {
+      opacity: 1 !important;
+      transform: scale(1.02) !important;
+    }
+  }
+</style>

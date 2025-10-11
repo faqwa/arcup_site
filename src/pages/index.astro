@@ -73,41 +73,48 @@ const seo = buildSEO({
       </p>
 
       <!-- UNIVERSAL PATTERN: content-prose for multi-paragraph text blocks -->
+
       <div class="content-prose">
         <p>
-          Our research begins with <strong>technology</strong>—how controlled electrical discharges can be
-          generated safely and accessibly. From there we study how that energy interacts with
-          <strong>water</strong>, transforming chemistry and enabling reuse.
-          We trace its influence on <strong>organisms</strong>—microbes, plants, and humans—examining
-          functional and molecular responses. Finally, we observe how these effects scale within
-          <strong>ecosystems</strong>, testing whether local repair can strengthen whole landscapes.
+          Each experiment is a step toward a thriving Earth. We design and build
+          plasma technologies as instruments for ecological functionality.
+          Through them, we observe how controlled energy transforms water
+          chemistry, influences biological processes, and supports the recovery
+          of ecosystems. Each experiment links engineering with ecology.
         </p>
-
         <p>
-          Every stage follows the
-          <a href="https://repractice.xbyali.page" target="_blank" rel="noopener noreferrer">
-            Repractice Ethical Framework
-          </a>,
-          which keeps our work transparent, reproducible, and accountable to the commons.
+          Workspace holds the technical detail—schematics, protocols, and
+          walkthroughs—available once verification is complete. This keeps
+          practice responsible while allowing anyone who wishes to learn to do
+          so safely.
+        </p>
+        <p>
+          Every project follows the
+          <a
+            href="https://repractice.xbyali.page"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Repractice Ethical Framework</a
+          >, which defines transparency, reproducibility, and accountability to
+          the commons as baseline conditions for participation.
         </p>
       </div>
 
+
       <!-- UNIVERSAL PATTERN: section-cta for action buttons -->
       <div class="section-cta">
-        <LinkButton 
-          href={withBase("/projects")} 
-          variant="primary" 
+        <LinkButton
+          href={withBase("/projects")}
+          variant="primary"
           icon="arrow-right"
+          >Explore Projects</LinkButton
         >
-          Explore Projects
-        </LinkButton>
-        <LinkButton 
-          href={withBase("/about")} 
-          variant="outline" 
+        <LinkButton
+          href={withBase("/about")}
+          variant="outline"
           icon="arrow-right"
+          >About ArcUp</LinkButton
         >
-          About ArcUp
-        </LinkButton>
       </div>
     </header>
 
@@ -123,60 +130,89 @@ const seo = buildSEO({
       <SectionHeader
         eyebrow="Our Research Framework"
         title="From Energy to Ecosystems"
-        subtitle="ArcUp studies how plasma interacts across four connected scales — from device to drop, organism to ecosystem."
+        subtitle="ArcUp studies how plasma interacts across four connected scales — from device to droplet, organisms to ecosystems."
         align="center"
       />
 
       <!-- UNIVERSAL PATTERN: card-grid--4 forces 4 columns on desktop -->
-      <div class="card-grid card-grid--4" role="list">
-        <!-- COMPONENT: Card wrapper for consistent surface treatment -->
+     <div class="card-grid card-grid--4" role="list">
         <Card as="article" variant="surface" hover={true} role="listitem">
           <h3>Technology</h3>
           <p>
-            We design and study plasma systems that translate high-voltage energy into usable environmental tools.
-            Research spans DIY and community-built devices, safety testing, and scalable configurations for industrial and municipal contexts.
+            We develop and test plasma architectures that convert electrical
+            energy into controlled discharge environments. Research spans
+            community-built prototypes and institutional platforms, focusing on
+            safety validation, reproducibility, and open-hardware standards.
           </p>
-          <!-- UNIVERSAL PATTERN: card-note for status/metadata -->
           <p class="card-note">
-            <em>Focus: dielectric barrier discharge design, open hardware, and reproducible engineering.</em>
+            <em
+              >Focus: dielectric-barrier discharges, circuit optimization,
+              modular design, and scalable applications.</em
+            >
           </p>
         </Card>
 
         <Card as="article" variant="surface" hover={true} role="listitem">
           <h3>Water Systems</h3>
           <p>
-            Water is the first medium of change. Plasma-activated water (PAW) is investigated for pollutant breakdown,
-            salinity management, and reuse in agriculture and wastewater treatment.
-            Each study measures both chemical kinetics and real-world practicality.
+            Water is the first interface between plasma energy and matter.
+            Studies measure how reactive species alter chemical composition,
+            oxidation–reduction balance, and contaminant breakdown, linking
+            bench results to field applications.
           </p>
           <p class="card-note">
-            <em>Focus: degradation of dyes and pesticides, desalination trials, and pathogen reduction.</em>
+            <em
+              >Focus: advanced oxidation mechanisms, desalination and water
+              reuse, kinetics, pollutant and pathogen degradation.</em
+            >
           </p>
         </Card>
 
         <Card as="article" variant="surface" hover={true} role="listitem">
           <h3>Organisms</h3>
           <p>
-            We examine how plasma-treated environments influence living systems —
-            from microbial communities to plants and higher organisms.
-            Studies bridge molecular responses with physiological outcomes to assess safety and benefit.
+            We examine how plasma-treated environments influence microbial
+            populations, plants, and higher organisms. Experiments link
+            molecular data with physiological responses to evaluate benefit,
+            risk, and repeatability across taxa.
           </p>
           <p class="card-note">
-            <em>Focus: plant stress physiology, microbiome modulation, and non-genetic inheritance pathways.</em>
+            <em
+              >Focus: plant stress adaptation, microbiome communities, genetic
+              and non-genetic responses, inheritance, and fitness.</em
+            >
           </p>
         </Card>
 
         <Card as="article" variant="surface" hover={true} role="listitem">
           <h3>Ecosystems</h3>
           <p>
-            The final scale tests whether local interventions lead to systemic resilience.
-            Plasma methods are embedded into wetlands, soil–water interfaces, and restoration designs to model long-term ecological repair.
+            At the largest scale, we test whether local plasma interventions can
+            foster systemic resilience. Field and mesocosm studies integrate
+            plasma processes into wetlands, soil–water interfaces, and
+            regeneration designs to model long-term ecological repair.
           </p>
           <p class="card-note">
-            <em>Focus: mesocosm experiments, nutrient cycling, and adaptive ecosystem modelling.</em>
+            <em
+              >Focus: ecological functionality, systems theory, coupling and
+              cycling dynamics, ecosystem processes and resilience, adaptive
+              regeneration modelling.</em
+            >
           </p>
         </Card>
       </div>
+
+      <p class="content-prose text-center">
+        Together, these scales form a continuum of repair—from energy generation
+        to ecological resilience.
+      </p>
+
+      <p class="content-prose text-center">
+        Detailed methods and safety information are available through Workspace
+        once verification is complete, ensuring open learning remains safe and
+        accountable.
+      </p>
+    </section>
 
       <!-- UNIVERSAL PATTERN: section-cta for follow-up action -->
       <div class="section-cta">
@@ -202,74 +238,88 @@ const seo = buildSEO({
       <SectionHeader
         eyebrow="Participation"
         title="Getting Involved"
-        subtitle="ArcUp is in its early stages — you can help shape its direction from the ground up."
+        subtitle="ArcUp is collaborative infrastructure for those building knowledge toward planetary repair and regeneration.ArcUp is in its early stages — you can help shape its direction from the ground up."
         align="center"
       />
 
       <!-- UNIVERSAL PATTERN: card-grid--3 for three audience pathways -->
-      <div class="card-grid card-grid--3" role="list">
-        <!-- CARD: Student participation pathway -->
-        <Card as="article" variant="surface" hover={true} role="listitem">
-          <div class="card-icon">🎓</div>
-          <h3>For Students</h3>
-          <p>
-            <strong>Wondering if open research can fit within your degree?</strong>
-            It can. ArcUp projects are designed for coursework alignment — you'll work under your supervisor's guidance while contributing to shared data.
-          </p>
-          <p class="card-note">
-            <em>What you'll need: a project proposal, supervisor approval, and commitment to open licensing.</em>
-          </p>
-        </Card>
+<div class="card-grid card-grid--3" role="list">
+  <!-- CARD: Student participation pathway -->
+  <Card as="article" variant="surface" hover={true} role="listitem">
+    <div class="card-icon">🎓</div>
+    <h3>For Students</h3>
+    <p>
+      <strong>Interested in aligning your studies with open research?</strong>
+      You can. ArcUp projects are built to integrate with coursework — you’ll develop a supervised plan that advances plasma applications for ecological benefit, while contributing to a shared dataset for reproducible science.
+    </p>
+    <p class="card-note">
+      <em>What you’ll need: a clear proposal, supervisor approval, and a commitment to open licensing and safe practice.</em>
+    </p>
+  </Card>
 
-        <!-- CARD: Researcher collaboration pathway -->
-        <Card as="article" variant="surface" hover={true} role="listitem">
-          <div class="card-icon">🔬</div>
-          <h3>For Researchers</h3>
-          <p>
-            <strong>Looking for rigor and openness in the same field?</strong>
-            ArcUp's early protocols need peer scrutiny and method design — your expertise defines what responsible plasma research looks like.
-          </p>
-          <p class="card-note">
-            <em>What's available now: emerging research questions, experimental frameworks, and opportunities for method development.</em>
-          </p>
-        </Card>
+  <!-- CARD: Researcher collaboration pathway -->
+  <Card as="article" variant="surface" hover={true} role="listitem">
+    <div class="card-icon">🔬</div>
+    <h3>For Researchers</h3>
+    <p>
+      <strong>Seeking a field that values both rigor and openness?</strong>
+      ArcUp’s early frameworks invite validation, replication, and co-development. Your expertise strengthens collective understanding of plasma–water systems and helps define responsible methods for applied ecological research.
+    </p>
+    <p class="card-note">
+      <em>What’s available: emerging research questions, experimental frameworks, and opportunities for method refinement.</em>
+    </p>
+  </Card>
 
-        <!-- CARD: General community participation pathway -->
-        <Card as="article" variant="surface" hover={true} role="listitem">
-          <div class="card-icon">🛠️</div>
-          <h3>For Everyone</h3>
-          <p>
-            <strong>Think this is beyond your skill set?</strong>
-            If you can follow a safety guide and keep notes, you're already part of the experiment. We'll teach you the rest.
-          </p>
-          <p class="card-note">
-            <em>Best way to start: browse projects that interest you and reach out to begin a conversation.</em>
-          </p>
-        </Card>
-      </div>
+  <!-- CARD: General community participation pathway -->
+  <Card as="article" variant="surface" hover={true} role="listitem">
+    <div class="card-icon">🌍</div>
+    <h3>For Practitioners & Collectives</h3>
+    <p>
+      <strong>Working independently or within a community lab?</strong>
+      You can apply ArcUp technologies under shared safety and reporting standards. Projects remain locally governed but contribute results to a common research archive for ecological restoration.
+    </p>
+    <p class="card-note">
+      <em>Getting started: review documentation in Workspace and connect with others exploring similar contexts.</em>
+    </p>
+  </Card>
+</div>
 
-      <!-- UNIVERSAL PATTERN: section-cta for primary engagement actions -->
-      <div class="section-cta">
-        <LinkButton 
-          href={withBase("/join")} 
-          variant="primary" 
-          icon="arrow-right"
-        >
-          Join the Community
-        </LinkButton>
-        <LinkButton 
-          href={EXTERNAL_LINKS.discord}
-          variant="outline" 
-          icon="external"
-        >
-          Explore Workspace
-        </LinkButton>
-      </div>
+<!-- UNIVERSAL PATTERN: section-cta for primary engagement actions -->
+<div class="section-cta">
+  <LinkButton 
+    href={withBase("/join")} 
+    variant="primary" 
+    icon="arrow-right"
+  >
+    Join the Community
+  </LinkButton>
+  <LinkButton 
+    href={EXTERNAL_LINKS.discord}
+    variant="outline" 
+    icon="external"
+  >
+    Explore Workspace
+  </LinkButton>
+</div>
+
+<!-- SHARED COMMITMENTS: licensing, safety, commons -->
+<div class="card-unifying-text">
+  <h4>Openness · Safety · Shared Commons</h4>
+  <p>
+    ArcUp operates as open scientific infrastructure. All data, designs, and documentation are released under open licenses that protect freedom of use while preventing enclosure or harmful application. Knowledge flows openly, but always with responsibility.
+  </p>
+  <p>
+    Safety is foundational. Every project follows electrical, chemical, and ecological standards, and any potential risk triggers review before continuation. Transparency exists to protect, not to pressure.
+  </p>
+  <p>
+    Together these commitments form a living commons — where credit is shared, results remain accessible, and collaboration serves ecological repair. Joining ArcUp means contributing to knowledge that circulates, not extracts.
+  </p>
+</div>
+
     </section>
 
     <!-- VISUAL: Divider maintains rhythm before navigation -->
     <SectionDivider />
-  <PageNavigation currentPage="about" />
 
   </main>
 </BaseLayout>

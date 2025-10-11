@@ -1,0 +1,299 @@
+---
+// ============================================================================
+// PAGE: Homepage Draft - Refactored Hero Section
+// PURPOSE: Demonstrate improved structure, hierarchy, and visual rhythm
+// ----------------------------------------------------------------------------
+// CHANGES:
+// - Two-zone responsive grid layout (7/5 column split)
+// - Added structural sub-headings (h4) for visual anchors
+// - Translucent mission capsule for first supporting paragraph
+// - Enhanced CTA zone with gradient background
+// - Improved vertical spacing and breathing room
+// - Maintains all original content intact
+// ============================================================================
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArcCanvas from "../../components/ArcCanvas.astro";
+import LinkButton from "../../components/LinkButton.astro";
+import SectionDivider from "../../components/SectionDivider.astro";
+import "../styles/global-v2.css";
+
+import { withBase } from "../../utils/paths";
+import { buildSEO } from "../../utils/seo";
+
+const seo = buildSEO({
+  title: "ArcUp - Open Experimental Plasma Research",
+  description: "Building plasma technologies for ecological repair through transparent, collaborative, and ethical research.",
+  path: "/",
+  siteUrl: Astro.site,
+});
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  seo={seo}
+  bodyClass="page-home"
+  navActive="home"
+>
+  <ArcCanvas slot="before-header" />
+
+  <main id="main-content" class="page-shell" aria-labelledby="main-title">
+
+    <!-- ========================================================================
+         HERO SECTION: Two-Zone Layout with Enhanced Visual Hierarchy
+         - Left zone (7 cols): Primary messaging - eyebrow, title, lead
+         - Right zone (5 cols): Supporting context with structural headings
+         - Mission capsule: Translucent container for first paragraph
+         - CTA zone: Gradient background for visual emphasis
+         ======================================================================== -->
+    <header class="page-hero" aria-labelledby="main-title">
+      
+      <!-- Two-Zone Responsive Grid -->
+      <div class="hero-grid">
+        
+        <!-- LEFT ZONE: Primary Message (7 columns) -->
+        <div class="hero-primary">
+          <p class="eyebrow">Open Experimental Plasma Research</p>
+          
+          <h1 id="main-title" class="hero-title">arc<sup>^</sup></h1>
+          
+          <p class="lead">
+            Building plasma technologies for <strong>ecological repair</strong> through transparent, 
+            collaborative, and <em>ethical research</em>.
+          </p>
+        </div>
+
+        <!-- RIGHT ZONE: Supporting Context (5 columns) -->
+        <div class="hero-supporting">
+          
+          <!-- Sub-heading: Experimentation -->
+          <div class="hero-content-block">
+            <h4 class="hero-label">Experimentation</h4>
+            
+            <!-- Mission Capsule: Translucent container with subtle styling -->
+            <div class="mission-capsule">
+              <p>
+                We develop and test plasma-based solutions in the open. Every experiment, 
+                every result, and every method is documented and shared. Our research explores 
+                how controlled plasma can support soil regeneration, water purification, 
+                and atmospheric balance.
+              </p>
+            </div>
+          </div>
+
+          <!-- Sub-heading: Verification -->
+          <div class="hero-content-block">
+            <h4 class="hero-label">Verification</h4>
+            <p>
+              All findings are made freely available for independent review and replication. 
+              We believe that <strong>science advances through verification</strong>, not 
+              secrecy. Community feedback and peer collaboration strengthen every outcome.
+            </p>
+          </div>
+
+          <!-- Sub-heading: Ethics -->
+          <div class="hero-content-block">
+            <h4 class="hero-label">Ethics</h4>
+            <p>
+              Our work follows <em>clear ethical guidelines</em> that prioritize safety, 
+              environmental responsibility, and inclusive participation. We're committed to 
+              research that serves life—not extraction or exploitation.
+            </p>
+          </div>
+          
+        </div>
+      </div>
+
+      <!-- CTA ZONE: Enhanced with gradient background -->
+      <div class="hero-cta-zone">
+        <LinkButton 
+          href={withBase("/projects")} 
+          variant="primary" 
+          icon="arrow-right"
+          aria-label="Explore active research projects"
+        >
+          Explore Projects
+        </LinkButton>
+        
+        <LinkButton 
+          href={withBase("/about")} 
+          variant="outline" 
+          icon="arrow-right"
+          aria-label="Learn more about ArcUp's mission and approach"
+        >
+          Learn More
+        </LinkButton>
+      </div>
+
+    </header>
+
+    <SectionDivider />
+
+    <!-- Additional page sections would continue here -->
+    
+  </main>
+</BaseLayout>
+
+<style>
+  /* ========================================================================
+     HERO GRID LAYOUT
+     Two-zone responsive grid with 7/5 column split on desktop
+     ======================================================================== */
+  .hero-grid {
+    display: grid;
+    gap: clamp(3rem, 5vw, 4rem);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  /* Desktop: 12-column grid with 7/5 split */
+  @media (min-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 7fr 5fr;
+      align-items: start;
+      gap: clamp(4rem, 6vw, 6rem);
+    }
+  }
+
+  /* LEFT ZONE: Primary content area */
+  .hero-primary {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  /* RIGHT ZONE: Supporting content with sub-headings */
+  .hero-supporting {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 3.5vw, 2.5rem);
+  }
+
+  /* Content blocks with visual anchors */
+  .hero-content-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  /* ========================================================================
+     STRUCTURAL SUB-HEADINGS (H4)
+     Visual anchors using existing ArcUp design tokens
+     ======================================================================== */
+  .hero-label {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-primary-bright);
+    margin-bottom: var(--space-xs);
+  }
+
+  /* ========================================================================
+     MISSION CAPSULE
+     Translucent container with subtle border and backdrop blur
+     ======================================================================== */
+  .mission-capsule {
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(93, 225, 228, 0.1);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.25rem, 3vw, 1.5rem);
+  }
+
+  .mission-capsule p {
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  /* ========================================================================
+     CTA ZONE ENHANCEMENT
+     Gradient background with increased visual emphasis
+     ======================================================================== */
+  .hero-cta-zone {
+    background: linear-gradient(
+      to top,
+      rgba(10, 147, 150, 0.1),
+      transparent
+    );
+    border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 3vw, 2rem);
+    margin-top: clamp(2.5rem, 4vw, 3rem);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Mobile: Stack buttons vertically */
+  @media (max-width: 640px) {
+    .hero-cta-zone {
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+  }
+
+  /* ========================================================================
+     ACCESSIBILITY & MOTION
+     Respecting user preferences for reduced motion
+     ======================================================================== */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-primary,
+    .hero-supporting > * {
+      animation: fade-in-up 0.6s ease-out backwards;
+    }
+
+    .hero-supporting > *:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .hero-supporting > *:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .hero-supporting > *:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  /* ========================================================================
+     VERTICAL SPACING ENHANCEMENT
+     Increased breathing room between sections
+     ======================================================================== */
+  .page-hero {
+    padding-top: clamp(3rem, 6vw, 5rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  @media (min-width: 1024px) {
+    .page-hero {
+      padding-top: clamp(5rem, 8vw, 8rem);
+      padding-bottom: clamp(5rem, 8vw, 8rem);
+    }
+  }
+
+  /* ========================================================================
+     RESPONSIVE TEXT WRAPPING
+     Ensuring optimal readability at ~60-70ch width
+     ======================================================================== */
+  .hero-primary .lead {
+    max-width: 65ch;
+  }
+
+  .hero-supporting p {
+    max-width: 70ch;
+    line-height: 1.75;
+  }
+</style>

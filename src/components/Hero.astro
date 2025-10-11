@@ -1,0 +1,153 @@
+---
+// ============================================================================
+// COMPONENT: Hero.astro
+// PURPOSE: Unified section hero for all non-homepage pages
+// ----------------------------------------------------------------------------
+// USAGE: /projects, /how, /about, /join, and other internal pages
+// FEATURES:
+// - Compact, consistent layout
+// - Configurable alignment (center/left)
+// - Optional description text
+// - Uses only global-v2.css tokens (no custom CSS file)
+// - Semantic HTML5 structure
+// - Vertical rhythm: py-24 lg:py-32
+// ============================================================================
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  align?: 'center' | 'left';
+  id?: string;
+}
+
+const { 
+  eyebrow,
+  title,
+  description,
+  align = 'center',
+  id = 'page-title'
+} = Astro.props;
+
+// Build alignment classes
+const alignmentClass = align === 'center' ? 'text-center' : 'text-left';
+const containerClass = align === 'center' ? 'mx-auto' : '';
+---
+
+<header 
+  class={`page-hero ${alignmentClass}`}
+  aria-labelledby={id}
+>
+  <div class={`hero-content ${containerClass}`}>
+    
+    {eyebrow && (
+      <p class="eyebrow">{eyebrow}</p>
+    )}
+    
+    <h1 id={id} class="hero-title">
+      {title}
+    </h1>
+    
+    {description && (
+      <p class="lead" set:html={description} />
+    )}
+
+    <!-- Slot for additional content (CTAs, prose, etc.) -->
+    <slot />
+    
+  </div>
+</header>
+
+<style>
+  /* ========================================================================
+     SECTION HERO: Unified hero component using global-v2.css tokens
+     No custom styling - all design tokens from global system
+     ======================================================================== */
+  .page-hero {
+    padding-top: clamp(3rem, 6vw, 5rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  @media (min-width: 1024px) {
+    .page-hero {
+      padding-top: clamp(5rem, 8vw, 8rem);
+      padding-bottom: clamp(5rem, 8vw, 8rem);
+    }
+  }
+
+  /* Content container with max-width constraint */
+  .hero-content {
+    max-width: 56rem;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+  }
+
+  /* Eyebrow styling - shared visual language with HomeHero */
+  .page-hero .eyebrow {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-primary-bright);
+  }
+
+  /* Hero title - moderate size for section pages */
+  .page-hero .hero-title {
+    font-size: clamp(2.25rem, 5vw, 3rem);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .page-hero .hero-title {
+      font-size: clamp(2.75rem, 6vw, 3.75rem);
+    }
+  }
+
+  /* Lead paragraph - description text */
+  .page-hero .lead {
+    font-size: clamp(1.1rem, 2.2vw, 1.25rem);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    max-width: 65ch;
+  }
+
+  /* Center alignment: center the lead text */
+  .text-center .lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Emphasis styling */
+  .page-hero strong {
+    color: var(--color-text);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .page-hero em {
+    color: var(--color-primary-bright);
+    font-style: normal;
+  }
+
+  /* Progressive enhancement: Fade-in animation */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-content {
+      animation: fade-in-up 0.6s ease-out backwards;
+    }
+
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+</style>

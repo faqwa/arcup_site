@@ -1,31 +1,54 @@
 ---
 // ============================================================================
-// FILE: src/pages/projects.astro
-// ACTION: FULL REPLACEMENT - Complete rewrite with correct hierarchy
-// CHANGES: 
-// 1. Hero → Getting Involved → All Projects → Build Your Own → Legal
-// 2. Dynamic project loading from markdown
-// 3. SectionHeader component throughout
-// 4. Cyan colored <strong> and <em> in hero
+// AI SUMMARY METADATA
+// ============================================================================
+/*
+AI Summary Metadata:
+title: ArcUp Projects — Open Plasma Research Portfolio
+summary: Active research projects applying plasma technology to ecological repair challenges through collaborative, open-source experimentation.
+keywords: plasma research projects, open science, collaborative research, ecological repair, plasma activated water, soil restoration, community science
+ai_content_highlights:
+  - Portfolio of active research projects in plasma-based ecological technologies
+  - Three pathways for participation: students, researchers, and community members
+  - All projects follow RE:TECH principles: open, safe, iterative
+  - Build-your-own project pathway with mentorship and support
+  - Comprehensive legal framework using CERN-OHL, CC BY-NC-SA, and AGPL licenses
+*/
+
+// ============================================================================
+// IMPORTS
 // ============================================================================
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ArcCanvas from "../components/ArcCanvas.astro";
 import PageNavigation from "../components/PageNavigation.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import SectionDivider from "../components/SectionDivider.astro";
 import Card from "../components/Card.astro";
 import LinkButton from "../components/LinkButton.astro";
 import StatusBadge from "../components/StatusBadge.astro";
-import SectionHeader from "../components/SectionHeader.astro";
+import CalloutPanel from "../components/CalloutPanel.astro";
+import "../styles/global-v2.css";
 
 import { getCollection } from 'astro:content';
-
 import { withBase } from '../utils/paths';
 import { buildSEO } from '../utils/seo';
 import { EXTERNAL_LINKS } from '../config/constants';
 
-// Get all projects dynamically
+// ============================================================================
+// DATA LOADING
+// ============================================================================
+// Get all projects dynamically from content collection
 const allProjects = await getCollection('projects');
 
-// Group projects by category (if they have one)
+// Define status priority for sorting (Active first, Completed last)
+const statusPriority = {
+  'active': 1,
+  'early-idea': 2,
+  'paused': 3,
+  'completed': 4
+};
+
+// Group projects by category and sort by status within each category
 const projectsByCategory = allProjects.reduce((acc, project) => {
   const category = project.data.category || 'Other';
   if (!acc[category]) {
@@ -35,13 +58,25 @@ const projectsByCategory = allProjects.reduce((acc, project) => {
   return acc;
 }, {} as Record<string, typeof allProjects>);
 
-// Get categories in a specific order (alphabetical, but 'Other' last)
+// Sort projects within each category by status priority
+Object.keys(projectsByCategory).forEach(category => {
+  projectsByCategory[category].sort((a, b) => {
+    const aPriority = statusPriority[a.data.status] || 999;
+    const bPriority = statusPriority[b.data.status] || 999;
+    return aPriority - bPriority;
+  });
+});
+
+// Sort categories alphabetically, with 'Other' always last
 const categories = Object.keys(projectsByCategory).sort((a, b) => {
   if (a === 'Other') return 1;
   if (b === 'Other') return -1;
   return a.localeCompare(b);
 });
 
+// ============================================================================
+// SEO CONFIGURATION
+// ============================================================================
 const seo = buildSEO({
   title: "Projects",
   description: "Active research projects in plasma technology for ecological repair. Open, collaborative, and building in public.",
@@ -57,14 +92,24 @@ const seo = buildSEO({
   seo={seo}
   navActive="projects"
 >
+  <!-- PERFORMANCE: ArcCanvas loaded in before-header slot for optimal visual hierarchy -->
   <ArcCanvas slot="before-header" />
 
+  <!-- SEMANTIC: Main landmark with proper labeling for screen readers -->
   <main id="main-content" class="page-shell" aria-labelledby="projects-title">
-    
-    <!-- HERO SECTION: Overview of ArcUp project portfolio and participation invite -->
-    <header class="projects-hero" aria-labelledby="projects-title">
+
+    <!-- ========================================================================
+         HERO SECTION
+         Overview of project portfolio and participation framework
+         ======================================================================== -->
+    <header class="page-hero" aria-labelledby="projects-title">
+      <!-- ACCESSIBILITY: Eyebrow provides context before main heading -->
       <p class="eyebrow">Early-Stage Collaborative Research</p>
+
+      <!-- SEMANTIC: h1 as primary page heading -->
       <h1 id="projects-title">Projects</h1>
+
+      <!-- Lead paragraph with emphasized key concepts -->
       <p class="lead">
         Each project applies RE:TECH principles — <em>open, safe, iterative</em> — and follows arc^'s licensing and governance. 
         <strong>These are real-world challenges that need collaborative solutions.</strong> Whether you're testing a hypothesis, 
@@ -72,81 +117,118 @@ const seo = buildSEO({
       </p>
     </header>
 
-    <!-- SECTION: Audience-specific guidance on how to engage -->
-    <section class="getting-involved-section" aria-labelledby="getting-involved-title">
+    <!-- VISUAL: Subtle divider for section rhythm -->
+    <SectionDivider />
+
+    <!-- ========================================================================
+         GETTING INVOLVED SECTION
+         Three pathways for participation across different backgrounds
+         ======================================================================== -->
+    <section class="page-section page-section--center" aria-labelledby="getting-involved-heading">
+      <!-- COMPONENT: SectionHeader for consistent heading pattern -->
       <SectionHeader
+        eyebrow="Participation"
         title="Getting Involved"
         subtitle="arc^ is in early stages, which means you can help shape the direction from the ground up."
+        align="center"
       />
 
-      <!-- GRID: Three involvement pathways -->
-      <div class="involvement-grid">
-        <!-- CARD: Student participation details -->
-        <Card as="article" class="involvement-card">
+      <!-- UNIVERSAL PATTERN: card-grid--3 for three participation pathways -->
+      <div class="card-grid card-grid--3" role="list">
+        <!-- CARD: Student participation pathway -->
+        <Card as="article" variant="surface" hover={true} role="listitem">
           <div class="card-icon">🎓</div>
           <h3>For Students</h3>
-          <p>Working on a final year project, honours thesis, or PhD? You can explore arc^ projects as part of your coursework.</p>
-          <p class="card-note">We're here to support you — whether that's access to equipment, guidance on safety protocols, or help framing research questions.</p>
+          <p>
+            Working on a final year project, honours thesis, or PhD? You can explore arc^ projects as part of your coursework.
+          </p>
+          <p class="card-note">
+            <em>We're here to support you — whether that's access to equipment, guidance on safety protocols, or help framing research questions.</em>
+          </p>
         </Card>
 
-        <!-- CARD: Researcher collaboration details -->
-        <Card as="article" class="involvement-card">
+        <!-- CARD: Researcher collaboration pathway -->
+        <Card as="article" variant="surface" hover={true} role="listitem">
           <div class="card-icon">🔬</div>
           <h3>For Researchers</h3>
-          <p>Have expertise in plasma physics, materials science, or ecological systems? Your knowledge can help validate approaches or identify new directions.</p>
-          <p class="card-note">This isn't about gatekeeping — it's about learning together and building on each other's insights.</p>
+          <p>
+            Have expertise in plasma physics, materials science, or ecological systems? Your knowledge can help validate approaches or identify new directions.
+          </p>
+          <p class="card-note">
+            <em>This isn't about gatekeeping — it's about learning together and building on each other's insights.</em>
+          </p>
         </Card>
 
-        <!-- CARD: General community invitation -->
-        <Card as="article" class="involvement-card">
+        <!-- CARD: General community participation pathway -->
+        <Card as="article" variant="surface" hover={true} role="listitem">
           <div class="card-icon">🛠️</div>
           <h3>For Everyone</h3>
-          <p>You don't need a degree to contribute. Maybe you're a maker, a tinkerer, or someone with lived experience of the problems we're trying to solve.</p>
-          <p class="card-note">If you're curious, willing to learn, and committed to safety — there's a place for you.</p>
+          <p>
+            You don't need a degree to contribute. Maybe you're a maker, a tinkerer, or someone with lived experience of the problems we're trying to solve.
+          </p>
+          <p class="card-note">
+            <em>If you're curious, willing to learn, and committed to safety — there's a place for you.</em>
+          </p>
         </Card>
       </div>
 
-      <!-- CTA: Link to external involvement form -->
-      <div class="involvement-cta">
-        <LinkButton href={EXTERNAL_LINKS.formURL} variant="primary" icon="external">
+      <!-- UNIVERSAL PATTERN: section-cta for primary action -->
+      <div class="section-cta">
+        <LinkButton 
+          href={EXTERNAL_LINKS.formURL}
+          variant="primary" 
+          icon="external"
+        >
           Get Involved
         </LinkButton>
       </div>
     </section>
 
-    <!-- SECTION: Dynamic project listing grouped by category -->
-    <section class="all-projects-section" aria-labelledby="all-projects-title">
+    <!-- VISUAL: Divider between major content sections -->
+    <SectionDivider />
+
+    <!-- ========================================================================
+         ALL PROJECTS SECTION
+         Dynamic listing of research projects from content collection
+         ======================================================================== -->
+    <section class="page-section" aria-labelledby="all-projects-heading">
+      <!-- COMPONENT: SectionHeader for section introduction -->
       <SectionHeader
+        eyebrow="Research Portfolio"
         title="All Projects"
         subtitle="Each project follows RE:TECH principles — open, safe, iterative — and follows arc^'s licensing and governance."
+        align="center"
       />
 
-      <!-- LOOP: Iterate over project categories generated above -->
+      <!-- DYNAMIC: Loop through categories and display grouped projects -->
       {categories.map((category) => (
         <div class="project-category">
-          {category !== 'Other' && (
-            <h3 class="category-heading">{category}</h3>
+          {/* Category heading if projects are grouped */}
+          {category !== 'Other' && projectsByCategory[category].length > 1 && (
+            <h3 class="category-title">{category}</h3>
           )}
-
-          <!-- GRID: Project cards within {category} -->
-          <div class="projects-grid">
+          
+          {/* UNIVERSAL PATTERN: card-grid--3 for project cards */}
+          <div class="card-grid card-grid--3" role="list">
             {projectsByCategory[category].map((project) => (
-              <!-- CARD: Individual project summary with status badge -->
-              <Card as="article" class="project-card">
-                <div class="card-header">
-                  <h4>
-                    <a href={withBase(`/projects/${project.slug}`)}>{project.data.title}</a>
-                  </h4>
-                  <StatusBadge status={project.data.status} />
-                </div>
-                <p class="card-summary">{project.data.summary}</p>
-                <p class="card-updated">Last updated: {project.data.lastUpdated}</p>
-                <!-- CTA: Button linking to full project page -->
-                <div class="card-actions">
-                  <LinkButton href={withBase(`/projects/${project.slug}`)} variant="outline" icon="arrow-right">
-                    Learn More
-                  </LinkButton>
-                </div>
+              <Card as="article" variant="surface" hover={true} role="listitem">
+                {/* Project status badge */}
+                <StatusBadge status={project.data.status} />
+                
+                {/* Project title as link to detail page */}
+                <h3>
+                  <a href={withBase(`/projects/${project.slug}`)}>
+                    {project.data.title}
+                  </a>
+                </h3>
+                
+                {/* Project summary */}
+                <p>{project.data.summary}</p>
+                
+                {/* Project metadata in card note */}
+                <p class="card-note">
+                  <em>Last updated: {project.data.lastUpdated}</em>
+                </p>
               </Card>
             ))}
           </div>
@@ -154,41 +236,113 @@ const seo = buildSEO({
       ))}
     </section>
 
-    <!-- SECTION: Encouragement to start new projects within framework -->
-    <section class="build-your-own-section" aria-labelledby="build-your-own-title">
+    <!-- VISUAL: Divider between major content sections -->
+    <SectionDivider />
+
+    <!-- ========================================================================
+         BUILD YOUR OWN SECTION
+         Information about starting independent projects with mentorship
+         ======================================================================== -->
+    <section class="page-section page-section--center" aria-labelledby="build-your-own-heading">
+      <!-- COMPONENT: SectionHeader for section introduction -->
       <SectionHeader
-        title="Build Your Own"
-        subtitle="Don't see what you're looking for? You don't need our permission."
+        eyebrow="Independent Research"
+        title="Build Your Own Project"
+        subtitle="Have an idea that doesn't fit existing projects? You can start your own."
+        align="center"
       />
 
-      <!-- CALLOUT CARD: Highlights self-directed project pathway -->
-      <Card class="build-your-own-content">
-        <p>
-          arc^ isn't about gatekeeping — it's about <em>enabling</em>. If you understand
-          <a href={withBase("/how")}>our philosophy</a> and commit to our <a href={withBase("/how/safety")}>safety protocols</a>
-          and <a href={withBase("/how/licensing")}>open licensing</a>, you can start your own arc^ project.
-        </p>
-        <p>
-          <strong>You have the power.</strong> Document your work. Share openly. Build for
-          <em>life over profit</em>. That's all we ask.
-        </p>
-        <!-- CTA: Link to philosophy overview -->
-        <div class="button-wrapper">
-          <LinkButton href={withBase("/how")} variant="outline" icon="arrow-right">
-            Learn the Philosophy
+      {/* COMPONENT: Card wrapper for content block */}
+      <Card as="article" variant="surface">
+        {/* UNIVERSAL PATTERN: content-prose for multi-paragraph text */}
+        <div class="content-prose">
+          <p>
+            <strong>arc^ isn't just about joining existing work.</strong> If you have an idea for applying plasma 
+            technology to ecological repair — soil remediation, water treatment, composting acceleration, pathogen 
+            control — and it aligns with the RE:TECH framework, you can propose it.
+          </p>
+
+          <p>
+            We'll help you refine the research question, think through safety protocols, and connect you with others 
+            who might want to collaborate. Your project will be listed here, documented transparently, and licensed 
+            openly from day one.
+          </p>
+
+          <p>
+            <strong>What you'll need:</strong> A clear hypothesis or design goal, willingness to work safely and 
+            document openly, and commitment to keeping all outputs in the commons.
+          </p>
+        </div>
+
+        {/* UNIVERSAL PATTERN: section-cta for action button */}
+        <div class="section-cta">
+          <LinkButton 
+            href={EXTERNAL_LINKS.formURL}
+            variant="primary" 
+            icon="external"
+          >
+            Propose a Project
           </LinkButton>
         </div>
       </Card>
     </section>
 
-    <!-- SECTION: Legal reminder about open licensing commitments -->
-    <section class="legal-section">
-      <h3>Open by Default</h3>
-      <p>All arc^ projects follow our <a href={withBase("/how/licensing")}>non-extractive licensing model</a>. Research outputs, data, and designs stay in the commons.</p>
-      <p>This ensures that <em>the many benefit</em>, not just a few.</p>
+    <!-- VISUAL: Divider between major content sections -->
+    <SectionDivider />
+
+    <!-- ========================================================================
+         LEGAL FRAMEWORK SECTION
+         Comprehensive licensing and governance information
+         ======================================================================== -->
+    <section class="page-section page-section--center" aria-labelledby="legal-heading">
+      <!-- COMPONENT: SectionHeader for section introduction -->
+      <SectionHeader
+        eyebrow="Governance"
+        title="Legal Framework"
+        subtitle="All arc^ projects operate under clear, open licenses that keep knowledge accessible."
+        align="center"
+      />
+
+      {/* COMPONENT: CalloutPanel for important legal information */}
+      <CalloutPanel variant="info">
+        <h3>Licensing Structure</h3>
+        
+        <div class="content-prose">
+          <p>
+            <strong>Hardware:</strong> All physical designs, CAD files, and technical specifications are licensed under 
+            <a href="https://ohwr.org/cern_ohl_s_v2.txt" target="_blank" rel="noopener noreferrer">CERN-OHL-S v2</a> 
+            (strongly reciprocal). This ensures that any modifications or derivatives remain open and accessible.
+          </p>
+
+          <p>
+            <strong>Documentation:</strong> Written guides, protocols, and educational materials use 
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a>. 
+            You can share and adapt them, but not for commercial purposes, and derivatives must use the same license.
+          </p>
+
+          <p>
+            <strong>Software:</strong> All code is released under 
+            <a href="https://www.gnu.org/licenses/agpl-3.0.en.html" target="_blank" rel="noopener noreferrer">AGPL-3.0</a>, 
+            which requires that any modifications — even those running on a server — be shared openly.
+          </p>
+
+          <p>
+            <strong>Why this matters:</strong> These licenses prevent enclosure. They ensure that if someone builds on 
+            arc^ work, their improvements flow back to the commons. It's not anti-commercial — it's pro-commons.
+          </p>
+        </div>
+      </CalloutPanel>
     </section>
 
-  </main>
+    <!-- VISUAL: Divider maintains rhythm before navigation -->
+    <SectionDivider />
 
-  <PageNavigation currentPage="projects" />
+    <!-- ========================================================================
+         PAGE NAVIGATION
+         Contextual links to related sections of the site
+         ======================================================================== -->
+    <!-- COMPONENT: PageNavigation provides consistent site wayfinding -->
+    <PageNavigation currentPage="projects" />
+
+  </main>
 </BaseLayout>

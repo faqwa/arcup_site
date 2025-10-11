@@ -4,15 +4,15 @@
 // ============================================================================
 /*
 AI Summary Metadata:
-title: ArcUp — Open Plasma Research for Ecological Repair
-summary: ArcUp is an open experimental research framework developing plasma-based systems for ecological regeneration, working transparently to make research accessible and actionable.
-keywords: plasma technology, ecological repair, open science, regenerative systems, plasma activated water, soil restoration, community research, ethical innovation
+title: ArcUp Projects — Open Plasma Research Portfolio
+summary: Active research projects applying plasma technology to ecological repair challenges through collaborative, open-source experimentation.
+keywords: plasma research projects, open science, collaborative research, ecological repair, plasma activated water, soil restoration, community science
 ai_content_highlights:
-  - Open research framework for plasma-based ecological regeneration technologies
-  - Develops water purification and soil restoration systems using controlled electrical discharges
-  - Guided by Repractice Ethical Framework emphasizing transparency, accessibility, and life-serving technology
-  - Four-layer logic: Technology → Water → Organisms → Ecosystems
-  - Transparent, multi-scale research process aligning engineering with ecological accountability
+  - Portfolio of active research projects in plasma-based ecological technologies
+  - Three pathways for participation: students, researchers, and community members
+  - All projects follow RE:TECH principles: open, safe, iterative
+  - Build-your-own project pathway with mentorship and support
+  - Comprehensive legal framework using CERN-OHL, CC BY-NC-SA, and AGPL licenses
 */
 
 // ============================================================================
@@ -25,19 +25,45 @@ import SectionHeader from "../components/SectionHeader.astro";
 import SectionDivider from "../components/SectionDivider.astro";
 import Card from "../components/Card.astro";
 import LinkButton from "../components/LinkButton.astro";
+import StatusBadge from "../components/StatusBadge.astro";
+import CalloutPanel from "../components/CalloutPanel.astro";
 import "../styles/global-v2.css";
 
+import { getCollection } from 'astro:content';
 import { withBase } from '../utils/paths';
 import { buildSEO } from '../utils/seo';
 import { EXTERNAL_LINKS } from '../config/constants';
 
 // ============================================================================
+// DATA LOADING
+// ============================================================================
+// Get all projects dynamically from content collection
+const allProjects = await getCollection('projects');
+
+// Group projects by category for organized display
+const projectsByCategory = allProjects.reduce((acc, project) => {
+  const category = project.data.category || 'Other';
+  if (!acc[category]) {
+    acc[category] = [];
+  }
+  acc[category].push(project);
+  return acc;
+}, {} as Record<string, typeof allProjects>);
+
+// Sort categories alphabetically, with 'Other' always last
+const categories = Object.keys(projectsByCategory).sort((a, b) => {
+  if (a === 'Other') return 1;
+  if (b === 'Other') return -1;
+  return a.localeCompare(b);
+});
+
+// ============================================================================
 // SEO CONFIGURATION
 // ============================================================================
 const seo = buildSEO({
-  title: "arc^",
-  description: "ArcUp is an open experimental research framework for regenerative plasma technology. We share our methods, data, and designs openly—guided by the Repractice Ethical Framework.",
-  path: "/",
+  title: "Projects",
+  description: "Active research projects in plasma technology for ecological repair. Open, collaborative, and building in public.",
+  path: "/projects",
   siteUrl: Astro.site,
 });
 ---
@@ -45,231 +71,195 @@ const seo = buildSEO({
 <BaseLayout
   title={seo.title}
   description={seo.description}
-  bodyClass="page-home"
+  bodyClass="page-projects"
   seo={seo}
-  navActive="home"
+  navActive="projects"
 >
   <!-- PERFORMANCE: ArcCanvas loaded in before-header slot for optimal visual hierarchy -->
   <ArcCanvas slot="before-header" />
 
   <!-- SEMANTIC: Main landmark with proper labeling for screen readers -->
-  <main id="main-content" class="page-shell" aria-labelledby="main-title">
+  <main id="main-content" class="page-shell" aria-labelledby="projects-title">
 
     <!-- ========================================================================
          HERO SECTION
-         Primary introduction communicating core mission and research framework
+         Overview of project portfolio and participation framework
          ======================================================================== -->
-    <header class="page-hero" aria-labelledby="main-title">
+    <header class="page-hero" aria-labelledby="projects-title">
       <!-- ACCESSIBILITY: Eyebrow provides context before main heading -->
-      <p class="eyebrow">Open Research for a Thriving Earth</p>
+      <p class="eyebrow">Early-Stage Collaborative Research</p>
 
-      <!-- SEMANTIC: h1 as primary page heading with hero-title class for large display -->
-      <h1 id="main-title" class="hero-title">arc^</h1>
+      <!-- SEMANTIC: h1 as primary page heading -->
+      <h1 id="projects-title">Projects</h1>
 
-      <!-- Lead paragraph emphasizing key mission -->
+      <!-- Lead paragraph with emphasized key concepts -->
       <p class="lead">
-        <em>ArcUp</em> is an open experimental research framework advancing
-        <strong>plasma-based systems for ecological repair.</strong>
+        Each project applies RE:TECH principles — <em>open, safe, iterative</em> — and follows arc^'s licensing and governance. 
+        <strong>These are real-world challenges that need collaborative solutions.</strong> Whether you're testing a hypothesis, 
+        building hardware, or bringing community knowledge — there's a way in.
       </p>
-
-      <!-- UNIVERSAL PATTERN: content-prose for multi-paragraph text blocks -->
-      <div class="content-prose">
-        <p>
-          Our research begins with <strong>technology</strong>—how controlled electrical discharges can be
-          generated safely and accessibly. From there we study how that energy interacts with
-          <strong>water</strong>, transforming chemistry and enabling reuse.
-          We trace its influence on <strong>organisms</strong>—microbes, plants, and humans—examining
-          functional and molecular responses. Finally, we observe how these effects scale within
-          <strong>ecosystems</strong>, testing whether local repair can strengthen whole landscapes.
-        </p>
-
-        <p>
-          Every stage follows the
-          <a href="https://repractice.xbyali.page" target="_blank" rel="noopener noreferrer">
-            Repractice Ethical Framework
-          </a>,
-          which keeps our work transparent, reproducible, and accountable to the commons.
-        </p>
-      </div>
-
-      <!-- UNIVERSAL PATTERN: section-cta for action buttons -->
-      <div class="section-cta">
-        <LinkButton 
-          href={withBase("/projects")} 
-          variant="primary" 
-          icon="arrow-right"
-        >
-          Explore Projects
-        </LinkButton>
-        <LinkButton 
-          href={withBase("/about")} 
-          variant="outline" 
-          icon="arrow-right"
-        >
-          About ArcUp
-        </LinkButton>
-      </div>
     </header>
 
-    <!-- VISUAL: Subtle divider for section rhythm -->
+
+    <!-- VISUAL: Divider between major content sections -->
     <SectionDivider />
 
     <!-- ========================================================================
-         RESEARCH FRAMEWORK SECTION
-         Four-layer logic presented in accessible card grid
+         ALL PROJECTS SECTION
+         Dynamic listing of research projects from content collection
          ======================================================================== -->
-    <section class="page-section page-section--center" aria-labelledby="research-framework-heading">
-      <!-- COMPONENT: SectionHeader for consistent heading pattern -->
+    <section class="page-section" aria-labelledby="all-projects-heading">
+      <!-- COMPONENT: SectionHeader for section introduction -->
       <SectionHeader
-        eyebrow="Our Research Framework"
-        title="From Energy to Ecosystems"
-        subtitle="ArcUp studies how plasma interacts across four connected scales — from device to drop, organism to ecosystem."
+        eyebrow="Research Portfolio"
+        title="All Projects"
+        subtitle="Each project follows RE:TECH principles — open, safe, iterative — and follows arc^'s licensing and governance."
         align="center"
       />
 
-      <!-- UNIVERSAL PATTERN: card-grid--4 forces 4 columns on desktop -->
-      <div class="card-grid card-grid--4" role="list">
-        <!-- COMPONENT: Card wrapper for consistent surface treatment -->
-        <Card as="article" variant="surface" hover={true} role="listitem">
-          <h3>Technology</h3>
-          <p>
-            We design and study plasma systems that translate high-voltage energy into usable environmental tools.
-            Research spans DIY and community-built devices, safety testing, and scalable configurations for industrial and municipal contexts.
-          </p>
-          <!-- UNIVERSAL PATTERN: card-note for status/metadata -->
-          <p class="card-note">
-            <em>Focus: dielectric barrier discharge design, open hardware, and reproducible engineering.</em>
-          </p>
-        </Card>
-
-        <Card as="article" variant="surface" hover={true} role="listitem">
-          <h3>Water Systems</h3>
-          <p>
-            Water is the first medium of change. Plasma-activated water (PAW) is investigated for pollutant breakdown,
-            salinity management, and reuse in agriculture and wastewater treatment.
-            Each study measures both chemical kinetics and real-world practicality.
-          </p>
-          <p class="card-note">
-            <em>Focus: degradation of dyes and pesticides, desalination trials, and pathogen reduction.</em>
-          </p>
-        </Card>
-
-        <Card as="article" variant="surface" hover={true} role="listitem">
-          <h3>Organisms</h3>
-          <p>
-            We examine how plasma-treated environments influence living systems —
-            from microbial communities to plants and higher organisms.
-            Studies bridge molecular responses with physiological outcomes to assess safety and benefit.
-          </p>
-          <p class="card-note">
-            <em>Focus: plant stress physiology, microbiome modulation, and non-genetic inheritance pathways.</em>
-          </p>
-        </Card>
-
-        <Card as="article" variant="surface" hover={true} role="listitem">
-          <h3>Ecosystems</h3>
-          <p>
-            The final scale tests whether local interventions lead to systemic resilience.
-            Plasma methods are embedded into wetlands, soil–water interfaces, and restoration designs to model long-term ecological repair.
-          </p>
-          <p class="card-note">
-            <em>Focus: mesocosm experiments, nutrient cycling, and adaptive ecosystem modelling.</em>
-          </p>
-        </Card>
-      </div>
-
-      <!-- UNIVERSAL PATTERN: section-cta for follow-up action -->
-      <div class="section-cta">
-        <LinkButton 
-          href={withBase("/how")} 
-          variant="outline" 
-          icon="arrow-right"
-        >
-          Our Methodology
-        </LinkButton>
-      </div>
+      <!-- DYNAMIC: Loop through categories and display grouped projects -->
+      {categories.map((category) => (
+        <div class="project-category">
+          {/* Category heading if projects are grouped */}
+          {category !== 'Other' && projectsByCategory[category].length > 1 && (
+            <h3 class="category-title">{category}</h3>
+          )}
+          
+          {/* UNIVERSAL PATTERN: card-grid--3 for project cards */}
+          <div class="card-grid card-grid--3" role="list">
+            {projectsByCategory[category].map((project) => (
+              <Card as="article" variant="surface" hover={true} role="listitem">
+                {/* Project status badge */}
+                <StatusBadge status={project.data.status} />
+                
+                {/* Project title as link to detail page */}
+                <h3>
+                  <a href={withBase(`/projects/${project.slug}`)}>
+                    {project.data.title}
+                  </a>
+                </h3>
+                
+                {/* Project summary */}
+                <p>{project.data.summary}</p>
+                
+                {/* Project metadata in card note */}
+                <p class="card-note">
+                  <em>Last updated: {project.data.lastUpdated}</em>
+                </p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      ))}
     </section>
 
     <!-- VISUAL: Divider between major content sections -->
     <SectionDivider />
 
     <!-- ========================================================================
-         GETTING INVOLVED SECTION
-         Invitation for students, researchers, and community members
+         BUILD YOUR OWN SECTION
+         Information about starting independent projects with mentorship
          ======================================================================== -->
-    <section class="page-section page-section--center" aria-labelledby="getting-involved-heading">
-      <!-- COMPONENT: SectionHeader establishes section context -->
+    <section class="page-section page-section--center" aria-labelledby="build-your-own-heading">
+      <!-- COMPONENT: SectionHeader for section introduction -->
       <SectionHeader
-        eyebrow="Participation"
-        title="Getting Involved"
-        subtitle="ArcUp is in its early stages — you can help shape its direction from the ground up."
+        eyebrow="Independent Research"
+        title="Build Your Own Project"
+        subtitle="Have an idea that doesn't fit existing projects? You can start your own."
         align="center"
       />
 
-      <!-- UNIVERSAL PATTERN: card-grid--3 for three audience pathways -->
-      <div class="card-grid card-grid--3" role="list">
-        <!-- CARD: Student participation pathway -->
-        <Card as="article" variant="surface" hover={true} role="listitem">
-          <div class="card-icon">🎓</div>
-          <h3>For Students</h3>
+      {/* COMPONENT: Card wrapper for content block */}
+      <Card as="article" variant="surface">
+        {/* UNIVERSAL PATTERN: content-prose for multi-paragraph text */}
+        <div class="content-prose">
           <p>
-            <strong>Wondering if open research can fit within your degree?</strong>
-            It can. ArcUp projects are designed for coursework alignment — you'll work under your supervisor's guidance while contributing to shared data.
+            <strong>arc^ isn't just about joining existing work.</strong> If you have an idea for applying plasma 
+            technology to ecological repair — soil remediation, water treatment, composting acceleration, pathogen 
+            control — and it aligns with the RE:TECH framework, you can propose it.
           </p>
-          <p class="card-note">
-            <em>What you'll need: a project proposal, supervisor approval, and commitment to open licensing.</em>
-          </p>
-        </Card>
 
-        <!-- CARD: Researcher collaboration pathway -->
-        <Card as="article" variant="surface" hover={true} role="listitem">
-          <div class="card-icon">🔬</div>
-          <h3>For Researchers</h3>
           <p>
-            <strong>Looking for rigor and openness in the same field?</strong>
-            ArcUp's early protocols need peer scrutiny and method design — your expertise defines what responsible plasma research looks like.
+            We'll help you refine the research question, think through safety protocols, and connect you with others 
+            who might want to collaborate. Your project will be listed here, documented transparently, and licensed 
+            openly from day one.
           </p>
-          <p class="card-note">
-            <em>What's available now: emerging research questions, experimental frameworks, and opportunities for method development.</em>
-          </p>
-        </Card>
 
-        <!-- CARD: General community participation pathway -->
-        <Card as="article" variant="surface" hover={true} role="listitem">
-          <div class="card-icon">🛠️</div>
-          <h3>For Everyone</h3>
           <p>
-            <strong>Think this is beyond your skill set?</strong>
-            If you can follow a safety guide and keep notes, you're already part of the experiment. We'll teach you the rest.
+            <strong>What you'll need:</strong> A clear hypothesis or design goal, willingness to work safely and 
+            document openly, and commitment to keeping all outputs in the commons.
           </p>
-          <p class="card-note">
-            <em>Best way to start: browse projects that interest you and reach out to begin a conversation.</em>
-          </p>
-        </Card>
-      </div>
+        </div>
 
-      <!-- UNIVERSAL PATTERN: section-cta for primary engagement actions -->
-      <div class="section-cta">
-        <LinkButton 
-          href={withBase("/join")} 
-          variant="primary" 
-          icon="arrow-right"
-        >
-          Join the Community
-        </LinkButton>
-        <LinkButton 
-          href={EXTERNAL_LINKS.discord}
-          variant="outline" 
-          icon="external"
-        >
-          Explore Workspace
-        </LinkButton>
-      </div>
+        {/* UNIVERSAL PATTERN: section-cta for action button */}
+        <div class="section-cta">
+          <LinkButton 
+            href={EXTERNAL_LINKS.formURL}
+            variant="primary" 
+            icon="external"
+          >
+            Propose a Project
+          </LinkButton>
+        </div>
+      </Card>
+    </section>
+
+    <!-- VISUAL: Divider between major content sections -->
+    <SectionDivider />
+
+    <!-- ========================================================================
+         LEGAL FRAMEWORK SECTION
+         Comprehensive licensing and governance information
+         ======================================================================== -->
+    <section class="page-section page-section--center" aria-labelledby="legal-heading">
+      <!-- COMPONENT: SectionHeader for section introduction -->
+      <SectionHeader
+        eyebrow="Governance"
+        title="Legal Framework"
+        subtitle="All arc^ projects operate under clear, open licenses that keep knowledge accessible."
+        align="center"
+      />
+
+      {/* COMPONENT: CalloutPanel for important legal information */}
+      <CalloutPanel variant="info">
+        <h3>Licensing Structure</h3>
+        
+        <div class="content-prose">
+          <p>
+            <strong>Hardware:</strong> All physical designs, CAD files, and technical specifications are licensed under 
+            <a href="https://ohwr.org/cern_ohl_s_v2.txt" target="_blank" rel="noopener noreferrer">CERN-OHL-S v2</a> 
+            (strongly reciprocal). This ensures that any modifications or derivatives remain open and accessible.
+          </p>
+
+          <p>
+            <strong>Documentation:</strong> Written guides, protocols, and educational materials use 
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a>. 
+            You can share and adapt them, but not for commercial purposes, and derivatives must use the same license.
+          </p>
+
+          <p>
+            <strong>Software:</strong> All code is released under 
+            <a href="https://www.gnu.org/licenses/agpl-3.0.en.html" target="_blank" rel="noopener noreferrer">AGPL-3.0</a>, 
+            which requires that any modifications — even those running on a server — be shared openly.
+          </p>
+
+          <p>
+            <strong>Why this matters:</strong> These licenses prevent enclosure. They ensure that if someone builds on 
+            arc^ work, their improvements flow back to the commons. It's not anti-commercial — it's pro-commons.
+          </p>
+        </div>
+      </CalloutPanel>
     </section>
 
     <!-- VISUAL: Divider maintains rhythm before navigation -->
     <SectionDivider />
-  <PageNavigation currentPage="about" />
+
+    <!-- ========================================================================
+         PAGE NAVIGATION
+         Contextual links to related sections of the site
+         ======================================================================== -->
+    <!-- COMPONENT: PageNavigation provides consistent site wayfinding -->
+    <PageNavigation currentPage="projects" />
 
   </main>
 </BaseLayout>

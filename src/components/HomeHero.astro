@@ -1,0 +1,371 @@
+---
+// ============================================================================
+// COMPONENT: HomeHero.astro
+// PURPOSE: Flagship hero for homepage with vertical narrative layout
+// ----------------------------------------------------------------------------
+// USAGE: Only on /index.astro
+// FEATURES:
+// - Two-zone layout: Identity (4 cols) + Narrative Stack (8 cols)
+// - Vertical narrative with connecting line visual
+// - Three research subsections (Experimentation, Verification, Ethics)
+// - CTA buttons with gradient background
+// - Radial plasma glow effects
+// - Staggered fade-in animations
+// ============================================================================
+
+import LinkButton from "./LinkButton.astro";
+import { withBase } from "../utils/paths";
+---
+
+<section class="home-hero" aria-labelledby="main-title">
+  
+  <!-- 12-Column Grid Container -->
+  <div class="panorama-grid">
+    
+    <!-- LEFT ZONE: Identity Anchor (4 columns, vertically centered) -->
+    <div class="identity-zone">
+      <p class="eyebrow">Open Experimental Plasma Research</p>
+      
+      <h1 id="main-title" class="hero-title">
+        arc<sup>^</sup>
+      </h1>
+      
+      <p class="lead">
+        Building plasma technologies for <strong>ecological repair</strong> through 
+        transparent, collaborative, and <em>ethical research</em>.
+      </p>
+    </div>
+
+    <!-- RIGHT ZONE: Vertical Narrative Stack (8 columns) -->
+    <div class="narrative-stack">
+      
+      <!-- Connecting Line Accent -->
+      <div class="narrative-connector"></div>
+      
+      <div class="narrative-content">
+        <!-- Subsection 1: Experimentation -->
+        <article class="narrative-card">
+          <h4 class="theme-label">Experimentation</h4>
+          <p>
+            We develop and test plasma-based solutions in the open. Every experiment, 
+            every result, and every method is documented and shared. Our research explores 
+            how controlled plasma can support soil regeneration, water purification, 
+            and atmospheric balance.
+          </p>
+        </article>
+
+        <!-- Subsection 2: Verification -->
+        <article class="narrative-card">
+          <h4 class="theme-label">Verification</h4>
+          <p>
+            All findings are made freely available for independent review and replication. 
+            We believe that <strong>science advances through verification</strong>, not 
+            secrecy. Community feedback and peer collaboration strengthen every outcome.
+          </p>
+        </article>
+
+        <!-- Subsection 3: Ethics -->
+        <article class="narrative-card">
+          <h4 class="theme-label">Ethics</h4>
+          <p>
+            Our work follows <em>clear ethical guidelines</em> that prioritize safety, 
+            environmental responsibility, and inclusive participation. We're committed to 
+            research that serves life—not extraction or exploitation.
+          </p>
+        </article>
+      </div>
+      
+    </div>
+
+    <!-- CTA ZONE: Full-width spanning all 12 columns -->
+    <div class="cta-zone">
+      <LinkButton 
+        href={withBase("/projects")} 
+        variant="primary" 
+        icon="arrow-right"
+        aria-label="Explore active research projects"
+      >
+        Explore Projects
+      </LinkButton>
+      
+      <LinkButton 
+        href={withBase("/about")} 
+        variant="outline" 
+        icon="arrow-right"
+        aria-label="Learn more about ArcUp's mission"
+      >
+        Learn More
+      </LinkButton>
+    </div>
+    
+  </div>
+</section>
+
+<style>
+  /* ========================================================================
+     HOME HERO: Vertical Narrative Layout with Plasma Aesthetics
+     ======================================================================== */
+  .home-hero {
+    position: relative;
+    padding-top: clamp(4rem, 8vw, 6rem);
+    padding-bottom: clamp(4rem, 8vw, 6rem);
+  }
+
+  /* Radial cyan glow background */
+  .home-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at center,
+      rgba(10, 147, 150, 0.05) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* ========================================================================
+     PANORAMA GRID: 12-Column Responsive Layout
+     Desktop: 4 cols identity + 8 cols narrative
+     Mobile: Single column stack
+     ======================================================================== */
+  .panorama-grid {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
+    align-items: start;
+  }
+
+  @media (min-width: 1024px) {
+    .panorama-grid {
+      grid-template-columns: repeat(12, 1fr);
+      gap: clamp(3rem, 5vw, 4rem);
+    }
+  }
+
+  /* ========================================================================
+     IDENTITY ZONE: Left anchor (4 columns)
+     ======================================================================== */
+  .identity-zone {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    text-align: center;
+  }
+
+  @media (min-width: 1024px) {
+    .identity-zone {
+      grid-column: span 4;
+      text-align: left;
+      justify-content: center;
+      align-self: center;
+    }
+  }
+
+  .identity-zone .eyebrow {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-primary-bright);
+  }
+
+  .identity-zone .hero-title {
+    font-size: clamp(3.5rem, 9vw, 6rem);
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .identity-zone .lead {
+    max-width: 60ch;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 1024px) {
+    .identity-zone .lead {
+      margin: 0;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .identity-zone .lead {
+      margin: 0 auto;
+    }
+  }
+
+  /* ========================================================================
+     NARRATIVE STACK: Vertical layout with connecting line
+     ======================================================================== */
+  .narrative-stack {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (min-width: 1024px) {
+    .narrative-stack {
+      grid-column: span 8;
+    }
+  }
+
+  /* Connecting Line Accent */
+  .narrative-connector {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(10, 147, 150, 0.2) 10%,
+      rgba(10, 147, 150, 0.2) 90%,
+      transparent
+    );
+    border-radius: 2px;
+  }
+
+  @media (max-width: 1023px) {
+    .narrative-connector {
+      display: none;
+    }
+  }
+
+  /* Content container with left padding */
+  .narrative-content {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.5rem, 4vw, 3rem);
+    padding-left: clamp(0rem, 1vw, 2rem);
+  }
+
+  @media (min-width: 1024px) {
+    .narrative-content {
+      padding-left: 2rem;
+    }
+  }
+
+  /* ========================================================================
+     NARRATIVE CARD: Individual subsection styling
+     ======================================================================== */
+  .narrative-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: clamp(1.25rem, 2.5vw, 1.5rem);
+    background: rgba(15, 23, 42, 0.3);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: var(--radius-md);
+    transition: border-color 180ms ease;
+  }
+
+  .narrative-card:hover {
+    border-color: rgba(93, 225, 228, 0.15);
+  }
+
+  .narrative-card p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  /* Theme label styling */
+  .theme-label {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.05em;
+    color: var(--color-primary-bright);
+    margin: 0;
+  }
+
+  /* ========================================================================
+     CTA ZONE: Full-width with gradient background
+     ======================================================================== */
+  .cta-zone {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-lg);
+    padding: clamp(1.5rem, 3vw, 2rem);
+    margin-top: clamp(3rem, 6vw, 4rem);
+    background: linear-gradient(
+      to top,
+      rgba(10, 147, 150, 0.1),
+      transparent
+    );
+    border-radius: var(--radius-lg);
+  }
+
+  @media (min-width: 1024px) {
+    .cta-zone {
+      grid-column: span 12;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cta-zone {
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+  }
+
+  /* ========================================================================
+     EMPHASIS STYLING
+     ======================================================================== */
+  .identity-zone strong,
+  .narrative-card strong {
+    color: var(--color-text);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .identity-zone em,
+  .narrative-card em {
+    color: var(--color-primary-bright);
+    font-style: normal;
+  }
+
+  /* ========================================================================
+     ANIMATIONS: Staggered fade-in
+     ======================================================================== */
+  @media (prefers-reduced-motion: no-preference) {
+    .identity-zone {
+      animation: fade-in-up 0.6s ease-out backwards;
+    }
+
+    .narrative-card {
+      animation: fade-in-up 0.6s ease-out backwards;
+    }
+
+    .narrative-card:nth-child(1) {
+      animation-delay: 0.15s;
+    }
+
+    .narrative-card:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+
+    .narrative-card:nth-child(3) {
+      animation-delay: 0.45s;
+    }
+
+    .cta-zone {
+      animation: fade-in-up 0.6s ease-out 0.6s backwards;
+    }
+
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+</style>
