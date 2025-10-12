@@ -1,56 +1,52 @@
 ---
-/**
- * LinkButton - Styled link component with button appearance
- * 
- * @param href - Link destination
- * @param variant - Button style variant
- * @param size - Button size
- * @param external - Opens in new tab if true
- * @param icon - Optional icon position
- */
+// ============================================================================
+// COMPONENT: LinkButton.astro (PHASE 2 REFACTOR)
+// PURPOSE: CTA button component for links
+// ----------------------------------------------------------------------------
+// CHANGES:
+// - Reduced sizes: small | normal (removed large)
+// - Lighter outline background for better readability
+// - Unified hover transitions
+// ============================================================================
+
 interface Props {
   href: string;
   variant?: 'primary' | 'outline' | 'ghost';
-  size?: 'normal' | 'small' | 'large';
+  size?: 'small' | 'normal';
+  icon?: 'arrow-right' | 'external';
   external?: boolean;
-  icon?: 'none' | 'arrow-right' | 'external';
   class?: string;
 }
 
-const { 
+const {
   href,
-  variant = 'outline',
+  variant = 'primary',
   size = 'normal',
+  icon,
   external = false,
-  icon = 'none',
   class: className = ''
 } = Astro.props;
-
-// Auto-detect external links
-const isExternal = external || href.startsWith('http');
 
 const classes = [
   'link-button',
   `link-button--${variant}`,
   `link-button--${size}`,
+  icon && 'link-button--with-icon',
   className
 ].filter(Boolean).join(' ');
 
-// Determine which icon to show
-const showIcon = icon !== 'none' ? icon : (isExternal ? 'external' : 'none');
+const linkProps = external ? {
+  target: '_blank',
+  rel: 'noopener noreferrer'
+} : {};
 ---
 
-<a 
-  href={href}
-  class={classes}
-  target={isExternal ? '_blank' : undefined}
-  rel={isExternal ? 'noopener noreferrer' : undefined}
->
+<a href={href} class={classes} {...linkProps}>
   <span class="link-button__text">
     <slot />
   </span>
   
-  {showIcon === 'arrow-right' && (
+  {icon === 'arrow-right' && (
     <svg 
       class="link-button__icon" 
       width="16" 
@@ -67,11 +63,11 @@ const showIcon = icon !== 'none' ? icon : (isExternal ? 'external' : 'none');
     </svg>
   )}
   
-  {showIcon === 'external' && (
+  {icon === 'external' && (
     <svg 
       class="link-button__icon" 
-      width="14" 
-      height="14" 
+      width="16" 
+      height="16" 
       viewBox="0 0 24 24" 
       fill="none" 
       stroke="currentColor" 
@@ -88,107 +84,118 @@ const showIcon = icon !== 'none' ? icon : (isExternal ? 'external' : 'none');
 </a>
 
 <style>
+  /* ========================================================================
+     LINK BUTTON - PHASE 2 REFACTOR
+     Simplified to 2 sizes, lighter outline variant
+     ======================================================================== */
   .link-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    border-radius: var(--radius-sm);
-    font-weight: var(--font-weight-semibold);
-    border: 1px solid transparent;
+    gap: var(--space-xs);
+    font-family: var(--font-sans);
+    font-weight: var(--font-weight-medium);
     text-decoration: none;
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
     cursor: pointer;
     transition: all var(--transition-base);
     white-space: nowrap;
   }
 
-  /* Sizes */
+  /* ========================================================================
+     SIZE VARIANTS - Reduced to 2
+     ======================================================================== */
   .link-button--small {
-    padding: 0.5rem 1rem;
+    padding: var(--space-xs) var(--space-md);
     font-size: var(--text-sm);
   }
 
   .link-button--normal {
-    padding: 0.75rem 1.5rem;
+    padding: var(--space-sm) var(--space-lg);
     font-size: var(--text-base);
   }
 
-  .link-button--large {
-    padding: 1rem 2rem;
-    font-size: var(--text-lg);
-  }
-
-  /* Variants */
+  /* ========================================================================
+     STYLE VARIANTS
+     ======================================================================== */
+  
+  /* Primary - Solid teal background */
   .link-button--primary {
-    background: linear-gradient(
-      135deg, 
-      var(--color-primary) 0%, 
-      var(--color-primary-bright) 100%
-    );
-    color: #031115;
-    box-shadow: 0 18px 35px -25px rgba(93, 225, 228, 0.55);
-  }
-
-  .link-button--primary:hover,
-  .link-button--primary:focus-visible {
-    transform: translateY(-2px);
-    box-shadow: 0 22px 42px -30px rgba(93, 225, 228, 0.7);
-  }
-
-  .link-button--outline {
-    background: rgba(6, 12, 20, 0.7);
-    color: var(--color-primary-bright);
-    border-color: var(--color-primary);
-  }
-
-  .link-button--outline:hover,
-  .link-button--outline:focus-visible {
-    background: rgba(10, 147, 150, 0.15);
-    border-color: var(--color-primary-bright);
-  }
-
-  .link-button--ghost {
-    background: transparent;
-    color: var(--color-text-muted);
-    border-color: var(--color-border);
-  }
-
-  .link-button--ghost:hover,
-  .link-button--ghost:focus-visible {
-    background: rgba(6, 12, 20, 0.5);
+    background: var(--color-primary);
     color: var(--color-text);
     border-color: var(--color-primary);
   }
 
-  /* Icon */
+  .link-button--primary:hover,
+  .link-button--primary:focus-visible {
+    background: var(--color-primary-bright);
+    border-color: var(--color-primary-bright);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 147, 150, 0.3);
+  }
+
+  /* Outline - Light background for better readability */
+  .link-button--outline {
+    background: rgba(93, 225, 228, 0.08);
+    color: var(--color-primary-bright);
+    border-color: rgba(93, 225, 228, 0.35);
+  }
+
+  .link-button--outline:hover,
+  .link-button--outline:focus-visible {
+    background: rgba(93, 225, 228, 0.15);
+    border-color: var(--color-primary-bright);
+    transform: translateY(-1px);
+  }
+
+  /* Ghost - Minimal style */
+  .link-button--ghost {
+    background: transparent;
+    color: var(--color-text-muted);
+    border-color: transparent;
+  }
+
+  .link-button--ghost:hover,
+  .link-button--ghost:focus-visible {
+    color: var(--color-primary-bright);
+    background: rgba(93, 225, 228, 0.08);
+  }
+
+  /* ========================================================================
+     ICON HANDLING
+     ======================================================================== */
   .link-button__icon {
     flex-shrink: 0;
     transition: transform var(--transition-base);
   }
 
-  .link-button:hover .link-button__icon {
+  .link-button--with-icon:hover .link-button__icon {
     transform: translateX(2px);
   }
 
-  .link-button__text {
-    display: inline-block;
-  }
-
-  /* Touch targets for mobile */
-  @media (max-width: 640px) {
-    .link-button {
-      min-height: 44px;
-      min-width: 44px;
-    }
+  /* ========================================================================
+     ACCESSIBILITY
+     ======================================================================== */
+  .link-button:focus-visible {
+    outline: 2px solid var(--color-primary-bright);
+    outline-offset: 2px;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .link-button:hover {
-      transform: none;
+    .link-button,
+    .link-button__icon {
+      transform: none !important;
+      transition: none;
     }
-    
-    .link-button:hover .link-button__icon {
-      transform: none;
+  }
+
+  /* ========================================================================
+     MOBILE OPTIMIZATION
+     ======================================================================== */
+  @media (max-width: 640px) {
+    .link-button {
+      width: 100%;
     }
   }
 </style>

@@ -12,9 +12,6 @@ export const EXTERNAL_LINKS = {
   youtube: "https://www.youtube.com/@arc-arcup",
   personalSite: "https://www.xbyali.page",
   github: "https://github.com/arcup",
-  
-  // NEW: Workspace URL for showing current progress/dashboard
-  // Replace this URL with your actual workspace location
   workspace: "https://workspace.arcup.example.com", // TODO: Update with real URL
 } as const;
 
@@ -59,38 +56,72 @@ export const SEO_KEYWORDS = [
  * Social media handles (if applicable)
  */
 export const SOCIAL_HANDLES = {
-  twitter: undefined, // Not currently used
-  mastodon: undefined, // Not currently used
+  twitter: undefined,
+  mastodon: undefined,
 } as const;
 
 /**
- * Navigation structure
- * Items with dropdown property will show sub-navigation on hover
+ * Navigation structure - TypeScript interfaces
  */
-export const NAV_ITEMS = [
-  { key: "home", label: "home", href: "/" },
-  { key: "projects", label: "projects", href: "/projects" },
+export interface DropdownItem {
+  key: string;
+  label: string;
+  href: string;
+}
+
+export interface NavItem {
+  key: string;
+  label: string;
+  href: string;
+  dropdown?: DropdownItem[];
+}
+
+/**
+ * Navigation items
+ * Add dropdown arrays to create sub-navigation
+ * Projects dropdown is built dynamically in SiteHeader.astro
+ */
+export const NAV_ITEMS: NavItem[] = [
+  { 
+    key: "home", 
+    label: "home", 
+    href: "/" 
+  },
+  { 
+    key: "projects", 
+    label: "projects", 
+    href: "/projects"
+    // Projects dropdown is built dynamically from CMS in SiteHeader.astro
+  },
   { 
     key: "how", 
     label: "how", 
     href: "/how",
-    // Dropdown for How - showing sub-pages only
     dropdown: [
-      { key: "how-safety", label: "Safety", href: "/how/safety" },
+      { key: "how-safety", label: "Safety Protocols", href: "/how/safety" },
       { key: "how-licensing", label: "Licensing", href: "/how/licensing" },
+      // Add more How pages here:
+      // { key: "how-methodology", label: "Methodology", href: "/how/methodology" },
+      // { key: "how-equipment", label: "Equipment", href: "/how/equipment" },
     ]
   },
   { 
     key: "about", 
     label: "about", 
     href: "/about",
-    // Dropdown for About - showing sub-pages only
     dropdown: [
       { key: "about-founder", label: "Meet Ali", href: "/about/founder" },
+      // Add more About pages here:
+      // { key: "about-mission", label: "Mission", href: "/about/mission" },
+      // { key: "about-team", label: "Team", href: "/about/team" },
     ]
   },
-  { key: "join", label: "join", href: "/join" },
-] as const;
+  { 
+    key: "join", 
+    label: "join", 
+    href: "/join" 
+  },
+];
 
 /**
  * Project status types

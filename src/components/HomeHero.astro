@@ -1,16 +1,13 @@
 ---
 // ============================================================================
-// COMPONENT: HomeHero.astro
-// PURPOSE: Flagship hero for homepage with vertical narrative layout
+// COMPONENT: HomeHero.astro (PHASE 2 REFACTOR)
+// PURPOSE: Flagship hero for homepage with mobile accordion support
 // ----------------------------------------------------------------------------
-// USAGE: Only on /index.astro
-// FEATURES:
-// - Two-zone layout: Identity (4 cols) + Narrative Stack (8 cols)
-// - Vertical narrative with connecting line visual
-// - Three research subsections (Experimentation, Verification, Ethics)
-// - CTA buttons with gradient background
-// - Radial plasma glow effects
-// - Staggered fade-in animations
+// CHANGES:
+// - Mobile: Two-step accordion for narrative cards
+// - Unified animations via .fade-in-up utility classes
+// - Reduced nested blurs for performance
+// - Preserved desktop panorama layout
 // ============================================================================
 
 import LinkButton from "./LinkButton.astro";
@@ -19,12 +16,11 @@ import { withBase } from "../utils/paths";
 
 <section class="home-hero" aria-labelledby="main-title">
   
-  <!-- 12-Column Grid Container -->
   <div class="panorama-grid">
     
-    <!-- LEFT ZONE: Identity Anchor (4 columns, vertically centered) -->
-    <div class="identity-zone">
-      <p class="eyebrow">Open Experimental Plasma Research</p>
+    <!-- IDENTITY ZONE (4 cols desktop) -->
+    <div class="identity-zone fade-in-up">
+      <p class="eyebrow">Open Research for a Thriving Earth</p>
       
       <h1 id="main-title" class="hero-title">
         arc<sup>^</sup>
@@ -36,49 +32,56 @@ import { withBase } from "../utils/paths";
       </p>
     </div>
 
-    <!-- RIGHT ZONE: Vertical Narrative Stack (8 columns) -->
+    <!-- NARRATIVE STACK (8 cols desktop) -->
     <div class="narrative-stack">
       
-      <!-- Connecting Line Accent -->
-      <div class="narrative-connector"></div>
+      <!-- Desktop: Connecting line -->
+      <div class="narrative-connector" aria-hidden="true"></div>
       
       <div class="narrative-content">
-        <!-- Subsection 1: Experimentation -->
-        <article class="narrative-card">
-          <h4 class="theme-label">Experimentation</h4>
-          <p>
-            We develop and test plasma-based solutions in the open. Every experiment, 
-            every result, and every method is documented and shared. Our research explores 
-            how controlled plasma can support soil regeneration, water purification, 
-            and atmospheric balance.
-          </p>
-        </article>
+        
+        <!-- Card 1: Experimentation -->
+        <details class="narrative-card fade-in-up delay-1" open>
+          <summary class="theme-label">Experimentation</summary>
+          <div class="card-body">
+            <p>
+              We develop and test plasma-based solutions in the open. Every experiment, 
+              every result, and every method is documented and shared. Our research explores 
+              how controlled plasma can support soil regeneration, water purification, 
+              and atmospheric balance.
+            </p>
+          </div>
+        </details>
 
-        <!-- Subsection 2: Verification -->
-        <article class="narrative-card">
-          <h4 class="theme-label">Verification</h4>
-          <p>
-            All findings are made freely available for independent review and replication. 
-            We believe that <strong>science advances through verification</strong>, not 
-            secrecy. Community feedback and peer collaboration strengthen every outcome.
-          </p>
-        </article>
+        <!-- Card 2: Verification -->
+        <details class="narrative-card fade-in-up delay-2" open>
+          <summary class="theme-label">Verification</summary>
+          <div class="card-body">
+            <p>
+              All findings are made freely available for independent review and replication. 
+              We believe that <strong>science advances through verification</strong>, not 
+              secrecy. Community feedback and peer collaboration strengthen every outcome.
+            </p>
+          </div>
+        </details>
 
-        <!-- Subsection 3: Ethics -->
-        <article class="narrative-card">
-          <h4 class="theme-label">Ethics</h4>
-          <p>
-            Our work follows <em>clear ethical guidelines</em> that prioritize safety, 
-            environmental responsibility, and inclusive participation. We're committed to 
-            research that serves life—not extraction or exploitation.
-          </p>
-        </article>
+        <!-- Card 3: Ethics -->
+        <details class="narrative-card fade-in-up delay-3" open>
+          <summary class="theme-label">Ethics</summary>
+          <div class="card-body">
+            <p>
+              Our work follows <em>clear ethical guidelines</em> that prioritize safety, 
+              environmental responsibility, and inclusive participation. We're committed to 
+              research that serves life—not extraction or exploitation.
+            </p>
+          </div>
+        </details>
+        
       </div>
-      
     </div>
 
-    <!-- CTA ZONE: Full-width spanning all 12 columns -->
-    <div class="cta-zone">
+    <!-- CTA ZONE -->
+    <div class="cta-zone fade-in-up delay-4">
       <LinkButton 
         href={withBase("/projects")} 
         variant="primary" 
@@ -103,7 +106,7 @@ import { withBase } from "../utils/paths";
 
 <style>
   /* ========================================================================
-     HOME HERO: Vertical Narrative Layout with Plasma Aesthetics
+     HOME HERO - PHASE 2 REFACTOR
      ======================================================================== */
   .home-hero {
     position: relative;
@@ -111,7 +114,7 @@ import { withBase } from "../utils/paths";
     padding-bottom: clamp(4rem, 8vw, 6rem);
   }
 
-  /* Radial cyan glow background */
+  /* Radial glow - single layer */
   .home-hero::before {
     content: '';
     position: absolute;
@@ -126,9 +129,7 @@ import { withBase } from "../utils/paths";
   }
 
   /* ========================================================================
-     PANORAMA GRID: 12-Column Responsive Layout
-     Desktop: 4 cols identity + 8 cols narrative
-     Mobile: Single column stack
+     PANORAMA GRID
      ======================================================================== */
   .panorama-grid {
     display: grid;
@@ -144,7 +145,7 @@ import { withBase } from "../utils/paths";
   }
 
   /* ========================================================================
-     IDENTITY ZONE: Left anchor (4 columns)
+     IDENTITY ZONE
      ======================================================================== */
   .identity-zone {
     display: flex;
@@ -162,14 +163,6 @@ import { withBase } from "../utils/paths";
     }
   }
 
-  .identity-zone .eyebrow {
-    font-size: var(--text-sm);
-    font-weight: var(--font-weight-semibold);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-primary-bright);
-  }
-
   .identity-zone .hero-title {
     font-size: clamp(3.5rem, 9vw, 6rem);
     font-weight: var(--font-weight-bold);
@@ -185,12 +178,6 @@ import { withBase } from "../utils/paths";
     color: var(--color-text-muted);
   }
 
-  @media (min-width: 1024px) {
-    .identity-zone .lead {
-      margin: 0;
-    }
-  }
-
   @media (max-width: 1023px) {
     .identity-zone .lead {
       margin: 0 auto;
@@ -198,7 +185,7 @@ import { withBase } from "../utils/paths";
   }
 
   /* ========================================================================
-     NARRATIVE STACK: Vertical layout with connecting line
+     NARRATIVE STACK
      ======================================================================== */
   .narrative-stack {
     position: relative;
@@ -212,7 +199,7 @@ import { withBase } from "../utils/paths";
     }
   }
 
-  /* Connecting Line Accent */
+  /* Connecting line (desktop only) */
   .narrative-connector {
     position: absolute;
     left: 0;
@@ -235,11 +222,10 @@ import { withBase } from "../utils/paths";
     }
   }
 
-  /* Content container with left padding */
   .narrative-content {
     display: flex;
     flex-direction: column;
-    gap: clamp(2.5rem, 4vw, 3rem);
+    gap: clamp(1.5rem, 3vw, 2rem);
     padding-left: clamp(0rem, 1vw, 2rem);
   }
 
@@ -250,40 +236,85 @@ import { withBase } from "../utils/paths";
   }
 
   /* ========================================================================
-     NARRATIVE CARD: Individual subsection styling
+     NARRATIVE CARDS - Accordion on mobile, static on desktop
      ======================================================================== */
   .narrative-card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-    padding: clamp(1.25rem, 2.5vw, 1.5rem);
     background: rgba(15, 23, 42, 0.3);
     border: 1px solid rgba(148, 163, 184, 0.1);
     border-radius: var(--radius-md);
-    transition: border-color 180ms ease;
+    transition: border-color var(--transition-base);
   }
 
   .narrative-card:hover {
     border-color: rgba(93, 225, 228, 0.15);
   }
 
-  .narrative-card p {
-    margin: 0;
-    line-height: 1.7;
-    color: var(--color-text-muted);
-  }
-
-  /* Theme label styling */
+  /* Summary (theme label) */
   .theme-label {
     font-size: var(--text-base);
     font-weight: var(--font-weight-medium);
     letter-spacing: 0.05em;
     color: var(--color-primary-bright);
+    padding: clamp(1.25rem, 2.5vw, 1.5rem);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  /* Remove default marker */
+  .theme-label::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Card body content */
+  .card-body {
+    padding: 0 clamp(1.25rem, 2.5vw, 1.5rem) clamp(1.25rem, 2.5vw, 1.5rem);
+  }
+
+  .card-body p {
     margin: 0;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  /* Desktop: Always show content (no accordion behavior) */
+  @media (min-width: 768px) {
+    .narrative-card {
+      padding: clamp(1.25rem, 2.5vw, 1.5rem);
+    }
+
+    .theme-label {
+      padding: 0;
+      cursor: default;
+      margin-bottom: var(--space-md);
+    }
+
+    .card-body {
+      padding: 0;
+    }
+
+    /* Hide details arrow on desktop */
+    .narrative-card summary {
+      pointer-events: none;
+    }
+  }
+
+  /* Mobile: Accordion indicator */
+  @media (max-width: 767px) {
+    .theme-label::after {
+      content: '▼';
+      float: right;
+      font-size: 0.85em;
+      transition: transform var(--transition-base);
+    }
+
+    .narrative-card[open] .theme-label::after {
+      transform: rotate(180deg);
+    }
   }
 
   /* ========================================================================
-     CTA ZONE: Full-width with gradient background
+     CTA ZONE
      ======================================================================== */
   .cta-zone {
     display: flex;
@@ -315,57 +346,17 @@ import { withBase } from "../utils/paths";
   }
 
   /* ========================================================================
-     EMPHASIS STYLING
+     TEXT EMPHASIS
      ======================================================================== */
   .identity-zone strong,
-  .narrative-card strong {
+  .card-body strong {
     color: var(--color-text);
     font-weight: var(--font-weight-semibold);
   }
 
   .identity-zone em,
-  .narrative-card em {
+  .card-body em {
     color: var(--color-primary-bright);
     font-style: normal;
-  }
-
-  /* ========================================================================
-     ANIMATIONS: Staggered fade-in
-     ======================================================================== */
-  @media (prefers-reduced-motion: no-preference) {
-    .identity-zone {
-      animation: fade-in-up 0.6s ease-out backwards;
-    }
-
-    .narrative-card {
-      animation: fade-in-up 0.6s ease-out backwards;
-    }
-
-    .narrative-card:nth-child(1) {
-      animation-delay: 0.15s;
-    }
-
-    .narrative-card:nth-child(2) {
-      animation-delay: 0.3s;
-    }
-
-    .narrative-card:nth-child(3) {
-      animation-delay: 0.45s;
-    }
-
-    .cta-zone {
-      animation: fade-in-up 0.6s ease-out 0.6s backwards;
-    }
-
-    @keyframes fade-in-up {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
   }
 </style>

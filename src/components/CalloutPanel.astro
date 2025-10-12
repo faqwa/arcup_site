@@ -1,15 +1,19 @@
 ---
-/**
- * CalloutPanel - Highlighted panel for important information
- * 
- * @param variant - Visual style (info, warning, success)
- * @param icon - Optional icon/emoji to display
- * @param title - Optional heading for the callout
- */
+// ============================================================================
+// COMPONENT: CalloutPanel.astro (PHASE 2 REFACTOR)
+// PURPOSE: Highlighted panel for important information
+// ----------------------------------------------------------------------------
+// CHANGES:
+// - Flattened gradients → solid tints for clarity
+// - Added icon-size-sm prop for compact icons
+// - Simplified backgrounds
+// ============================================================================
+
 interface Props {
   variant?: 'info' | 'warning' | 'success' | 'neutral';
   icon?: string;
   title?: string;
+  iconSize?: 'small' | 'normal';
   class?: string;
 }
 
@@ -17,6 +21,7 @@ const {
   variant = 'info',
   icon,
   title,
+  iconSize = 'normal',
   class: className = ''
 } = Astro.props;
 
@@ -25,13 +30,15 @@ const classes = [
   `callout-panel--${variant}`,
   className
 ].filter(Boolean).join(' ');
+
+const iconClass = iconSize === 'small' ? 'callout-panel__icon--sm' : '';
 ---
 
 <aside class={classes} role="complementary">
   {(icon || title) && (
     <div class="callout-panel__header">
       {icon && (
-        <span class="callout-panel__icon" aria-hidden="true">{icon}</span>
+        <span class={`callout-panel__icon ${iconClass}`} aria-hidden="true">{icon}</span>
       )}
       {title && (
         <h3 class="callout-panel__title">{title}</h3>
@@ -45,35 +52,44 @@ const classes = [
 </aside>
 
 <style>
+  /* ========================================================================
+     CALLOUT PANEL - PHASE 2 REFACTOR
+     Solid tints instead of gradients
+     ======================================================================== */
   .callout-panel {
     padding: clamp(1.5rem, 4vw, 2rem);
     border-radius: var(--radius-lg);
     border: 1px solid;
-    background: var(--color-surface);
-    backdrop-filter: blur(10px);
   }
 
   .callout-panel__header {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
   }
 
   .callout-panel__icon {
     font-size: 1.5rem;
     line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .callout-panel__icon--sm {
+    font-size: 1.25rem;
   }
 
   .callout-panel__title {
     margin: 0;
     font-size: var(--text-lg);
     font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-tight);
   }
 
   .callout-panel__content {
-    display: grid;
-    gap: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
   }
 
   .callout-panel__content > :first-child {
@@ -84,58 +100,76 @@ const classes = [
     margin-bottom: 0;
   }
 
-  /* Variants */
+  .callout-panel__content p {
+    margin: 0;
+    line-height: var(--leading-relaxed);
+  }
+
+  /* ========================================================================
+     VARIANT STYLES - Solid tints
+     ======================================================================== */
+  
+  /* Info - Cyan/Teal */
   .callout-panel--info {
-    background: linear-gradient(
-      135deg, 
-      rgba(93, 225, 228, 0.08), 
-      rgba(93, 225, 228, 0.03)
-    );
+    background: rgba(93, 225, 228, 0.08);
     border-color: rgba(93, 225, 228, 0.3);
   }
 
-  .callout-panel--info .callout-panel__title {
+  .callout-panel--info .callout-panel__title,
+  .callout-panel--info .callout-panel__icon {
     color: var(--color-primary-bright);
   }
 
+  /* Warning - Amber */
   .callout-panel--warning {
-    background: linear-gradient(
-      135deg, 
-      rgba(251, 191, 36, 0.08), 
-      rgba(251, 191, 36, 0.03)
-    );
+    background: rgba(251, 191, 36, 0.08);
     border-color: rgba(251, 191, 36, 0.3);
   }
 
-  .callout-panel--warning .callout-panel__title {
+  .callout-panel--warning .callout-panel__title,
+  .callout-panel--warning .callout-panel__icon {
     color: #fde047;
   }
 
+  /* Success - Green */
   .callout-panel--success {
-    background: linear-gradient(
-      135deg, 
-      rgba(34, 197, 94, 0.08), 
-      rgba(34, 197, 94, 0.03)
-    );
+    background: rgba(34, 197, 94, 0.08);
     border-color: rgba(34, 197, 94, 0.3);
   }
 
-  .callout-panel--success .callout-panel__title {
+  .callout-panel--success .callout-panel__title,
+  .callout-panel--success .callout-panel__icon {
     color: #86efac;
   }
 
+  /* Neutral - Default surface */
   .callout-panel--neutral {
-    background: rgba(15, 23, 42, 0.55);
+    background: var(--color-surface);
     border-color: var(--color-border);
   }
 
+  .callout-panel--neutral .callout-panel__title {
+    color: var(--color-text);
+  }
+
+  .callout-panel--neutral .callout-panel__icon {
+    color: var(--color-text-muted);
+  }
+
+  /* ========================================================================
+     MOBILE RESPONSIVENESS
+     ======================================================================== */
   @media (max-width: 640px) {
     .callout-panel {
-      padding: 1.25rem;
+      padding: var(--space-lg);
     }
 
     .callout-panel__icon {
       font-size: 1.25rem;
+    }
+
+    .callout-panel__icon--sm {
+      font-size: 1rem;
     }
   }
 </style>

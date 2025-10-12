@@ -1,10 +1,15 @@
 ---
-/**
- * Updated SiteHeader.astro with HOVER-BASED dropdown navigation
- * Main nav items are CLICKABLE links, dropdown shows on HOVER with CLICKABLE sub-pages
- * Dropdowns only show sub-pages (not the main page link)
- * File: src/components/SiteHeader.astro
- */
+// ============================================================================
+// COMPONENT: SiteHeader.astro (SIMPLIFIED)
+// PURPOSE: Global navigation header
+// ----------------------------------------------------------------------------
+// CHANGES:
+// - Only dynamic Projects dropdown (from CMS)
+// - All other dropdowns defined in constants.ts
+// - No descriptions shown in dropdowns
+// - Clean and maintainable
+// ============================================================================
+
 import { getCollection } from 'astro:content';
 import { withBase } from '../utils/paths';
 import { NAV_ITEMS, EXTERNAL_LINKS } from '../config/constants';
@@ -15,25 +20,32 @@ interface Props {
 
 const { active = "home" } = Astro.props;
 
-// Get current path to check for active dropdown items
+// TypeScript interfaces
+interface DropdownItem {
+  key: string;
+  label: string;
+  href: string;
+}
+
+interface NavItem {
+  key: string;
+  label: string;
+  href: string;
+  dropdown?: DropdownItem[];
+}
+
 const currentPath = Astro.url.pathname.replace(import.meta.env.BASE_URL || '', '') || '/';
 
-// Fetch all projects for dropdown
+// Fetch projects for dynamic dropdown
 const allProjects = await getCollection('projects');
 
-// Define dropdown items for "How" - ONLY sub-pages, not main page
-const howDropdownItems = [
-  { key: 'how-safety', label: 'Safety Protocols', href: '/how/safety' },
-  { key: 'how-licensing', label: 'Licensing', href: '/how/licensing' },
-];
-
-// Build navigation with dropdowns
-const navigationItems = NAV_ITEMS.map(item => {
-  // Add dynamic dropdown for Projects - ONLY individual projects, not "All Projects"
+// Build navigation - only add dynamic dropdown for projects
+const navigationItems: NavItem[] = NAV_ITEMS.map((item) => {
+  // Projects: Build dropdown dynamically from CMS
   if (item.key === 'projects') {
     return {
       ...item,
-      dropdown: allProjects.map(project => ({
+      dropdown: allProjects.map((project) => ({
         key: `project-${project.slug}`,
         label: project.data.title,
         href: `/projects/${project.slug}`
@@ -41,18 +53,16 @@ const navigationItems = NAV_ITEMS.map(item => {
     };
   }
   
-  // Add dropdown for How - ONLY sub-pages
-  if (item.key === 'how') {
-    return {
-      ...item,
-      dropdown: howDropdownItems
-    };
-  }
-  
-  return item;
+  // All other items: Use dropdown from constants.ts as-is
+  return {
+    key: item.key,
+    label: item.label,
+    href: item.href,
+    dropdown: item.dropdown as DropdownItem[] | undefined
+  };
 });
 
-// Social links configuration
+// Social links
 const socialLinks = [
   {
     name: "YouTube",
@@ -68,11 +78,11 @@ const socialLinks = [
   }
 ];
 
-// Helper to check if nav item or its dropdown is active
-function isItemActive(item: typeof navigationItems[number]) {
+// Check if nav item is active
+function isItemActive(item: NavItem): boolean {
   if (item.key === active) return true;
   if (item.dropdown) {
-    return item.dropdown.some(subItem => currentPath === subItem.href);
+    return item.dropdown.some((subItem: DropdownItem) => currentPath === subItem.href);
   }
   return false;
 }
@@ -81,7 +91,7 @@ function isItemActive(item: typeof navigationItems[number]) {
 <header class="site-header" role="banner">
   <div class="site-brand">
     <a href={withBase("/")} class="site-brand__link" aria-label="arc^ home">
-      arc^ <span class="brand-by">by</span> ali
+      arc<sup>^</sup> <span class="brand-by">by</span> ali
     </a>
   </div>
   
@@ -89,20 +99,19 @@ function isItemActive(item: typeof navigationItems[number]) {
     <ul class="nav-list">
       {navigationItems.map((item) => (
         <li class={item.dropdown ? "nav-item has-dropdown" : "nav-item"}>
-          {/* Main nav link - ALWAYS CLICKABLE */}
           <a
             href={withBase(item.href)}
             class={isItemActive(item) ? "nav-link is-active" : "nav-link"}
             aria-current={isItemActive(item) ? "page" : undefined}
             aria-haspopup={item.dropdown ? "true" : undefined}
+            aria-expanded={item.dropdown ? "false" : undefined}
           >
             {item.label}
           </a>
           
-          {/* Dropdown menu - SHOWS ON HOVER, sub-pages only */}
           {item.dropdown && item.dropdown.length > 0 && (
             <ul class="nav-dropdown" role="menu">
-              {item.dropdown.map((subItem) => (
+              {item.dropdown.map((subItem: DropdownItem) => (
                 <li role="none">
                   <a
                     href={withBase(subItem.href)}
@@ -144,3 +153,252 @@ function isItemActive(item: typeof navigationItems[number]) {
     ))}
   </div>
 </header>
+
+<style>
+  /* ========================================================================
+     SITE HEADER
+     ======================================================================== */
+  .site-header {
+    width: var(--shell-width);
+    margin: clamp(1.5rem, 4vw, 2.5rem) auto 0;
+    padding: var(--space-md) var(--shell-padding);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(var(--blur-sm));
+    background: rgba(6, 12, 22, 0.58);
+    border: 1px solid var(--color-border-accent);
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+  }
+
+  /* ========================================================================
+     SITE BRAND
+     ======================================================================== */
+  .site-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .site-brand__link {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    color: var(--color-text);
+    text-transform: lowercase;
+    transition: color var(--transition-base);
+  }
+
+  .site-brand__link:hover {
+    color: var(--color-primary-bright);
+  }
+
+  .site-brand__link sup {
+    font-size: 0.6em;
+    color: var(--color-primary-bright);
+  }
+
+  .brand-by {
+    font-size: 0.65em;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-text-muted);
+    margin: 0 0.25em;
+  }
+
+  /* ========================================================================
+     NAVIGATION
+     ======================================================================== */
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: var(--space-sm);
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-link {
+    display: block;
+    padding: var(--space-sm) var(--space-md);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-base);
+    cursor: pointer;
+  }
+
+  .nav-link:hover {
+    color: var(--color-text);
+    background: rgba(93, 225, 228, 0.08);
+  }
+
+  .nav-link.is-active {
+    color: var(--color-primary-bright);
+    background: rgba(93, 225, 228, 0.12);
+  }
+
+  /* ========================================================================
+     DROPDOWN MENU - Simple, no descriptions
+     ======================================================================== */
+  .nav-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    min-width: 200px;
+    background: rgba(6, 12, 22, 0.95);
+    backdrop-filter: blur(var(--blur-md));
+    border: 1px solid var(--color-border-accent);
+    border-radius: var(--radius-md);
+    padding: var(--space-xs);
+    list-style: none;
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-lg);
+    z-index: 100;
+  }
+
+  /* Show dropdown on click/focus */
+  .has-dropdown:focus-within .nav-dropdown,
+  .has-dropdown .nav-link:focus + .nav-dropdown,
+  .has-dropdown .nav-link:active + .nav-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Also show on hover for desktop */
+  @media (min-width: 768px) {
+    .has-dropdown:hover .nav-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+
+  /* Dropdown links - simple single line */
+  .nav-dropdown-link {
+    display: block;
+    padding: var(--space-sm) var(--space-md);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-base);
+  }
+
+  .nav-dropdown-link:hover {
+    background: rgba(93, 225, 228, 0.08);
+    color: var(--color-text);
+  }
+
+  .nav-dropdown-link.is-active {
+    background: rgba(93, 225, 228, 0.12);
+    color: var(--color-primary-bright);
+  }
+
+  /* ========================================================================
+     SOCIAL LINKS
+     ======================================================================== */
+  .site-social {
+    display: flex;
+    gap: var(--space-sm);
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    color: var(--color-text-muted);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-base);
+  }
+
+  .social-link:hover {
+    color: var(--color-primary-bright);
+    background: rgba(93, 225, 228, 0.08);
+  }
+
+  /* ========================================================================
+     MOBILE RESPONSIVENESS
+     ======================================================================== */
+  @media (max-width: 768px) {
+    .site-header {
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .nav-list {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .nav-item {
+      width: 100%;
+    }
+
+    .nav-link {
+      width: 100%;
+    }
+
+    .nav-dropdown {
+      position: static;
+      transform: none;
+      margin-top: var(--space-xs);
+    }
+
+    .site-social {
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  // Click-to-toggle for mobile
+  document.querySelectorAll('.has-dropdown .nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const isExpanded = link.getAttribute('aria-expanded') === 'true';
+      
+      // Close other dropdowns
+      document.querySelectorAll('.has-dropdown .nav-link').forEach(otherLink => {
+        otherLink.setAttribute('aria-expanded', 'false');
+      });
+      
+      // Toggle current
+      link.setAttribute('aria-expanded', (!isExpanded).toString());
+      
+      // On mobile, prevent navigation to allow dropdown use
+      if (window.innerWidth < 768) {
+        e.preventDefault();
+      }
+    });
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest('.has-dropdown')) {
+      document.querySelectorAll('.has-dropdown .nav-link').forEach(link => {
+        link.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+</script>

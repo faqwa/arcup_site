@@ -1,13 +1,13 @@
 ---
-/**
- * SectionHeader - Consistent section heading component
- * 
- * @param title - Main heading text
- * @param subtitle - Optional supporting text (lead paragraph)
- * @param eyebrow - Optional small text above title
- * @param align - Text alignment
- * @param headingLevel - Semantic heading level (h2-h4)
- */
+// ============================================================================
+// COMPONENT: SectionHeader.astro (PHASE 2 REFACTOR)
+// PURPOSE: Consistent section heading component
+// ----------------------------------------------------------------------------
+// CHANGES:
+// - Default align changed: center → left
+// - Preserved all functionality
+// ============================================================================
+
 interface Props {
   title: string;
   subtitle?: string;
@@ -20,7 +20,7 @@ const {
   title, 
   subtitle, 
   eyebrow,
-  align = 'center',
+  align = 'left',  // Changed default from 'center' to 'left'
   headingLevel = 'h2'
 } = Astro.props;
 
@@ -44,6 +44,10 @@ const HeadingTag = headingLevel;
 </header>
 
 <style>
+  /* ========================================================================
+     SECTION HEADER - PHASE 2 REFACTOR
+     Default alignment: left (was center)
+     ======================================================================== */
   .section-header {
     display: grid;
     gap: clamp(0.75rem, 2vw, 1rem);
@@ -66,6 +70,10 @@ const HeadingTag = headingLevel;
 
   .section-header__title {
     margin: 0;
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-tight);
+    color: var(--color-text);
   }
 
   .section-header__subtitle {
@@ -73,14 +81,20 @@ const HeadingTag = headingLevel;
     max-width: 72ch;
   }
 
-  /* Center alignment constraint */
   .section-header--center .section-header__subtitle {
     margin-inline: auto;
   }
 
+  /* ========================================================================
+     MOBILE RESPONSIVENESS
+     ======================================================================== */
   @media (max-width: 640px) {
     .section-header {
       gap: 0.65rem;
+    }
+
+    .section-header__title {
+      font-size: var(--text-xl);
     }
   }
 </style>

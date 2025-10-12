@@ -1,71 +1,78 @@
 ---
-/**
- * SectionDivider - Visual separator between page sections
- * 
- * @param variant - Visual style of the divider
- * @param spacing - Amount of vertical space around divider
- */
+// ============================================================================
+// COMPONENT: SectionDivider.astro (PHASE 2 REFACTOR)
+// PURPOSE: Visual separator between page sections
+// ----------------------------------------------------------------------------
+// CHANGES:
+// - Added variant prop: subtle | strong
+// - Replaced inline styles with proper variants
+// - More semantic and maintainable
+// ============================================================================
+
 interface Props {
-  variant?: 'default' | 'subtle' | 'strong';
-  spacing?: 'normal' | 'compact' | 'spacious';
+  variant?: 'subtle' | 'strong';
+  class?: string;
 }
 
 const { 
-  variant = 'default', 
-  spacing = 'normal' 
+  variant = 'subtle',
+  class: className = ''
 } = Astro.props;
+
+const classes = [
+  'section-divider',
+  `divider-${variant}`,
+  className
+].filter(Boolean).join(' ');
 ---
 
-<div 
-  class={`section-divider section-divider--${variant} section-divider--${spacing}`}
-  role="separator"
-  aria-hidden="true"
-></div>
+<hr class={classes} aria-hidden="true" />
 
 <style>
+  /* ========================================================================
+     SECTION DIVIDER - PHASE 2 REFACTOR
+     Proper variant system
+     ======================================================================== */
   .section-divider {
     width: 100%;
     height: 1px;
+    border: none;
+    margin: var(--section-gap) 0;
+  }
+
+  /* ========================================================================
+     VARIANTS
+     ======================================================================== */
+  
+  /* Subtle - Soft gradient fade */
+  .divider-subtle {
     background: linear-gradient(
-      90deg, 
-      transparent, 
-      var(--color-border), 
+      to right,
+      transparent,
+      var(--color-border) 20%,
+      var(--color-border) 80%,
+      transparent
+    );
+    opacity: 0.6;
+  }
+
+  /* Strong - Accent gradient with cyan */
+  .divider-strong {
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(93, 225, 228, 0.3) 20%,
+      rgba(93, 225, 228, 0.3) 80%,
       transparent
     );
   }
 
-  /* Variants */
-  .section-divider--subtle {
-    opacity: 0.3;
-  }
-
-  .section-divider--strong {
-    height: 2px;
-    opacity: 0.8;
-    background: linear-gradient(
-      90deg, 
-      transparent, 
-      var(--color-primary), 
-      transparent
-    );
-  }
-
-  /* Spacing */
-  .section-divider--compact {
-    margin: var(--space-lg) 0;
-  }
-
-  .section-divider--normal {
-    margin: var(--space-2xl) 0;
-  }
-
-  .section-divider--spacious {
-    margin: var(--space-3xl) 0;
-  }
-
+  /* ========================================================================
+     RESPONSIVE
+     ======================================================================== */
   @media (max-width: 640px) {
-    .section-divider--spacious {
-      margin: var(--space-2xl) 0;
+    .section-divider {
+      margin: clamp(2rem, 5vw, 3rem) 0;
     }
   }
 </style>
