@@ -22,6 +22,8 @@ import CalloutPanel from "../../components/CalloutPanel.astro";
 import { withBase } from '../../utils/paths';
 import { buildSEO } from '../../utils/seo';
 import { EXTERNAL_LINKS } from '../../config/constants';
+import "../../styles/global-v2.css";
+
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
