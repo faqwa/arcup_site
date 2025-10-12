@@ -1,0 +1,320 @@
+---
+// src/pages/byali.astro
+import Layout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import PageLayout from '../components/PageLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import CardGrid from '../components/CardGrid.astro';
+import Card from '../components/Card.astro';
+import SectionDivider from '../components/SectionDivider.astro';
+import CalloutPanel from '../components/CalloutPanel.astro';
+
+const pageTitle = "By Ali";
+const pageDescription = "Holding the early framework. ArcUp began as a quiet bench-scale plasma experiment.";
+
+// Define navigation links
+const navLinks = [
+  { href: "#origin", label: "Origin" },
+  { href: "#working-principles", label: "Working Principles" },
+  { href: "#current-role", label: "Current Role" }
+];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  
+  <!-- Hero Section - Prelude -->
+  <Hero
+    eyebrow="🜂 Prelude"
+    title="ArcUp grows through people — first by one, then by many"
+    description="The framework began as a single experiment and now expands through everyone who contributes to its development. Each person strengthens the same field of open research."
+  />
+
+  <!-- Page Layout with Sidebar -->
+  <PageLayout navLinks={navLinks}>
+    
+    <!-- Section 1: Origin Story -->
+    <section id="origin" class="content-section">
+      <SectionHeader
+        eyebrow="🜂 By Ali"
+        title="Holding the early framework"
+        align="left"
+      />
+      
+      <div class="prose">
+        <p class="lead">
+          ArcUp began as a quiet bench-scale plasma experiment. A simple discharge across tungsten electrodes produced water that changed how seeds grew.
+        </p>
+        
+        <p>
+          That observation raised a question about openness in science:
+        </p>
+
+        <blockquote class="inquiry-quote">
+          What would research look like if every result were shared from the start?
+        </blockquote>
+        
+        <p>
+          Through study in bioscience and ecology, I began documenting, verifying, and releasing every step so others could build safely. ArcUp by Ali now maintains the initial framework — keeping research transparent, reproducible, and aligned with the Re:Practise ethics until the field expands.
+        </p>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- Section 2: Working Principles -->
+    <section id="working-principles" class="content-section">
+      <SectionHeader
+        title="Working principles"
+        align="left"
+      />
+
+      <CardGrid columns={3}>
+        
+        <Card variant="bordered">
+          <div class="principle-card">
+            <h3 class="principle-heading">Openness over ownership</h3>
+            <p class="principle-description">
+              Research shared freely creates more value than research held privately. Open documentation accelerates collective learning and enables verification.
+            </p>
+          </div>
+        </Card>
+
+        <Card variant="bordered">
+          <div class="principle-card">
+            <h3 class="principle-heading">Curiosity over control</h3>
+            <p class="principle-description">
+              Discovery emerges from questions, not predetermined outcomes. Each experiment follows evidence rather than forcing results.
+            </p>
+          </div>
+        </Card>
+
+        <Card variant="bordered">
+          <div class="principle-card">
+            <h3 class="principle-heading">Regeneration over recognition</h3>
+            <p class="principle-description">
+              The measure of success is ecological repair, not individual credit. Work serves living systems first, researchers second.
+            </p>
+          </div>
+        </Card>
+
+      </CardGrid>
+    </section>
+
+    <SectionDivider />
+
+    <!-- Section 3: Current Role -->
+    <section id="current-role" class="content-section">
+      <SectionHeader
+        title="Current role"
+        subtitle="Maintaining the framework"
+        align="left"
+      />
+      
+      <div class="prose">
+        <p class="lead">
+          ArcUp operates between biology, physics, chemistry, and culture. Each prototype links energy with ecology — a small test of how technology can assist living systems.
+        </p>
+        
+        <p>
+          My current role is to maintain consistency and safety so others can join without friction. The framework is built to transition: <strong>from by Ali to by the many.</strong>
+        </p>
+      </div>
+
+      <CalloutPanel variant="info">
+        <p>
+          As ArcUp grows, governance and credit will become collective. The goal is not to build an institution around one person, but to create a durable commons where many can contribute and benefit equally.
+        </p>
+      </CalloutPanel>
+
+      <div class="transition-visual">
+        <div class="transition-step">
+          <span class="transition-label">Phase 1</span>
+          <span class="transition-arrow">→</span>
+          <span class="transition-text">by Ali</span>
+        </div>
+        <div class="transition-step">
+          <span class="transition-label">Phase 2</span>
+          <span class="transition-arrow">→</span>
+          <span class="transition-text">by the many</span>
+        </div>
+        <div class="transition-step">
+          <span class="transition-label">Phase 3</span>
+          <span class="transition-arrow">→</span>
+          <span class="transition-text">by the commons</span>
+        </div>
+      </div>
+
+      <div class="cta-group">
+        <a href="/bythemany" class="btn btn-primary">Join the Field →</a>
+        <a href="/about" class="btn btn-outline">Learn More About ArcUp →</a>
+        <a href="/join" class="btn btn-outline">Ways to Participate →</a>
+      </div>
+    </section>
+
+  </PageLayout>
+</Layout>
+
+<style>
+  /* Page-Specific Styles */
+  
+  /* Prose Content */
+  .prose {
+    max-width: 65ch;
+  }
+
+  .prose p {
+    margin-bottom: var(--space-md, 1.2rem);
+    line-height: 1.6;
+  }
+
+  .lead {
+    font-size: 1.125rem;
+    color: var(--color-text, #f1f5f9);
+    margin-bottom: var(--space-lg, 1.5rem);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  /* Inquiry Quote - Central Question */
+  .inquiry-quote {
+    margin: var(--space-xl, 2rem) 0;
+    padding: var(--space-lg, 1.5rem) var(--space-xl, 2rem);
+    background: linear-gradient(
+      135deg,
+      rgba(14, 191, 194, 0.08) 0%,
+      rgba(10, 147, 150, 0.05) 100%
+    );
+    border-left: 3px solid var(--color-primary-bright, #0ebfc2);
+    border-radius: var(--radius-md, 0.5rem);
+    font-size: 1.25rem;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--color-text, #f1f5f9);
+    line-height: 1.5;
+  }
+
+  /* Principle Cards */
+  .principle-card {
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm, 0.75rem);
+  }
+
+  .principle-heading {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text, #f1f5f9);
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .principle-description {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted, #9aa7bd);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Transition Visual - Phase Flow */
+  .transition-visual {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md, 1rem);
+    margin: var(--space-xl, 2rem) 0;
+    padding: var(--space-xl, 2rem);
+    background: var(--color-surface, rgba(6, 12, 20, 0.35));
+    border: 1px solid var(--color-border, rgba(148, 163, 184, 0.18));
+    border-radius: var(--radius-md, 0.5rem);
+    max-width: 500px;
+  }
+
+  @media (min-width: 640px) {
+    .transition-visual {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 100%;
+    }
+  }
+
+  .transition-step {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm, 0.75rem);
+  }
+
+  .transition-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-text-muted, #9aa7bd);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .transition-arrow {
+    color: var(--color-primary-bright, #0ebfc2);
+    font-size: 1.5rem;
+    font-weight: 300;
+  }
+
+  @media (max-width: 639px) {
+    .transition-arrow {
+      transform: rotate(90deg);
+    }
+  }
+
+  .transition-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text, #f1f5f9);
+  }
+
+  /* CTA Group */
+  .cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md, 1rem);
+    margin-top: var(--space-xl, 2rem);
+  }
+
+  @media (max-width: 640px) {
+    .cta-group {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  /* Animations */
+  @media (prefers-reduced-motion: no-preference) {
+    .content-section {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .inquiry-quote {
+      animation: fadeInUp 0.8s ease-out 0.2s backwards;
+    }
+
+    .transition-visual {
+      animation: fadeInUp 0.8s ease-out 0.3s backwards;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>

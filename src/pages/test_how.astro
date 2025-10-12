@@ -1,0 +1,685 @@
+---
+// src/pages/how.astro
+import Layout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import PageLayout from '../components/PageLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import CardGrid from '../components/CardGrid.astro';
+import Card from '../components/Card.astro';
+import SectionDivider from '../components/SectionDivider.astro';
+import CalloutPanel from '../components/CalloutPanel.astro';
+
+const pageTitle = "How ArcUp Works";
+const pageDescription = "From experiment to commons. ArcUp converts open research into a repeatable, verifiable process.";
+
+// Define navigation links
+const navLinks = [
+  { href: "#governance", label: "Framework Governance" },
+  { href: "#phased-architecture", label: "Phased Architecture" },
+  { href: "#verification", label: "Verification" },
+  { href: "#safety", label: "Safety Integration" },
+  { href: "#infrastructure", label: "Data Infrastructure" },
+  { href: "#licensing", label: "Licensing" },
+  { href: "#participation", label: "Participation" },
+  { href: "#feedback", label: "Feedback & Evolution" },
+  { href: "#process", label: "Method to Meaning" }
+];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  
+  <!-- Hero Section -->
+  <Hero
+    eyebrow="🜂 How ArcUp Works"
+    title="From experiment to commons"
+    description="ArcUp converts open research into a repeatable, verifiable process. Each phase builds the capacity of the next, linking technical work with ethical and ecological responsibility."
+  />
+
+  <!-- Page Layout with Sidebar -->
+  <PageLayout navLinks={navLinks}>
+    
+    <!-- Section 1: Framework Governance -->
+    <section id="governance" class="content-section">
+      <SectionHeader
+        title="1 · Framework Governance"
+        align="left"
+      />
+      
+      <div class="prose">
+        <p class="lead">
+          All ArcUp activity operates within the Re:Practise Ethical Framework. Decisions are documented publicly and follow one rule: <strong>openness must never compromise safety.</strong>
+        </p>
+        
+        <p>
+          Verification teams confirm data integrity, licensing, and attribution before publication. Hardware, software, and documentation are released under open licences (CERN OHL-S, AGPL-3, CC BY-NC-SA).
+        </p>
+      </div>
+
+      <CalloutPanel variant="info">
+        <p>
+          Full safety and licensing protocols are maintained on <a href="/repractise">Re:Practise →</a>
+        </p>
+      </CalloutPanel>
+
+      <div class="prose">
+        <p>
+          This governance structure ensures transparency, reproducibility, and clear custodianship of knowledge.
+        </p>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- Section 2: Phased Research Architecture -->
+    <section id="phased-architecture" class="content-section">
+      <SectionHeader
+        title="2 · Phased Research Architecture"
+        align="left"
+      />
+
+      <CardGrid stack={true}>
+        
+        <Card variant="default">
+          <div class="phase-card">
+            <div class="phase-header">
+              <span class="phase-number">Phase 1</span>
+              <h3 class="phase-title">Bench-Scale Exploration</h3>
+            </div>
+            <p class="phase-focus">
+              <strong>Focus:</strong> Controlled plasma–water and plasma–biological tests at laboratory scale.
+            </p>
+            <p class="phase-output">
+              <strong>Output:</strong> Verified data, open schematics, initial safety review.
+            </p>
+          </div>
+        </Card>
+
+        <Card variant="default">
+          <div class="phase-card">
+            <div class="phase-header">
+              <span class="phase-number">Phase 2</span>
+              <h3 class="phase-title">Community Frameworks</h3>
+            </div>
+            <p class="phase-focus">
+              <strong>Focus:</strong> Replication and refinement across independent labs and field sites.
+            </p>
+            <p class="phase-output">
+              <strong>Output:</strong> Shared templates, reproducibility standards, community governance notes.
+            </p>
+          </div>
+        </Card>
+
+        <Card variant="default">
+          <div class="phase-card">
+            <div class="phase-header">
+              <span class="phase-number">Phase 3</span>
+              <h3 class="phase-title">Collaborative Application</h3>
+            </div>
+            <p class="phase-focus">
+              <strong>Focus:</strong> Deployment with ecological or industry partners once safety and performance are validated.
+            </p>
+            <p class="phase-output">
+              <strong>Output:</strong> Applied protocols, long-term monitoring data, commons integration report.
+            </p>
+          </div>
+        </Card>
+
+      </CardGrid>
+
+      <CalloutPanel variant="info">
+        <p>
+          Progress between phases depends on <strong>verified benefit, absence of harm, and community readiness.</strong><br>
+          Every phase considers four connected scales — technology, water, organisms, ecosystems.
+        </p>
+      </CalloutPanel>
+    </section>
+
+    <SectionDivider />
+
+    <!-- Section 3: Verification and Reproducibility -->
+    <section id="verification" class="content-section">
+      <SectionHeader
+        title="3 · Verification and Reproducibility"
+        align="left"
+      />
+      
+      <div class="prose">
+        <p class="lead">
+          All experiments follow an open-notebook standard.
+        </p>
+        
+        <ul class="process-list">
+          <li>Parameters, calibration data, and results are logged in Workspace using version control.</li>
+          <li>A design is marked <strong>stable</strong> after at least three independent replications.</li>
+          <li>Each dataset includes a verification sheet linking raw data, analysis scripts, and reviewer comments.</li>
+          <li>Failures and redesigns remain archived; learning is recorded as progress.</li>
+        </ul>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- Section 4: Safety Integration -->
+    <section id="safety" class="content-section">
+      <SectionHeader
+        title="4 · Safety Integration"
+        align="left"
+      />
+      
+      <div class="prose">
+        <p class="lead">
+          Safety operates as a condition of research, not a stage.
+        </p>
+      </div>
+
+      <div class="safety-timeline">
+        <div class="timeline-item">
+          <span class="timeline-marker">Before</span>
+          <div class="timeline-content">
+            <p>Protocols are checked against the four-lens triage — people, organisms, ecosystems, future.</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-marker">During</span>
+          <div class="timeline-content">
+            <p>Electrical and chemical parameters are monitored continuously.</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-marker">After</span>
+          <div class="timeline-content">
+            <p>Results undergo ecological and relational review.</p>
+          </div>
+        </div>
+      </div>
+
+      <CalloutPanel variant="warning">
+        <p>
+          <strong>If uncertainty or degradation appears, work pauses until resolved.</strong><br>
+          Detailed safety procedures are maintained on <a href="/repractise">Re:Practise →</a>
+        </p>
+      </CalloutPanel>
+    </section>
+
+    <SectionDivider />
+
+    <!-- Section 5: Data and Collaboration Infrastructure -->
+    <section id="infrastructure" class="content-section">
+      <SectionHeader
+        title="5 · Data and Collaboration Infrastructure"
+        align="left"
+      />
+      
+      <div class="prose">
+        <ul class="process-list">
+          <li>The <strong>Workspace</strong> platform records live logs, data uploads, and dashboards.</li>
+          <li>Each project receives an identifier for traceability.</li>
+          <li>Contributors can replicate protocols, comment on results, and link analyses through open repositories.</li>
+          <li>Coordination occurs through <strong>Discord</strong>; verified reports are archived publicly for citation and long-term access.</li>
+        </ul>
+      </div>
+
+      <div class="platform-links">
+        <a href="/workspace" class="btn btn-outline">Open Workspace →</a>
+        <a href="https://discord.gg/arcup" class="btn btn-outline" target="_blank" rel="noopener">Join Discord →</a>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- Section 6: Licensing and Commons Integration -->
+    <section id="licensing" class="content-section">
+      <SectionHeader
+        title="6 · Licensing and Commons Integration"
+        align="left"
+      />
+      
+      <div class="prose">
+        <p class="lead">
+          Open licensing prevents enclosure.
+        </p>
+      </div>
+
+      <CardGrid columns={3}>
+        
+        <Card variant="bordered">
+          <div class="license-card">
+            <h4 class="license-type">Hardware</h4>
+            <p class="license-name">CERN OHL-S</p>
+            <p class="license-desc">Open hardware schematics and designs</p>
+          </div>
+        </Card>
+
+        <Card variant="bordered">
+          <div class="license-card">
+            <h4 class="license-type">Software</h4>
+            <p class="license-name">AGPL-3</p>
+            <p class="license-desc">Network-aware open source code</p>
+          </div>
+        </Card>
+
+        <Card variant="bordered">
+          <div class="license-card">
+            <h4 class="license-type">Documentation</h4>
+            <p class="license-name">CC BY-NC-SA</p>
+            <p class="license-desc">Attribution, non-commercial, share-alike</p>
+          </div>
+        </Card>
+
+      </CardGrid>
+
+      <div class="prose">
+        <p>
+          Every derivative must credit its source and maintain openness.
+        </p>
+      </div>
+
+      <CalloutPanel variant="info">
+        <p>
+          Complete policy details and licence texts are held on <a href="/repractise">Re:Practise →</a>
+        </p>
+      </CalloutPanel>
+    </section>
+
+    <SectionDivider />
+
+    <!-- Section 7: Participation Pathways -->
+    <section id="participation" class="content-section">
+      <SectionHeader
+        title="7 · Participation Pathways"
+        subtitle="Researchers and contributors engage at the level matching their training"
+        align="left"
+      />
+
+      <CardGrid columns={2}>
+        
+        <Card variant="default">
+          <h4 class="role-title">Observer</h4>
+          <p class="role-actions">Read notebooks, comment, follow updates.</p>
+        </Card>
+
+        <Card variant="default">
+          <h4 class="role-title">Contributor</h4>
+          <p class="role-actions">Replicate a protocol, upload verified data.</p>
+        </Card>
+
+        <Card variant="default">
+          <h4 class="role-title">Collaborator</h4>
+          <p class="role-actions">Co-design experiments, join verification teams.</p>
+        </Card>
+
+        <Card variant="default">
+          <h4 class="role-title">Custodian</h4>
+          <p class="role-actions">Maintain shared datasets, support governance cycles.</p>
+        </Card>
+
+      </CardGrid>
+
+      <CalloutPanel variant="info">
+        <p>
+          Each role includes safety orientation and data-handling training.<br>
+          Authorship and credit are recorded through persistent identifiers in Workspace.
+        </p>
+      </CalloutPanel>
+
+      <div class="cta-group">
+        <a href="/join" class="btn btn-primary">Join as Contributor →</a>
+        <a href="/bythemany" class="btn btn-outline">See Participation Modes →</a>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- Section 8: Feedback and Evolution -->
+    <section id="feedback" class="content-section">
+      <SectionHeader
+        title="8 · Feedback and Evolution"
+        align="left"
+      />
+      
+      <div class="prose">
+        <p class="lead">
+          ArcUp is a learning framework.
+        </p>
+        
+        <ul class="process-list">
+          <li>Feedback from replications, partners, and ecosystems informs the next design iteration.</li>
+          <li>Paused or failed experiments remain visible to prevent repetition of error.</li>
+          <li>Annual reviews summarise findings, challenges, and governance updates.</li>
+        </ul>
+        
+        <p>
+          This feedback loop keeps the framework adaptive and credible.
+        </p>
+      </div>
+    </section>
+
+    <SectionDivider />
+
+    <!-- Section 9: From Method to Meaning -->
+    <section id="process" class="content-section">
+      <SectionHeader
+        title="9 · From Method to Meaning"
+        align="left"
+      />
+      
+      <div class="process-flow">
+        <div class="flow-step">Idea</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">Verification</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">Publication</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">Replication</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">Application</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">Repair</div>
+      </div>
+
+      <div class="prose">
+        <p class="lead">
+          Each step is traceable.<br>
+          Each verified result strengthens the commons.
+        </p>
+        
+        <p>
+          <strong>ArcUp demonstrates that open research can be fast and responsible</strong> — accelerated by collaboration, not competition.
+        </p>
+      </div>
+
+      <div class="cta-group">
+        <a href="/about" class="btn btn-primary">Learn About ArcUp →</a>
+        <a href="/join" class="btn btn-outline">Ways to Participate →</a>
+        <a href="/workspace" class="btn btn-outline">Explore Workspace →</a>
+      </div>
+    </section>
+
+  </PageLayout>
+</Layout>
+
+<style>
+  /* Page-Specific Styles */
+  
+  /* Prose Content */
+  .prose {
+    max-width: 65ch;
+  }
+
+  .prose p {
+    margin-bottom: var(--space-md, 1.2rem);
+    line-height: 1.6;
+  }
+
+  .prose a {
+    color: var(--color-primary-bright, #0ebfc2);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .prose a:hover {
+    color: var(--color-primary, #0a9396);
+    text-decoration: underline;
+  }
+
+  .lead {
+    font-size: 1.125rem;
+    color: var(--color-text, #f1f5f9);
+    margin-bottom: var(--space-lg, 1.5rem);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  /* Process List */
+  .process-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-lg, 1.5rem) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md, 1rem);
+  }
+
+  .process-list li {
+    padding-left: var(--space-lg, 1.5rem);
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .process-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--color-primary-bright, #0ebfc2);
+    font-weight: 600;
+  }
+
+  /* Phase Cards */
+  .phase-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm, 0.75rem);
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md, 1rem);
+    margin-bottom: var(--space-xs, 0.5rem);
+  }
+
+  .phase-number {
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      135deg,
+      rgba(14, 191, 194, 0.15) 0%,
+      rgba(10, 147, 150, 0.08) 100%
+    );
+    border: 2px solid var(--color-primary-bright, #0ebfc2);
+    border-radius: 50%;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-primary-bright, #0ebfc2);
+  }
+
+  .phase-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text, #f1f5f9);
+    margin: 0;
+  }
+
+  .phase-focus,
+  .phase-output {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Safety Timeline */
+  .safety-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg, 1.5rem);
+    margin: var(--space-xl, 2rem) 0;
+    max-width: 600px;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: var(--space-md, 1rem);
+  }
+
+  .timeline-marker {
+    flex-shrink: 0;
+    width: 80px;
+    padding: var(--space-xs, 0.5rem) var(--space-sm, 0.75rem);
+    background: var(--color-surface, rgba(6, 12, 20, 0.35));
+    border: 1px solid var(--color-primary-bright, #0ebfc2);
+    border-radius: var(--radius-sm, 0.25rem);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-primary-bright, #0ebfc2);
+    text-align: center;
+  }
+
+  .timeline-content {
+    flex: 1;
+  }
+
+  .timeline-content p {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* License Cards */
+  .license-card {
+    text-align: center;
+    padding: var(--space-sm, 0.75rem) 0;
+  }
+
+  .license-type {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-muted, #9aa7bd);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 var(--space-xs, 0.5rem);
+  }
+
+  .license-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary-bright, #0ebfc2);
+    margin: 0 0 var(--space-sm, 0.75rem);
+  }
+
+  .license-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-muted, #9aa7bd);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Role Cards */
+  .role-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text, #f1f5f9);
+    margin: 0 0 var(--space-sm, 0.75rem);
+  }
+
+  .role-actions {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted, #9aa7bd);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Process Flow */
+  .process-flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm, 0.75rem);
+    margin: var(--space-xl, 2rem) 0;
+    padding: var(--space-xl, 2rem);
+    background: var(--color-surface, rgba(6, 12, 20, 0.35));
+    border: 1px solid var(--color-border, rgba(148, 163, 184, 0.18));
+    border-radius: var(--radius-md, 0.5rem);
+  }
+
+  .flow-step {
+    padding: var(--space-sm, 0.75rem) var(--space-md, 1rem);
+    background: rgba(14, 191, 194, 0.1);
+    border: 1px solid var(--color-primary-bright, #0ebfc2);
+    border-radius: var(--radius-sm, 0.25rem);
+    font-weight: 600;
+    color: var(--color-text, #f1f5f9);
+    white-space: nowrap;
+  }
+
+  .flow-arrow {
+    color: var(--color-primary-bright, #0ebfc2);
+    font-size: 1.5rem;
+    font-weight: 300;
+  }
+
+  /* Platform Links */
+  .platform-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md, 1rem);
+    margin-top: var(--space-lg, 1.5rem);
+  }
+
+  /* CTA Group */
+  .cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md, 1rem);
+    margin-top: var(--space-xl, 2rem);
+  }
+
+  @media (max-width: 640px) {
+    .cta-group,
+    .platform-links {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .process-flow {
+      flex-direction: column;
+    }
+    
+    .flow-arrow {
+      transform: rotate(90deg);
+    }
+  }
+
+  /* CalloutPanel Link Styling */
+  :global(.callout-panel) a {
+    color: var(--color-primary-bright, #0ebfc2);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  :global(.callout-panel) a:hover {
+    color: var(--color-primary, #0a9396);
+    text-decoration: underline;
+  }
+
+  /* Animations */
+  @media (prefers-reduced-motion: no-preference) {
+    .content-section {
+      animation: fadeInUp 0.6s ease-out;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>

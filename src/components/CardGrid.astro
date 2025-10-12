@@ -1,0 +1,121 @@
+---
+// ============================================================================
+// COMPONENT: CardGrid.astro
+// PURPOSE: Flexible card grid layout with responsive options
+// ----------------------------------------------------------------------------
+// USAGE: Any page that needs to display cards in a grid
+// FEATURES:
+// - Configurable columns (1-4)
+// - Stack option for desktop (cards on top of each other)
+// - Responsive breakpoints
+// - Uses only global CSS tokens
+// ============================================================================
+
+interface Props {
+  columns?: 1 | 2 | 3 | 4;
+  stack?: boolean; // Forces 1 column even on desktop
+  gap?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const { 
+  columns = 3,
+  stack = false,
+  gap = 'lg',
+  class: className = ''
+} = Astro.props;
+
+// Build CSS classes
+const gridClass = stack ? 'card-grid-stack' : `card-grid-${columns}`;
+const gapClass = `gap-${gap}`;
+---
+
+<div class={`card-grid ${gridClass} ${gapClass} ${className}`}>
+  <slot />
+</div>
+
+<style>
+  /* Base Card Grid */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-block: var(--space-xl, 2rem);
+  }
+
+  /* Gap Sizes */
+  .gap-sm {
+    gap: var(--space-md, 1rem);
+  }
+
+  .gap-md {
+    gap: var(--space-lg, 1.5rem);
+  }
+
+  .gap-lg {
+    gap: var(--space-xl, 2rem);
+  }
+
+  /* Stacked Layout (1 column everywhere) */
+  .card-grid-stack {
+    grid-template-columns: 1fr;
+  }
+
+  /* 2-Column Grid */
+  .card-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .card-grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* 3-Column Grid */
+  .card-grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .card-grid-3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .card-grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* 4-Column Grid */
+  .card-grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .card-grid-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .card-grid-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* Card Headings (global styles for slotted content) */
+  .card-grid :global(.card-heading) {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text, #f1f5f9);
+    margin-bottom: var(--space-xs, 0.5rem);
+  }
+
+  .card-grid :global(.card-subheading) {
+    font-size: 0.875rem;
+    color: var(--color-text-muted, #9aa7bd);
+    margin-bottom: var(--space-md, 1rem);
+  }
+</style>

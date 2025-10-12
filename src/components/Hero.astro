@@ -31,30 +31,31 @@ const {
 
 // Build alignment classes
 const alignmentClass = align === 'center' ? 'text-center' : 'text-left';
-const containerClass = align === 'center' ? 'mx-auto' : '';
 ---
 
 <header 
   class={`page-hero ${alignmentClass}`}
   aria-labelledby={id}
 >
-  <div class={`hero-content ${containerClass}`}>
-    
-    {eyebrow && (
-      <p class="eyebrow">{eyebrow}</p>
-    )}
-    
-    <h1 id={id} class="hero-title">
-      {title}
-    </h1>
-    
-    {description && (
-      <p class="lead" set:html={description} />
-    )}
+  <div class="hero-container">
+    <div class="hero-content">
+      
+      {eyebrow && (
+        <p class="eyebrow">{eyebrow}</p>
+      )}
+      
+      <h1 id={id} class="hero-title">
+        {title}
+      </h1>
+      
+      {description && (
+        <p class="lead" set:html={description} />
+      )}
 
-    <!-- Slot for additional content (CTAs, prose, etc.) -->
-    <slot />
-    
+      <!-- Slot for additional content (CTAs, prose, etc.) -->
+      <slot />
+      
+    </div>
   </div>
 </header>
 
@@ -75,12 +76,33 @@ const containerClass = align === 'center' ? 'mx-auto' : '';
     }
   }
 
+  /* Outer container - handles page-level centering */
+  .hero-container {
+    max-width: var(--container-max, 1200px);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--space-page, 2rem);
+    padding-right: var(--space-page, 2rem);
+  }
+
   /* Content container with max-width constraint */
   .hero-content {
     max-width: 56rem;
     display: flex;
     flex-direction: column;
     gap: clamp(1rem, 2.5vw, 1.5rem);
+  }
+
+  /* Center alignment: center the content within container */
+  .text-center .hero-content {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Left alignment: align to start */
+  .text-left .hero-content {
+    margin-left: 0;
+    margin-right: auto;
   }
 
   /* Eyebrow styling - shared visual language with HomeHero */

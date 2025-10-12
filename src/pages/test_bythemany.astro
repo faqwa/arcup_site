@@ -1,0 +1,364 @@
+---
+// src/pages/bythemany.astro
+import Layout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import PageLayout from '../components/PageLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import CardGrid from '../components/CardGrid.astro';
+import Card from '../components/Card.astro';
+import SectionDivider from '../components/SectionDivider.astro';
+import CalloutPanel from '../components/CalloutPanel.astro';
+
+const pageTitle = "By the Many";
+const pageDescription = "Collaborative participation in open plasma research for ecological repair.";
+
+// Define navigation links
+const navLinks = [
+  { href: "#participation-modes", label: "Participation Modes" },
+  { href: "#research-streams", label: "Research Streams" },
+  { href: "#joining-logic", label: "Joining Logic" }
+];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  
+  <!-- Hero Section -->
+  <Hero
+    eyebrow="🜂 By the Many"
+    title="Collaborative participation"
+    description="ArcUp exists within a global movement of open science. Community labs and cooperative research groups — such as Open Insulin, GOSH, and Open Source Ecology — demonstrate that transparent collaboration can produce reliable technology. ArcUp follows the same principle, applied to plasma research for ecological repair."
+  >
+    <div class="hero-cta-group">
+      <a href="#participation-modes" class="btn btn-primary">See Participation Modes →</a>
+      <a href="#research-streams" class="btn btn-outline">Explore Research Streams →</a>
+    </div>
+  </Hero>
+
+  <!-- Page Layout with Sidebar -->
+  <PageLayout navLinks={navLinks}>
+    
+    <!-- Section 1: Participation Modes -->
+    <section id="participation-modes" class="content-section">
+      <SectionHeader
+        title="Participation modes"
+        align="left"
+      />
+
+      <CardGrid columns={2}>
+        
+        <Card variant="default">
+          <h3 class="card-heading">Independent route</h3>
+          <p>
+            Use, adapt, or fork any open protocol. Attribute sources, follow published safety guidance, and share verified data through Workspace.
+          </p>
+          <p>
+            Independent contributors expand the dataset and confirm reproducibility.
+          </p>
+          <div class="card-action">
+            <a href="/protocols" class="btn btn-outline btn-sm">Browse Protocols →</a>
+            <a href="/workspace" class="btn btn-outline btn-sm">Open Workspace →</a>
+          </div>
+        </Card>
+
+        <Card variant="default">
+          <h3 class="card-heading">Collaborative route</h3>
+          <p>
+            Join active Workspace projects to co-design experiments, build hardware, and co-author publications. Collaborators share credit and, when resources permit, funding.
+          </p>
+          <p>
+            This pathway forms the foundation for Phase 2: the community framework.
+          </p>
+          <div class="card-action">
+            <a href="/workspace" class="btn btn-outline btn-sm">Active Projects →</a>
+            <a href="/join" class="btn btn-outline btn-sm">Join Community →</a>
+          </div>
+        </Card>
+
+      </CardGrid>
+    </section>
+
+    <SectionDivider />
+
+    <!-- Section 2: Research Streams -->
+    <section id="research-streams" class="content-section">
+      <SectionHeader
+        title="Research streams"
+        subtitle="Select a stream that matches your background"
+        align="left"
+      />
+
+      <!-- Research Stream Cards - Stacked for readability -->
+      <CardGrid stack={false}>
+        
+        <Card variant="bordered">
+          <h3 class="card-heading">Plasma & Hardware</h3>
+          <p class="card-subheading">Design and evaluate dielectric-barrier discharge systems, sensors, and circuits</p>
+          <div class="stream-skills">
+            <span class="skill-badge">Electrical engineering</span>
+            <span class="skill-badge">Plasma physics</span>
+            <span class="skill-badge">CAD</span>
+          </div>
+        </Card>
+
+        <Card variant="bordered">
+          <h3 class="card-heading">Applied Chemistry</h3>
+          <p class="card-subheading">Study plasma–water interactions and reactive species</p>
+          <div class="stream-skills">
+            <span class="skill-badge">Analytical chemistry</span>
+            <span class="skill-badge">Environmental science</span>
+          </div>
+        </Card>
+
+        <Card variant="bordered">
+          <h3 class="card-heading">Applied Biology</h3>
+          <p class="card-subheading">Examine plant or microbial responses using non-invasive methods</p>
+          <div class="stream-skills">
+            <span class="skill-badge">Molecular biology</span>
+            <span class="skill-badge">Ecology</span>
+            <span class="skill-badge">Bioinformatics</span>
+          </div>
+        </Card>
+
+        <Card variant="bordered">
+          <h3 class="card-heading">Replication & Writing</h3>
+          <p class="card-subheading">Validate protocols and publish findings</p>
+          <div class="stream-skills">
+            <span class="skill-badge">Research</span>
+            <span class="skill-badge">Statistics</span>
+            <span class="skill-badge">Scientific writing</span>
+          </div>
+        </Card>
+
+        <Card variant="bordered">
+          <h3 class="card-heading">Software & Visualisation</h3>
+          <p class="card-subheading">Build analysis pipelines and dashboards</p>
+          <div class="stream-skills">
+            <span class="skill-badge">Python / R</span>
+            <span class="skill-badge">Data engineering</span>
+          </div>
+        </Card>
+
+        <Card variant="bordered">
+          <h3 class="card-heading">Documentation & Media</h3>
+          <p class="card-subheading">Translate results for public learning</p>
+          <div class="stream-skills">
+            <span class="skill-badge">Writing</span>
+            <span class="skill-badge">Design</span>
+            <span class="skill-badge">Translation</span>
+          </div>
+        </Card>
+      </CardGrid>
+
+      <CalloutPanel variant="info">
+        <p>
+          All participants work under ArcUp's <a href="/about#safety-ethics">safety triage</a> and the <a href="/repractise">Re:Practise Ethical Framework</a>, which ensures experiments remain safe, verifiable, and non-extractive.
+        </p>
+      </CalloutPanel>
+    </section>
+
+    <SectionDivider />
+
+    <!-- Section 3: Joining Logic -->
+    <section id="joining-logic" class="content-section">
+      <SectionHeader
+        title="Joining logic"
+        align="left"
+      />
+      
+      <div class="logic-list">
+        <div class="logic-item">
+          <span class="logic-bullet">•</span>
+          <span class="logic-text">Begin where you already have competence.</span>
+        </div>
+        <div class="logic-item">
+          <span class="logic-bullet">•</span>
+          <span class="logic-text">Use existing documentation before proposing new work.</span>
+        </div>
+        <div class="logic-item">
+          <span class="logic-bullet">•</span>
+          <span class="logic-text">Publish methods and data through Workspace for traceability.</span>
+        </div>
+        <div class="logic-item">
+          <span class="logic-bullet">•</span>
+          <span class="logic-text">Reference project identifiers when replicating experiments.</span>
+        </div>
+      </div>
+
+      <div class="prose">
+        <p class="lead">
+          Each action — however small — contributes measurable value to the commons. When people share verified data rather than isolated results, collective progress accelerates.
+        </p>
+        
+        <p>
+          ArcUp's distributed model enables faster, more resilient innovation than conventional closed systems. Your contribution, once verified, becomes part of the permanent record of open plasma research.
+        </p>
+      </div>
+
+      <div class="cta-group">
+        <a href="/join" class="btn btn-primary">Join the Community →</a>
+        <a href="/workspace" class="btn btn-outline">Explore Workspace →</a>
+        <a href="https://discord.gg/arcup" class="btn btn-outline" target="_blank" rel="noopener">Join Discord →</a>
+      </div>
+    </section>
+
+  </PageLayout>
+</Layout>
+
+<style>
+  /* Page-Specific Styles */
+  
+  /* Prose Content */
+  .prose {
+    max-width: 65ch;
+  }
+
+  .prose p {
+    margin-bottom: var(--space-md, 1.2rem);
+    line-height: 1.6;
+  }
+
+  .prose a {
+    color: var(--color-primary-bright, #0ebfc2);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .prose a:hover {
+    color: var(--color-primary, #0a9396);
+    text-decoration: underline;
+  }
+
+  .lead {
+    font-size: 1.125rem;
+    color: var(--color-text, #f1f5f9);
+    margin-bottom: var(--space-lg, 1.5rem);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  /* Card Actions */
+  .card-action {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm, 0.75rem);
+    margin-top: var(--space-md, 1rem);
+    padding-top: var(--space-md, 1rem);
+    border-top: 1px solid var(--color-border, rgba(148, 163, 184, 0.18));
+  }
+
+  .btn-sm {
+    padding: var(--space-xs, 0.5rem) var(--space-md, 1rem);
+    font-size: 0.875rem;
+  }
+
+  /* Stream Skills */
+  .stream-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs, 0.5rem);
+    margin-top: var(--space-md, 1rem);
+  }
+
+  .skill-badge {
+    display: inline-block;
+    padding: var(--space-xs, 0.25rem) var(--space-sm, 0.75rem);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-text-muted, #9aa7bd);
+    background: rgba(148, 163, 184, 0.1);
+    border: 1px solid var(--color-border, rgba(148, 163, 184, 0.18));
+    border-radius: var(--radius-sm, 0.25rem);
+    white-space: nowrap;
+  }
+
+  /* Joining Logic List */
+  .logic-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md, 1rem);
+    margin-block: var(--space-xl, 2rem);
+    max-width: 65ch;
+  }
+
+  .logic-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm, 0.75rem);
+  }
+
+  .logic-bullet {
+    flex-shrink: 0;
+    color: var(--color-primary-bright, #0ebfc2);
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .logic-text {
+    color: var(--color-text, #f1f5f9);
+    line-height: 1.6;
+    padding-top: 0.125rem;
+  }
+
+  /* CTA Group */
+  .cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md, 1rem);
+    margin-top: var(--space-xl, 2rem);
+  }
+
+  .hero-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md, 1rem);
+    justify-content: center;
+    margin-top: var(--space-xl, 2rem);
+  }
+
+  @media (max-width: 640px) {
+    .cta-group,
+    .hero-cta-group {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  /* CalloutPanel Link Styling */
+  :global(.callout-panel) a {
+    color: var(--color-primary-bright, #0ebfc2);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  :global(.callout-panel) a:hover {
+    color: var(--color-primary, #0a9396);
+    text-decoration: underline;
+  }
+
+  /* Animations */
+  @media (prefers-reduced-motion: no-preference) {
+    .content-section {
+      animation: fadeInUp 0.6s ease-out;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>
