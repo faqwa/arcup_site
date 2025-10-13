@@ -18,14 +18,16 @@ interface Props {
   class?: string;
 }
 
-const { 
+const {
   variant = 'surface',
   hover = true,
   padding = 'default',
   active = false,
   as: Element = 'div',
-  class: className = ''
+  class: className = '',
+  ...attrs
 } = Astro.props;
+
 
 const classes = [
   'card',
@@ -37,7 +39,7 @@ const classes = [
 ].filter(Boolean).join(' ');
 ---
 
-<Element class={classes}>
+<Element class={classes} {...attrs}>
   <slot />
 </Element>
 
@@ -56,10 +58,15 @@ const classes = [
      VARIANT STYLES
      ======================================================================== */
   .card--surface {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    background: linear-gradient(
+      to bottom right,
+      rgba(15,23,42,0.75),
+      rgba(10,147,150,0.05)
+    );
+    border: 1px solid rgba(93,225,228,0.1);
     box-shadow: var(--shadow-soft);
   }
+
 
   /* Desktop: Add blur */
   @media (min-width: 769px) {
@@ -94,13 +101,9 @@ const classes = [
   /* ========================================================================
      PADDING VARIANTS - Simplified to 2 options
      ======================================================================== */
-  .card--compact {
-    padding: clamp(1rem, 3vw, 1.5rem);
-  }
+  .card--compact { padding: var(--space-lg); }
+  .card--default { padding: var(--space-xl); }
 
-  .card--default {
-    padding: clamp(1.75rem, 4vw, 2.25rem);
-  }
 
   /* ========================================================================
      ACTIVE STATE - New in Phase 2
@@ -117,10 +120,13 @@ const classes = [
      HOVER EFFECTS
      ======================================================================== */
   .card--hover:hover {
-    border-color: rgba(93, 225, 228, 0.35);
+    border-color: rgba(93,225,228,0.35);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-strong);
+    box-shadow:
+      0 0 30px rgba(93,225,228,0.08),
+      var(--shadow-soft);
   }
+
 
   .card--hover:focus-within {
     border-color: rgba(93, 225, 228, 0.5);
@@ -133,6 +139,34 @@ const classes = [
       transform: none;
     }
   }
+.card[href] {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+.card[href]:hover {
+  border-color: rgba(93,225,228,0.35);
+  box-shadow: 0 0 30px rgba(93,225,228,0.08), var(--shadow-soft);
+  transform: translateY(-2px);
+}
+
+.card[href]::after {
+  content: "→";
+  position: absolute;
+  right: var(--space-lg);
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+  opacity: 0;
+  transition: all var(--transition-base);
+  color: var(--color-primary-bright);
+}
+
+.card[href]:hover::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(2px);
+}
 
   /* ========================================================================
      ACCESSIBILITY

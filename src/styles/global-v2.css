@@ -25,7 +25,9 @@
   
   /* Text */
   --color-text: #f1f5f9;
-  --color-text-muted: #9aa7bd;
+  --color-text-muted: #a6b3ca;
+  --color-surface: rgba(15, 23, 42, 0.6); /* subtle lift */
+
   
   /* Borders */
   --color-border: rgba(148, 163, 184, 0.18);
@@ -191,6 +193,96 @@ body {
   color: var(--color-primary-bright);
   font-style: normal;
 }
+/* =======================================================================
+   ARCUP GLOBAL V2 — UTILITY EXTENSION (PHASE 1.1)
+   -----------------------------------------------------------------------
+   Adds utilities for section rhythm, text tones, surfaces & card grids.
+   ======================================================================= */
+
+/* === Section Density Modifiers === */
+.section--dense   { padding-block: clamp(2rem, 4vw, 3rem); }
+.section--spacious{ padding-block: clamp(4rem, 8vw, 6rem); }
+
+/* === Text Tones === */
+.text-primary   { color: var(--color-text); }
+.text-secondary { color: var(--color-text-muted); }
+.text-accent    { color: var(--color-primary-bright); }
+
+/* === Background Surfaces === */
+.bg-surface-soft {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+}
+.bg-surface-strong {
+  background: var(--color-surface-strong);
+  border-radius: var(--radius-lg);
+}
+.bg-gradient-teal {
+  background: linear-gradient(
+    to bottom,
+    rgba(10,147,150,0.12),
+    rgba(10,147,150,0.02) 80%,
+    transparent
+  );
+}
+
+.bg-surface-centered {
+  background: linear-gradient(
+    to bottom,
+    rgba(15,23,42,0.75),
+    rgba(15,23,42,0.6)
+  );
+  text-align: center;
+}
+
+
+/* === Card & Group Utilities === */
+.card-group {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+@media (min-width:768px){
+  .card-group--2 { grid-template-columns: repeat(2,1fr); }
+  .card-group--3 { grid-template-columns: repeat(3,1fr); }
+}
+/* global-v2.css */
+.content-container {
+  width: 100%;
+  max-width: min(72ch, 90%);
+  margin-inline: auto;
+  padding-inline: var(--shell-padding);
+}
+
+
+/* === Inline Links === */
+.inline-link {
+  color: var(--color-primary-bright);
+  text-decoration: underline;
+  text-decoration-color: rgba(93,225,228,0.3);
+  text-underline-offset: 0.2em;
+  transition: color var(--transition-base);
+}
+.inline-link:hover { text-decoration-color: var(--color-primary-bright); }
+
+/* === Vertical Rhythm Helpers === */
+.flow > * + * { margin-top: var(--space-md); }
+/* =======================================================================
+   ARCUP ALIGNMENT UTILITIES (Phase 3.5)
+   ======================================================================= */
+
+.align-left   { text-align: left;   justify-items: start; }
+.align-center { text-align: center; justify-items: center; }
+.align-right  { text-align: right;  justify-items: end; }
+
+/* Grid-column helpers for mixed layouts */
+.layout-split {
+  display: grid;
+  gap: var(--space-2xl);
+}
+@media (min-width: 1024px) {
+  .layout-split--40-60 { grid-template-columns: 2fr 3fr; align-items: center; }
+  .layout-split--60-40 { grid-template-columns: 3fr 2fr; align-items: center; }
+}
 
 /* ============================================================================
    LAYOUT PATTERNS
@@ -286,6 +378,10 @@ body {
 /* ============================================================================
    CARD GRID SYSTEM
    ============================================================================ */
+.card-grid,
+.flow-grid {
+  padding-inline: var(--shell-padding);
+}
 
 .card-grid {
   display: grid;
@@ -321,21 +417,109 @@ body {
 /* ============================================================================
    CARD UTILITIES
    ============================================================================ */
-
 .card-note {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   opacity: 0.85;
   font-style: italic;
   padding-top: var(--space-md);
-  margin-top: auto;
-  border-top: 1px solid var(--color-border);
+  margin-top: var(--space-lg);
+  border-top: 1.5px solid var(--color-border);
 }
 
 .card-icon {
   font-size: 1.5rem;
   margin-bottom: var(--space-sm);
   opacity: 0.8;
+}
+.card[as="a"]::after {
+  content: "→";
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all var(--transition-base);
+  margin-left: var(--space-xs);
+}
+.card[as="a"]:hover::after {
+  opacity: 1;
+  transform: translateX(2px);
+}
+.card-grid {
+  justify-items: center;
+}
+.card-grid > * {
+  width: 100%;
+  max-width: 350px;
+}
+
+
+/* =======================================================================
+   ARCUP TYPOGRAPHIC RHYTHM SYSTEM (Phase 3)
+   -----------------------------------------------------------------------
+   Establishes a baseline grid & semantic spacing rhythm for prose.
+   ======================================================================= */
+
+/* === Baseline Variables === */
+:root {
+  --baseline: 1.1rem;
+  --line-rhythm-tight: calc(var(--baseline) * 1.3);
+  --line-rhythm-normal: calc(var(--baseline) * 1.6);
+  --line-rhythm-loose: calc(var(--baseline) * 1.9);
+}
+
+/* === Global Paragraph Rhythm === */
+.content-prose {
+  max-width: 72ch;
+  line-height: var(--line-rhythm-normal);
+  margin-inline: auto;
+}
+
+.content-prose > * + * {
+  margin-top: var(--baseline);
+}
+
+/* === Section Vertical Rhythm === */
+.page-section {
+  padding-top: calc(var(--baseline) * 6);
+  padding-bottom: calc(var(--baseline) * 6);
+}
+
+.section--dense {
+  padding-block: calc(var(--baseline) * 4);
+}
+
+.section--spacious {
+  padding-block: calc(var(--baseline) * 8);
+}
+
+/* === Headings Harmonisation === */
+h2, h3, h4 {
+  line-height: var(--line-rhythm-tight);
+  letter-spacing: -0.015em;
+}
+
+.section-header__title {
+  font-weight: var(--font-weight-semibold);
+  max-width: 36ch;
+}
+
+/* === Link + Button Tone === */
+a, .link-button {
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.link-button--primary {
+  font-weight: var(--font-weight-medium);
+}
+.link-button--outline {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-primary-bright);
+}
+
+/* === Soft Text Flow Accents === */
+.text-secondary {
+  color: var(--color-text-muted);
+  line-height: var(--line-rhythm-loose);
+  max-width: 68ch;
+  margin-inline: auto;
 }
 
 /* ============================================================================

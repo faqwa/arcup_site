@@ -1,0 +1,210 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import PageLayout from "../components/PageLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import Card from "../components/Card.astro";
+import SectionDivider from "../components/SectionDivider.astro";
+import CalloutPanel from "../components/CalloutPanel.astro";
+import "../styles/global-v2.css";
+import "../styles/animations.css";
+
+const pageTitle = "About ArcUp";
+const pageDescription =
+  "ArcUp is an open experimental research framework developing plasma-based systems for ecological repair.";
+
+const navLinks = [
+  { href: "#what-arcup-is", label: "What ArcUp Is" },
+  { href: "#how-it-works", label: "How ArcUp Works" },
+  { href: "#safety-ethics", label: "Safety & Ethics" },
+  { href: "#take-next-step", label: "Take Next Step" },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} navActive="about">
+  <main id="main-content">
+
+    <!-- ================================================================ -->
+    <!-- HERO -->
+    <!-- ================================================================ -->
+    <section class="page-section page-section--center section--spacious bg-gradient-teal">
+      <Hero
+        eyebrow="About ArcUp"
+        title="Open Research for a Thriving Earth"
+        description="ArcUp (arc^) is an open experimental research framework developing plasma-based systems for ecological repair. Each experiment studies how controlled energy interacts with water, organisms, and ecosystems — linking engineering with ecology and ethics."
+      >
+        <div class="section-cta fade-in-up delay-2">
+          <a href="/join" class="link-button link-button--primary">Join ArcUp →</a>
+          <a href="/workspace" class="link-button link-button--outline">Explore Workspace →</a>
+          <a href="#how-it-works" class="link-button link-button--outline">Learn More ↓</a>
+        </div>
+      </Hero>
+    </section>
+
+    <PageLayout navLinks={navLinks}>
+      <!-- ================================================================ -->
+      <!-- SECTION 1: WHAT ARCUP IS -->
+      <!-- ================================================================ -->
+      <section id="what-arcup-is" class="page-section bg-surface-soft align-left">
+        <SectionHeader
+          title="What ArcUp Is"
+          subtitle="A shared field of open experimental practice"
+          align="left"
+        />
+        <div class="content-prose">
+          <p>
+            ArcUp (arc^) is an open experimental research framework developing plasma-based systems for ecological repair. Each experiment studies how controlled energy interacts with water, organisms, and ecosystems — linking engineering with ecology and ethics.
+          </p>
+          <p>
+            ArcUp is a shared field of practice that may take many forms — a lab, a cooperative, a community — as long as it remains guided by its commitments to Earth, to people, and to future generations.
+          </p>
+          <p>
+            Every prototype adds evidence to a commons of repair, helping ecosystems regain stability and complexity after human disturbance. Our goal is simple: make research transparent, reproducible, and responsible — a form of science that contributes to futures worth inheriting.
+          </p>
+        </div>
+      </section>
+
+      <SectionDivider variant="subtle" />
+
+      <!-- ================================================================ -->
+      <!-- SECTION 2: HOW ARCUP WORKS -->
+      <!-- ================================================================ -->
+      <section id="how-it-works" class="page-section bg-surface-soft align-left">
+        <SectionHeader
+          title="How ArcUp Works"
+          subtitle="From bench-scale exploration to collaborative application"
+          align="left"
+        />
+
+        <p class="content-prose">
+          ArcUp grows through three connected phases. Each builds capacity for the next — moving from individual experimentation to collective practice and application, and eventually to systemic repair.
+        </p>
+
+        <div class="card-grid card-grid--3">
+          <Card variant="surface" hover>
+            <h3>Phase 1 — Bench-Scale Exploration</h3>
+            <p>
+              ArcUp begins at the bench: compact dielectric-barrier discharge systems and other plasma reactors studying how controlled plasma interacts with water, organisms, and ecosystems.
+            </p>
+            <p>
+              Researchers refine device architectures, use assays, trace reaction kinetics, and document every parameter — from oxidation pathways and pollutant degradation to plasma spatial interactions and interfaces.
+            </p>
+            <p>
+              All results are verified for safety, logged openly, and shared through Workspace. Progress is measured not by speed but by clarity, reproducibility, and demonstrable benefit.
+            </p>
+          </Card>
+
+          <Card variant="surface" hover>
+            <h3>Phase 2 — Community Frameworks</h3>
+            <p>
+              When designs prove reliable and safe, they enter collective practice. Community teams co-develop open build guides, data templates, and safety modules so plasma systems can be replicated responsibly.
+            </p>
+            <p>
+              Governance structures form to ensure fair credit and ethical oversight; collaborators working within ArcUp share authorship and, where possible, compensation.
+            </p>
+            <p>
+              This is when ArcUp matures from <em>by Ali</em> to <em>by many</em> — a cooperative field where learning circulates and decisions are shared. The purpose of Phase 2 is to make open plasma technology socially durable.
+            </p>
+          </Card>
+
+          <Card variant="surface" hover>
+            <h3>Phase 3 — Collaborative Application</h3>
+            <p>
+              With verified prototypes and community capacity established, ArcUp engages with broader ecological and industrial contexts.
+            </p>
+            <p>
+              Projects partner with municipalities, research institutes, and regenerative enterprises to adapt plasma systems for real-world challenges — water treatment, soil regeneration, salt-water irrigation, ecosystem resilience.
+            </p>
+            <p>
+              Each collaboration operates under open-science licensing and returns its data to the commons. Revenue and institutional partnerships are designed to reinforce — never erode — the ethical commitments of earlier phases.
+            </p>
+          </Card>
+        </div>
+
+        <CalloutPanel variant="info" class="fade-in-up delay-3">
+          <p>
+            Together, these phases form a living continuum: <strong>research → community → commons.</strong> Each builds not only technology but trust — the foundation for futures that are regenerative, equitable, and scientifically sound.
+          </p>
+        </CalloutPanel>
+      </section>
+
+      <SectionDivider variant="subtle" />
+
+      <!-- ================================================================ -->
+      <!-- SECTION 3: SAFETY & ETHICS -->
+      <!-- ================================================================ -->
+      <section id="safety-ethics" class="page-section bg-surface-soft align-left">
+        <SectionHeader
+          title="Safety & Ethics Triage"
+          subtitle="Ontological Assessment"
+          align="left"
+        />
+
+        <p class="content-prose">
+          Every ArcUp decision passes through four lenses of safety — people, organisms, ecosystems, and future. Safety here means continuity of care: electrical, ecological, and relational.
+        </p>
+
+        <div class="card-grid card-grid--2">
+          <Card variant="surface" hover>
+            <h3>People</h3>
+            <p>
+              Work must benefit communities without enabling exploitation or cultural erasure. Research is conducted with consent, transparency, and respect for local knowledge systems.
+            </p>
+            <p>Participation is voluntary; authorship and credit remain with those who contribute.</p>
+          </Card>
+
+          <Card variant="surface" hover>
+            <h3>Organisms</h3>
+            <p>
+              All biological study follows a non-invasive ethic. ArcUp uses environmental and molecular sensing — eDNA, protein and stress-response markers — to understand organismal change without harm.
+            </p>
+            <p>
+              Traditional toxicity assays that rely on mortality or dissection are replaced by informational methods that trace life's adaptive signals.
+            </p>
+          </Card>
+
+          <Card variant="surface" hover>
+            <h3>Ecosystems</h3>
+            <p>
+              Ecosystems are treated as dynamic, coupled systems, not static backdrops. Monitoring extends beyond observation to modelling — tracing feedbacks, fluxes, and cross-scale interactions that reveal emergent behaviour.
+            </p>
+            <p>If degradation or instability appears, designs are paused and re-evaluated before continuation.</p>
+          </Card>
+
+          <Card variant="surface" hover>
+            <h3>Future</h3>
+            <p>
+              Every project anticipates downstream effects and questions whether its outcomes can be responsibly inherited. When uncertainty exceeds our capacity to model it, progress pauses until understanding improves.
+            </p>
+            <p>The measure of success is not novelty but continuity — research that future generations can trust.</p>
+          </Card>
+        </div>
+
+        <CalloutPanel variant="info" class="fade-in-up delay-2">
+          <p>
+            This triage links ArcUp with the <strong>Re:Practise Ethical Framework.</strong> Together they ensure that science produces not only results, but results that remain aligned with human dignity, ecological integrity, and the living continuity of Earth.
+          </p>
+        </CalloutPanel>
+      </section>
+
+      <SectionDivider variant="strong" />
+
+      <!-- ================================================================ -->
+      <!-- SECTION 4: CTA -->
+      <!-- ================================================================ -->
+      <section id="take-next-step" class="page-section section--spacious bg-gradient-teal page-section--center">
+        <SectionHeader
+          title="Take the Next Step"
+          subtitle="Choose an entry point that fits your context — whether you're here to learn, contribute, or collaborate."
+          align="center"
+        />
+        <div class="section-cta fade-in-up delay-3">
+          <a href="/join" class="link-button link-button--primary">Join ArcUp →</a>
+          <a href="/repractise" class="link-button link-button--outline">Re:Practise Framework →</a>
+          <a href="https://discord.gg/arcup" target="_blank" rel="noopener" class="link-button link-button--outline">Discord Community →</a>
+          <a href="https://youtube.com/@arcup" target="_blank" rel="noopener" class="link-button link-button--outline">YouTube Channel →</a>
+        </div>
+      </section>
+    </PageLayout>
+  </main>
+</BaseLayout>

@@ -1,465 +1,213 @@
 ---
-// src/pages/join.astro
-import Layout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import PageLayout from '../components/PageLayout.astro';
-import SectionHeader from '../components/SectionHeader.astro';
-import CardGrid from '../components/CardGrid.astro';
-import Card from '../components/Card.astro';
-import SectionDivider from '../components/SectionDivider.astro';
-import CalloutPanel from '../components/CalloutPanel.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import Card from "../components/Card.astro";
+import FlowGrid from "../components/FlowGrid.astro";
+import LinkButton from "../components/LinkButton.astro";
+import "../styles/global-v2.css";
+import "../styles/animations.css";
+import { withBase } from "../utils/paths";
+import { buildSEO } from "../utils/seo";
+import SectionDivider from "../components/SectionDivider.astro";
 
-const pageTitle = "Join ArcUp";
-const pageDescription = "Ways to take part in the ArcUp field. Engage at the level that fits your time, skills, and curiosity.";
-
-// Define navigation links
-const navLinks = [
-  { href: "#get-oriented", label: "Get Oriented" },
-  { href: "#clarify-why", label: "Clarify Your Why" },
-  { href: "#entry-points", label: "Find Entry Point" },
-  { href: "#connect", label: "Connect" },
-  { href: "#begin", label: "Begin" }
-];
+const seo = buildSEO({
+  title: "Join — Ways to Take Part in the ArcUp Field",
+  description: "ArcUp is open by design. You can engage at the level that fits your time, skills, and curiosity — from observing open research to co-building plasma systems.",
+  path: "/join",
+  siteUrl: Astro.site,
+});
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
-  
-  <!-- Hero Section -->
-  <Hero
-    eyebrow="🜂 Join"
-    title="Ways to take part in the ArcUp field"
-    description="ArcUp is open by design. You can engage at the level that fits your time, skills, and curiosity — from observing open research to co-building plasma systems."
-  >
-    <div class="hero-cta-group">
-      <a href="#get-oriented" class="btn btn-primary">Get Started →</a>
-      <a href="#entry-points" class="btn btn-outline">See Entry Points →</a>
-    </div>
-  </Hero>
+<BaseLayout title={seo.title} description={seo.description} seo={seo} navActive="join">
+  <main id="main-content" class="page-shell" aria-labelledby="join-title">
 
-  <!-- Page Layout with Sidebar -->
-  <PageLayout navLinks={navLinks}>
-    
-    <!-- Section 1: Get Oriented -->
-    <section id="get-oriented" class="content-section">
+    <!-- ================================================================ -->
+    <!-- HERO -->
+    <!-- ================================================================ -->
+    <section class="page-section page-section--center section--spacious bg-gradient-teal">
+      <div class="fade-in-up delay-1">
+        <SectionHeader
+          eyebrow="🜂 Join"
+          title="Ways to Take Part in the ArcUp Field"
+          subtitle="ArcUp is open by design. You can engage at the level that fits your time, skills, and curiosity — from observing open research to co-building plasma systems."
+          align="center"
+        />
+      </div>
+
+      <div class="section-cta fade-in-up delay-3">
+        <LinkButton href={withBase('/workspace')} variant="outline" icon="arrow-right">
+          Get Started
+        </LinkButton>
+        <LinkButton href="#entry-points" variant="primary" icon="arrow-right">
+          See Entry Points
+        </LinkButton>
+      </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- STEP 1: GET ORIENTED -->
+    <!-- ================================================================ -->
+    <section class="page-section section--dense bg-surface-soft fade-in-up delay-2" id="oriented">
+        <SectionHeader
+        eyebrow="1 · Get Oriented"
+        title="Learn the Foundation"
+        subtitle="Start by understanding how ArcUp and Re:Practise define responsible research."
+        align="center"
+        />
+      <div class="content-prose flow">
+        <p><strong>Read:</strong> About ArcUp — the purpose and structure of the framework. Safety & Ethics — the four-lens model of care. Re:Practise Framework — the ethical base for openness and reproducibility.</p>
+        <p><strong>Review:</strong> Licensing Guidelines — how open hardware and documentation are shared. Verification Process — what qualifies a result for public release.</p>
+        <p>Knowing the principles first prevents re-work later. Ten minutes of reading equals days of saved effort.</p>
+      </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- STEP 2: CLARIFY YOUR WHY -->
+    <!-- ================================================================ -->
+    <section class="page-section section--dense fade-in-up delay-3" id="why">
+     <div class="content-container">
+        <SectionHeader
+        eyebrow="2 · Clarify Your Why"
+        title="Align Intent"
+        subtitle="ArcUp began with reflection: what if discovery were shared from the start? What world would this create? Before joining, define your own purpose for working in the open."
+      />
+      <ul class="focus-list">
+        <li>Note the problems or systems you care about.</li>
+        <li>Identify the skills you can offer.</li>
+        <li>Ask how your contribution supports planetary repair.</li>
+      </ul>
+      <p class="card-note"><em>You can include these notes when you’re joining the community.</em></p>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- STEP 3: FIND ENTRY POINT -->
+    <!-- ================================================================ -->
+    <section class="page-section bg-surface-soft fade-in-up delay-4" id="entry-points">
       <SectionHeader
-        title="1. Get Oriented"
-        subtitle="Learn the foundation"
-        align="left"
+        eyebrow="3 · Find Your Entry Point"
+        title="Choose How to Contribute"
+        subtitle="Each route connects to the same commons of repair — you choose the distance and depth that work for you."
+        align="center"
       />
       
-      <p class="lead">
-        Start by understanding how ArcUp and Re:Practise define responsible research.
+       <!-- <Card as="a" href="/workspace" variant="surface" hover>
+  <div class="card-icon">🔬</div>
+  <h3>Collaborative Projects</h3>
+  <p>Join ongoing builds and co-design experiments.</p>
+</Card> -->
+
+
+      <FlowGrid columns={3} connected stagger>
+        <Card as="article" variant="surface" hover>
+          <h3>Independent Research</h3>
+          <p>Use or replicate any open protocol. Attribute, follow safety guidance, and share verified data through Workspace.</p>
+          <div class="section-cta">
+            <LinkButton href={withBase('/workspace')} variant="ghost" icon="arrow-right">
+              Explore Protocols
+            </LinkButton>
+            <a href={withBase('/workspace')} target="_blank" rel="noopener" class="link-button link-button--primary link-button--icon arrow-right">
+              Contributor Form
+            </a>
+          </div>
+        </Card>
+
+        <Card as="article" variant="surface" hover>
+          <h3>Collaborative Projects</h3>
+          <p>Join ongoing builds and co-design experiments. Publish results collectively and refine shared systems.</p>
+          <div class="section-cta">
+            <LinkButton href={withBase('/workspace')} variant="outline" icon="arrow-right">
+              Open Workspace
+            </LinkButton>
+            <LinkButton href={withBase('/join-form')} variant="primary" icon="arrow-right">
+              Contributor Form
+            </LinkButton>
+          </div>
+        </Card>
+
+        <Card as="article" variant="surface" hover>
+          <h3>Framework Application</h3>
+          <p>Apply the Re:Practise ethics and safety model to your own field of research or engineering practice.</p>
+          <div class="section-cta">
+            <LinkButton href={withBase('/repractise')} variant="outline" icon="arrow-right">
+              Visit Re:Practise
+            </LinkButton>
+          </div>
+        </Card>
+
+        <Card as="article" variant="surface" hover>
+          <h3>Community Network</h3>
+          <p>Discuss, troubleshoot, and share progress in real time with peers and mentors across the open field.</p>
+          <div class="section-cta">
+            <LinkButton href="https://discord.gg/DA8BPA3VsN" external variant="outline" icon="external">
+              Join Discord
+            </LinkButton>
+          </div>
+        </Card>
+
+        <Card as="article" variant="surface" hover>
+          <h3>Learning Media</h3>
+          <p>Watch walkthroughs and open-lab sessions demonstrating current experiments and analysis methods.</p>
+          <div class="section-cta">
+            <LinkButton href="https://www.youtube.com/@arc-arcup" external variant="outline" icon="external">
+              View YouTube
+            </LinkButton>
+          </div>
+        </Card>
+      </FlowGrid>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- STEP 4: CONNECT -->
+    <!-- ================================================================ -->
+    <section class="page-section section--dense fade-in-up delay-2" id="connect">
+    <div class="content-container">
+    <SectionHeader
+        eyebrow="4 · Connect"
+        title="Join the Active Network"
+        subtitle="When you're ready:"
+      />
+      <ul class="focus-list">
+        <li>Submit the Contributor Form to outline your skills and interests.</li>
+        <li>Enter the Discord to meet researchers and builders.</li>
+        <li>Follow the Workspace for live updates and new experiments.</li>
+        <li>Subscribe to YouTube for demonstrations and data reviews.</li>
+      </ul>
+      <p class="card-note">All collaboration runs under open licensing and transparent authorship. Every verified contribution is credited in the public record.</p>
+      <div class="section-cta">
+        <LinkButton href={withBase('/join-form')} variant="primary" icon="arrow-right">
+          Contributor Form
+        </LinkButton>
+        <LinkButton href="https://discord.gg/DA8BPA3VsN" external variant="outline" icon="external">
+          Join Discord
+        </LinkButton>
+      </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- STEP 5: BEGIN -->
+    <!-- ================================================================ -->
+    <section class="page-section page-section--center section--spacious bg-gradient-teal fade-in-up delay-3" id="begin">
+      <SectionHeader
+        eyebrow="5 · Begin"
+        title="Start Small, Stay Consistent"
+        subtitle="Replicate a simple protocol or document an observation. Upload your data and notes through Workspace. Use existing templates for safety checks and formatting."
+        align="center"
+      />
+      <p class="content-prose text-secondary">
+        Small, verified contributions accelerate collective learning far more than large unverified ones.
       </p>
-
-      <div class="resource-group">
-        <div class="resource-category">
-          <h3 class="category-heading">Read:</h3>
-          <ul class="resource-list">
-            <li>
-              <a href="/about" class="resource-link">About ArcUp</a>
-              <span class="resource-description">— the purpose and structure of the framework.</span>
-            </li>
-            <li>
-              <a href="/about#safety-ethics" class="resource-link">Safety & Ethics</a>
-              <span class="resource-description">— the four-lens model of care.</span>
-            </li>
-            <li>
-              <a href="/repractise" class="resource-link">Re:Practise Framework</a>
-              <span class="resource-description">— the ethical base for openness and reproducibility.</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="resource-category">
-          <h3 class="category-heading">Review:</h3>
-          <ul class="resource-list">
-            <li>
-              <a href="/licensing" class="resource-link">Licensing Guidelines</a>
-              <span class="resource-description">— how open hardware and documentation are shared.</span>
-            </li>
-            <li>
-              <a href="/verification" class="resource-link">Verification Process</a>
-              <span class="resource-description">— what qualifies a result for public release.</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <CalloutPanel variant="info">
-        <p>
-          <strong>Knowing the principles first prevents re-work later.</strong><br>
-          Ten minutes of reading equals days of saved effort.
-        </p>
-      </CalloutPanel>
-    </section>
-
-    <SectionDivider />
-
-    <!-- Section 2: Clarify Your Why -->
-    <section id="clarify-why" class="content-section">
-      <SectionHeader
-        title="2. Clarify Your Why"
-        subtitle="Align intent"
-        align="left"
-      />
-      
-      <p class="lead">
-        ArcUp began with reflection: what if discovery were shared from the start? What world would this create? Before joining, define your own purpose for working in the open.
-      </p>
-
-      <div class="checklist">
-        <div class="checklist-item">
-          <span class="checklist-icon">✓</span>
-          <span class="checklist-text">Note the problems or systems you care about.</span>
-        </div>
-        <div class="checklist-item">
-          <span class="checklist-icon">✓</span>
-          <span class="checklist-text">Identify the skills you can offer.</span>
-        </div>
-        <div class="checklist-item">
-          <span class="checklist-icon">✓</span>
-          <span class="checklist-text">Ask how your contribution supports planetary repair.</span>
-        </div>
-      </div>
-
-      <CalloutPanel variant="info">
-        <p>
-          You can include these notes when you're joining the community.
-        </p>
-      </CalloutPanel>
-    </section>
-
-    <SectionDivider />
-
-    <!-- Section 3: Find Your Entry Point -->
-    <section id="entry-points" class="content-section">
-      <SectionHeader
-        title="3. Find Your Entry Point"
-        subtitle="Choose how to contribute"
-        align="left"
-      />
-
-      <!-- Entry Point Cards - Stacked for easy reading -->
-      <CardGrid stack={false}>
-        
-        <Card variant="default">
-          <h3 class="card-heading">Independent Research</h3>
-          <p class="card-subheading">Use or replicate any open protocol</p>
-          <p>
-            Use or replicate any open protocol. Attribute, follow safety guidance, and share verified data through Workspace.
-          </p>
-          <div class="card-action">
-            <a href="/protocols" class="btn btn-outline btn-sm">Explore Protocols →</a>
-          </div>
-        </Card>
-
-        <Card variant="default">
-          <h3 class="card-heading">Collaborative Projects</h3>
-          <p class="card-subheading">Join ongoing builds and co-design experiments</p>
-          <p>
-            Join ongoing builds, co-design experiments, and publish results collectively.
-          </p>
-          <div class="card-action">
-            <a href="/workspace" class="btn btn-outline btn-sm">Open Workspace →</a>
-            <a href="#connect" class="btn btn-outline btn-sm">Contributor Form →</a>
-          </div>
-        </Card>
-
-        <Card variant="default">
-          <h3 class="card-heading">Framework Application</h3>
-          <p class="card-subheading">Apply Re:Practise to your own field</p>
-          <p>
-            Apply the Re:Practise ethics and safety model to your own field of research.
-          </p>
-          <div class="card-action">
-            <a href="/repractise" class="btn btn-outline btn-sm">Visit Re:Practise →</a>
-          </div>
-        </Card>
-
-        <Card variant="default">
-          <h3 class="card-heading">Community Network</h3>
-          <p class="card-subheading">Discuss, troubleshoot, and share progress</p>
-          <p>
-            Discuss ideas, troubleshoot, and share progress with others in real time.
-          </p>
-          <div class="card-action">
-            <a href="https://discord.gg/arcup" class="btn btn-outline btn-sm" target="_blank" rel="noopener">Join Discord →</a>
-          </div>
-        </Card>
-
-        <Card variant="default">
-          <h3 class="card-heading">Learning Media</h3>
-          <p class="card-subheading">Watch walkthroughs and open-lab sessions</p>
-          <p>
-            Watch experiment walkthroughs and open-lab sessions.
-          </p>
-          <div class="card-action">
-            <a href="https://youtube.com/@arcup" class="btn btn-outline btn-sm" target="_blank" rel="noopener">View YouTube →</a>
-          </div>
-        </Card>
-
-      </CardGrid>
-
-      <CalloutPanel variant="info">
-        <p>
-          <strong>Each route connects to the same commons of repair.</strong><br>
-          You choose the distance and depth that work for you.
-        </p>
-      </CalloutPanel>
-    </section>
-
-    <SectionDivider />
-
-    <!-- Section 4: Connect -->
-    <section id="connect" class="content-section">
-      <SectionHeader
-        title="4. Connect"
-        subtitle="Join the active network"
-        align="left"
-      />
-      
-      <p class="lead">
-        When you're ready:
-      </p>
-
-      <div class="checklist">
-        <div class="checklist-item">
-          <span class="checklist-icon">→</span>
-          <span class="checklist-text">Submit the <a href="/contribute">Contributor Form</a> to outline your skills and interests.</span>
-        </div>
-        <div class="checklist-item">
-          <span class="checklist-icon">→</span>
-          <span class="checklist-text">Enter the <a href="https://discord.gg/arcup" target="_blank" rel="noopener">Discord</a> to meet researchers and builders.</span>
-        </div>
-        <div class="checklist-item">
-          <span class="checklist-icon">→</span>
-          <span class="checklist-text">Follow the <a href="/workspace">Workspace</a> for live updates and new experiments.</span>
-        </div>
-        <div class="checklist-item">
-          <span class="checklist-icon">→</span>
-          <span class="checklist-text">Subscribe to <a href="https://youtube.com/@arcup" target="_blank" rel="noopener">YouTube</a> for demonstrations and data reviews.</span>
-        </div>
-      </div>
-
-      <CalloutPanel variant="info">
-        <p>
-          All collaboration runs under open licensing and transparent authorship.<br>
-          Every verified contribution is credited in the public record.
-        </p>
-      </CalloutPanel>
-    </section>
-
-    <SectionDivider />
-
-    <!-- Section 5: Begin -->
-    <section id="begin" class="content-section">
-      <SectionHeader
-        title="5. Begin"
-        subtitle="Start small, stay consistent"
-        align="left"
-      />
-      
-      <div class="prose">
-        <p class="lead">
-          Replicate a simple protocol or document an observation. Upload your data and notes through Workspace. Use existing templates for safety checks and formatting.
-        </p>
-        
-        <p>
-          <strong>Small, verified contributions accelerate collective learning far more than large unverified ones.</strong>
-        </p>
-      </div>
-
-      <div class="cta-group">
-        <a href="/contribute" class="btn btn-primary">Submit Contributor Form →</a>
-        <a href="/workspace" class="btn btn-outline">Open Workspace →</a>
-        <a href="https://discord.gg/arcup" class="btn btn-outline" target="_blank" rel="noopener">Join Discord →</a>
+      <div class="section-cta">
+        <LinkButton href={withBase('/join-form')} variant="primary" icon="arrow-right">
+          Submit Contributor Form
+        </LinkButton>
+        <LinkButton href={withBase('/workspace')} variant="outline" icon="arrow-right">
+          Open Workspace
+        </LinkButton>
+        <LinkButton href="https://discord.gg/DA8BPA3VsN" external variant="outline" icon="external">
+          Join Discord
+        </LinkButton>
       </div>
     </section>
 
-  </PageLayout>
-</Layout>
-
-<style>
-  /* Page-Specific Styles */
-  
-  /* Prose Content */
-  .prose {
-    max-width: 65ch;
-  }
-
-  .prose p {
-    margin-bottom: var(--space-md, 1.2rem);
-    line-height: 1.6;
-  }
-
-  .lead {
-    font-size: 1.125rem;
-    color: var(--color-text, #f1f5f9);
-    margin-bottom: var(--space-lg, 1.5rem);
-    font-weight: 500;
-    line-height: 1.6;
-  }
-
-  /* Resource Groups */
-  .resource-group {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xl, 2rem);
-    margin-block: var(--space-xl, 2rem);
-  }
-
-  .resource-category {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md, 1rem);
-  }
-
-  .category-heading {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--color-text, #f1f5f9);
-    margin: 0;
-  }
-
-  .resource-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md, 1rem);
-  }
-
-  .resource-list li {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs, 0.25rem);
-  }
-
-  @media (min-width: 640px) {
-    .resource-list li {
-      flex-direction: row;
-      align-items: baseline;
-      gap: var(--space-xs, 0.5rem);
-    }
-  }
-
-  .resource-link {
-    color: var(--color-primary-bright, #0ebfc2);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
-  }
-
-  .resource-link:hover {
-    color: var(--color-primary, #0a9396);
-    text-decoration: underline;
-  }
-
-  .resource-description {
-    color: var(--color-text-muted, #9aa7bd);
-    font-size: 0.95rem;
-  }
-
-  /* Checklist */
-  .checklist {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md, 1rem);
-    margin-block: var(--space-xl, 2rem);
-    max-width: 65ch;
-  }
-
-  .checklist-item {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-sm, 0.75rem);
-  }
-
-  .checklist-icon {
-    flex-shrink: 0;
-    color: var(--color-primary-bright, #0ebfc2);
-    font-weight: 600;
-    font-size: 1.125rem;
-  }
-
-  .checklist-text {
-    color: var(--color-text, #f1f5f9);
-    line-height: 1.6;
-  }
-
-  .checklist-text a {
-    color: var(--color-primary-bright, #0ebfc2);
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  .checklist-text a:hover {
-    color: var(--color-primary, #0a9396);
-    text-decoration: underline;
-  }
-
-  /* Card Actions */
-  .card-action {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm, 0.75rem);
-    margin-top: var(--space-md, 1rem);
-    padding-top: var(--space-md, 1rem);
-    border-top: 1px solid var(--color-border, rgba(148, 163, 184, 0.18));
-  }
-
-  .btn-sm {
-    padding: var(--space-xs, 0.5rem) var(--space-md, 1rem);
-    font-size: 0.875rem;
-  }
-
-  /* CTA Group */
-  .cta-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-md, 1rem);
-    margin-top: var(--space-xl, 2rem);
-  }
-
-  .hero-cta-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-md, 1rem);
-    justify-content: center;
-    margin-top: var(--space-xl, 2rem);
-  }
-
-  @media (max-width: 640px) {
-    .cta-group,
-    .hero-cta-group {
-      flex-direction: column;
-      align-items: stretch;
-    }
-  }
-
-  /* Animations */
-  @media (prefers-reduced-motion: no-preference) {
-    .content-section {
-      animation: fadeInUp 0.6s ease-out;
-    }
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      animation: none !important;
-      transition: none !important;
-    }
-  }
-</style>
+  </main>
+</BaseLayout>

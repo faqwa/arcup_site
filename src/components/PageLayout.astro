@@ -68,13 +68,13 @@ const {
     gap: 0;
   }
 
-  @media (min-width: 1024px) {
+    @media (min-width: 1024px) {
     .page-layout {
-      grid-template-columns: 260px 1fr;
-      gap: var(--space-2xl, 3rem);
-      padding-top: var(--space-2xl, 3rem);
+        grid-template-columns: 260px 1fr;
+        gap: var(--space-xl); /* was var(--space-2xl) */
     }
-  }
+    }
+
 
   /* Sidebar Navigation */
   .page-sidebar {
@@ -197,4 +197,8 @@ const {
   :global(section[id]) {
     scroll-margin-top: 5rem;
   }
+  section[id] {
+  scroll-margin-top: calc(var(--baseline) * 6);
+}
+
 </style>

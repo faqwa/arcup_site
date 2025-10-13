@@ -167,6 +167,10 @@ const staggerClass = stagger ? 'flow-grid--stagger' : '';
       }
     }
   }
+  .flow-grid > :global(* + *) {
+  margin-top: var(--space-md);
+}
+
 
   /* ========================================================================
      STAGGERED ANIMATIONS

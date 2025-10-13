@@ -1,265 +1,161 @@
 ---
-// ============================================================================
-// AI SUMMARY METADATA
-// ============================================================================
-/*
-AI Summary Metadata:
-title: ArcUp Projects — Open Plasma Research Portfolio
-summary: Active research projects applying plasma technology to ecological repair challenges through collaborative, open-source experimentation.
-keywords: plasma research projects, open science, collaborative research, ecological repair, plasma activated water, soil restoration, community science
-ai_content_highlights:
-  - Portfolio of active research projects in plasma-based ecological technologies
-  - Three pathways for participation: students, researchers, and community members
-  - All projects follow RE:TECH principles: open, safe, iterative
-  - Build-your-own project pathway with mentorship and support
-  - Comprehensive legal framework using CERN-OHL, CC BY-NC-SA, and AGPL licenses
-*/
-
-// ============================================================================
-// IMPORTS
-// ============================================================================
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ArcCanvas from "../components/ArcCanvas.astro";
-import PageNavigation from "../components/PageNavigation.astro";
 import SectionHeader from "../components/SectionHeader.astro";
-import SectionDivider from "../components/SectionDivider.astro";
 import Card from "../components/Card.astro";
-import LinkButton from "../components/LinkButton.astro";
-import StatusBadge from "../components/StatusBadge.astro";
-import CalloutPanel from "../components/CalloutPanel.astro";
+import SectionDivider from "../components/SectionDivider.astro";
 import "../styles/global-v2.css";
+import "../styles/animations.css";
 
-import { getCollection } from 'astro:content';
-import { withBase } from '../utils/paths';
-import { buildSEO } from '../utils/seo';
-import { EXTERNAL_LINKS } from '../config/constants';
-
-// ============================================================================
-// DATA LOADING
-// ============================================================================
-// Get all projects dynamically from content collection
-const allProjects = await getCollection('projects');
-
-// Group projects by category for organized display
-const projectsByCategory = allProjects.reduce((acc, project) => {
-  const category = project.data.category || 'Other';
-  if (!acc[category]) {
-    acc[category] = [];
-  }
-  acc[category].push(project);
-  return acc;
-}, {} as Record<string, typeof allProjects>);
-
-// Sort categories alphabetically, with 'Other' always last
-const categories = Object.keys(projectsByCategory).sort((a, b) => {
-  if (a === 'Other') return 1;
-  if (b === 'Other') return -1;
-  return a.localeCompare(b);
-});
-
-// ============================================================================
-// SEO CONFIGURATION
-// ============================================================================
-const seo = buildSEO({
-  title: "Projects",
-  description: "Active research projects in plasma technology for ecological repair. Open, collaborative, and building in public.",
-  path: "/projects",
-  siteUrl: Astro.site,
-});
+const seo = {
+  title: "ArcUp Style Guide — Alignment & Rhythm",
+  description: "Visual alignment and containment test for ArcUp global layout system.",
+};
 ---
 
-<BaseLayout
-  title={seo.title}
-  description={seo.description}
-  bodyClass="page-projects"
-  seo={seo}
-  navActive="projects"
->
-  <!-- PERFORMANCE: ArcCanvas loaded in before-header slot for optimal visual hierarchy -->
-  <ArcCanvas slot="before-header" />
+<BaseLayout title={seo.title} description={seo.description} seo={seo}>
+  <main id="main-content" class="page-shell">
 
-  <!-- SEMANTIC: Main landmark with proper labeling for screen readers -->
-  <main id="main-content" class="page-shell" aria-labelledby="projects-title">
-
-    <!-- ========================================================================
-         HERO SECTION
-         Overview of project portfolio and participation framework
-         ======================================================================== -->
-    <header class="page-hero" aria-labelledby="projects-title">
-      <!-- ACCESSIBILITY: Eyebrow provides context before main heading -->
-      <p class="eyebrow">Early-Stage Collaborative Research</p>
-
-      <!-- SEMANTIC: h1 as primary page heading -->
-      <h1 id="projects-title">Projects</h1>
-
-      <!-- Lead paragraph with emphasized key concepts -->
-      <p class="lead">
-        Each project applies RE:TECH principles — <em>open, safe, iterative</em> — and follows arc^'s licensing and governance. 
-        <strong>These are real-world challenges that need collaborative solutions.</strong> Whether you're testing a hypothesis, 
-        building hardware, or bringing community knowledge — there's a way in.
-      </p>
-    </header>
-
-
-    <!-- VISUAL: Divider between major content sections -->
-    <SectionDivider />
-
-    <!-- ========================================================================
-         ALL PROJECTS SECTION
-         Dynamic listing of research projects from content collection
-         ======================================================================== -->
-    <section class="page-section" aria-labelledby="all-projects-heading">
-      <!-- COMPONENT: SectionHeader for section introduction -->
+    <!-- ================================================================ -->
+    <!-- 1. TYPOGRAPHIC + BASELINE TEST -->
+    <!-- ================================================================ -->
+    <section class="page-section section--dense bg-gradient-teal align-left">
       <SectionHeader
-        eyebrow="Research Portfolio"
-        title="All Projects"
-        subtitle="Each project follows RE:TECH principles — open, safe, iterative — and follows arc^'s licensing and governance."
-        align="center"
+        eyebrow="Test 1"
+        title="Typographic Rhythm"
+        subtitle="This section ensures baseline spacing, line height, and containment behave consistently."
+        align="left"
       />
-
-      <!-- DYNAMIC: Loop through categories and display grouped projects -->
-      {categories.map((category) => (
-        <div class="project-category">
-          {/* Category heading if projects are grouped */}
-          {category !== 'Other' && projectsByCategory[category].length > 1 && (
-            <h3 class="category-title">{category}</h3>
-          )}
-          
-          {/* UNIVERSAL PATTERN: card-grid--3 for project cards */}
-          <div class="card-grid card-grid--3" role="list">
-            {projectsByCategory[category].map((project) => (
-              <Card as="article" variant="surface" hover={true} role="listitem">
-                {/* Project status badge */}
-                <StatusBadge status={project.data.status} />
-                
-                {/* Project title as link to detail page */}
-                <h3>
-                  <a href={withBase(`/projects/${project.slug}`)}>
-                    {project.data.title}
-                  </a>
-                </h3>
-                
-                {/* Project summary */}
-                <p>{project.data.summary}</p>
-                
-                {/* Project metadata in card note */}
-                <p class="card-note">
-                  <em>Last updated: {project.data.lastUpdated}</em>
-                </p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      ))}
+      <div class="content-prose">
+        <p>
+          ArcUp typography operates on a <strong>1.1rem baseline</strong>.
+          Headings, lists, and paragraph spacing should appear even and balanced,
+          forming a consistent visual rhythm without overlaps.
+        </p>
+        <ul>
+          <li>Body line-height follows <code>--line-rhythm-normal</code></li>
+          <li>Headings use <code>--line-rhythm-tight</code></li>
+          <li>Muted text tone equals <code>--color-text-muted</code></li>
+        </ul>
+        <p class="text-secondary">
+          If this paragraph feels too close or too wide compared to others, spacing
+          or line-height values may need calibration.
+        </p>
+      </div>
     </section>
 
-    <!-- VISUAL: Divider between major content sections -->
-    <SectionDivider />
+    <SectionDivider variant="strong" />
 
-    <!-- ========================================================================
-         BUILD YOUR OWN SECTION
-         Information about starting independent projects with mentorship
-         ======================================================================== -->
-    <section class="page-section page-section--center" aria-labelledby="build-your-own-heading">
-      <!-- COMPONENT: SectionHeader for section introduction -->
+    <!-- ================================================================ -->
+    <!-- 2. ALIGNMENT TEST -->
+    <!-- ================================================================ -->
+    <section class="page-section bg-surface-soft">
       <SectionHeader
-        eyebrow="Independent Research"
-        title="Build Your Own Project"
-        subtitle="Have an idea that doesn't fit existing projects? You can start your own."
+        eyebrow="Test 2"
+        title="Alignment Logic"
+        subtitle="Left, center, and grid alignments follow contextual purpose: clarity for procedural, calm for reflective."
         align="center"
       />
-
-      {/* COMPONENT: Card wrapper for content block */}
-      <Card as="article" variant="surface">
-        {/* UNIVERSAL PATTERN: content-prose for multi-paragraph text */}
-        <div class="content-prose">
-          <p>
-            <strong>arc^ isn't just about joining existing work.</strong> If you have an idea for applying plasma 
-            technology to ecological repair — soil remediation, water treatment, composting acceleration, pathogen 
-            control — and it aligns with the RE:TECH framework, you can propose it.
-          </p>
-
-          <p>
-            We'll help you refine the research question, think through safety protocols, and connect you with others 
-            who might want to collaborate. Your project will be listed here, documented transparently, and licensed 
-            openly from day one.
-          </p>
-
-          <p>
-            <strong>What you'll need:</strong> A clear hypothesis or design goal, willingness to work safely and 
-            document openly, and commitment to keeping all outputs in the commons.
-          </p>
+      <div class="alignment-grid">
+        <div class="align-left">
+          <h4>Left Aligned</h4>
+          <p>Used for instructional or procedural content where rapid scanning is needed.</p>
         </div>
-
-        {/* UNIVERSAL PATTERN: section-cta for action button */}
-        <div class="section-cta">
-          <LinkButton 
-            href={EXTERNAL_LINKS.formURL}
-            variant="primary" 
-            icon="external"
-          >
-            Propose a Project
-          </LinkButton>
+        <div class="align-center">
+          <h4>Center Aligned</h4>
+          <p>Used for introductions, CTAs, and summaries where balance and calm matter.</p>
         </div>
-      </Card>
+      </div>
     </section>
 
-    <!-- VISUAL: Divider between major content sections -->
-    <SectionDivider />
+    <SectionDivider variant="subtle" />
 
-    <!-- ========================================================================
-         LEGAL FRAMEWORK SECTION
-         Comprehensive licensing and governance information
-         ======================================================================== -->
-    <section class="page-section page-section--center" aria-labelledby="legal-heading">
-      <!-- COMPONENT: SectionHeader for section introduction -->
+    <!-- ================================================================ -->
+    <!-- 3. CARD CONTAINMENT TEST -->
+    <!-- ================================================================ -->
+    <section class="page-section section--dense bg-surface-soft">
       <SectionHeader
-        eyebrow="Governance"
-        title="Legal Framework"
-        subtitle="All arc^ projects operate under clear, open licenses that keep knowledge accessible."
+        eyebrow="Test 3"
+        title="Card Containment & Hover"
+        subtitle="Cards should maintain internal padding and avoid touching tinted section edges."
         align="center"
       />
-
-      {/* COMPONENT: CalloutPanel for important legal information */}
-      <CalloutPanel variant="info">
-        <h3>Licensing Structure</h3>
-        
-        <div class="content-prose">
-          <p>
-            <strong>Hardware:</strong> All physical designs, CAD files, and technical specifications are licensed under 
-            <a href="https://ohwr.org/cern_ohl_s_v2.txt" target="_blank" rel="noopener noreferrer">CERN-OHL-S v2</a> 
-            (strongly reciprocal). This ensures that any modifications or derivatives remain open and accessible.
-          </p>
-
-          <p>
-            <strong>Documentation:</strong> Written guides, protocols, and educational materials use 
-            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a>. 
-            You can share and adapt them, but not for commercial purposes, and derivatives must use the same license.
-          </p>
-
-          <p>
-            <strong>Software:</strong> All code is released under 
-            <a href="https://www.gnu.org/licenses/agpl-3.0.en.html" target="_blank" rel="noopener noreferrer">AGPL-3.0</a>, 
-            which requires that any modifications — even those running on a server — be shared openly.
-          </p>
-
-          <p>
-            <strong>Why this matters:</strong> These licenses prevent enclosure. They ensure that if someone builds on 
-            arc^ work, their improvements flow back to the commons. It's not anti-commercial — it's pro-commons.
-          </p>
-        </div>
-      </CalloutPanel>
+      <div class="card-grid card-grid--3">
+        <Card variant="surface" hover>
+          <div class="card-icon">🧩</div>
+          <h3>Default Surface</h3>
+          <p>Tests gradient and blur containment at default radius and shadow depth.</p>
+        </Card>
+        <Card variant="surface" hover>
+          <div class="card-icon">⚙️</div>
+          <h3>Clickable Card</h3>
+          <p>Simulates a linkable surface using hover + arrow animation.</p>
+        </Card>
+        <Card variant="surface" hover>
+          <div class="card-icon">🌿</div>
+          <h3>Active Glow</h3>
+          <p>Displays the intended tactile feel when focused or hovered.</p>
+        </Card>
+      </div>
     </section>
 
-    <!-- VISUAL: Divider maintains rhythm before navigation -->
-    <SectionDivider />
+    <SectionDivider variant="strong" />
 
-    <!-- ========================================================================
-         PAGE NAVIGATION
-         Contextual links to related sections of the site
-         ======================================================================== -->
-    <!-- COMPONENT: PageNavigation provides consistent site wayfinding -->
-    <PageNavigation currentPage="projects" />
+    <!-- ================================================================ -->
+    <!-- 4. GRID & CONTAINMENT WIDTHS -->
+    <!-- ================================================================ -->
+    <section class="page-section bg-gradient-teal">
+      <SectionHeader
+        eyebrow="Test 4"
+        title="Container Widths"
+        subtitle="All sections respect shell width and padding. Check edge breathing on all viewports."
+        align="center"
+      />
+      <div class="content-container">
+        <p class="content-prose">
+          This block sits within <code>.content-container</code>, ensuring content
+          never touches the screen edge and remains optically centered. Resize the
+          viewport to confirm fluid containment.
+        </p>
+      </div>
+    </section>
 
+    <SectionDivider variant="subtle" />
+
+    <!-- ================================================================ -->
+    <!-- 5. FINAL COLOR + MOTION TEST -->
+    <!-- ================================================================ -->
+    <section class="page-section section--spacious bg-gradient-teal align-center">
+      <SectionHeader
+        eyebrow="Test 5"
+        title="Color, Motion & Closure"
+        subtitle="Gradient blends and reveal sequences should remain calm and smooth."
+        align="center"
+      />
+      <div class="card-grid card-grid--2 reveal-group">
+        <Card variant="surface" hover class="fade-in-up delay-2">
+          <h3>Teal Gradient Consistency</h3>
+          <p>Observe transition between surface color and background gradient.</p>
+        </Card>
+        <Card variant="surface" hover class="fade-in-up delay-3">
+          <h3>Motion Synchronization</h3>
+          <p>Cards reveal sequentially with <code>.fade-in-up</code> and stagger delay.</p>
+        </Card>
+      </div>
+    </section>
   </main>
 </BaseLayout>
+
+<style>
+  .alignment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+  }
+
+  .alignment-grid h4 {
+    font-size: var(--text-lg);
+    color: var(--color-primary-bright);
+    margin-bottom: var(--space-sm);
+  }
+</style>
